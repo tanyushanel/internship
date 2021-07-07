@@ -7,13 +7,14 @@ const routes: Routes = [
     loadChildren: () => import('./models/login/login.module').then((m) => m.LoginModule),
   },
   {
-    path:'grammar',
-    loadChildren: () => import('./models/grammar-test/grammar-test.module').then(m => m.GrammarTestModule)
-  }
+    path: 'grammar',
+    loadChildren: () =>
+      import('./models/grammar-test/grammar-test.module').then((m) => m.GrammarTestModule),
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
