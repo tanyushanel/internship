@@ -10,11 +10,6 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class LoginComponent implements OnInit {
   public loginReactiveForm!: FormGroup;
 
-  public test = new FormGroup({
-    first: new FormControl(),
-    second: new FormControl(),
-  });
-
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
