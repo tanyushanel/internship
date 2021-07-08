@@ -11,6 +11,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./models/grammar-test/grammar-test.module').then((m) => m.GrammarTestModule),
   },
+  {
+    path: 'coachProfile',
+    loadChildren: () =>
+      import('./models/coachProfile/coachProfile.module').then((m) => m.CoachProfileModule),
+  },
 ];
 
 @NgModule({
