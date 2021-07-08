@@ -8,7 +8,8 @@ const routes: Routes = [
   },
   {
     path: 'user',
-    loadChildren: () => import('./models/user/user.module').then((m) => m.UserModule),
+    loadChildren: () =>
+      import('./models/userProfile/userProfile.module').then((m) => m.UserProfileModule),
   },
   {
     path: 'grammar',
