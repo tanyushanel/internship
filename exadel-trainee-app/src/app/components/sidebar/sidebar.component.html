@@ -1,0 +1,46 @@
+<mat-sidenav-container class="sidebar" autosize>
+  <mat-sidenav class="sidebar__container" mode="side" [opened]="isOpen">
+    <mat-nav-list>
+      <div mat-card-avatar class="sidebar__logo"></div>
+      <nav class="sidebar__nav">
+        <div>
+          <mat-list-item [routerLink]="'dashboard'">
+            <mat-icon mat-list-icon>home</mat-icon>
+            <span>Home</span>
+          </mat-list-item>
+
+          <mat-list-item [routerLink]="'info'">
+            <mat-icon mat-list-icon>important_devices</mat-icon>
+            <span>Info</span>
+          </mat-list-item>
+
+          <mat-list-item [routerLink]="'user'">
+            <mat-icon mat-list-icon>supervisor_account</mat-icon>
+            <span>User</span>
+          </mat-list-item>
+        </div>
+        <mat-list-item [routerLink]="'logout'" class="logout">
+          <mat-icon mat-list-icon>logout</mat-icon>
+          <span>Exit</span>
+        </mat-list-item>
+      </nav>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-icon
+      mat-icon-button
+      class="sidebar__button"
+      (click)="handleSidebar()"
+      [ngClass]="{'sidebar__button_close': isOpen}">
+      chevron_right
+    </mat-icon>
+    <router-outlet>
+      <h1>App page</h1>
+      <a [routerLink]="['/grammar']">Grammar-test</a>
+      <p><a [routerLink]="['/coachProfile']">CoachProfile</a></p>
+      <router-outlet></router-outlet>
+    </router-outlet>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
