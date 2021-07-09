@@ -25,7 +25,12 @@ const routes: Routes = [
     path: 'writing',
     loadChildren: () =>
       import('./models/writing-test/writing-test.module').then((m) => m.WritingTestModule),
-  }   
+  },
+  {
+    path: 'adminProfile',
+    loadChildren: () =>
+      import('./models/admin-module/admin-module.module').then((m) => m.AdminModuleModule),
+  },
 ];
 
 @NgModule({
