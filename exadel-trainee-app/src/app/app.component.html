@@ -1,1 +1,6 @@
-<app-sidebar></app-sidebar>
+<app-sidebar>
+  <h1>App page</h1>
+  <a [routerLink]="['/grammar']">Grammar-test</a>
+  <p><a [routerLink]="['/coachProfile']">CoachProfile</a></p>
+  <router-outlet></router-outlet>
+</app-sidebar>

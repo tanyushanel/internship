@@ -3,26 +3,22 @@
     <mat-nav-list>
       <div mat-card-avatar class="sidebar__logo"></div>
       <nav class="sidebar__nav">
-        <div>
-          <mat-list-item [routerLink]="'dashboard'">
-            <mat-icon mat-list-icon>home</mat-icon>
+        <div class="sidebar__button-group">
+          <div class="sidebar__button-group_item">
             <span>Home</span>
-          </mat-list-item>
+          </div>
 
-          <mat-list-item [routerLink]="'info'">
-            <mat-icon mat-list-icon>important_devices</mat-icon>
-            <span>Info</span>
-          </mat-list-item>
+          <div class="sidebar__button-group_item">
+            <span>Check Tests</span>
+          </div>
 
-          <mat-list-item [routerLink]="'user'">
-            <mat-icon mat-list-icon>supervisor_account</mat-icon>
-            <span>User</span>
-          </mat-list-item>
+            <div class="sidebar__button-group_item">
+            <span>Editor</span>
+          </div>
         </div>
-        <mat-list-item [routerLink]="'logout'" class="logout">
-          <mat-icon mat-list-icon>logout</mat-icon>
+        <div class="sidebar__button-group_item logout">
           <span>Exit</span>
-        </mat-list-item>
+        </div>
       </nav>
     </mat-nav-list>
   </mat-sidenav>
@@ -35,12 +31,9 @@
       [ngClass]="{'sidebar__button_close': isOpen}">
       chevron_right
     </mat-icon>
-    <router-outlet>
-      <h1>App page</h1>
-      <a [routerLink]="['/grammar']">Grammar-test</a>
-      <p><a [routerLink]="['/coachProfile']">CoachProfile</a></p>
-      <router-outlet></router-outlet>
-    </router-outlet>
+
+<ng-content></ng-content>
+
   </mat-sidenav-content>
 
 </mat-sidenav-container>

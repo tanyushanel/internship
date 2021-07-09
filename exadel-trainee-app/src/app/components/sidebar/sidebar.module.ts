@@ -7,14 +7,12 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
-import { SidebarRoutingModule } from './sidebar-routing.module';
 import { SidebarComponent } from './sidebar.component';
 
 @NgModule({
   declarations: [SidebarComponent],
   imports: [
     CommonModule,
-    SidebarRoutingModule,
     MatSnackBarModule,
     MatSidenavModule,
     MatListModule,
