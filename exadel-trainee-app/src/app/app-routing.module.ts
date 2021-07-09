@@ -21,6 +21,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./models/coachProfile/coachProfile.module').then((m) => m.CoachProfileModule),
   },
+  {
+    path: 'writing',
+    loadChildren: () =>
+      import('./models/writing-test/writing-test.module').then((m) => m.WritingTestModule),
+  }   
 ];
 
 @NgModule({
