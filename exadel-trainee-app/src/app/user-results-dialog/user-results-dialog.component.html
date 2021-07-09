@@ -1,0 +1,37 @@
+<div class="user-results-container">
+    <h4 mat-dialog-title> User Test Results </h4>
+    <div class="content"
+         mat-dialog-content>
+
+        <div class="user-pic">
+            <img src="">
+        </div>
+        <button mat-raised-button
+                color="primary">Assign test to User</button>
+
+        <div *ngIf="resultArr.length; else noResults">
+            <h3>Recent test results</h3>
+            <table class="result-details">
+
+                <tr *ngFor="let res of resultArr; let ind = index">
+                    <td>{{ind + 1}}</td>
+                    <td>{{res.date}}</td>
+                    <td>{{res.level}}</td>
+                    <td>{{res.score}}</td>
+                    <td><button mat-raised-button>View details</button></td>
+                </tr>
+
+            </table>
+
+
+
+        </div>
+        <ng-template #noResults>No results yet</ng-template>
+
+
+    </div>
+    <mat-dialog-actions>
+        <button mat-button
+                mat-dialog-close>Close</button>
+    </mat-dialog-actions>
+</div>
