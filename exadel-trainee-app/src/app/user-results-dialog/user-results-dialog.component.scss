@@ -1,12 +1,21 @@
 .user-results-container {
 }
+
+.user-info-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .user-pic {
-  display: inline-block;
   width: 4rem;
   height: 4rem;
   margin-right: 2rem;
   border: 1px solid grey;
   border-radius: 0.25rem;
+}
+
+.user-info {
 }
 
 h3 {
@@ -15,8 +24,8 @@ h3 {
 }
 
 button {
-  display: inline-block;
-  margin: 1rem auto;
+  display: block;
+  margin: 1rem 0;
 }
 
 table {
@@ -25,5 +34,4 @@ table {
 
 td {
   padding: 0 1rem;
-  line-height: normal;
 }

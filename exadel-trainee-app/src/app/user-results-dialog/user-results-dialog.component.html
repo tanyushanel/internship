@@ -1,22 +1,31 @@
 <div class="user-results-container">
-    <h4 mat-dialog-title> User Test Results </h4>
     <div class="content"
          mat-dialog-content>
+        <h2 mat-dialog-title>User Test Results</h2>
 
-        <div class="user-pic">
-            <img src="">
+        <div class="user-info-wrapper">
+            <div class="user-pic">
+                <img src="">
+            </div>
+            <div class="user-info">
+                <b class="user-name">{{user.firstName}} {{user.lastName}}</b>
+                <p>{{user.email}}</p>
+            </div>
         </div>
+
+
+
         <button mat-raised-button
                 color="primary">Assign test to User</button>
         <div>
             <b class="user-name"></b>
         </div>
 
-        <div *ngIf="resultArr.length; else noResults">
+        <div *ngIf="results.length; else noResults">
             <h3>Recent test results</h3>
             <table class="result-details">
 
-                <tr *ngFor="let res of resultArr; let ind = index">
+                <tr *ngFor="let res of results; let ind = index">
                     <td>{{ind + 1}}</td>
                     <td>{{res.date}}</td>
                     <td>{{res.level}}</td>

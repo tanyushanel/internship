@@ -15,7 +15,6 @@ export class AppComponent {
   openDialog(): void {
     this.dialog.open(UserResultsDialogComponent, {
       width: '30rem',
-      height: '40rem',
     });
   }
 }
