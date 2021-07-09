@@ -8,6 +8,9 @@
         </div>
         <button mat-raised-button
                 color="primary">Assign test to User</button>
+        <div>
+            <b class="user-name"></b>
+        </div>
 
         <div *ngIf="resultArr.length; else noResults">
             <h3>Recent test results</h3>
@@ -22,9 +25,6 @@
                 </tr>
 
             </table>
-
-
-
         </div>
         <ng-template #noResults>No results yet</ng-template>
 

@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-results-dialog.component.scss'],
 })
 export class UserResultsDialogComponent implements OnInit {
+  user: any = {};
+
   resultArr = [
     {
       date: '09-09-2020',
