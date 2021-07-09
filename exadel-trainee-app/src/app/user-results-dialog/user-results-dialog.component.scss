@@ -1,9 +1,7 @@
-.user-results-container {
-}
-
 .user-info-wrapper {
   display: flex;
-  justify-content: flex-start;
+
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -15,23 +13,41 @@
   border-radius: 0.25rem;
 }
 
-.user-info {
+.submit-btn {
+  line-height: 4rem;
+  width: 10rem;
 }
 
-h3 {
+.header {
   text-align: center;
-  font-weight: bold;
+  margin: 1rem;
+  font-weight: 500;
 }
 
-button {
-  display: block;
-  margin: 1rem 0;
+.title {
+  font-size: 1rem;
+  line-height: 1rem;
+  font-weight: 500;
 }
 
 table {
-  border-collapse: collapse;
+  width: 100%;
 }
 
 td {
+  white-space: nowrap;
   padding: 0 1rem;
+}
+
+td:last-child {
+}
+
+.scale {
+  display: flex;
+  justify-content: stretch;
+}
+
+.result {
+  background: lightgreen;
+  padding: 0 0.5rem;
 }

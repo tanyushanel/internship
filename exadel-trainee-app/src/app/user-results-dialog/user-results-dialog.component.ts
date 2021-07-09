@@ -13,6 +13,8 @@ export interface User {
   styleUrls: ['./user-results-dialog.component.scss'],
 })
 export class UserResultsDialogComponent implements OnInit {
+  isHidden = true;
+
   user: User = {
     firstName: 'Test',
     lastName: 'Testy',
@@ -42,4 +44,8 @@ export class UserResultsDialogComponent implements OnInit {
   ];
 
   ngOnInit(): void {}
+
+  onShowResults(): void {
+    this.isHidden = !this.isHidden;
+  }
 }

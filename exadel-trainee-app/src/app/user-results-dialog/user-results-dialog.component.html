@@ -1,46 +1,57 @@
-<div class="user-results-container">
-    <div class="content"
-         mat-dialog-content>
-        <h2 mat-dialog-title>User Test Results</h2>
+<div class="content"
+     mat-dialog-content>
+    <h4 class="title"
+        mat-dialog-title>User Test Results</h4>
 
-        <div class="user-info-wrapper">
-            <div class="user-pic">
-                <img src="">
-            </div>
-            <div class="user-info">
-                <b class="user-name">{{user.firstName}} {{user.lastName}}</b>
-                <p>{{user.email}}</p>
-            </div>
+    <div class="user-info-wrapper">
+        <div class="user-pic">
+            <img src="">
+        </div>
+        <div class="user-info">
+            <b class="user-name">{{user.firstName}} {{user.lastName}}</b>
+            <p>{{user.email}}</p>
         </div>
 
-
-
-        <button mat-raised-button
+        <button class="submit-btn"
+                mat-raised-button
                 color="primary">Assign test to User</button>
-        <div>
-            <b class="user-name"></b>
-        </div>
+    </div>
 
-        <div *ngIf="results.length; else noResults">
-            <h3>Recent test results</h3>
-            <table class="result-details">
+    <div *ngIf="results.length; else noResults">
+        <h4 class="header">Recent test results</h4>
+        <table class="result-details">
 
-                <tr *ngFor="let res of results; let ind = index">
-                    <td>{{ind + 1}}</td>
-                    <td>{{res.date}}</td>
-                    <td>{{res.level}}</td>
-                    <td>{{res.score}}</td>
-                    <td><button mat-raised-button>View details</button></td>
-                </tr>
+            <tr *ngFor="let res of results; let ind = index">
+                <td>{{ind + 1}}</td>
+                <td>{{res.date}}</td>
+                <td>{{res.level}}</td>
+                <td>{{res.score}}</td>
+                <td>
+                    <button mat-raised-button
+                            *ngIf="isHidden; else showResults"
+                            class="view-btn"
+                            (click)="onShowResults()">View details</button>
+                    <ng-template #showResults
+                                 class="scale">
+                        <span class="result gram">20</span>
+                        <span class="result audit">40</span>
+                        <span class="result write">40</span>
+                        <span class="result speak">20</span>
+                    </ng-template>
+                </td>
+            </tr>
 
-            </table>
-        </div>
-        <ng-template #noResults>No results yet</ng-template>
+        </table>
+
 
 
     </div>
-    <mat-dialog-actions>
-        <button mat-button
-                mat-dialog-close>Close</button>
-    </mat-dialog-actions>
+    <ng-template #noResults>No results yet</ng-template>
+
+
 </div>
+<mat-dialog-actions align="end">
+    <button mat-button
+            mat-dialog-close
+            cdkFocusInitial>Close</button>
+</mat-dialog-actions>
