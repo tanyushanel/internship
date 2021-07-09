@@ -9,7 +9,7 @@ const routes: Routes = [
   {
     path: 'user',
     loadChildren: () =>
-      import('./models/userProfile/userProfile.module').then((m) => m.UserProfileModule),
+      import('./models/user-profile/user-profile.module').then((m) => m.UserProfileModule),
   },
   {
     path: 'grammar',
