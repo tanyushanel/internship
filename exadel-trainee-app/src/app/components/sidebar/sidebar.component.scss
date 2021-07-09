@@ -26,25 +26,8 @@
     justify-content: space-between;
   }
 
-  &__button-group {
-
-
-    &_item {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 1em auto;
-      width: 70%;
-      height: 8em;
-      color: $black;
-      border: 1px solid $green;
-      border-radius: $border-radius-big;
-      background-color: $others-grey6;
-    }
-
-    &_item:hover {
-      opacity: .6;
-    }
+  mat-list-item {
+    margin: 1em auto;
   }
 
 
