@@ -12,10 +12,20 @@ const routes: Routes = [
       import('./models/grammar-test/grammar-test.module').then((m) => m.GrammarTestModule),
   },
   {
+    path: 'hrProfile',
+    loadChildren: () =>
+      import('./models/hr-profile/hr-profile.module').then((m) => m.HrProfileModule),
+  },
+  {
     path: 'coachProfile',
     loadChildren: () =>
       import('./models/coachProfile/coachProfile.module').then((m) => m.CoachProfileModule),
   },
+  {
+    path: 'writing',
+    loadChildren: () =>
+      import('./models/writing-test/writing-test.module').then((m) => m.WritingTestModule),
+  }   
 ];
 
 @NgModule({
