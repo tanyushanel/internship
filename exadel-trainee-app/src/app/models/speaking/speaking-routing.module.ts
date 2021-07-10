@@ -4,7 +4,7 @@ import { SpeakingComponent } from './speaking.component';
 
 const routes: Routes = [
   {
-    path: 'speaking',
+    path: '',
     component: SpeakingComponent,
   },
 ];
