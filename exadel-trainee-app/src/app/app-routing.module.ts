@@ -9,7 +9,7 @@ const routes: Routes = [
   {
     path: 'speaking',
     loadChildren: () =>
-      import('./models/speaking-test/speaking.module').then((m) => m.SpeakingModule),
+      import('./models/speaking-test/speaking-test.module').then((m) => m.SpeakingTestModule),
   },
   {
     path: 'grammar',
