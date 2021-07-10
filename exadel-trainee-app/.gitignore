@@ -11,10 +11,8 @@
 chrome-profiler-events*.json
 # IDEs and editors
 /.idea
-.inspectionProfiles/Project_Default.xml
-.internship.iml
-.modules.xml
-.vcs.xml
+.xml
+.json
 .project
 .classpath
 .c9/
