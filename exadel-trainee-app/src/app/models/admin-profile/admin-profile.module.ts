@@ -7,4 +7,4 @@ import { AdminProfileRouting } from './admin-profile-routing';
   declarations: [AdminProfileComponent],
   imports: [CommonModule, AdminProfileRouting],
 })
-export class AdminModuleModule {}
+export class AdminProfileModule {}

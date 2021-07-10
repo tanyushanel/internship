@@ -15,13 +15,20 @@ chrome-profiler-events*.json
 
 # IDEs and editors
 /.idea
+.inspectionProfiles/Project_Default.xml
+.internship.iml
+.modules.xml
+.vcs.xml
 .project
 .classpath
 .c9/
 *.launch
 .settings/
 *.sublime-workspace
-
+.idea/vcs.xml
+.idea/modules.xml
+.idea/internship.iml
+.idea/inspectionProfiles/Project_Default.xml
 # IDE - VSCode
 .vscode/*
 !.vscode/settings.json

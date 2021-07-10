@@ -29,7 +29,7 @@ const routes: Routes = [
   {
     path: 'adminProfile',
     loadChildren: () =>
-      import('./models/admin-module/admin-module.module').then((m) => m.AdminModuleModule),
+      import('./models/admin-profile/admin-profile.module').then((m) => m.AdminProfileModule),
   },
 ];
 
