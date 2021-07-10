@@ -25,18 +25,18 @@
                 <td>{{ind + 1}}</td>
                 <td>{{res.date}}</td>
                 <td>{{res.level}}</td>
-                <td>{{res.score}}</td>
+                <td>{{res.grammar + res.audition + res.writing + res.speaking}}</td>
                 <td>
                     <button mat-raised-button
-                            *ngIf="isHidden; else showResults"
+                            *ngIf="hideResultBtnIndex[ind]; else showResults"
                             class="view-btn"
-                            (click)="onShowResults()">View details</button>
+                            (click)="onShowResults(res, ind)">View details</button>
                     <ng-template #showResults
                                  class="scale">
-                        <span class="result gram">20</span>
-                        <span class="result audit">40</span>
-                        <span class="result write">40</span>
-                        <span class="result speak">20</span>
+                        <span class="result">{{res.grammar}}</span>
+                        <span class="result">{{res.audition}}</span>
+                        <span class="result">{{res.writing}}</span>
+                        <span class="result">{{res.speaking}}</span>
                     </ng-template>
                 </td>
             </tr>

@@ -1,51 +1,46 @@
 import { Component, OnInit } from '@angular/core';
 
-export interface User {
-  firstName: string;
-  lastName: string;
-  email: string;
-  roleId: number;
-}
-
 @Component({
   selector: 'app-user-results-dialog',
   templateUrl: './user-results-dialog.component.html',
   styleUrls: ['./user-results-dialog.component.scss'],
 })
 export class UserResultsDialogComponent implements OnInit {
-  isHidden = true;
-
-  user: User = {
-    firstName: 'Test',
-    lastName: 'Testy',
-    email: 'Dfff@jk.op',
+  user: any = {
+    firstName: 'Ivan',
+    lastName: 'Ivanov',
+    email: 'Ivanov@gmal.com',
     roleId: 1,
   };
 
-  results = [
+  results: any = [
     {
       date: '09-09-2020',
-      score: 80,
       level: 'advanced',
       grammar: 20,
-      listening: 30,
+      audition: 30,
       writing: 30,
       speaking: 20,
     },
     {
       date: '09-09-2020',
-      score: 100,
       level: 'advanced',
-      grammar: 20,
-      listening: 30,
-      writing: 30,
+      grammar: 30,
+      audition: 30,
+      writing: 10,
       speaking: 20,
     },
   ];
 
-  ngOnInit(): void {}
+  hideResultBtnIndex: boolean[] = [];
 
-  onShowResults(): void {
-    this.isHidden = !this.isHidden;
+  ngOnInit(): void {
+    for (let i = 0; i < this.results.length; i += 1) {
+      this.hideResultBtnIndex.push(true);
+    }
+  }
+
+  onShowResults(res: any, index: number): void {
+    if (this.results.indexOf(res) === index) this.hideResultBtnIndex[index] = false;
   }
 }
