@@ -25,7 +25,12 @@ const routes: Routes = [
     path: 'writing',
     loadChildren: () =>
       import('./models/writing-test/writing-test.module').then((m) => m.WritingTestModule),
-  }   
+  },
+  {
+    path: 'listening',
+    loadChildren: () =>
+      import('./models/listening/listening.module').then((m) => m.ListeningModule),
+  },
 ];
 
 @NgModule({
