@@ -1,20 +1,21 @@
 <div class="content"
      mat-dialog-content>
-    <h4 class="title"
-        mat-dialog-title>User Test Results</h4>
+
 
     <div class="user-info-wrapper">
         <div class="user-pic">
             <img src="">
         </div>
         <div class="user-info">
-            <b class="user-name">{{user.firstName}} {{user.lastName}}</b>
+            <p class="user-name">{{user.firstName}} {{user.lastName}}</p>
             <p>{{user.email}}</p>
         </div>
 
         <button class="submit-btn"
                 mat-raised-button
-                color="primary">Assign test to User</button>
+                color="primary"
+                (click)="onAssignBtnClick()">Assign test to User</button>
+
     </div>
 
     <div *ngIf="results.length; else noResults">
@@ -25,29 +26,29 @@
                 <td>{{ind + 1}}</td>
                 <td>{{res.date}}</td>
                 <td>{{res.level}}</td>
-                <td>{{res.grammar + res.audition + res.writing + res.speaking}}</td>
+                <td><b>{{res.grammar + res.audition + res.writing + res.speaking}}%</b></td>
                 <td>
                     <button mat-raised-button
                             *ngIf="hideResultBtnIndex[ind]; else showResults"
                             class="view-btn"
                             (click)="onShowResults(res, ind)">View details</button>
-                    <ng-template #showResults
-                                 class="scale">
-                        <span class="result">{{res.grammar}}</span>
-                        <span class="result">{{res.audition}}</span>
-                        <span class="result">{{res.writing}}</span>
-                        <span class="result">{{res.speaking}}</span>
+                    <ng-template #showResults>
+                        <div class="scale">
+                            <span class="result">{{res.grammar}}</span>
+                            <span class="result">{{res.audition}}</span>
+                            <span class="result">{{res.writing}}</span>
+                            <span class="result">{{res.speaking}}</span>
+                        </div>
                     </ng-template>
                 </td>
             </tr>
-
         </table>
-
     </div>
+
     <ng-template #noResults>No results yet</ng-template>
 
-
 </div>
+
 <mat-dialog-actions align="end">
     <button mat-button
             mat-dialog-close

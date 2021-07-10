@@ -43,4 +43,6 @@ export class UserResultsDialogComponent implements OnInit {
   onShowResults(res: any, index: number): void {
     if (this.results.indexOf(res) === index) this.hideResultBtnIndex[index] = false;
   }
+
+  onAssignBtnClick(): void {}
 }

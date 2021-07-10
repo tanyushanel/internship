@@ -1,20 +1,23 @@
 .user-info-wrapper {
   display: flex;
-
   justify-content: space-between;
-  align-items: center;
+  align-items: top;
 }
 
 .user-pic {
-  width: 4rem;
-  height: 4rem;
-  margin-right: 2rem;
+  width: 5rem;
+  height: 5rem;
   border: 1px solid grey;
   border-radius: 0.25rem;
 }
 
+.user-name {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
 .submit-btn {
-  line-height: 4rem;
+  line-height: 3rem;
   width: 10rem;
 }
 
@@ -24,30 +27,31 @@
   font-weight: 500;
 }
 
-.title {
-  font-size: 1rem;
-  line-height: 1rem;
-  font-weight: 500;
-}
-
 table {
   width: 100%;
 }
 
 td {
   white-space: nowrap;
-  padding: 0 1rem;
 }
 
 td:last-child {
+  max-width: 4rem;
+  text-align: end;
 }
 
 .scale {
   display: flex;
-  justify-content: stretch;
+  justify-content: space-between;
+  background: linear-gradient(to right, #3366cc 0%, #333399 100%);
+  border-radius: 0.25rem;
 }
 
 .result {
-  background: lightgreen;
-  padding: 0 0.25rem;
+  padding: 0.5rem;
+  color: white;
+}
+
+.desc {
+  font-size: 50%;
 }
