@@ -6,5 +6,7 @@
     <p><a [routerLink]="['/writing']">Writing-test</a></p>
     <div> <a [routerLink]="['/user']">User </a></div>
 
+    <div (window:beforeunload)="openWarningDialog()"></div>
+
     <router-outlet></router-outlet>
 </app-sidebar>
