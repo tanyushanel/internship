@@ -12,6 +12,11 @@ const routes: Routes = [
       import('./models/user-profile/user-profile.module').then((m) => m.UserProfileModule),
   },
   {
+    path: 'speaking',
+    loadChildren: () =>
+      import('./models/speaking-test/speaking-test.module').then((m) => m.SpeakingTestModule),
+  },
+  {
     path: 'grammar',
     loadChildren: () =>
       import('./models/grammar-test/grammar-test.module').then((m) => m.GrammarTestModule),
@@ -30,6 +35,11 @@ const routes: Routes = [
     path: 'writing',
     loadChildren: () =>
       import('./models/writing-test/writing-test.module').then((m) => m.WritingTestModule),
+  },
+  {
+    path: 'listening',
+    loadChildren: () =>
+      import('./models/listening/listening.module').then((m) => m.ListeningModule),
   },
 ];
 
