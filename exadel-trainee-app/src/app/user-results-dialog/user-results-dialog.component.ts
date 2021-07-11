@@ -32,12 +32,10 @@ export class UserResultsDialogComponent implements OnInit {
     },
   ];
 
-  hideResultBtnIndex: boolean[] = [];
+  hideResultBtnIndex: boolean[] = new Array(this.results.length);
 
   ngOnInit(): void {
-    for (let i = 0; i < this.results.length; i += 1) {
-      this.hideResultBtnIndex.push(true);
-    }
+    this.hideResultBtnIndex.fill(true);
   }
 
   onShowResults(res: any, index: number): void {
