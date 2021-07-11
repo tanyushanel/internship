@@ -26,7 +26,7 @@
                 <td><b>{{res.grammar + res.audition + res.writing + res.speaking}}%</b></td>
                 <td>
                     <button mat-raised-button
-                            *ngIf="hideResultBtnIndex[ind]; else showResults"
+                            *ngIf="hideResultBtnIndexes[ind]; else showResults"
                             (click)="onShowResults(res, ind)">View details</button>
                     <ng-template #showResults>
                         <div class="scale">
@@ -47,6 +47,5 @@
 
 <mat-dialog-actions align="end">
     <button mat-button
-            mat-dialog-close
-            cdkFocusInitial>Close</button>
+            mat-dialog-close>Close</button>
 </mat-dialog-actions>

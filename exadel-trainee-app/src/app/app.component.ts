@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { UserResultsDialogComponent } from './user-results-dialog/user-results-dialog.component';
+import { UserResultsDialogComponent } from './models/dialog-module/user-results-dialog/user-results-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +12,7 @@ export class AppComponent {
 
   constructor(public dialog: MatDialog) {}
 
-  openDialog(): void {
+  onOpenUserResultsDialog(): void {
     this.dialog.open(UserResultsDialogComponent, {
       width: '35rem',
     });
