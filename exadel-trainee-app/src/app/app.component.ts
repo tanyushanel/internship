@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { WarningDialogComponent } from './models/dialog-module/warning-dialog/warning-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -10,13 +8,8 @@ import { WarningDialogComponent } from './models/dialog-module/warning-dialog/wa
 export class AppComponent {
   title = 'exadel-trainee-app';
 
-  constructor(public dialog: MatDialog) {}
-
-  openWarningDialog(): void {
-    this.dialog.open(WarningDialogComponent, {
-      width: '35rem',
-      disableClose: true,
-      autoFocus: false,
-    });
+  openWarningDialog(e: Event): void {
+    e.preventDefault();
+    e.returnValue = true;
   }
 }
