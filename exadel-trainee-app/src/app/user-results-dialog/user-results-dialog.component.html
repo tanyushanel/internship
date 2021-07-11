@@ -6,7 +6,7 @@
         </div>
         <div class="user-info">
             <p class="user-name">{{user.firstName}} {{user.lastName}}</p>
-            <p>{{user.email}}</p>
+            <p class="user-email">{{user.email}}</p>
         </div>
 
         <button class="submit-btn"
@@ -27,7 +27,6 @@
                 <td>
                     <button mat-raised-button
                             *ngIf="hideResultBtnIndex[ind]; else showResults"
-                            class="view-btn"
                             (click)="onShowResults(res, ind)">View details</button>
                     <ng-template #showResults>
                         <div class="scale">

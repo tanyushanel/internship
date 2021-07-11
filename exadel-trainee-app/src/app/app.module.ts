@@ -16,12 +16,6 @@ import { UserResultsDialogComponent } from './user-results-dialog/user-results-d
     MatDialogModule,
     MatButtonModule,
   ],
-  providers: [
-    {
-      provide: MatDialogRef,
-      useValue: {},
-    },
-  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

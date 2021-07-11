@@ -16,6 +16,11 @@
   font-size: 1rem;
 }
 
+.user-email {
+  line-height: 0.5rem;
+  font-size: 0.75rem;
+}
+
 .submit-btn {
   line-height: 3rem;
   width: 10rem;
@@ -51,8 +56,4 @@ td:last-child {
 .result {
   padding: 0.5rem;
   color: white;
-}
-
-.desc {
-  font-size: 50%;
 }
