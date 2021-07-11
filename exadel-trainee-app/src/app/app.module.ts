@@ -1,21 +1,13 @@
 import { NgModule } from '@angular/core';
-import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule } from '@angular/material/button';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserResultsDialogComponent } from './user-results-dialog/user-results-dialog.component';
+import { ConfirmDialogModule } from './models/dialog-module/confirm-dialog.module';
 
 @NgModule({
-  declarations: [AppComponent, UserResultsDialogComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatDialogModule,
-    MatButtonModule,
-  ],
+  declarations: [AppComponent],
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, ConfirmDialogModule],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
