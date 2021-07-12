@@ -4,23 +4,21 @@
       <div mat-card-avatar class="sidebar__logo"></div>
       <nav class="sidebar__nav">
         <div class="sidebar__list">
-          <div *ngFor="let user of users">
-            <div *ngIf="selectedUser === user.permission">
-              <div *ngFor="let route of user.route">
-                <mat-list-item [routerLink]="'/' + route" class="sidebar__list_item">
-                  <span>{{route}}</span>
-                </mat-list-item>
-              </div>
-            </div>
+          <div *ngFor="let route of usersRoute[selectedUser].route; let i = index">
+            <mat-list-item [routerLink]="'/' + route" class="sidebar__list_item">
+              <span>{{usersRoute[selectedUser].menuItem[i]}}</span>
+            </mat-list-item>
           </div>
+          <!--          mock selector -->
           <mat-form-field appearance="outline">
             <mat-label>Users permission</mat-label>
-            <mat-select [(value)]="selectedUser" >
-              <mat-option *ngFor="let user of users" [value]="user.permission">
+            <mat-select [(value)]="selectedUser">
+              <mat-option *ngFor="let user of userPermission" [value]="user.value">
                 {{user.viewValue}}
               </mat-option>
             </mat-select>
           </mat-form-field>
+
         </div>
         <mat-list-item [routerLink]="'/logout'" class="sidebar__list_item">
           <span>Exit</span>

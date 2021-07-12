@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-
-interface Users {
-  value: string;
-  viewValue: string;
-  permission: string;
-  route: string[];
-}
+import { Role } from '../../../constants/route-constant';
+import {
+  UserRoutesType,
+  UsersPermission,
+  usersRoute,
+  userPermission,
+} from '../../../constants/mock-user-data';
 
 @Component({
   selector: 'app-sidebar',
@@ -15,30 +15,11 @@ interface Users {
 export class SidebarComponent implements OnInit {
   isOpen = true;
 
-  // mock data for check logic work sidebar
-  selectedUser = 'user';
+  selectedUser = Role.user;
 
-  users: Users[] = [
-    { value: 'user', viewValue: 'User', permission: 'test', route: ['home'] },
-    {
-      value: 'hr',
-      viewValue: 'HR',
-      permission: 'watcher',
-      route: ['home', 'users'],
-    },
-    {
-      value: 'couch',
-      viewValue: 'Couch',
-      permission: 'check',
-      route: ['home', 'check', 'editor'],
-    },
-    {
-      value: 'admin',
-      viewValue: 'Admin',
-      permission: 'all',
-      route: ['home', 'manage', 'statistics'],
-    },
-  ];
+  usersRoute: UserRoutesType = usersRoute;
+
+  userPermission: UsersPermission[] = userPermission;
 
   ngOnInit(): void {}
 

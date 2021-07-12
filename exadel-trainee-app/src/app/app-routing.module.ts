@@ -6,6 +6,7 @@ import { ManageComponent } from './components/mock-component/manage/manage.compo
 import { CheckComponent } from './components/mock-component/check/check.component';
 import { StatisticsComponent } from './components/mock-component/statistics/statistics.component';
 import { EditorComponent } from './components/mock-component/editor/editor.component';
+import { Route } from '../constants/route-constant';
 
 const routes: Routes = [
   {
@@ -44,27 +45,27 @@ const routes: Routes = [
   },
   // mock component for check business logic
   {
-    path: 'home',
+    path: Route.home,
     component: HomeComponent,
   },
   {
-    path: 'users',
+    path: Route.users,
     component: UsersComponent,
   },
   {
-    path: 'manage',
+    path: Route.manage,
     component: ManageComponent,
   },
   {
-    path: 'check',
+    path: Route.check,
     component: CheckComponent,
   },
   {
-    path: 'statistics',
+    path: Route.statistics,
     component: StatisticsComponent,
   },
   {
-    path: 'editor',
+    path: Route.editor,
     component: EditorComponent,
   },
 ];
