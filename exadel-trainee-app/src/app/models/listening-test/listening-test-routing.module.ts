@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ListeningComponent } from './listening.component';
+import { ListeningTestComponent } from './listening-test.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ListeningComponent,
+    component: ListeningTestComponent,
   },
 ];
 
@@ -13,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ListeningRoutingModule {}
+export class ListeningTestRoutingModule {}
