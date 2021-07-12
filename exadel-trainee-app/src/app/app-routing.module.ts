@@ -29,7 +29,7 @@ const routes: Routes = [
   {
     path: 'listening',
     loadChildren: () =>
-      import('./models/listening/listening.module').then((m) => m.ListeningModule),
+      import('./models/listening-test/listening-test.module').then((m) => m.ListeningTestModule),
   },
 ];
 
