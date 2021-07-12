@@ -7,6 +7,10 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { SidebarComponent } from './sidebar.component';
 
 @NgModule({
@@ -19,6 +23,10 @@ import { SidebarComponent } from './sidebar.component';
     MatIconModule,
     MatToolbarModule,
     MatCardModule,
+    MatOptionModule,
+    MatSelectModule,
+    FormsModule,
+    RouterModule,
   ],
   exports: [SidebarComponent],
 })
