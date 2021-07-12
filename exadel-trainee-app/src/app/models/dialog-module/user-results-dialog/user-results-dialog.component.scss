@@ -1,6 +1,7 @@
-.user-info-wrapper {
-  display: flex;
-  justify-content: space-between;
+.user-info {
+  display: inline-block;
+  vertical-align: text-top;
+  margin-right: 2rem;
 }
 
 .user-pic {
@@ -10,12 +11,14 @@
   background-size: cover;
 }
 
-.submit-btn{
-  line-height: 6rem;
+.submit-btn {
+  display: inline-block;
+  vertical-align: bottom;
+  line-height: 4rem;
   width: 12rem;
 }
 
-.table-header {
+.table-caption {
   text-align: center;
   margin: 1rem;
   font-weight: 600;
@@ -23,13 +26,15 @@
 }
 
 table {
+  position: relative;
   width: 100%;
 
   & td {
     white-space: nowrap;
+    border-spacing: 0.2rem;
 
     &:last-child {
-      max-width: 4rem;
+      max-width: 5rem;
       text-align: end;
     }
   }
@@ -41,8 +46,18 @@ table {
   background: linear-gradient(to right, #3366cc 0%, #333399 100%);
   border-radius: 0.25rem;
 
-  & .result {
-    padding: 0.5rem;
+  & span{
+    padding: 0.5rem 0.75rem;
     color: white;
   }
+}
+
+.desc {
+  position: absolute;
+  top: 2rem;
+  font-size: 0.7rem;
+  & span {
+    margin: 0.2rem;
+  }
+
 }

@@ -1,24 +1,22 @@
 <div class="content"
      mat-dialog-content>
 
-     <mat-card class="user-info-wrapper">
+     <mat-card class="user-info">
         <mat-card-header>
             <div mat-card-avatar class="user-pic"></div>
             <mat-card-title>{{user.lastName}} {{user.firstName}}</mat-card-title>
             <mat-card-subtitle>{{user.email}}</mat-card-subtitle>
         </mat-card-header>
-        <button class="submit-btn"
-                mat-raised-button
-                color="primary"
-                (click)="onAssignBtnClick()">Assign test to User</button>
     </mat-card>
 
-
-
+    <button class="submit-btn"
+    mat-raised-button
+    color="primary"
+    (click)="onAssignBtnClick()">Assign test to User</button>
 
       <div *ngIf="results.length; else noResults">
-        <h4 class="table-header">Recent test results</h4>
         <table>
+            <caption class="table-caption">Recent test results</caption>
             <tr *ngFor="let res of results; let ind = index">
                 <td>{{ind + 1}}</td>
                 <td>{{res.date}}</td>
@@ -29,11 +27,17 @@
                             *ngIf="btnIndexes[ind]; else showResults"
                             (click)="onShowResults(res, ind)">View details</button>
                     <ng-template #showResults>
+                        <div class="desc" [hidden]="false">
+                            <span>Gramm</span>
+                            <span>Audio</span>
+                            <span>Assay</span>
+                            <span>Speach</span>
+                        </div>
                         <div class="scale">
-                            <span class="result">{{res.grammar}}</span>
-                            <span class="result">{{res.audition}}</span>
-                            <span class="result">{{res.writing}}</span>
-                            <span class="result">{{res.speaking}}</span>
+                            <span>{{res.grammar}}</span>
+                            <span>{{res.audition}}</span>
+                            <span>{{res.writing}}</span>
+                            <span>{{res.speaking}}</span>
                         </div>
                     </ng-template>
                 </td>

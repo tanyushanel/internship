@@ -46,6 +46,14 @@ export class UserResultsDialogComponent implements OnInit {
       writing: 10,
       speaking: 20,
     },
+    {
+      date: '09-12-2020',
+      level: 'advanced',
+      grammar: 20,
+      audition: 10,
+      writing: 10,
+      speaking: 20,
+    },
   ];
 
   btnIndexes: boolean[] = new Array(this.results.length);
