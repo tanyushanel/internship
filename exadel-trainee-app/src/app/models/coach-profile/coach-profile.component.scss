@@ -1,0 +1,28 @@
+button {
+  float: right;
+}
+
+button:hover {
+  background-color: gray;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-elevation-z8 {
+  margin: 0 100px;
+}
+
+mat-form-field {
+  font-size: 14px;
+  width: 100%;
+  background-color: #424242;
+  box-sizing: border-box;
+  padding: 0 1rem;
+  color: white;
+}
+
+td, th {
+  width: 35%;
+}
