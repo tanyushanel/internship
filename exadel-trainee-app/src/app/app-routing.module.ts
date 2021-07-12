@@ -1,5 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './components/mock-component/home/home.component';
+import { UsersComponent } from './components/mock-component/users/users.component';
+import { ManageComponent } from './components/mock-component/manage/manage.component';
+import { CheckComponent } from './components/mock-component/check/check.component';
+import { StatisticsComponent } from './components/mock-component/statistics/statistics.component';
+import { EditorComponent } from './components/mock-component/editor/editor.component';
+import { Route } from '../constants/route-constant';
 
 const routes: Routes = [
   {
@@ -40,6 +47,31 @@ const routes: Routes = [
     path: 'listening',
     loadChildren: () =>
       import('./models/listening-test/listening-test.module').then((m) => m.ListeningTestModule),
+  },
+  // mock component for check business logic
+  {
+    path: Route.home,
+    component: HomeComponent,
+  },
+  {
+    path: Route.users,
+    component: UsersComponent,
+  },
+  {
+    path: Route.manage,
+    component: ManageComponent,
+  },
+  {
+    path: Route.check,
+    component: CheckComponent,
+  },
+  {
+    path: Route.statistics,
+    component: StatisticsComponent,
+  },
+  {
+    path: Route.editor,
+    component: EditorComponent,
   },
 ];
 

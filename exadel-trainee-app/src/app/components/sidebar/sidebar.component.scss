@@ -33,6 +33,7 @@
 
   &__button {
     position: absolute;
+    cursor: pointer;
     bottom: 50%;
     transition: 300ms ease-in-out;
     transform: rotate(0deg);
