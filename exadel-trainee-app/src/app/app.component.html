@@ -1,6 +1,14 @@
-<h1>App page</h1>
-<a [routerLink]="['/grammar']">Grammar-test</a>
-<p><a [routerLink]="['/coachProfile']">CoachProfile</a></p>
+<app-sidebar>
+  <h1>App page</h1>
+  <a [routerLink]="['/grammar']">Grammar-test</a>
+  <p><a [routerLink]="['/coachProfile']">CoachProfile</a></p>
+  <p><a [routerLink]="['/hrProfile']">hrProfile</a></p>
+  <p><a [routerLink]="['/writing']">Writing-test</a></p>
+  <p><a [routerLink]="['/listening']">Listening</a></p>
+  <p><a [routerLink]="['/speaking']">Speaking</a></p>
 
-<button (click)="onOpenUserResultsDialog()">User Results For HR</button>
-<router-outlet></router-outlet>
+  <button (click)="onOpenUserResultsDialog()">User Results For HR</button>
+
+  <router-outlet></router-outlet>
+</app-sidebar>
+
