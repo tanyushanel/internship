@@ -1,20 +1,19 @@
 <div class="content"
      mat-dialog-content>
 
-     <mat-card>
-        <mat-card-header class="user-info-wrapper">
+     <mat-card class="user-info-wrapper">
+        <mat-card-header>
             <div mat-card-avatar class="user-pic"></div>
             <mat-card-title>{{user.lastName}} {{user.firstName}}</mat-card-title>
             <mat-card-subtitle>{{user.email}}</mat-card-subtitle>
-
-            <mat-card-actions>
-            <button class="submit-btn"
-                    mat-raised-button
-                    color="primary"
-                    (click)="onAssignBtnClick()">Assign test to User</button>
-            </mat-card-actions>
         </mat-card-header>
+        <button class="submit-btn"
+                mat-raised-button
+                color="primary"
+                (click)="onAssignBtnClick()">Assign test to User</button>
     </mat-card>
+
+
 
 
       <div *ngIf="results.length; else noResults">
@@ -42,12 +41,6 @@
         </table>
     </div>
     <ng-template #noResults>No results yet</ng-template>
-
-
-
-
-
-
 </div>
 
 <mat-dialog-actions align="end">

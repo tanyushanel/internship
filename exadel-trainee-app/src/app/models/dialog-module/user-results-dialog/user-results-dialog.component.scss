@@ -1,7 +1,6 @@
 .user-info-wrapper {
   display: flex;
   justify-content: space-between;
-  align-items: top;
 }
 
 .user-pic {
@@ -11,8 +10,8 @@
   background-size: cover;
 }
 
-.submit-btn {
-  line-height: 4rem;
+.submit-btn{
+  line-height: 6rem;
   width: 12rem;
 }
 
