@@ -1,19 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 
+export interface User {
+  firstName: string;
+  lastName: string;
+  email: string;
+  roleId: string;
+}
+
+export interface Test {
+  date: string;
+  level: string;
+  grammar: number;
+  audition: number;
+  writing: number;
+  speaking: number;
+}
+
 @Component({
   selector: 'app-user-results-dialog',
   templateUrl: './user-results-dialog.component.html',
   styleUrls: ['./user-results-dialog.component.scss'],
 })
 export class UserResultsDialogComponent implements OnInit {
-  user: any = {
+  user: User = {
     firstName: 'Ivan',
     lastName: 'Ivanov',
     email: 'Ivanov@gmal.com',
-    roleId: 1,
+    roleId: '1',
   };
 
-  results: any = [
+  results: Test[] = [
     {
       date: '09-09-2020',
       level: 'advanced',
@@ -32,14 +48,14 @@ export class UserResultsDialogComponent implements OnInit {
     },
   ];
 
-  hideResultBtnIndexes: boolean[] = new Array(this.results.length);
+  btnIndexes: boolean[] = new Array(this.results.length);
 
   ngOnInit(): void {
-    this.hideResultBtnIndexes.fill(true);
+    this.btnIndexes.fill(true);
   }
 
   onShowResults(res: any, index: number): void {
-    if (this.results.indexOf(res) === index) this.hideResultBtnIndexes[index] = false;
+    if (this.results.indexOf(res) === index) this.btnIndexes[index] = false;
   }
 
   onAssignBtnClick(): void {}

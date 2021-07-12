@@ -28,7 +28,7 @@
                 <td><b>{{res.grammar + res.audition + res.writing + res.speaking}}%</b></td>
                 <td>
                     <button mat-raised-button
-                            *ngIf="hideResultBtnIndexes[ind]; else showResults"
+                            *ngIf="btnIndexes[ind]; else showResults"
                             (click)="onShowResults(res, ind)">View details</button>
                     <ng-template #showResults>
                         <div class="scale">

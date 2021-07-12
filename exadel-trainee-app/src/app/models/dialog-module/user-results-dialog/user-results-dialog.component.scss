@@ -8,9 +8,11 @@
   display: flex;
 }
 
-.user-info div {
-  align-self: center;
-  text-align: center;
+.user-info {
+  & div {
+    align-self: center;
+    text-align: center;
+  }
 }
 
 .user-pic {
@@ -44,15 +46,15 @@
 
 table {
   width: 100%;
-}
 
-td {
-  white-space: nowrap;
-}
+  & td {
+    white-space: nowrap;
 
-td:last-child {
-  max-width: 4rem;
-  text-align: end;
+    &:last-child {
+      max-width: 4rem;
+      text-align: end;
+    }
+  }
 }
 
 .scale {
