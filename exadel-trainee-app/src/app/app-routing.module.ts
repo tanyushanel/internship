@@ -7,6 +7,11 @@ const routes: Routes = [
     loadChildren: () => import('./models/login/login.module').then((m) => m.LoginModule),
   },
   {
+    path: 'user',
+    loadChildren: () =>
+      import('./models/user-profile/user-profile.module').then((m) => m.UserProfileModule),
+  },
+  {
     path: 'speaking',
     loadChildren: () =>
       import('./models/speaking-test/speaking-test.module').then((m) => m.SpeakingTestModule),
@@ -34,7 +39,7 @@ const routes: Routes = [
   {
     path: 'listening',
     loadChildren: () =>
-      import('./models/listening/listening.module').then((m) => m.ListeningModule),
+      import('./models/listening-test/listening-test.module').then((m) => m.ListeningTestModule),
   },
 ];
 
