@@ -4,40 +4,19 @@
   align-items: top;
 }
 
-.user-info {
-  display: flex;
-}
-
-.user-info {
-  & div {
-    align-self: center;
-    text-align: center;
-  }
-}
-
 .user-pic {
-  width: 5rem;
-  height: 5rem;
-  border: 1px solid grey;
-  border-radius: 0.25rem;
-}
-
-.user-name {
-  font-weight: bold;
-  font-size: 1.5rem;
-}
-
-.user-email {
-  line-height: 0.5rem;
-  font-size: 0.75rem;
+  width: 6rem;
+  height: 6rem;
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
 }
 
 .submit-btn {
-  line-height: 3rem;
-  width: 10rem;
+  line-height: 4rem;
+  width: 12rem;
 }
 
-.header {
+.table-header {
   text-align: center;
   margin: 1rem;
   font-weight: 600;
@@ -62,9 +41,9 @@ table {
   justify-content: space-between;
   background: linear-gradient(to right, #3366cc 0%, #333399 100%);
   border-radius: 0.25rem;
-}
 
-.result {
-  padding: 0.5rem;
-  color: white;
+  & .result {
+    padding: 0.5rem;
+    color: white;
+  }
 }

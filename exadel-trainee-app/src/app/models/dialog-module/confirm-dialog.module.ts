@@ -1,3 +1,4 @@
+import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgModule } from '@angular/core';
@@ -6,7 +7,7 @@ import { UserResultsDialogComponent } from './user-results-dialog/user-results-d
 
 @NgModule({
   declarations: [UserResultsDialogComponent],
-  imports: [CommonModule, MatDialogModule, MatButtonModule],
+  imports: [CommonModule, MatDialogModule, MatButtonModule, MatCardModule],
   exports: [UserResultsDialogComponent],
 })
 export class ConfirmDialogModule {}
