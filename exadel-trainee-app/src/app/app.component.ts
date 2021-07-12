@@ -9,12 +9,4 @@ import { UserResultsDialogComponent } from './models/dialog-module/user-results-
 })
 export class AppComponent {
   title = 'exadel-trainee-app';
-
-  constructor(public dialog: MatDialog) {}
-
-  onOpenUserResultsDialog(): void {
-    this.dialog.open(UserResultsDialogComponent, {
-      width: '35rem',
-    });
-  }
 }
