@@ -25,7 +25,6 @@ export class CoachProfileComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor() {
-    // eslint-disable-next-line @typescript-eslint/no-use-before-define
     const users = Array.from({ length: 100 }, (_, k) => createNewUser(k + 1));
     this.dataSource = new MatTableDataSource(users);
   }
