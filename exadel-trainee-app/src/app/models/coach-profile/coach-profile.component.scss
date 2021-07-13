@@ -1,3 +1,5 @@
+@import "src/theme/variables";
+
 button {
   float: right;
 }
@@ -19,6 +21,7 @@ mat-form-field {
   width: 100%;
   box-sizing: border-box;
   padding: 0 1rem;
-  background-color: white;
+  background-color: $secondary-grey1;
+  color: white;
 }
 
