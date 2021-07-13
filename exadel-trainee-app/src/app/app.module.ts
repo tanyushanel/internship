@@ -4,7 +4,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidebarModule } from './components/sidebar/sidebar.module';
-import { ConfirmDialogModule } from './models/dialog-module/confirm-dialog.module';
 import { UsersComponent } from './components/mock-component/users/users.component';
 import { HomeComponent } from './components/mock-component/home/home.component';
 import { CheckComponent } from './components/mock-component/check/check.component';
@@ -22,13 +21,7 @@ import { StatisticsComponent } from './components/mock-component/statistics/stat
     ManageComponent,
     StatisticsComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    SidebarModule,
-    ConfirmDialogModule,
-  ],
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, SidebarModule],
   providers: [],
   bootstrap: [AppComponent],
 })

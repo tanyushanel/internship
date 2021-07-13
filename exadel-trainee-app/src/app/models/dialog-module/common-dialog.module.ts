@@ -10,4 +10,4 @@ import { UserResultsDialogComponent } from './user-results-dialog/user-results-d
   imports: [CommonModule, MatDialogModule, MatButtonModule, MatCardModule],
   exports: [UserResultsDialogComponent],
 })
-export class ConfirmDialogModule {}
+export class CommonDialogModule {}
