@@ -1,8 +1,8 @@
-import { Level } from '../../constants/route-constant';
+import { Level } from '../../constants/data-constants';
 
 export interface Topic {
   id: number;
+  text: string;
   level: Level;
-  topicText: string;
   creationDate: string;
 }

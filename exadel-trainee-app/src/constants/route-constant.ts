@@ -29,9 +29,3 @@ export enum UserViewValue {
   couch = 'Couch',
   admin = 'Admin',
 }
-
-export enum Level {
-  beginner = 'beginner',
-  intermediate = 'intermediate',
-  advanced = 'advanced',
-}

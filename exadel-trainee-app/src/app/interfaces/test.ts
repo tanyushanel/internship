@@ -1,21 +1,19 @@
-import { Level } from '../../constants/route-constant';
+import { Level } from '../../constants/data-constants';
+import { TestModule } from './test-module';
 
 export interface Test {
   id: number;
-  userId: number;
-  hrId?: number;
-  coachId?: number;
-  creationDate: string;
-  assignmentStartDate: string;
-  assignmentEndDate: string;
   level: Level;
-  grammarId: number;
-  grammarMark?: number;
-  auditionId: number;
-  auditionMark?: number;
-  essayId: number;
-  essayMark?: number;
-  speakingId: number;
-  speakingMark?: number;
+  date: {
+    creationDate: string;
+    assignmentStartDate: string;
+    assignmentEndDate: string;
+  };
+  content: {
+    grammar: TestModule;
+    audition: TestModule;
+    essay: TestModule;
+    speaking: TestModule;
+  };
   feedback?: string;
 }

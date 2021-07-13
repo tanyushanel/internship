@@ -1,7 +1,6 @@
 export interface Question {
   id: number;
-  questionId: Question;
+  text: string;
   phaseId: number;
-  questionText: string;
   answerId: number;
 }
