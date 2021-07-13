@@ -9,7 +9,7 @@ export interface UserData {
   lastName: string;
 }
 
-const LastName: string[] = [
+const MOCK_LAST_NAMES: string[] = [
   'Иванов',
   'Петоров',
   'Сидоров',
@@ -19,7 +19,7 @@ const LastName: string[] = [
   'Фамилия 4',
   'Фамилия 5',
 ];
-const NAMES: string[] = [
+const MOCK_NAMES: string[] = [
   'Maia',
   'Asher',
   'Olivia',
@@ -51,9 +51,9 @@ export class HrProfileComponent implements AfterViewInit {
 
   dataSource: MatTableDataSource<UserData>;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
+  @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
 
-  @ViewChild(MatSort) sort: MatSort | undefined;
+  @ViewChild(MatSort) sort: MatSort | null = null;
 
   constructor() {
     // Create 100 users
@@ -65,9 +65,8 @@ export class HrProfileComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // @ts-ignore
     this.dataSource.paginator = this.paginator;
-    // @ts-ignore
+
     this.dataSource.sort = this.sort;
   }
 
@@ -81,13 +80,12 @@ export class HrProfileComponent implements AfterViewInit {
   }
 }
 
-/** Builds and returns a new User. */
 function createNewUser(id: number): UserData {
-  const name = `${NAMES[Math.round(Math.random() * (NAMES.length - 1))]}`;
+  const name = `${MOCK_NAMES[Math.round(Math.random() * (MOCK_NAMES.length - 1))]}`;
 
   return {
     id: id.toString(),
     name,
-    lastName: LastName[Math.round(Math.random() * (LastName.length - 1))],
+    lastName: MOCK_LAST_NAMES[Math.round(Math.random() * (MOCK_LAST_NAMES.length - 1))],
   };
 }
