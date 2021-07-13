@@ -62,7 +62,7 @@ export class UserResultsDialogComponent implements OnInit {
     this.btnIndexes.fill(true);
   }
 
-  onShowResults(res: any, index: number): void {
+  onShowResults(res: Test, index: number): void {
     if (this.results.indexOf(res) === index) this.btnIndexes[index] = false;
   }
 
