@@ -5,8 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 
 export interface UserData {
   id: string;
-  name: string;
-  surname: string;
+  firstName: string;
+  lastName: string;
 }
 
 const SURNAMES: string[] = [
@@ -51,9 +51,9 @@ export class CoachProfileComponent implements AfterViewInit {
 
   dataSource: MatTableDataSource<UserData>;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  @ViewChild(MatSort) sort: MatSort | undefined;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor() {
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
@@ -62,9 +62,7 @@ export class CoachProfileComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // @ts-ignore
     this.dataSource.paginator = this.paginator;
-    // @ts-ignore
     this.dataSource.sort = this.sort;
   }
 
@@ -87,7 +85,7 @@ function createNewUser(id: number): UserData {
 
   return {
     id: id.toString(),
-    name,
-    surname: SURNAMES[Math.round(Math.random() * (SURNAMES.length - 1))],
+    firstName: name,
+    lastName: SURNAMES[Math.round(Math.random() * (SURNAMES.length - 1))],
   };
 }
