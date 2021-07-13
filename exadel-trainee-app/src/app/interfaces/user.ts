@@ -1,4 +1,4 @@
-import { Role } from './role';
+import { Role } from '../../constants/route-constant';
 
 export interface User {
   id: number;

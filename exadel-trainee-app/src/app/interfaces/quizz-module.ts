@@ -1,4 +1,4 @@
-import { Level } from './level';
+import { Level } from '../../constants/route-constant';
 
 export interface QuizzModule {
   id: number;
