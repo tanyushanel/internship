@@ -31,6 +31,7 @@ export class UserProfileComponent implements OnInit {
           mark: 10,
         },
       },
+      feedback: '',
     },
     {
       id: 2,
@@ -54,6 +55,7 @@ export class UserProfileComponent implements OnInit {
           mark: 0,
         },
       },
+      feedback: '',
     },
     {
       id: 3,
@@ -77,6 +79,7 @@ export class UserProfileComponent implements OnInit {
           mark: 10,
         },
       },
+      feedback: '',
     },
     {
       id: 4,
@@ -100,6 +103,7 @@ export class UserProfileComponent implements OnInit {
           mark: 10,
         },
       },
+      feedback: 'OK',
     },
   ];
 

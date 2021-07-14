@@ -13,7 +13,17 @@ export class UserResultsTableComponent implements AfterViewInit {
 
   dataSource = new MatTableDataSource(this.results);
 
-  displayedColumns: any[] = ['id', 'date', 'level', 'content'];
+  displayedColumns: any[] = [
+    'id',
+    'date',
+    'level',
+    'grammar',
+    'audition',
+    'essay',
+    'speaking',
+    'result',
+    'feedback',
+  ];
 
   @ViewChild(MatSort) sort!: MatSort;
 
