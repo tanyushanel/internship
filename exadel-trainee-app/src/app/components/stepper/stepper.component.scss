@@ -1,7 +1,21 @@
 .mat-form-field {
   margin-top: 16px;
 }
+
 .stepper {
   width: 80%;
   margin: 0 auto;
+}
+
+.button__color {
+  color: #c7c7c7;
+  background-color: #555555;
+}
+
+.form__color {
+  color: #c7c7c7;
+}
+
+div .button__color {
+  margin-right: 5px;
 }
