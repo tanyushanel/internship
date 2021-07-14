@@ -1,25 +1,22 @@
 .radio {
-    display: flex;
-    justify-content: space-evenly;
+  display: flex;
+  justify-content: space-evenly;
 }
-
 
 .start-btn {
-    width: 15rem;
-    height: 5rem;
-    margin: 2rem auto;
+  width: 15rem;
+  height: 5rem;
+
 }
 
-table {
-    width: 100%;
+.note-icon  {
+    color: green;
 
-    th.mat-sort-header-sorted {
-        color: black;
-      }
-  }
+}
 
-  .table-caption {
-    text-align: center;
-    margin: 1rem;
-    font-weight: 600;
-  }
+
+.table-caption {
+  margin: 1rem;
+  font-weight: 600;
+  text-align: center;
+}
