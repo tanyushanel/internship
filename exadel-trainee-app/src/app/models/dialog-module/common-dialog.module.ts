@@ -4,9 +4,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserResultsDialogComponent } from './user-results-dialog/user-results-dialog.component';
+import { DialogResultsTableComponent } from './user-results-dialog/dialog-results-table/dialog-results-table.component';
 
 @NgModule({
-  declarations: [UserResultsDialogComponent],
+  declarations: [UserResultsDialogComponent, DialogResultsTableComponent],
   imports: [CommonModule, MatDialogModule, MatButtonModule, MatCardModule],
   exports: [UserResultsDialogComponent],
 })

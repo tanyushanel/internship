@@ -1,0 +1,42 @@
+.table-caption {
+    text-align: center;
+    margin: 1rem;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+
+  table {
+    position: relative;
+    width: 100%;
+
+    & td {
+      white-space: nowrap;
+      max-width: 4.5rem;
+
+      &:last-child {
+        text-align: end;
+      }
+    }
+  }
+
+  .scale {
+    display: flex;
+    justify-content: space-between;
+    background: linear-gradient(to right, #3366cc 0%, #333399 100%);
+    border-radius: 0.25rem;
+
+    & span{
+      padding: 0.5rem 0.75rem;
+      color: white;
+    }
+  }
+
+  .desc {
+    position: absolute;
+    top: 2rem;
+    font-size: 0.7rem;
+    & span {
+      margin: 0.25rem;
+    }
+
+  }

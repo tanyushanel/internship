@@ -1,0 +1,32 @@
+<table>
+    <caption class="table-caption">Recent test results</caption>
+    <tr *ngFor="let res of results; let ind = index">
+        <td>{{ind + 1}}</td>
+        <td>{{res.date.assignmentEndDate}}</td>
+        <td>{{res.level}}</td>
+        <td>{{res!.content!.grammar!.mark! +
+            res!.content!.audition!.mark! +
+            res!.content!.essay!.mark! +
+            res!.content!.speaking!.mark!}}</td>
+        <td>
+            <button mat-raised-button
+                    *ngIf="btnIndexes[ind]; else showResults"
+                    (click)="onShowResults(res, ind)">View details</button>
+
+            <ng-template #showResults>
+                <div class="desc">
+                    <span>Gramm</span>
+                    <span>Audio</span>
+                    <span>Essay</span>
+                    <span>Speach</span>
+                </div>
+                <div class="scale">
+                    <span>{{ res.content.grammar.mark }}</span>
+                    <span>{{ res.content.audition.mark }}</span>
+                    <span>{{ res.content.essay.mark }}</span>
+                    <span>{{ res.content.speaking.mark }}</span>
+                </div>
+            </ng-template>
+        </td>
+    </tr>
+</table>

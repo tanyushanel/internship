@@ -7,7 +7,7 @@ import { User, Level, Test, TestModule } from '../mocks';
   templateUrl: './user-results-dialog.component.html',
   styleUrls: ['./user-results-dialog.component.scss'],
 })
-export class UserResultsDialogComponent implements OnInit {
+export class UserResultsDialogComponent {
   user: User = {
     id: 1,
     firstName: 'Сальвадор',
@@ -65,16 +65,6 @@ export class UserResultsDialogComponent implements OnInit {
       },
     },
   ];
-
-  btnIndexes: boolean[] = new Array(this.results.length);
-
-  ngOnInit(): void {
-    this.btnIndexes.fill(true);
-  }
-
-  onShowResults(res: Test, index: number): void {
-    if (this.results.indexOf(res) === index) this.btnIndexes[index] = false;
-  }
 
   onAssignBtnClick(): void {}
 }
