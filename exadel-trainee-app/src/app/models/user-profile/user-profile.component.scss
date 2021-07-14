@@ -1,7 +1,15 @@
 .radio {
-    display: block;
-    margin: 1rem;
+    display: flex;
+    justify-content: space-evenly;
 }
+
+
+.start-btn {
+    width: 15rem;
+    height: 5rem;
+    margin: 2rem auto;
+}
+
 table {
     width: 100%;
 
@@ -14,5 +22,4 @@ table {
     text-align: center;
     margin: 1rem;
     font-weight: 600;
-    text-decoration: underline;
   }

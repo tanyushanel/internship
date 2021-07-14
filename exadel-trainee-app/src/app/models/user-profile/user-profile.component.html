@@ -1,42 +1,16 @@
-<div>
-    <h3>Choose your English level:</h3>
-    <mat-radio-group name="levels">
-        <mat-radio-button class="radio" value="beginner" checked="true">Beginner</mat-radio-button>
-        <mat-radio-button class="radio" value="intermediate">Intermediate</mat-radio-button>
-        <mat-radio-button class="radio" value="advanced">Advanced</mat-radio-button>
+<div class="profile-container">
+    <h3 class="table-caption">Choose your English level:</h3>
+    <mat-radio-group name="levels" class="radio">
+        <mat-radio-button class="radio-btn" value="beginner" checked="true">Beginner</mat-radio-button>
+        <mat-radio-button class="radio-btn" value="intermediate">Intermediate</mat-radio-button>
+        <mat-radio-button class="radio-btn" value="advanced">Advanced</mat-radio-button>
       </mat-radio-group>
 
-      <button mat-raised-button>START TEST</button>
+      <button mat-raised-button color="primary" class="start-btn" (click)="onStartButtonClick()">START TEST</button>
 
-      <h3 class="table-caption" *ngIf="results.length">Your recent results</h3>
+      <h3 class="table-caption" >Your recent results</h3>
 
-      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+      <app-user-results-table></app-user-results-table>
 
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
-          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-        </ng-container>
 
-        <ng-container matColumnDef="date">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
-          <td mat-cell *matCellDef="let element"> {{element.date.creationDate}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="level">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Level </th>
-          <td mat-cell *matCellDef="let element"> {{element.level}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef= "content" >
-          <th mat-header-cell *matHeaderCellDef> Result </th>
-          <td mat-cell *matCellDef="let element">
-            {{element!.content!.grammar!.mark
-            + element!.content!.audition!.mark
-            + element!.content!.essay!.mark
-            + element!.content!.speaking!.mark}}</td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
 </div>
