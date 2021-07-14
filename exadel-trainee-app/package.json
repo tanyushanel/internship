@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "eslint \"**/*.{ts,tsx}\"",
     "lint:fix": "eslint \"**/*.{ts,tsx}\" --fix --color",
-    "lint:styles": "stylelint \"src/**/*.scss\" --fix --color --formatter"
+    "lint:styles": "stylelint \"src/**/*.scss\" --fix"
   },
   "private": true,
   "dependencies": {
@@ -70,7 +70,8 @@
   },
   "lint-staged": {
     "*.{js,ts}": [
-      "npm run lint:fix && lint:styles",
+      "npm run lint:fix",
+      "npm run lint:styles",
       "git add"
     ]
   }

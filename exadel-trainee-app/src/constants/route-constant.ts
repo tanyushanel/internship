@@ -7,13 +7,6 @@ export enum Route {
   statistics = 'statistics',
 }
 
-export enum Role {
-  user = 'user',
-  hr = 'hr',
-  couch = 'couch',
-  admin = 'admin',
-}
-
 export enum SidebarMenu {
   home = 'Home',
   users = 'Users',
@@ -21,11 +14,4 @@ export enum SidebarMenu {
   editor = 'Editor',
   manage = 'Manage',
   statistics = 'Statistics',
-}
-
-export enum UserViewValue {
-  user = 'User',
-  hr = 'HR',
-  couch = 'Couch',
-  admin = 'Admin',
 }

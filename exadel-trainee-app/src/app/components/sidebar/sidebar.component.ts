@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Role } from '../../../constants/route-constant';
-import {
-  UserRoutesType,
-  UsersPermission,
-  usersRoute,
-  userPermission,
-} from '../../../constants/mock-user-data';
+import { Observable } from 'rxjs';
+import { UserRoutesType, usersRoute } from '../../../constants/mock-user-data';
+import { UserRoleService } from '../../services/user-role.service';
+import { UserResponseType } from '../../../interfaces/user.interfaces';
 
 @Component({
   selector: 'app-sidebar',
@@ -15,13 +12,15 @@ import {
 export class SidebarComponent implements OnInit {
   isOpen = true;
 
-  selectedUser = Role.user;
+  readonly user$: Observable<UserResponseType> = this.userRoleSvr.activeUser$;
 
   usersRoute: UserRoutesType = usersRoute;
 
-  userPermission: UsersPermission[] = userPermission;
+  constructor(private readonly userRoleSvr: UserRoleService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userRoleSvr.getActiveUser();
+  }
 
   handleSidebar() {
     this.isOpen = !this.isOpen;
