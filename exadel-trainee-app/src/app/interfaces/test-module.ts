@@ -1,4 +1,4 @@
 export interface TestModule {
-  testId: number;
-  testMark?: number;
+  id: number;
+  mark?: number;
 }
