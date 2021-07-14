@@ -44,6 +44,11 @@ const routes: Routes = [
       import('./models/writing-test/writing-test.module').then((m) => m.WritingTestModule),
   },
   {
+    path: 'adminProfile',
+    loadChildren: () =>
+      import('./models/admin-profile/admin-profile.module').then((m) => m.AdminProfileModule),
+  },
+  {
     path: 'listening',
     loadChildren: () =>
       import('./models/listening-test/listening-test.module').then((m) => m.ListeningTestModule),
