@@ -46,4 +46,4 @@ export function createNewUser(id: number): UserData {
   };
 }
 
-export const users = Array.from({ length: 100 }, (_, k) => createNewUser(k + 1));
+export const MOCK_USERS = Array.from({ length: 100 }, (_, k) => createNewUser(k + 1));
