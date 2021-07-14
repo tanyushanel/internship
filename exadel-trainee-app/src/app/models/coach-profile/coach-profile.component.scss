@@ -17,11 +17,11 @@ table {
 }
 
 mat-form-field {
-  font-size: 14px;
-  width: 100%;
   box-sizing: border-box;
+  width: 100%;
   padding: 0 1rem;
-  background-color: $secondary-grey1;
   color: white;
+  font-size: 14px;
+  background-color: $secondary-grey1;
 }
 
