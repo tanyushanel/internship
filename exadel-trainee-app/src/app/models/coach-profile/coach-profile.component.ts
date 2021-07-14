@@ -2,7 +2,7 @@ import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { createNewUser } from 'src/mocks/users-utils.mock';
+import { MOCK_USERS } from 'src/mocks/users-utils.mock';
 
 export interface UserData {
   id: string;
@@ -25,8 +25,7 @@ export class CoachProfileComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor() {
-    const users = Array.from({ length: 100 }, (_, k) => createNewUser(k + 1));
-    this.dataSource = new MatTableDataSource(users);
+    this.dataSource = new MatTableDataSource(MOCK_USERS);
   }
 
   ngAfterViewInit() {
