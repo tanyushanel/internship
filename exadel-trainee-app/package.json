@@ -9,7 +9,8 @@
     "test": "ng test",
     "lint": "eslint \"**/*.{ts,tsx}\"",
     "lint:fix": "eslint \"**/*.{ts,tsx}\" --fix --color",
-    "lint:styles": "stylelint \"src/**/*.scss\" --fix"
+    "lint:styles": "stylelint \"src/**/*.scss\" --fix",
+    "prettier:fix": "prettier \"src/**/*.*\" --write"
   },
   "private": true,
   "dependencies": {
@@ -72,6 +73,7 @@
     "*.{js,ts}": [
       "npm run lint:fix",
       "npm run lint:styles",
+      "npm run prettier:fix",
       "git add"
     ]
   }
