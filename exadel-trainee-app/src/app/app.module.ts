@@ -10,6 +10,7 @@ import { CheckComponent } from './components/mock-component/check/check.componen
 import { EditorComponent } from './components/mock-component/editor/editor.component';
 import { ManageComponent } from './components/mock-component/manage/manage.component';
 import { StatisticsComponent } from './components/mock-component/statistics/statistics.component';
+import { StepperComponent } from './components/stepper/stepper.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { StatisticsComponent } from './components/mock-component/statistics/stat
     EditorComponent,
     ManageComponent,
     StatisticsComponent,
+    StepperComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, SidebarModule],
   providers: [],
