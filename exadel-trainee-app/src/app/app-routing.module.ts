@@ -34,9 +34,9 @@ const routes: Routes = [
       import('./models/hr-profile/hr-profile.module').then((m) => m.HrProfileModule),
   },
   {
-    path: 'coachProfile',
+    path: 'coach-profile',
     loadChildren: () =>
-      import('./models/coachProfile/coachProfile.module').then((m) => m.CoachProfileModule),
+      import('./models/coach-profile/coach-profile.module').then((m) => m.CoachProfileModule),
   },
   {
     path: 'writing',
