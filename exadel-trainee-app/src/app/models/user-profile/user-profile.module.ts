@@ -7,9 +7,10 @@ import { AngularMaterialCommonModule } from '../angular-material-common.module';
 import { UserProfileRoutingModule } from './user-profile-routing.module';
 import { UserProfileComponent } from './user-profile.component';
 import { UserResultsTableComponent } from './user-results-table/user-results-table.component';
+import { NotificationComponent } from './notification/notification.component';
 
 @NgModule({
-  declarations: [UserProfileComponent, UserResultsTableComponent],
+  declarations: [UserProfileComponent, UserResultsTableComponent, NotificationComponent],
   imports: [
     CommonModule,
     UserProfileRoutingModule,
