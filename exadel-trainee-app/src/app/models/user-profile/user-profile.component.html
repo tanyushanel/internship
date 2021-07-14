@@ -9,11 +9,9 @@
         <mat-radio-button class="radio-btn" value="advanced">Advanced</mat-radio-button>
     </mat-radio-group>
 
-      <button mat-raised-button color="primary" class="start-btn" (click)="onStartButtonClick()">START TEST</button>
+    <button mat-raised-button color="primary" class="start-btn" (click)="onStartButtonClick()">START TEST</button>
 
-      <h3 class="table-caption" >Your recent results</h3>
+    <app-user-results-table *ngIf="results.length > 0; else noResults" [results]="results"></app-user-results-table>
 
-      <app-user-results-table *ngIf="results.length" [results]="results"></app-user-results-table>
-
-
+    <ng-template  #noResults> <p class="table-caption">You have no test results yet</p></ng-template>
 </div>
