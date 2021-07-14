@@ -1,53 +1,62 @@
 <div class="content"
      mat-dialog-content>
 
-     <mat-card class="user-info">
-        <mat-card-header>
-            <div mat-card-avatar class="user-pic"></div>
-            <mat-card-title>{{user.firstName}} {{user.lastName}}</mat-card-title>
-            <mat-card-subtitle>{{user.email}}</mat-card-subtitle>
-        </mat-card-header>
+
+    <mat-card class="user-info-wrap">
+            <div mat-card-avatar
+                 class="user-pic"></div>
+            <div class="user-info">
+                <b>{{user.firstName}} {{user.lastName}}</b>
+                <p>{{user.email}}</p>
+            </div>
     </mat-card>
 
-    <button class="submit-btn"
-    mat-raised-button
-    color="primary"
-    (click)="onAssignBtnClick()">Assign test to User</button>
 
-      <div *ngIf="results.length; else noResults">
+    <button class="submit-btn"
+            mat-raised-button
+            color="primary"
+            (click)="onAssignBtnClick()">Assign test to User</button>
+
+    <div *ngIf="results.length; else noResults">
         <table>
             <caption class="table-caption">Recent test results</caption>
+
             <tr *ngFor="let res of results; let ind = index">
                 <td>{{ind + 1}}</td>
-                <td>{{res.date}}</td>
+                <td>{{res.date.assignmentEndDate}}</td>
                 <td>{{res.level}}</td>
-                <td><b>{{res.grammar + res.audition + res.writing + res.speaking}}%</b></td>
+                <td>{{res!.content!.grammar!.mark! +
+                    res!.content!.audition!.mark! +
+                    res!.content!.essay!.mark! +
+                    res!.content!.speaking!.mark!}}</td>
+
                 <td>
                     <button mat-raised-button
                             *ngIf="btnIndexes[ind]; else showResults"
                             (click)="onShowResults(res, ind)">View details</button>
                     <ng-template #showResults>
-                        <div class="desc" [hidden]="false">
+                        <div class="desc">
                             <span>Gramm</span>
                             <span>Audio</span>
-                            <span>Assay</span>
+                            <span>Essay</span>
                             <span>Speach</span>
                         </div>
                         <div class="scale">
-                            <span>{{res.grammar}}</span>
-                            <span>{{res.audition}}</span>
-                            <span>{{res.writing}}</span>
-                            <span>{{res.speaking}}</span>
+                            <span>{{res.content.grammar.mark }}</span>
+                            <span>{{res.content.audition.mark}}</span>
+                            <span>{{res.content.essay.mark}}</span>
+                            <span>{{res.content.speaking.mark}}</span>
                         </div>
                     </ng-template>
                 </td>
             </tr>
         </table>
     </div>
-    <ng-template #noResults>No results yet</ng-template>
+    <ng-template #noResults><h3 class="table-caption">No results yet</h3></ng-template>
 </div>
 
 <mat-dialog-actions align="end">
     <button mat-button
-            mat-dialog-close cdkFocusInitial>Close</button>
+            mat-dialog-close
+            cdkFocusInitial>Close</button>
 </mat-dialog-actions>

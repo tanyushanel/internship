@@ -1,20 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
-export interface User {
-  firstName: string;
-  lastName: string;
-  email: string;
-  roleId: string;
-}
-
-export interface Test {
-  date: string;
-  level: string;
-  grammar: number;
-  audition: number;
-  writing: number;
-  speaking: number;
-}
+import { Role } from 'src/constants/route-constant';
+import { User, Level, Test, TestModule } from '../mocks';
 
 @Component({
   selector: 'app-user-results-dialog',
@@ -23,36 +9,60 @@ export interface Test {
 })
 export class UserResultsDialogComponent implements OnInit {
   user: User = {
-    firstName: 'Ivan',
-    lastName: 'Ivanov',
-    email: 'Ivanov@gmal.com',
-    roleId: '1',
+    id: 1,
+    firstName: 'Сальвадор',
+    lastName: 'Бананович',
+    email: 'salsa@mail.com',
+    role: Role.couch,
+    userPhoto: '',
   };
 
   results: Test[] = [
     {
-      date: '09-09-2020',
-      level: 'advanced',
-      grammar: 20,
-      audition: 30,
-      writing: 30,
-      speaking: 20,
+      id: 1,
+      date: { assignmentEndDate: new Date().toDateString() },
+      level: Level.beginner,
+      content: {
+        grammar: {
+          id: 1,
+          mark: 30,
+        },
+        audition: {
+          id: 1,
+          mark: 20,
+        },
+        essay: {
+          id: 1,
+          mark: 20,
+        },
+        speaking: {
+          id: 1,
+          mark: 10,
+        },
+      },
     },
     {
-      date: '09-09-2020',
-      level: 'advanced',
-      grammar: 30,
-      audition: 30,
-      writing: 10,
-      speaking: 20,
-    },
-    {
-      date: '09-12-2020',
-      level: 'advanced',
-      grammar: 20,
-      audition: 10,
-      writing: 10,
-      speaking: 20,
+      id: 2,
+      date: { assignmentEndDate: new Date().toDateString() },
+      level: Level.beginner,
+      content: {
+        grammar: {
+          id: 1,
+          mark: 30,
+        },
+        audition: {
+          id: 1,
+          mark: 30,
+        },
+        essay: {
+          id: 1,
+          mark: 10,
+        },
+        speaking: {
+          id: 1,
+          mark: 10,
+        },
+      },
     },
   ];
 

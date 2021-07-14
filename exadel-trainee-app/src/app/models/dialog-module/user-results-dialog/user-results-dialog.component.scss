@@ -1,7 +1,12 @@
-.user-info {
-  display: inline-block;
-  vertical-align: text-top;
-  margin-right: 2rem;
+.content {
+  white-space: nowrap;
+}
+
+.user-info-wrap {
+  display: inline-flex;
+  margin-right: 1rem;
+  justify-content: space-between;
+  width: 60%;
 }
 
 .user-pic {
@@ -15,7 +20,6 @@
   display: inline-block;
   vertical-align: bottom;
   line-height: 4rem;
-  width: 12rem;
 }
 
 .table-caption {
@@ -31,10 +35,9 @@ table {
 
   & td {
     white-space: nowrap;
-    border-spacing: 0.2rem;
+    max-width: 4.5rem;
 
     &:last-child {
-      max-width: 5rem;
       text-align: end;
     }
   }
@@ -57,7 +60,7 @@ table {
   top: 2rem;
   font-size: 0.7rem;
   & span {
-    margin: 0.2rem;
+    margin: 0.25rem;
   }
 
 }
