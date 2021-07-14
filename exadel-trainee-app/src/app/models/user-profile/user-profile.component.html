@@ -8,6 +8,8 @@
 
       <button mat-raised-button>START TEST</button>
 
+      <h3 class="table-caption" *ngIf="results.length">Your recent results</h3>
+
       <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
         <ng-container matColumnDef="id">
@@ -27,7 +29,11 @@
 
         <ng-container matColumnDef= "content" >
           <th mat-header-cell *matHeaderCellDef> Result </th>
-          <td mat-cell *matCellDef="let element">  {{element!.content!.grammar!.mark + element!.content!.audition!.mark + element!.content!.essay!.mark + element!.content!.speaking!.mark}}</td>
+          <td mat-cell *matCellDef="let element">
+            {{element!.content!.grammar!.mark
+            + element!.content!.audition!.mark
+            + element!.content!.essay!.mark
+            + element!.content!.speaking!.mark}}</td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
