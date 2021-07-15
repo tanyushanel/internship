@@ -1,7 +1,10 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { UserResultsDialogComponent } from '../dialog-module/user-results-dialog/user-results-dialog.component';
 
 export interface UserData {
   id: string;
@@ -55,7 +58,7 @@ function createNewUser(id: number): UserData {
   templateUrl: './hr-profile.component.html',
   styleUrls: ['./hr-profile.component.scss'],
 })
-export class HrProfileComponent implements AfterViewInit {
+export class HrProfileComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['id', 'firstName', 'lastName', 'assessment'];
 
   dataSource: MatTableDataSource<UserData>;
@@ -64,15 +67,18 @@ export class HrProfileComponent implements AfterViewInit {
 
   @ViewChild(MatSort) sort: MatSort | null = null;
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
     const users = Array.from({ length: 100 }, (_, k) => createNewUser(k + 1));
 
     this.dataSource = new MatTableDataSource(users);
   }
 
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-
     this.dataSource.sort = this.sort;
   }
 

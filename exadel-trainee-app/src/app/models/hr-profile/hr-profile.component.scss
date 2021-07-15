@@ -1,18 +1,20 @@
-@import "src/theme/variables.scss";
+@import 'src/theme/variables.scss';
 
 table {
   width: 100%;
 }
-.mat-elevation-z8{
-margin: 0 30px;
+
+.mat-elevation-z8 {
+  margin: 0 30px;
 }
 
 .mat-form-field {
-  background-color: $secondary-grey1;
-  font-size: 14px;
   width: 100%;
+  font-size: 14px;
+  background-color: $secondary-grey1;
 }
 
-td, th {
+td,
+th {
   width: 10%;
 }
