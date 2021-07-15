@@ -12,10 +12,10 @@ import { HrProfileRoutingModule } from './hr-profile-routing.module';
 
 @NgModule({
   declarations: [HrProfileComponent],
-  imports: [CommonModule, HrProfileRoutingModule, CommonDialogModule],
   imports: [
     CommonModule,
     HrProfileRoutingModule,
+    CommonDialogModule,
     MatFormFieldModule,
     MatTableModule,
     MatPaginatorModule,

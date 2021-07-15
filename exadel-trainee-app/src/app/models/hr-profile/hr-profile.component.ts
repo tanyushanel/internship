@@ -77,15 +77,8 @@ export class HrProfileComponent implements OnInit, AfterViewInit {
     throw new Error('Method not implemented.');
   }
 
-  onOpenUserResultsDialog(): void {
-    this.dialog.open(UserResultsDialogComponent, {
-      width: '35rem',
-    });
-  }
-
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-
     this.dataSource.sort = this.sort;
   }
 
