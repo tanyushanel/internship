@@ -9,8 +9,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class WritingTestComponent implements OnInit {
   form!: FormGroup;
 
-  numSymbols = this.form.value.length;
-
   ngOnInit() {
     this.form = new FormGroup({
       text: new FormControl('', [Validators.required, Validators.minLength(10)]),
@@ -19,7 +17,10 @@ export class WritingTestComponent implements OnInit {
 
   submit() {
     const formData = this.form.value;
-    console.log(formData.text.length);
+    this.form.reset();
+  }
+
+  clear() {
     this.form.reset();
   }
 }

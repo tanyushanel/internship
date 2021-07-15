@@ -1,18 +1,18 @@
 <div class="container">
   <h1>Writing test page</h1>
+  <p>Write about <span>some theme</span></p>
 
   <form class="essay-area" [formGroup]="form" (ngSubmit)="submit()">
-    <p>Write about <span>some theme</span></p>
-
     <mat-form-field appearance="fill">
       <textarea
         matNativeControl
         maxlength="512"
         formControlName="text"
+        #text
         (paste)="$event.preventDefault()"
       ></textarea>
       <mat-hint aligt="start">Max 512 characters</mat-hint>
-      <span>{{ numSymbols }}/512</span>
+      <span>{{ text.value.length }}/ 512 </span>
 
       <div *ngIf="form.get('text')!.invalid && form.get('text')!.touched" class="validation">
         <small class="error" *ngIf="form.get('text')!.errors!.required"
@@ -25,6 +25,11 @@
       </div>
     </mat-form-field>
 
-    <button type="submit" [disabled]="form.invalid" mat-raised-button>Send essay</button>
+    <div class="buttons">
+      <button type="submit" class="send" [disabled]="form.invalid" mat-raised-button>
+        Send essay
+      </button>
+      <button type="button" class="clear" mat-raised-button (click)="clear()">Clear form</button>
+    </div>
   </form>
 </div>
