@@ -6,6 +6,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatSortModule } from '@angular/material/sort';
 import { MatButtonModule } from '@angular/material/button';
+import { MatStepperModule } from '@angular/material/stepper';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -16,6 +18,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     MatSortModule,
     MatButtonModule,
+    MatStepperModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   declarations: [],
   exports: [
@@ -26,6 +31,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     MatSortModule,
     MatButtonModule,
+    MatStepperModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
 })
 export class AngularMaterialCommonModule {}

@@ -11,12 +11,17 @@ export class StepperComponent implements OnInit {
 
   secondFormGroup: FormGroup;
 
+  lastFormGroup: FormGroup;
+
   constructor(private formBuilder: FormBuilder) {
     this.firstFormGroup = this.formBuilder.group({
       firstCtrl: ['', Validators.required],
     });
     this.secondFormGroup = this.formBuilder.group({
       secondCtrl: ['', Validators.required],
+    });
+    this.lastFormGroup = this.formBuilder.group({
+      lastCtrl: ['', Validators.required],
     });
   }
 
