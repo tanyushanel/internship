@@ -1,33 +1,25 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { Component, Input, OnInit } from '@angular/core';
 import { Test } from 'src/app/interfaces/test';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-user-results-table',
   templateUrl: './user-results-table.component.html',
   styleUrls: ['./user-results-table.component.scss'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
-export class UserResultsTableComponent implements AfterViewInit {
+export class UserResultsTableComponent implements OnInit {
   @Input() results: Test[] = [];
 
-  dataSource = new MatTableDataSource(this.results);
+  columnsToDisplay: any[] = ['id', 'date', 'level', 'result'];
 
-  displayedColumns: any[] = [
-    'id',
-    'date',
-    'level',
-    'grammar',
-    'audition',
-    'essay',
-    'speaking',
-    'result',
-    'feedback',
-  ];
+  expandedElement!: Test;
 
-  @ViewChild(MatSort) sort!: MatSort;
-
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-  }
+  ngOnInit(): void {}
 }

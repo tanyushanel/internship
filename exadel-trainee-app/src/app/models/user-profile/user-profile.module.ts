@@ -1,8 +1,5 @@
-import { MatTableModule } from '@angular/material/table';
-import { MatButtonModule } from '@angular/material/button';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatRadioModule, MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
 import { AngularMaterialCommonModule } from '../angular-material-common.module';
 import { UserProfileRoutingModule } from './user-profile-routing.module';
 import { UserProfileComponent } from './user-profile.component';
@@ -11,19 +8,6 @@ import { NotificationComponent } from './notification/notification.component';
 
 @NgModule({
   declarations: [UserProfileComponent, UserResultsTableComponent, NotificationComponent],
-  imports: [
-    CommonModule,
-    UserProfileRoutingModule,
-    MatRadioModule,
-    MatButtonModule,
-    MatTableModule,
-    AngularMaterialCommonModule,
-  ],
-  providers: [
-    {
-      provide: MAT_RADIO_DEFAULT_OPTIONS,
-      useValue: { color: 'accent' },
-    },
-  ],
+  imports: [CommonModule, UserProfileRoutingModule, AngularMaterialCommonModule],
 })
 export class UserProfileModule {}

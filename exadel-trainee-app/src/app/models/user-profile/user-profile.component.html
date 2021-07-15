@@ -1,17 +1,33 @@
 <div class="profile-container">
   <app-notification></app-notification>
 
-    <h3 class="table-caption">Choose your English level:</h3>
+  <h3 class="table-caption">Choose your English level:</h3>
 
-    <mat-radio-group name="levels" class="radio">
-        <mat-radio-button class="radio-btn" value="beginner" checked="true">Beginner</mat-radio-button>
-        <mat-radio-button class="radio-btn" value="intermediate">Intermediate</mat-radio-button>
-        <mat-radio-button class="radio-btn" value="advanced">Advanced</mat-radio-button>
-    </mat-radio-group>
+  <mat-radio-group name="levels"
+                   class="radio">
+    <mat-radio-button class="radio-btn"
+                      value="beginner"
+                      checked="true"
+                      [(ngModel)]="level">Beginner</mat-radio-button>
+    <mat-radio-button class="radio-btn"
+                      value="intermediate"
+                      [(ngModel)]="level">Intermediate</mat-radio-button>
+    <mat-radio-button class="radio-btn"
+                      value="advanced"
+                      [(ngModel)]="level">Advanced</mat-radio-button>
+  </mat-radio-group>
 
-    <button mat-raised-button color="primary" class="start-btn" (click)="onStartButtonClick()">START TEST</button>
+  <p>You chose {{level}}</p>
 
-    <app-user-results-table *ngIf="results.length > 0; else noResults" [results]="results"></app-user-results-table>
+  <button mat-raised-button
+          color="primary"
+          class="start-btn"
+          (click)="onStartButtonClick()">START TEST</button>
 
-    <ng-template  #noResults> <p class="table-caption">You have no test results yet</p></ng-template>
+  <app-user-results-table *ngIf="results.length > 0; else noResults"
+                          [results]="results"></app-user-results-table>
+
+  <ng-template #noResults>
+    <p class="table-caption">You have no test results yet</p>
+  </ng-template>
 </div>

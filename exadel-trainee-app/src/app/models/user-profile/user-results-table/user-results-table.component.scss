@@ -1,14 +1,87 @@
+.table-caption {
+  text-align: center;
+  margin: 1rem;
+  font-weight: 500;
+}
+
 table {
-    width: 100%;
+  width: 80%;
+  margin: 1rem auto;
+  & td {
+    white-space: nowrap;
+    max-width: 4.5rem;
 
-    th.mat-sort-header-sorted {
-      color: black;
-
+    &:last-child {
+      text-align: end;
     }
   }
+}
 
-  .table-caption {
-    margin: 1rem;
-    font-weight: 600;
-    text-align: center;
+.scale {
+  display: flex;
+  justify-content: space-between;
+  background: linear-gradient(to right, #3366cc 0%, #333399 100%);
+  border-radius: 0.25rem;
+  width: 15em;
+
+  & span {
+    padding: 0.5rem 0.75rem;
+    color: white;
   }
+}
+
+.desc span {
+  font-size: 0.7rem;
+  display: inline-block;
+  color: black;
+  margin: 0 0.75rem;
+}
+
+th.mat-header-cell:last-child {
+  text-align: right;
+}
+
+tr.detail-row {
+  height: 0;
+}
+
+tr.element-row:not(.expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.element-row:not(.expanded-row):active {
+  background: #efefef;
+}
+
+.element-row td {
+  border-bottom-width: 0;
+}
+
+.element-detail {
+  overflow: hidden;
+}
+
+.element-diagram {
+  display: flex;
+  justify-content: space-between;
+  min-width: 2rem;
+  font-weight: lighter;
+  margin: 0.5rem 0;
+}
+
+.element-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+}
+
+.element-description {
+  max-width: 50%;
+  white-space: normal;
+  margin: 0.5rem;
+  text-align: justify;
+}
+
+.element-description-attribution {
+  opacity: 0.5;
+}
