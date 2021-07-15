@@ -42,7 +42,5 @@ export class CoachProfileComponent implements AfterViewInit {
     }
   }
 
-  OnClick(id: number) {
-    console.log('Click', id);
-  }
+  OnClick(id: number) {}
 }
