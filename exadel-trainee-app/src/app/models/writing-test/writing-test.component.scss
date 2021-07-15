@@ -1,0 +1,41 @@
+@import 'src/theme/variables.scss';
+
+.container {
+  height: 100vh;
+  padding-left: 30px;
+  background-color: $secondary-grey1;
+
+  h1,
+  p,
+  span {
+    color: $secondary-grey3;
+  }
+
+  span {
+    font-style: italic;
+  }
+}
+
+mat-form-field {
+  width: 700px;
+  border-radius: $border-radius-medium;
+
+  textarea {
+    height: 100px;
+    color: $secondary-grey3;
+  }
+}
+
+mat-hint {
+  color: $white;
+}
+
+.error {
+  color: $error;
+}
+
+button {
+  display: block;
+  margin-top: 10px;
+  background-color: $primary-violet;
+}
