@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserRoutesType, usersRoute } from '../../../constants/mock-user-data';
-import { UserRoleService } from '../../services/user-role.service';
+import { UserStoreService } from '../../services/store/user-store.service';
 import { UserResponseType } from '../../../interfaces/user.interfaces';
 
 @Component({
@@ -16,7 +16,7 @@ export class SidebarComponent implements OnInit {
 
   usersRoute: UserRoutesType = usersRoute;
 
-  constructor(private readonly userRoleSvr: UserRoleService) {}
+  constructor(private readonly userRoleSvr: UserStoreService) {}
 
   ngOnInit(): void {
     this.userRoleSvr.getActiveUser();

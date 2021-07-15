@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { UserResponseType } from '../../interfaces/user.interfaces';
-import { UserHttpService } from './user-role-http.service';
+import { UserResponseType } from '../../../interfaces/user.interfaces';
+import { UserHttpService } from '../user-http.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class UserRoleService {
+export class UserStoreService {
   private readonly userSubject$ = new BehaviorSubject<UserResponseType>({} as UserResponseType);
 
   readonly activeUser$ = this.userSubject$.asObservable();
@@ -19,7 +19,7 @@ export class UserRoleService {
 
   getActiveUser(): void {
     this.userHttpService.getUser().subscribe((user) => {
-      this.activeUser = user;
+      this.activeUser = { ...user };
     });
   }
 }
