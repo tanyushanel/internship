@@ -1,0 +1,18 @@
+@import "src/theme/variables.scss";
+
+table {
+  width: 100%;
+}
+.mat-elevation-z8{
+margin: 0 30px;
+}
+
+.mat-form-field {
+  background-color: $secondary-grey1;
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 10%;
+}
