@@ -1,1 +1,8 @@
-<h1>Hello World!</h1>
+<button (click)="startRecording()">
+	Start recording
+</button>
+<button (click)="stopRecording()">
+	Stop
+</button>
+
+<audio *ngFor="let audio of audioFiles" controls='true' [src]="audio.src"></audio>
