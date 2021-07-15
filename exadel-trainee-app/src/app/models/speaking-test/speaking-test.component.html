@@ -1,8 +1,4 @@
-<button mat-raised-button color = "primary" (click)="startRecording()">
-	Start recording
-</button>
-<button mat-raised-button color = "warn" (click)="stopRecording()">
-	Stop
-</button>
+<button mat-raised-button color="primary" (click)="startRecording()">Start recording</button>
+<button mat-raised-button color="warn" (click)="stopRecording()">Stop</button>
 
-<audio *ngFor="let audio of audioFiles" controls='true' [src]="audio.src"></audio>
+<audio *ngFor="let audio of audioFiles" controls="true" [src]="audio.src"></audio>
