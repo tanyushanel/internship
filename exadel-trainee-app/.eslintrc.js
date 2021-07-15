@@ -1,4 +1,4 @@
-module.exports = {
+
   /**
    * See packages/eslint-plugin/src/configs/README.md
    * for what this recommended config contains.
