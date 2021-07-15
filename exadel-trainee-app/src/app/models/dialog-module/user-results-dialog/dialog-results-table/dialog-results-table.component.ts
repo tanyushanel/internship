@@ -1,22 +1,25 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Test } from '../../mocks';
 
 @Component({
   selector: 'app-dialog-results-table',
   templateUrl: './dialog-results-table.component.html',
   styleUrls: ['./dialog-results-table.component.scss'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class DialogResultsTableComponent implements OnInit {
   @Input() results: Test[] = [];
 
-  btnIndexes: boolean[] = [];
+  columnsToDisplay: any[] = ['id', 'date', 'level', 'result'];
 
-  ngOnInit(): void {
-    this.btnIndexes = new Array(this.results.length);
-    this.btnIndexes.fill(true);
-  }
+  expandedElement!: Test;
 
-  onShowResults(res: Test, index: number): void {
-    if (this.results.indexOf(res) === index) this.btnIndexes[index] = false;
-  }
+  ngOnInit(): void {}
 }

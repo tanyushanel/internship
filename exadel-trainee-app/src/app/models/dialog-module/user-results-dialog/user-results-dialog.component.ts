@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Component, OnInit } from '@angular/core';
 import { Role } from 'src/constants/route-constant';
 import { User, Level, Test, TestModule } from '../mocks';
@@ -29,7 +30,7 @@ export class UserResultsDialogComponent {
         },
         audition: {
           id: 1,
-          mark: 20,
+          mark: 10,
         },
         essay: {
           id: 1,

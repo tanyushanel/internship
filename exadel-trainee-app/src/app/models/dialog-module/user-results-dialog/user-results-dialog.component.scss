@@ -1,12 +1,14 @@
 .content {
+  position: relative;
   white-space: nowrap;
 }
 
 .user-info-wrap {
   display: inline-flex;
   margin-right: 1rem;
-  justify-content: space-between;
-  width: 60%;
+  padding: 0.5rem;
+  width: 65%;
+  overflow: hidden;
 }
 
 .user-pic {
@@ -16,10 +18,18 @@
   background-size: cover;
 }
 
+.user-info {
+  padding: 0.5rem;
+  & b {
+    display: inline-block;
+    white-space: normal;
+  }
+}
+
 .submit-btn {
   display: inline-block;
   vertical-align: bottom;
-  line-height: 4rem;
+  line-height: 5rem;
 }
 
 .table-caption {
@@ -49,7 +59,7 @@ table {
   background: linear-gradient(to right, #3366cc 0%, #333399 100%);
   border-radius: 0.25rem;
 
-  & span{
+  & span {
     padding: 0.5rem 0.75rem;
     color: white;
   }
@@ -62,5 +72,4 @@ table {
   & span {
     margin: 0.25rem;
   }
-
 }
