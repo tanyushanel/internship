@@ -34,14 +34,19 @@ const routes: Routes = [
       import('./models/hr-profile/hr-profile.module').then((m) => m.HrProfileModule),
   },
   {
-    path: 'coachProfile',
+    path: 'coach-profile',
     loadChildren: () =>
-      import('./models/coachProfile/coachProfile.module').then((m) => m.CoachProfileModule),
+      import('./models/coach-profile/coach-profile.module').then((m) => m.CoachProfileModule),
   },
   {
     path: 'writing',
     loadChildren: () =>
       import('./models/writing-test/writing-test.module').then((m) => m.WritingTestModule),
+  },
+  {
+    path: 'adminProfile',
+    loadChildren: () =>
+      import('./models/admin-profile/admin-profile.module').then((m) => m.AdminProfileModule),
   },
   {
     path: 'listening',

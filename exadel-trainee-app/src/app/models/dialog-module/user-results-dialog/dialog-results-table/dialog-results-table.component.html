@@ -1,58 +1,48 @@
-<table mat-table
-       [dataSource]="results"
-       multiTemplateDataRows
-       class="mat-elevation-z8">
-
+<table mat-table [dataSource]="results" multiTemplateDataRows class="mat-elevation-z8">
   <ng-container matColumnDef="id">
-    <th mat-header-cell
-        *matHeaderCellDef
-        mat-sort-header> No. </th>
-    <td mat-cell
-        *matCellDef="let element"> {{element.id}} </td>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
+    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
   </ng-container>
 
   <ng-container matColumnDef="date">
-    <th mat-header-cell
-        *matHeaderCellDef
-        mat-sort-header> Date </th>
-    <td mat-cell
-        *matCellDef="let element"> {{element.date.assignmentEndDate}} </td>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+    <td mat-cell *matCellDef="let element">{{ element.date.assignmentEndDate }}</td>
   </ng-container>
 
   <ng-container matColumnDef="level">
-    <th mat-header-cell
-        *matHeaderCellDef
-        mat-sort-header> Level </th>
-    <td mat-cell
-        *matCellDef="let element"> {{element.level}} </td>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Level</th>
+    <td mat-cell *matCellDef="let element">{{ element.level }}</td>
   </ng-container>
 
   <ng-container matColumnDef="result">
-    <th mat-header-cell
-        *matHeaderCellDef> Result </th>
-    <td mat-cell
-        *matCellDef="let element"> <b> {{element!.content!.grammar!.mark
-        + element!.content!.audition!.mark
-        + element!.content!.essay!.mark
-        + element!.content!.speaking!.mark}}% </b></td>
+    <th mat-header-cell *matHeaderCellDef>Result</th>
+    <td mat-cell *matCellDef="let element">
+      <b>
+        {{
+          element!.content!.grammar!.mark +
+            element!.content!.audition!.mark +
+            element!.content!.essay!.mark +
+            element!.content!.speaking!.mark
+        }}%
+      </b>
+    </td>
   </ng-container>
 
-
   <ng-container matColumnDef="expandedDetail">
-    <td mat-cell
-        *matCellDef="let element"
-        [attr.colspan]="columnsToDisplay.length">
-      <div class="element-detail"
-           [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+    <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+      <div
+        class="element-detail"
+        [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'"
+      >
         <div class="element-diagram">
           <div>
-            <div class='desc'>
+            <div class="desc">
               <span>Gramm</span>
               <span>Audio</span>
               <span>Essay</span>
               <span>Speach</span>
             </div>
-            <div class='scale'>
+            <div class="scale">
               <span>{{ element.content.grammar.mark }}</span>
               <span>{{ element.content.audition.mark }}</span>
               <span>{{ element.content.essay.mark }}</span>
@@ -63,22 +53,18 @@
           <div class="element-description">
             <span class="element-description-attribution"> ...Feedback... </span>
           </div>
-
         </div>
-
       </div>
     </td>
   </ng-container>
 
-  <tr mat-header-row
-      *matHeaderRowDef="columnsToDisplay"></tr>
-  <tr mat-row
-      *matRowDef="let element; columns: columnsToDisplay;"
-      class="element-row"
-      [class.expanded-row]="expandedElement === element"
-      (click)="expandedElement = expandedElement === element ? null : element">
-  </tr>
-  <tr mat-row
-      *matRowDef="let row; columns: ['expandedDetail']"
-      class="detail-row"></tr>
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr
+    mat-row
+    *matRowDef="let element; columns: columnsToDisplay"
+    class="element-row"
+    [class.expanded-row]="expandedElement === element"
+    (click)="expandedElement = expandedElement === element ? null : element"
+  ></tr>
+  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
 </table>
