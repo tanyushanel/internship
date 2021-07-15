@@ -1,3 +1,5 @@
+import { Role } from '../constants/data-constants';
+
 export interface UserResponseType {
   id: number;
   message: null;
@@ -5,6 +7,6 @@ export interface UserResponseType {
   firstName: string;
   lastName: string;
   email: string;
-  roles: string[];
+  roles: Role[];
   token: string;
 }
