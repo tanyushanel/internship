@@ -90,4 +90,10 @@ export class HrProfileComponent implements OnInit, AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  onOpenUserResultsDialog(): void {
+    this.dialog.open(UserResultsDialogComponent, {
+      width: '35rem',
+    });
+  }
 }
