@@ -1,3 +1,4 @@
+import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -20,6 +21,7 @@ import { MatRadioModule, MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/rad
     MatButtonModule,
     MatRadioModule,
     FormsModule,
+    MatIconModule,
   ],
   declarations: [],
   exports: [
@@ -32,6 +34,7 @@ import { MatRadioModule, MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/rad
     MatButtonModule,
     MatRadioModule,
     FormsModule,
+    MatIconModule,
   ],
   providers: [
     {
