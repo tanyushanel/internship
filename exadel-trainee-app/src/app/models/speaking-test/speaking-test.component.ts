@@ -13,6 +13,8 @@ export class SpeakingTestComponent implements OnInit {
 
   chunks: Blob[] = [];
 
+  isRecording = false;
+
   audioFiles: { src: SafeUrl }[] = [];
 
   constructor(private cd: ChangeDetectorRef, private dom: DomSanitizer) {}
@@ -36,8 +38,22 @@ export class SpeakingTestComponent implements OnInit {
         this.chunks.push(e.data);
       };
     } catch (err) {
+      // eslint-disable-next-line no-alert
       alert('Error capturing audio.');
     }
+  }
+
+  toggleRecording() {
+    this.isRecording = !this.isRecording;
+    if (this.isRecording === true) {
+      this.startRecording();
+    } else {
+      this.stopRecording();
+    }
+  }
+
+  getColor() {
+    return this.isRecording === false ? 'primary' : 'warn';
   }
 
   startRecording() {
