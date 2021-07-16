@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidebarModule } from './components/sidebar/sidebar.module';
@@ -21,7 +22,13 @@ import { StatisticsComponent } from './components/mock-component/statistics/stat
     ManageComponent,
     StatisticsComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, SidebarModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    SidebarModule,
+    HttpClientModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

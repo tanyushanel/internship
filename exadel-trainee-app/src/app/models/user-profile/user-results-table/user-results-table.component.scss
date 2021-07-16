@@ -1,15 +1,16 @@
 .table-caption {
-  text-align: center;
   margin: 1rem;
   font-weight: 500;
+  text-align: center;
 }
 
 table {
   width: 80%;
   margin: 1rem auto;
+
   & td {
-    white-space: nowrap;
     max-width: 4.5rem;
+    white-space: nowrap;
 
     &:last-child {
       text-align: end;
@@ -20,9 +21,9 @@ table {
 .scale {
   display: flex;
   justify-content: space-between;
+  width: 15em;
   background: linear-gradient(to right, #3366cc 0%, #333399 100%);
   border-radius: 0.25rem;
-  width: 15em;
 
   & span {
     padding: 0.5rem 0.75rem;
@@ -31,10 +32,10 @@ table {
 }
 
 .desc span {
-  font-size: 0.7rem;
   display: inline-block;
-  color: black;
   margin: 0 0.75rem;
+  color: black;
+  font-size: 0.7rem;
 }
 
 th.mat-header-cell:last-child {
@@ -65,8 +66,8 @@ tr.element-row:not(.expanded-row):active {
   display: flex;
   justify-content: space-between;
   min-width: 2rem;
-  font-weight: lighter;
   margin: 0.5rem 0;
+  font-weight: lighter;
 }
 
 .element-symbol {
@@ -77,8 +78,8 @@ tr.element-row:not(.expanded-row):active {
 
 .element-description {
   max-width: 50%;
-  white-space: normal;
   margin: 0.5rem;
+  white-space: normal;
   text-align: justify;
 }
 

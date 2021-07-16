@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/mock-component/home/home.component';
@@ -42,6 +43,11 @@ const routes: Routes = [
     path: 'writing',
     loadChildren: () =>
       import('./models/writing-test/writing-test.module').then((m) => m.WritingTestModule),
+  },
+  {
+    path: 'adminProfile',
+    loadChildren: () =>
+      import('./models/admin-profile/admin-profile.module').then((m) => m.AdminProfileModule),
   },
   {
     path: 'listening',
