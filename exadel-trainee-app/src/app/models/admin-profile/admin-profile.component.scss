@@ -1,0 +1,78 @@
+@import "src/theme/variables";
+
+table {
+  width: 100%;
+
+}
+
+.mat-row {
+  height: auto;
+}
+
+.mat-header-cell {
+  padding: 16px 8px 20px 0;
+}
+
+.mat-cell {
+  padding: 8px 0 25px 0;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: #6D7174FF;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #555657;
+}
+
+.example-element-row td {
+  border-top: 1px solid $secondary-grey2;
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  display: flex;
+  overflow: hidden;
+}
+
+.col-sm {
+  width: 70px;
+}
+
+.example-element-description {
+  width: 32px;
+  padding-left: 3.563%;
+  text-align: center;
+  border-right: 1px solid white;
+}
+
+.text {
+  margin-left: 30px;
+}
+
+.mat-column-Position {
+  width: 32px;
+  padding-right: 24px;
+  text-align: center;
+  border-right: 1.5px solid currentColor;
+}
+
+.mat-column-Level {
+  margin: 0;
+  padding: 0 0 0 50px;
+
+}
+
+.mat-column-Date {
+  padding: 0 0 0 100px;
+
+}
+
+.mat-column-Coach {
+  padding: 0 0 0 100px;
+
+}
