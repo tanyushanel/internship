@@ -3,15 +3,15 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
-import { MOCK_USERS, UserData } from '../../../mocks/users-utils.mock';
 import { UserResultsDialogComponent } from '../dialog-module/user-results-dialog/user-results-dialog.component';
+import { MOCK_USERS, UserData } from '../../../mocks/users-utils.mock';
 
 @Component({
   selector: 'app-hr-profile',
   templateUrl: './hr-profile.component.html',
   styleUrls: ['./hr-profile.component.scss'],
 })
-export class HrProfileComponent implements OnInit, AfterViewInit {
+export class HrProfileComponent implements AfterViewInit {
   displayedColumns: string[] = ['id', 'firstName', 'lastName', 'assessment'];
 
   dataSource: MatTableDataSource<UserData>;
@@ -22,10 +22,6 @@ export class HrProfileComponent implements OnInit, AfterViewInit {
 
   constructor(public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource(MOCK_USERS);
-  }
-
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
   }
 
   ngAfterViewInit() {
