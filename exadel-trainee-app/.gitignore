@@ -39,7 +39,7 @@ yarn-error.log
 testem.log
 /typings
 yarn-lock
-packge-lock
+package-lock
 # System Files
 .DS_Store
 Thumbs.db
