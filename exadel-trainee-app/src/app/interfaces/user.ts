@@ -1,10 +1,10 @@
-import { Role } from '../../constants/route-constant';
+import { UserRole } from '../../constants/data-constants';
 
 export interface User {
   id: number;
   firstName: string;
   lastName: string;
   email: string;
-  role: Role;
+  role: UserRole;
   userPhoto?: string;
 }

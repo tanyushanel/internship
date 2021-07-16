@@ -1,54 +1,10 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
-
-export interface UserData {
-  id: string;
-  firstName: string;
-  lastName: string;
-}
-
-const MOCK_LASTNAMES: string[] = [
-  'Иванов',
-  'Петоров',
-  'Сидоров',
-  'Фамилия 1',
-  'Фамилия 2',
-  'Фамилия 3',
-  'Фамилия 4',
-  'Фамилия 5',
-];
-const MOCK_FIRSTNAMES: string[] = [
-  'Maia',
-  'Asher',
-  'Olivia',
-  'Atticus',
-  'Amelia',
-  'Jack',
-  'Charlotte',
-  'Theodore',
-  'Oliver',
-  'Isabella',
-  'Jasper',
-  'Cora',
-  'Levi',
-  'Violet',
-  'Arthur',
-  'Mia',
-  'Thomas',
-  'Elizabeth',
-];
-
-function createNewUser(id: number): UserData {
-  const firstName = `${MOCK_FIRSTNAMES[Math.round(Math.random() * (MOCK_FIRSTNAMES.length - 1))]}`;
-
-  return {
-    id: id.toString(),
-    firstName,
-    lastName: MOCK_LASTNAMES[Math.round(Math.random() * (MOCK_LASTNAMES.length - 1))],
-  };
-}
+import { UserResultsDialogComponent } from '../dialog-module/user-results-dialog/user-results-dialog.component';
+import { MOCK_USERS, UserData } from '../../../mocks/users-utils.mock';
 
 @Component({
   selector: 'app-hr-profile',
@@ -64,15 +20,12 @@ export class HrProfileComponent implements AfterViewInit {
 
   @ViewChild(MatSort) sort: MatSort | null = null;
 
-  constructor() {
-    const users = Array.from({ length: 100 }, (_, k) => createNewUser(k + 1));
-
-    this.dataSource = new MatTableDataSource(users);
+  constructor(public dialog: MatDialog) {
+    this.dataSource = new MatTableDataSource(MOCK_USERS);
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-
     this.dataSource.sort = this.sort;
   }
 
@@ -83,5 +36,11 @@ export class HrProfileComponent implements AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  onOpenUserResultsDialog(): void {
+    this.dialog.open(UserResultsDialogComponent, {
+      width: '35rem',
+    });
   }
 }

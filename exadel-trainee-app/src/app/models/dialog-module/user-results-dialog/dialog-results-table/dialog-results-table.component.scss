@@ -1,0 +1,89 @@
+.table-caption {
+  margin: 1rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: underline;
+}
+
+table {
+  width: 100%;
+  margin-top: 1rem;
+
+  & td {
+    max-width: 4.5rem;
+    white-space: nowrap;
+
+    &:last-child {
+      text-align: end;
+    }
+  }
+}
+
+.scale {
+  display: flex;
+  justify-content: space-between;
+  width: 15em;
+  background: linear-gradient(to right, #3366cc 0%, #333399 100%);
+  border-radius: 0.25rem;
+
+  & span {
+    padding: 0.5rem 0.75rem;
+    color: white;
+  }
+}
+
+.desc span {
+  display: inline-block;
+  margin: 0 0.75rem;
+  color: black;
+  font-size: 0.7rem;
+}
+
+th.mat-header-cell:last-child {
+  text-align: right;
+}
+
+tr.detail-row {
+  height: 0;
+}
+
+tr.element-row:not(.expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.element-row:not(.expanded-row):active {
+  background: #efefef;
+}
+
+.element-row td {
+  border-bottom-width: 0;
+}
+
+.element-detail {
+  overflow: hidden;
+}
+
+.element-diagram {
+  display: flex;
+  justify-content: space-between;
+  min-width: 2rem;
+  margin: 0.5rem 0;
+  font-weight: lighter;
+}
+
+.element-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+}
+
+.element-description {
+  max-width: 50%;
+  margin: 0.5rem;
+  white-space: normal;
+  text-align: justify;
+}
+
+.element-description-attribution {
+  opacity: 0.5;
+}
