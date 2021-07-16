@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Level } from 'src/constants/data-constants';
 import { Test } from '../../interfaces/test';
 
@@ -11,6 +12,8 @@ export class UserProfileComponent implements OnInit {
   levels = Level;
 
   selectedLevel = Level.beginner;
+
+  constructor(private router: Router) {}
 
   results: Test[] = [
     {
@@ -113,5 +116,9 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {}
 
-  onStartButtonClick(): void {}
+  onStartButtonClick(): void {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([`grammar`]);
+    });
+  }
 }
