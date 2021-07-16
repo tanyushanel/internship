@@ -1,37 +1,46 @@
-<mat-sidenav-container class="sidebar" autosize>
-  <mat-sidenav class="sidebar__container" mode="side" [opened]="isOpen">
+<mat-sidenav-container class="sidebar"
+                       autosize>
+  <mat-sidenav class="sidebar__container"
+               mode="side"
+               [opened]="isOpen">
     <mat-nav-list>
-      <div mat-card-avatar class="sidebar__logo"></div>
+      <div mat-card-avatar
+           class="sidebar__logo"></div>
       <nav class="sidebar__nav">
         <div class="sidebar__list">
           <div *ngFor="let route of usersRoute[selectedUser].route; let i = index">
-            <mat-list-item [routerLink]="'/' + route" class="sidebar__list_item">
+            <mat-list-item [routerLink]="'/' + route"
+                           class="sidebar__list_item">
               <span>{{usersRoute[selectedUser].menuItem[i]}}</span>
             </mat-list-item>
           </div>
+
+          <app-notification class="notifications"> </app-notification>
+
           <!--          mock selector -->
           <mat-form-field appearance="outline">
             <mat-label>Users permission</mat-label>
             <mat-select [(value)]="selectedUser">
-              <mat-option *ngFor="let user of userPermission" [value]="user.value">
+              <mat-option *ngFor="let user of userPermission"
+                          [value]="user.value">
                 {{user.viewValue}}
               </mat-option>
             </mat-select>
           </mat-form-field>
 
         </div>
-        <mat-list-item [routerLink]="'/logout'" class="sidebar__list_item">
+        <mat-list-item [routerLink]="'/logout'"
+                       class="sidebar__list_item">
           <span>Exit</span>
         </mat-list-item>
       </nav>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-icon
-      mat-icon-button
-      class="sidebar__button"
-      (click)="handleSidebar()"
-      [ngClass]="{'sidebar__button_close': isOpen}">
+    <mat-icon mat-icon-button
+              class="sidebar__button"
+              (click)="handleSidebar()"
+              [ngClass]="{'sidebar__button_close': isOpen}">
       chevron_right
     </mat-icon>
     <ng-content></ng-content>
