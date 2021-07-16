@@ -1,4 +1,4 @@
-@import "src/theme/variables";
+@import 'src/theme/variables';
 
 .sidebar {
   height: 100%;
@@ -18,9 +18,9 @@
     width: 100px;
     height: 100px;
     margin: 10% 25%;
-    background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
     background-size: cover;
-    border-radius: 50%
+    border-radius: 50%;
   }
 
   &__nav {
@@ -33,7 +33,6 @@
   mat-list-item {
     margin: 1em auto;
   }
-
 
   &__button {
     position: absolute;
