@@ -14,20 +14,20 @@ export interface UserRoutesType {
 }
 
 export const usersRoute: UserRoutesType = {
-  User: {
+  [UserRole.User]: {
     route: [Route.home],
     menuItem: [SidebarMenu.home],
   },
 
-  Hr: {
+  [UserRole.Hr]: {
     route: [Route.home, Route.users],
     menuItem: [SidebarMenu.home, SidebarMenu.users],
   },
-  Couch: {
+  [UserRole.Couch]: {
     route: [Route.home, Route.check, Route.editor],
     menuItem: [SidebarMenu.home, SidebarMenu.check, SidebarMenu.editor],
   },
-  Administrator: {
+  [UserRole.Administrator]: {
     route: [Route.home, Route.manage, Route.statistics],
     menuItem: [SidebarMenu.home, SidebarMenu.manage, SidebarMenu.statistics],
   },
