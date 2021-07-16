@@ -8,10 +8,13 @@ table {
   margin: 0 30px;
 }
 
+button:hover {
+  background-color: gray;
+}
+
 .mat-form-field {
   width: 100%;
   font-size: 14px;
-  background-color: $secondary-grey1;
 }
 
 td,
