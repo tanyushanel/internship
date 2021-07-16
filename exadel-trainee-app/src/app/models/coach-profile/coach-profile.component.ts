@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MOCK_TESTS, TestData } from '../../../mocks/users-utils.mock';
 import { CoachProfileDialogComponent } from './coach-profile-dialog/coach-profile-dialog.component';
 
+
 @Component({
   selector: 'app-coach-profile',
   templateUrl: './coach-profile.component.html',
@@ -41,4 +42,3 @@ export class CoachProfileComponent implements AfterViewInit {
   onClick(id: number) {
     this.dialog.open(CoachProfileDialogComponent, { data: { id } });
   }
-}
