@@ -1,10 +1,12 @@
 <app-sidebar>
   <h1>App page</h1>
-  <ul>
-    <li><a [routerLink]="['/login']">Login</a></li>
-    <li><a [routerLink]="['/grammar']">Grammar-test</a></li>
-    <li><a [routerLink]="['/coachProfile']">CoachProfile</a></li>
-    <li><a [routerLink]="['/hrProfile']">hrProfile</a></li>
-  </ul>
+  <a [routerLink]="['/grammar']">Grammar-test</a>
+  <p><a [routerLink]="['/coach-profile']">CoachProfile</a></p>
+  <p><a [routerLink]="['/hrProfile']">hrProfile</a></p>
+  <p><a [routerLink]="['/writing']">Writing-test</a></p>
+  <p><a [routerLink]="['/adminProfile']">Admin Profile</a></p>
+  <div><a [routerLink]="['/user']">User </a></div>
+  <p><a [routerLink]="['/listening']">Listening</a></p>
+  <p><a [routerLink]="['/speaking']">Speaking</a></p>
   <router-outlet></router-outlet>
 </app-sidebar>
