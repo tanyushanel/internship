@@ -1,4 +1,4 @@
-module.exports = {
+
   /**
    * See packages/eslint-plugin/src/configs/README.md
    * for what this recommended config contains.
@@ -52,12 +52,12 @@ module.exports = {
         sourceType: 'module',
       },
       rules: {
-        'prefer-destructuring': ['error', {
-          'array': false,
-          'object': true
-        }, {
-          'enforceForRenamedProperties': false
-        }],
+          "prefer-destructuring": ["error", {
+            "array": false,
+            "object": true
+          }, {
+            "enforceForRenamedProperties": false
+          }],
         'no-return-assign': 'off',
         'import/no-unresolved': 'off',
         'import/prefer-default-export': 'off',
