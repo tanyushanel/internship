@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Level } from 'src/constants/data-constants';
-import { NgForm } from '@angular/forms';
 import { Test } from '../../interfaces/test';
 
 @Component({
@@ -9,7 +8,9 @@ import { Test } from '../../interfaces/test';
   styleUrls: ['./user-profile.component.scss'],
 })
 export class UserProfileComponent implements OnInit {
-  level!: Level;
+  levels = Level;
+
+  selectedLevel = Level.beginner;
 
   results: Test[] = [
     {

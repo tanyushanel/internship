@@ -1,3 +1,7 @@
+.user-results-table {
+  max-width: 60%;
+}
+
 .radio {
   display: flex;
   justify-content: center;
@@ -22,4 +26,8 @@
   margin: 1rem;
   text-align: center;
   font-weight: 500;
+}
+
+.for-delete {
+  text-align: center;
 }
