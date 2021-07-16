@@ -4,6 +4,13 @@ export interface UserData {
   lastName: string;
 }
 
+export interface TestData {
+  id: string;
+  level: string;
+  isChecked: boolean;
+  isHigh: boolean;
+}
+
 const MOCK_LASTNAMES: string[] = [
   'Walker',
   'Lee',
@@ -36,6 +43,15 @@ const MOCK_FIRSTNAMES: string[] = [
   'Elizabeth',
 ];
 
+const MOCK_LEVELS: string[] = [
+  'Starter',
+  'Elementary',
+  'Pre-intermediate',
+  'Intermediate',
+  'Upper-intermediate',
+  'Advanced',
+];
+
 export function createNewUser(id: number): UserData {
   const name = `${MOCK_FIRSTNAMES[Math.round(Math.random() * (MOCK_FIRSTNAMES.length - 1))]}`;
 
@@ -46,4 +62,14 @@ export function createNewUser(id: number): UserData {
   };
 }
 
+export function createNewCoachProfileTest(id: number): TestData {
+  return {
+    id: id.toString(),
+    level: MOCK_LEVELS[Math.round(Math.random() * (MOCK_LEVELS.length - 1))],
+    isChecked: true,
+    isHigh: true,
+  };
+}
+
 export const MOCK_USERS = Array.from({ length: 100 }, (_, k) => createNewUser(k + 1));
+export const MOCK_TESTS = Array.from({ length: 100 }, (_, k) => createNewCoachProfileTest(k + 1));

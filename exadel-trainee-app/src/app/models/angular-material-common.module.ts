@@ -6,6 +6,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatSortModule } from '@angular/material/sort';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     MatSortModule,
     MatButtonModule,
+    MatTabsModule,
   ],
   declarations: [],
   exports: [
@@ -26,6 +28,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     MatSortModule,
     MatButtonModule,
+    MatTabsModule,
   ],
 })
 export class AngularMaterialCommonModule {}

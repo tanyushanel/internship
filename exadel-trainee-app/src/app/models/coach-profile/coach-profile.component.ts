@@ -2,13 +2,9 @@ import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { MOCK_USERS } from 'src/mocks/users-utils.mock';
-
-export interface UserData {
-  id: string;
-  firstName: string;
-  lastName: string;
-}
+import { MatDialog } from '@angular/material/dialog';
+import { MOCK_TESTS, TestData } from '../../../mocks/users-utils.mock';
+import { CoachProfileDialogComponent } from './coach-profile-dialog/coach-profile-dialog.component';
 
 @Component({
   selector: 'app-coach-profile',
@@ -16,16 +12,16 @@ export interface UserData {
   styleUrls: ['./coach-profile.component.scss'],
 })
 export class CoachProfileComponent implements AfterViewInit {
-  displayedColumns: string[] = ['id', 'button'];
+  displayedColumns: string[] = ['id', 'level', 'button'];
 
-  dataSource: MatTableDataSource<UserData>;
+  dataSource: MatTableDataSource<TestData>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor() {
-    this.dataSource = new MatTableDataSource(MOCK_USERS);
+  constructor(public dialog: MatDialog) {
+    this.dataSource = new MatTableDataSource(MOCK_TESTS);
   }
 
   ngAfterViewInit() {
@@ -42,7 +38,7 @@ export class CoachProfileComponent implements AfterViewInit {
     }
   }
 
-  OnClick(id: number) {
-    console.log('Click', id);
+  onClick(id: number) {
+    this.dialog.open(CoachProfileDialogComponent, { data: { id } });
   }
 }
