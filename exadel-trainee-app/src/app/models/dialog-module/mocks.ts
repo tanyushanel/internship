@@ -1,4 +1,4 @@
-import { Role } from '../../../constants/route-constant';
+import { UserRole } from '../../../constants/data-constants';
 
 export enum Level {
   beginner = 'beginner',
@@ -11,7 +11,7 @@ export interface User {
   firstName: string;
   lastName: string;
   email: string;
-  role: Role;
+  role: UserRole;
   userPhoto?: string;
 }
 
