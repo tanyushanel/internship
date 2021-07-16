@@ -1,7 +1,7 @@
 /* eslint-disable */
-import { Component, OnInit } from '@angular/core';
-import { Role } from 'src/constants/route-constant';
-import { User, Level, Test, TestModule } from '../mocks';
+import { Component } from '@angular/core';
+import { Level, Test, User } from '../mocks';
+import { UserRole } from '../../../../constants/data-constants';
 
 @Component({
   selector: 'app-user-results-dialog',
@@ -14,7 +14,7 @@ export class UserResultsDialogComponent {
     firstName: 'Сальвадор',
     lastName: 'Бананович',
     email: 'salsa@mail.com',
-    role: Role.couch,
+    role: UserRole.Couch,
     userPhoto: '',
   };
 
