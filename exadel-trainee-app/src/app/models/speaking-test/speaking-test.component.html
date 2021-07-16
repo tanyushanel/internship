@@ -1,6 +1,6 @@
-<mat-card>Simple card</mat-card>
+<mat-card class=text-of-theme>What speaking about?</mat-card>
 <section class="speaking-module-position" ng-controller="controller">
-  <button mat-raised-button [color]="getColor()" (click)="toggleRecording()">
+  <button mat-raised-button class="button-position" [color]="getColor()" (click)="toggleRecording()">
     {{ isRecording == false ? 'Start Recording' : 'Stop Recording' }}
   </button>
   <audio
