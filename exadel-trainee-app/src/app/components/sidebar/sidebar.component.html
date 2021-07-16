@@ -6,6 +6,9 @@
     <mat-nav-list>
       <div mat-card-avatar
            class="sidebar__logo"></div>
+
+      <app-notification class="notifications"> </app-notification>
+
       <nav class="sidebar__nav">
         <div class="sidebar__list">
           <div *ngFor="let route of usersRoute[selectedUser].route; let i = index">
@@ -15,7 +18,7 @@
             </mat-list-item>
           </div>
 
-          <app-notification class="notifications"> </app-notification>
+
 
           <!--          mock selector -->
           <mat-form-field appearance="outline">
