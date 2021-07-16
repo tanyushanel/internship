@@ -2,13 +2,7 @@ import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { MOCK_USERS } from '../../../mocks/users-utils.mock';
-
-export interface UserData {
-  id: string;
-  firstName: string;
-  lastName: string;
-}
+import { MOCK_USERS, UserData } from '../../../mocks/users-utils.mock';
 
 @Component({
   selector: 'app-coach-profile',
