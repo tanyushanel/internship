@@ -4,8 +4,8 @@ export enum Level {
   advanced = 'advanced',
 }
 export enum UserRole {
-  User = 'user',
-  Hr = 'hr',
-  Couch = 'couch',
-  Administrator = 'admin',
+  User = 'User',
+  Hr = 'Hr',
+  Couch = 'Couch',
+  Administrator = 'Administrator',
 }
