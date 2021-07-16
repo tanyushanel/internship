@@ -26,7 +26,13 @@
     </mat-form-field>
 
     <div class="buttons">
-      <button type="submit" class="send" [disabled]="form.invalid || disabled" mat-raised-button>
+      <button
+        type="submit"
+        class="send"
+        [disabled]="form.invalid || disabled"
+        mat-raised-button
+        color="primary"
+      >
         Send essay
       </button>
       <button type="button" class="clear" [disabled]="disabled" mat-raised-button (click)="clear()">

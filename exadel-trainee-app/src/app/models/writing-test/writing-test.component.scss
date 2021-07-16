@@ -3,13 +3,6 @@
 .container {
   height: 100vh;
   padding-left: 30px;
-  background-color: $secondary-grey1;
-
-  h1,
-  p,
-  span {
-    color: $secondary-grey3;
-  }
 
   span {
     font-style: italic;
@@ -22,12 +15,7 @@ mat-form-field {
 
   textarea {
     height: 100px;
-    color: $secondary-grey3;
   }
-}
-
-mat-hint {
-  color: $white;
 }
 
 .error {
@@ -41,11 +29,5 @@ mat-hint {
 
   .send {
     margin-right: 20px;
-    background-color: $primary-violet;
-  }
-
-  .clear {
-    color: $secondary-grey1;
-    background-color: $others-grey6;
   }
 }
