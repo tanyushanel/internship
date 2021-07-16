@@ -20,7 +20,7 @@ export class HrProfileComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatSort) sort: MatSort | null = null;
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource(MOCK_USERS);
   }
 
