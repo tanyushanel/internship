@@ -14,22 +14,24 @@
       <mat-hint aligt="start">Max 512 characters</mat-hint>
       <span>{{ text.value.length }}/ 512 </span>
 
-      <div *ngIf="form.get('text')!.invalid && form.get('text')!.touched" class="validation">
-        <small class="error" *ngIf="form.get('text')!.errors!.required"
+      <div *ngIf="form.get('text')?.invalid && form.get('text')?.touched" class="validation">
+        <small class="error" *ngIf="form.get('text')?.errors?.required"
           >You cannot submit an empty form</small
         >
-        <small class="error" *ngIf="form.get('text')!.errors!.minlength">
+        <small class="error" *ngIf="form.get('text')?.errors?.minlength">
           Essay length should be at least
-          {{ form.get('text')!.errors!.minlength.requiredLength }} symbols
+          {{ form.get('text')?.errors?.minlength.requiredLength }} symbols
         </small>
       </div>
     </mat-form-field>
 
     <div class="buttons">
-      <button type="submit" class="send" [disabled]="form.invalid" mat-raised-button>
+      <button type="submit" class="send" [disabled]="form.invalid || disabled" mat-raised-button>
         Send essay
       </button>
-      <button type="button" class="clear" mat-raised-button (click)="clear()">Clear form</button>
+      <button type="button" class="clear" [disabled]="disabled" mat-raised-button (click)="clear()">
+        Clear form
+      </button>
     </div>
   </form>
 </div>

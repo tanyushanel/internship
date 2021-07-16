@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-writing-test',
@@ -9,6 +10,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class WritingTestComponent implements OnInit {
   form!: FormGroup;
 
+  disabled = false;
+
   ngOnInit() {
     this.form = new FormGroup({
       text: new FormControl('', [Validators.required, Validators.minLength(10)]),
@@ -17,7 +20,8 @@ export class WritingTestComponent implements OnInit {
 
   submit() {
     const formData = this.form.value;
-    this.form.reset();
+    this.form.disable();
+    this.disabled = true;
   }
 
   clear() {
