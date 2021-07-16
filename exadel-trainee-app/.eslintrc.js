@@ -52,11 +52,11 @@ module.exports = {
         sourceType: 'module',
       },
       rules: {
-        'prefer-destructuring': ['error', {
-          'array': false,
-          'object': true
+        "prefer-destructuring": ["error", {
+          "array": false,
+          "object": true
         }, {
-          'enforceForRenamedProperties': false
+          "enforceForRenamedProperties": false
         }],
         'no-return-assign': 'off',
         'import/no-unresolved': 'off',

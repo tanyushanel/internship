@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+
+declare let MediaRecorder: any;
 
 @Component({
   selector: 'app-speaking',
@@ -6,5 +9,42 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./speaking-test.component.scss'],
 })
 export class SpeakingTestComponent implements OnInit {
-  ngOnInit(): void {}
+  mediaRecorder: any;
+
+  chunks: Blob[] = [];
+
+  audioFiles: { src: SafeUrl }[] = [];
+
+  constructor(private cd: ChangeDetectorRef, private dom: DomSanitizer) {}
+
+  async ngOnInit() {
+    let stream = null;
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      this.mediaRecorder = new MediaRecorder(stream);
+      this.mediaRecorder.onstop = () => {
+        const blob = new Blob(this.chunks, { type: 'audio/ogg; codecs=opus' });
+        this.chunks = [];
+        const audioURL = URL.createObjectURL(blob);
+        const audio = {
+          src: this.dom.bypassSecurityTrustUrl(audioURL),
+        };
+        this.audioFiles.push(audio);
+        this.cd.detectChanges();
+      };
+      this.mediaRecorder.ondataavailable = (e: { data: Blob }) => {
+        this.chunks.push(e.data);
+      };
+    } catch (err) {
+      alert('Error capturing audio.');
+    }
+  }
+
+  startRecording() {
+    this.mediaRecorder.start();
+  }
+
+  stopRecording() {
+    this.mediaRecorder.stop();
+  }
 }
