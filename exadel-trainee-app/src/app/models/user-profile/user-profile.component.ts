@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Level } from 'src/constants/data-constants';
 import { results } from 'src/constants/mock-test-data';
+import { Route } from 'src/constants/route-constant';
 import { Test } from '../../interfaces/test';
 
 @Component({
@@ -24,7 +25,7 @@ export class UserProfileComponent implements OnInit {
 
   onStartButtonClick(): void {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate([`grammar`]);
+      this.router.navigate([Route.grammarTest]);
     });
   }
 }
