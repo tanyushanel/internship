@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AngularMaterialCommonModule } from '../angular-material-common.module';
 import { UserProfileRoutingModule } from './user-profile-routing.module';
 import { UserProfileComponent } from './user-profile.component';
-import { UserResultsTableComponent } from './user-results-table/user-results-table.component';
+import { UserResultsModule } from '../../components/user-results-table/user-results.module';
+import { AngularMaterialCommonModule } from '../angular-material-common.module';
 
 @NgModule({
-  declarations: [UserProfileComponent, UserResultsTableComponent],
-  imports: [CommonModule, UserProfileRoutingModule, AngularMaterialCommonModule],
-  exports: [UserResultsTableComponent],
+  declarations: [UserProfileComponent],
+  imports: [CommonModule, UserProfileRoutingModule, UserResultsModule, AngularMaterialCommonModule],
 })
 export class UserProfileModule {}

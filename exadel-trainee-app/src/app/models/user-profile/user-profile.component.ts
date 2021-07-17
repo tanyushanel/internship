@@ -11,7 +11,7 @@ import { Test } from '../../interfaces/test';
   styleUrls: ['./user-profile.component.scss'],
 })
 export class UserProfileComponent implements OnInit {
-  @Input() results: Test[] = [];
+  results!: Test[];
 
   levels = Level;
 

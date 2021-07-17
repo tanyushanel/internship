@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Test } from 'src/app/interfaces/test';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { results } from 'src/constants/mock-test-data';
 
 @Component({
   selector: 'app-user-results-table',
@@ -15,11 +16,13 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   ],
 })
 export class UserResultsTableComponent implements OnInit {
-  @Input() results: Test[] = [];
+  results!: Test[];
 
-  columnsToDisplay: any[] = ['id', 'date', 'level', 'result'];
+  columnsToDisplay: string[] = ['id', 'date', 'level', 'result'];
 
   expandedElement!: Test;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.results = results;
+  }
 }
