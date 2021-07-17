@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Level } from 'src/constants/data-constants';
+import { results } from 'src/constants/mock-test-data';
 import { Test } from '../../interfaces/test';
 
 @Component({
@@ -9,112 +10,17 @@ import { Test } from '../../interfaces/test';
   styleUrls: ['./user-profile.component.scss'],
 })
 export class UserProfileComponent implements OnInit {
+  @Input() results: Test[] = [];
+
   levels = Level;
 
   selectedLevel = Level.beginner;
 
   constructor(private router: Router) {}
 
-  results: Test[] = [
-    {
-      id: 1,
-      date: { creationDate: new Date().toDateString() },
-      level: Level.advanced,
-      content: {
-        grammar: {
-          id: 1,
-          mark: 10,
-        },
-        audition: {
-          id: 1,
-          mark: 20,
-        },
-        essay: {
-          id: 1,
-          mark: 20,
-        },
-        speaking: {
-          id: 1,
-          mark: 10,
-        },
-      },
-      feedback: '',
-    },
-    {
-      id: 2,
-      date: { creationDate: new Date().toDateString() },
-      level: Level.beginner,
-      content: {
-        grammar: {
-          id: 1,
-          mark: 30,
-        },
-        audition: {
-          id: 1,
-          mark: 20,
-        },
-        essay: {
-          id: 1,
-          mark: 70,
-        },
-        speaking: {
-          id: 1,
-          mark: 0,
-        },
-      },
-      feedback: '',
-    },
-    {
-      id: 3,
-      date: { creationDate: new Date().toDateString() },
-      level: Level.beginner,
-      content: {
-        grammar: {
-          id: 1,
-          mark: 30,
-        },
-        audition: {
-          id: 1,
-          mark: 20,
-        },
-        essay: {
-          id: 1,
-          mark: 10,
-        },
-        speaking: {
-          id: 1,
-          mark: 10,
-        },
-      },
-      feedback: '',
-    },
-    {
-      id: 4,
-      date: { creationDate: new Date().toDateString() },
-      level: Level.beginner,
-      content: {
-        grammar: {
-          id: 1,
-          mark: 30,
-        },
-        audition: {
-          id: 1,
-          mark: 20,
-        },
-        essay: {
-          id: 1,
-          mark: 20,
-        },
-        speaking: {
-          id: 1,
-          mark: 10,
-        },
-      },
-      feedback: 'OK',
-    },
-  ];
-
-  ngOnInit() {}
+  ngOnInit() {
+    this.results = results;
+  }
 
   onStartButtonClick(): void {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {

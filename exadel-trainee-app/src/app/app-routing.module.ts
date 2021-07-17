@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/mock-component/home/home.component';
@@ -54,7 +53,6 @@ const routes: Routes = [
     loadChildren: () =>
       import('./models/listening-test/listening-test.module').then((m) => m.ListeningTestModule),
   },
-  // mock component for check business logic
   {
     path: Route.home,
     component: HomeComponent,
