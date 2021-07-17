@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Test } from '../../../interfaces/test';
 import { results } from '../../../../constants/mock-test-data';
 import { User } from '../../../interfaces/user';
@@ -12,11 +13,16 @@ import { user } from '../../../../constants/mock-user-data';
 export class UserResultsDialogComponent implements OnInit {
   user!: User;
 
+  constructor(
+    public dialogRef: MatDialogRef<UserResultsDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: User,
+  ) {}
+
   results!: Test[];
 
   ngOnInit() {
     this.results = results;
-    this.user = { ...user };
+    this.user = { ...user, ...this.data };
   }
 
   onAssignBtnClick(): void {}

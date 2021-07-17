@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -38,9 +38,10 @@ export class HrProfileComponent implements AfterViewInit {
     }
   }
 
-  onOpenUserResultsDialog(): void {
+  onOpenUserResultsDialog(row: any): void {
     this.dialog.open(UserResultsDialogComponent, {
       width: '35rem',
+      data: { id: row.id, firstName: row.firstName, lastName: row.lastName },
     });
   }
 }
