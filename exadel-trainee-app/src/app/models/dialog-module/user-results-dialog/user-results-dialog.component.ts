@@ -13,6 +13,8 @@ import { user } from '../../../../constants/mock-user-data';
 export class UserResultsDialogComponent implements OnInit {
   user!: User;
 
+  isClicked = false;
+
   constructor(
     public dialogRef: MatDialogRef<UserResultsDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: User,
@@ -25,5 +27,7 @@ export class UserResultsDialogComponent implements OnInit {
     this.user = { ...user, ...this.data };
   }
 
-  onAssignBtnClick(): void {}
+  onAssignBtnClick(): void {
+    this.isClicked = true;
+  }
 }

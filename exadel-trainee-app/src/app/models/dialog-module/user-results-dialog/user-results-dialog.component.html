@@ -6,7 +6,13 @@
       <p>{{ user.email }}</p>
     </div>
 
-    <button class="submit-btn" mat-raised-button color="primary" (click)="onAssignBtnClick()">
+    <button
+      class="submit-btn"
+      mat-raised-button
+      color="primary"
+      (click)="onAssignBtnClick()"
+      [disabled]="isClicked"
+    >
       Assign test to User
     </button>
   </mat-card>
