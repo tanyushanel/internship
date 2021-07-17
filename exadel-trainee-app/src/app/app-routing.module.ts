@@ -15,7 +15,7 @@ const routes: Routes = [
     loadChildren: () => import('./models/login/login.module').then((m) => m.LoginModule),
   },
   {
-    path: 'user',
+    path: 'home',
     loadChildren: () =>
       import('./models/user-profile/user-profile.module').then((m) => m.UserProfileModule),
   },
