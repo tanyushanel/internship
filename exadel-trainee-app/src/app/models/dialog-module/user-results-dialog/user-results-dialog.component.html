@@ -12,8 +12,6 @@
   </button>
 
   <div *ngIf="results.length > 0; else noResults">
-    <!-- <app-dialog-results-table [results]="results"></app-dialog-results-table> -->
-
     <app-user-results-table
       class="user-results-table"
       *ngIf="results.length > 0; else noResults"

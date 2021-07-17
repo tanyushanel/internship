@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Test } from 'src/app/interfaces/test';
 import { Level } from 'src/constants/data-constants';
 
