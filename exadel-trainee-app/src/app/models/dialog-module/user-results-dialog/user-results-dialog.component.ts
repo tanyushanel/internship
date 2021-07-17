@@ -1,7 +1,7 @@
-/* eslint-disable */
 import { Component } from '@angular/core';
-import { Level, Test, User } from '../mocks';
-import { UserRole } from '../../../../constants/data-constants';
+import { Test } from '../../../interfaces/test';
+import { User } from '../../../interfaces/user';
+import { Level, UserRole } from '../../../../constants/data-constants';
 
 @Component({
   selector: 'app-user-results-dialog',

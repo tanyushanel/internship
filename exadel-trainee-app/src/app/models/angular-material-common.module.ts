@@ -1,3 +1,5 @@
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -22,6 +24,8 @@ import { MatRadioModule, MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/rad
     MatRadioModule,
     FormsModule,
     MatIconModule,
+    MatCardModule,
+    MatDialogModule,
   ],
   declarations: [],
   exports: [
@@ -35,6 +39,8 @@ import { MatRadioModule, MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/rad
     MatRadioModule,
     FormsModule,
     MatIconModule,
+    MatCardModule,
+    MatDialogModule,
   ],
   providers: [
     {

@@ -1,6 +1,6 @@
+import { Test } from 'src/app/interfaces/test';
 import { Component, Input, OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Test } from '../../mocks';
 
 @Component({
   selector: 'app-dialog-results-table',
