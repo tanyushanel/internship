@@ -8,5 +8,6 @@ import { UserResultsTableComponent } from './user-results-table/user-results-tab
 @NgModule({
   declarations: [UserProfileComponent, UserResultsTableComponent],
   imports: [CommonModule, UserProfileRoutingModule, AngularMaterialCommonModule],
+  exports: [UserResultsTableComponent],
 })
 export class UserProfileModule {}

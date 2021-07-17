@@ -12,7 +12,13 @@
   </button>
 
   <div *ngIf="results.length > 0; else noResults">
-    <app-dialog-results-table [results]="results"></app-dialog-results-table>
+    <!-- <app-dialog-results-table [results]="results"></app-dialog-results-table> -->
+
+    <app-user-results-table
+      class="user-results-table"
+      *ngIf="results.length > 0; else noResults"
+      [results]="results"
+    ></app-user-results-table>
   </div>
   <ng-template #noResults>
     <h3 class="table-caption">No results yet</h3>

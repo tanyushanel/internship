@@ -32,11 +32,14 @@ table {
   }
 }
 
-.desc span {
-  display: inline-block;
-  margin: 0 0.75rem;
-  color: black;
-  font-size: 0.7rem;
+.desc {
+  display: flex;
+  justify-content: space-between;
+
+  span {
+    color: black;
+    font-size: 0.7rem;
+  }
 }
 
 th.mat-header-cell:last-child {
