@@ -1,15 +1,12 @@
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatTableModule } from '@angular/material/table';
 import { UserResultsDialogComponent } from './user-results-dialog/user-results-dialog.component';
-import { DialogResultsTableComponent } from './user-results-dialog/dialog-results-table/dialog-results-table.component';
+import { AngularMaterialCommonModule } from '../angular-material-common.module';
+import { UserResultsModule } from '../../components/user-results-table/user-results.module';
 
 @NgModule({
-  declarations: [UserResultsDialogComponent, DialogResultsTableComponent],
-  imports: [CommonModule, MatDialogModule, MatButtonModule, MatCardModule, MatTableModule],
+  declarations: [UserResultsDialogComponent],
+  imports: [CommonModule, AngularMaterialCommonModule, UserResultsModule],
   exports: [UserResultsDialogComponent],
 })
 export class CommonDialogModule {}
