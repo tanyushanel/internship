@@ -12,9 +12,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SidebarComponent } from './sidebar.component';
+import { NotificationComponent } from './notification/notification.component';
 
 @NgModule({
-  declarations: [SidebarComponent],
+  declarations: [SidebarComponent, NotificationComponent],
   imports: [
     CommonModule,
     MatSnackBarModule,
@@ -28,6 +29,6 @@ import { SidebarComponent } from './sidebar.component';
     FormsModule,
     RouterModule,
   ],
-  exports: [SidebarComponent],
+  exports: [SidebarComponent, NotificationComponent],
 })
 export class SidebarModule {}

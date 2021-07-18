@@ -5,9 +5,9 @@ export interface Test {
   id: number;
   level: Level;
   date: {
-    creationDate: string;
-    assignmentStartDate: string;
-    assignmentEndDate: string;
+    creationDate?: string;
+    assignmentStartDate?: string;
+    assignmentEndDate?: string;
   };
   content: {
     grammar: TestModule;

@@ -1,1 +1,26 @@
-<h2>Hello world!</h2>
+<div class="profile-container">
+  <h3 class="table-caption">Choose your English level:</h3>
+
+  <mat-radio-group name="levels" class="radio" [(ngModel)]="selectedLevel">
+    <mat-radio-button class="radio-btn" value="beginner" checked="true">Beginner</mat-radio-button>
+    <mat-radio-button class="radio-btn" value="intermediate">Intermediate</mat-radio-button>
+    <mat-radio-button class="radio-btn" value="advanced">Advanced</mat-radio-button>
+  </mat-radio-group>
+
+  <p class="for-delete">
+    Your choise is <b>{{ selectedLevel }}</b>
+  </p>
+
+  <button mat-raised-button color="primary" class="start-btn" (click)="onStartButtonClick()">
+    START TEST
+  </button>
+
+  <app-user-results-table
+    class="user-results-table"
+    *ngIf="results.length > 0; else noResults"
+  ></app-user-results-table>
+
+  <ng-template #noResults>
+    <p class="table-caption">You have no test results yet</p>
+  </ng-template>
+</div>
