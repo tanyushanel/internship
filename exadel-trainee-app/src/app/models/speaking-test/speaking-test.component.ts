@@ -14,7 +14,11 @@ export class SpeakingTestComponent implements OnInit {
 
   chunks: Blob[] = [];
 
+  isRecording = false;
+
   audioFiles: { src: SafeUrl }[] = [];
+
+  counter = 0;
 
   constructor(
     private cd: ChangeDetectorRef,
@@ -46,6 +50,20 @@ export class SpeakingTestComponent implements OnInit {
         time: Date.now(),
       });
     }
+  }
+
+  toggleRecording() {
+    this.isRecording = !this.isRecording;
+    if (this.isRecording) {
+      this.startRecording();
+    } else {
+      this.counter += 1;
+      this.stopRecording();
+    }
+  }
+
+  getColor() {
+    return !this.isRecording ? 'primary' : 'warn';
   }
 
   startRecording() {

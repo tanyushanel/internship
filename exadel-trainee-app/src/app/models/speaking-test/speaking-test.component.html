@@ -1,4 +1,18 @@
-<button mat-raised-button color="primary" (click)="startRecording()">Start recording</button>
-<button mat-raised-button color="warn" (click)="stopRecording()">Stop</button>
-
-<audio *ngFor="let audio of audioFiles" controls="true" [src]="audio.src"></audio>
+<mat-card class="text-of-theme">What are you speaking about?</mat-card>
+<section class="speaking-module-position" ng-controller="controller">
+  <button
+    mat-raised-button
+    class="button-position"
+    [color]="getColor()"
+    (click)="toggleRecording()"
+    [disabled]="counter === 1"
+  >
+    {{ !isRecording ? 'Start Recording' : 'Stop Recording' }}
+  </button>
+  <audio
+    class="audio-speaking"
+    *ngFor="let audio of audioFiles"
+    controls="true"
+    [src]="audio.src"
+  ></audio>
+</section>

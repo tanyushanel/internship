@@ -1,5 +1,5 @@
-import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -38,11 +38,11 @@ import { MatRadioModule, MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/rad
     MatInputModule,
     MatSortModule,
     MatButtonModule,
+    MatCardModule,
     MatStepperModule,
     MatRadioModule,
     FormsModule,
     MatIconModule,
-    MatCardModule,
     MatDialogModule,
   ],
   providers: [
