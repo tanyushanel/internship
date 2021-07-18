@@ -1,3 +1,7 @@
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -7,6 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSortModule } from '@angular/material/sort';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatRadioModule, MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
 
 @NgModule({
   imports: [
@@ -18,6 +23,11 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatSortModule,
     MatButtonModule,
     MatTabsModule,
+    MatRadioModule,
+    FormsModule,
+    MatIconModule,
+    MatCardModule,
+    MatDialogModule,
   ],
   declarations: [],
   exports: [
@@ -29,6 +39,17 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatSortModule,
     MatButtonModule,
     MatTabsModule,
+    MatRadioModule,
+    FormsModule,
+    MatIconModule,
+    MatCardModule,
+    MatDialogModule,
+  ],
+  providers: [
+    {
+      provide: MAT_RADIO_DEFAULT_OPTIONS,
+      useValue: { color: 'accent' },
+    },
   ],
 })
 export class AngularMaterialCommonModule {}
