@@ -15,15 +15,15 @@ export interface UserRoutesType {
 
 export const usersRoute: UserRoutesType = {
   [UserRole.User]: {
-    route: ['user'],
+    route: [Route.home],
     menuItem: [SidebarMenu.home],
   },
 
-  [UserRole.Hr]: {
+  [UserRole.HumanResourceManager]: {
     route: [Route.home, Route.users],
     menuItem: [SidebarMenu.home, SidebarMenu.users],
   },
-  [UserRole.Couch]: {
+  [UserRole.Coach]: {
     route: [Route.home, Route.check, Route.editor],
     menuItem: [SidebarMenu.home, SidebarMenu.check, SidebarMenu.editor],
   },
@@ -40,7 +40,7 @@ export const usersMockDataResponse = [
     isAuthenticated: true,
     firstName: 'Admin',
     lastName: 'Adminov',
-    email: 'ElevelAdministrator@gmail.com  ',
+    email: 'eleveladministrator@gmail.com  ',
     roles: [UserRole.Administrator],
     token:
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBZG1pbkFkbWlub3YiLCJqdGkiOiJhOWUyNzA2Yi04NGEwLTQxNDMtOWQwZC0wODE4MGMzNDA2NzEiLCJlbWFpbCI6IkVsZXZlbEFkbWluaXN0cmF0b3JAZ21haWwuY29tIiwidWlkIjoiYTg2YTEyY2ItMmFmZS00MGE4LTA5ODItMDhkOTQyNDdlZmE1Iiwicm9sZXMiOiJBZG1pbmlzdHJhdG9yIiwiZXhwIjoxNjI2MTc0ODg5LCJpc3MiOiJTZWN1cmVBcGkiLCJhdWQiOiJTZWN1cmVBcGlVc2VyIn0.v5f7ZkoLC6lT5urcwy4XtY5NTR5ZpNfPHZeXwnwFzz4  ',
@@ -51,7 +51,7 @@ export const usersMockDataResponse = [
     isAuthenticated: true,
     firstName: 'User',
     lastName: 'Userof',
-    email: ' ElevelAdministrator@gmail.com',
+    email: 'eleveluser@gmail.com',
     roles: [UserRole.User],
     token:
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBZG1pbkFkbWlub3YiLCJqdGkiOiJhOWUyNzA2Yi04NGEwLTQxNDMtOWQwZC0wODE4MGMzNDA2NzEiLCJlbWFpbCI6IkVsZXZlbEFkbWluaXN0cmF0b3JAZ21haWwuY29tIiwidWlkIjoiYTg2YTEyY2ItMmFmZS00MGE4LTA5ODItMDhkOTQyNDdlZmE1Iiwicm9sZXMiOiJBZG1pbmlzdHJhdG9yIiwiZXhwIjoxNjI2MTc0ODg5LCJpc3MiOiJTZWN1cmVBcGkiLCJhdWQiOiJTZWN1cmVBcGlVc2VyIn0.v5f7ZkoLC6lT5urcwy4XtY5NTR5ZpNfPHZeXwnwFzz4  ',
@@ -62,8 +62,8 @@ export const usersMockDataResponse = [
     isAuthenticated: true,
     firstName: 'HR',
     lastName: 'HRof',
-    email: 'ElevelAdministrator@gmail.com ',
-    roles: [UserRole.Hr],
+    email: 'elevelhumanresourcemanager@gmail.com ',
+    roles: [UserRole.HumanResourceManager],
     token:
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBZG1pbkFkbWlub3YiLCJqdGkiOiJhOWUyNzA2Yi04NGEwLTQxNDMtOWQwZC0wODE4MGMzNDA2NzEiLCJlbWFpbCI6IkVsZXZlbEFkbWluaXN0cmF0b3JAZ21haWwuY29tIiwidWlkIjoiYTg2YTEyY2ItMmFmZS00MGE4LTA5ODItMDhkOTQyNDdlZmE1Iiwicm9sZXMiOiJBZG1pbmlzdHJhdG9yIiwiZXhwIjoxNjI2MTc0ODg5LCJpc3MiOiJTZWN1cmVBcGkiLCJhdWQiOiJTZWN1cmVBcGlVc2VyIn0.v5f7ZkoLC6lT5urcwy4XtY5NTR5ZpNfPHZeXwnwFzz4  ',
   },
@@ -73,8 +73,8 @@ export const usersMockDataResponse = [
     isAuthenticated: true,
     firstName: 'Coach',
     lastName: 'Coachov',
-    email: 'ElevelAdministrator@gmail.com',
-    roles: [UserRole.Couch],
+    email: 'elevelcoach@gmail.com',
+    roles: [UserRole.Coach],
     token:
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBZG1pbkFkbWlub3YiLCJqdGkiOiJhOWUyNzA2Yi04NGEwLTQxNDMtOWQwZC0wODE4MGMzNDA2NzEiLCJlbWFpbCI6IkVsZXZlbEFkbWluaXN0cmF0b3JAZ21haWwuY29tIiwidWlkIjoiYTg2YTEyY2ItMmFmZS00MGE4LTA5ODItMDhkOTQyNDdlZmE1Iiwicm9sZXMiOiJBZG1pbmlzdHJhdG9yIiwiZXhwIjoxNjI2MTc0ODg5LCJpc3MiOiJTZWN1cmVBcGkiLCJhdWQiOiJTZWN1cmVBcGlVc2VyIn0.v5f7ZkoLC6lT5urcwy4XtY5NTR5ZpNfPHZeXwnwFzz4  ',
   },
@@ -85,6 +85,6 @@ export const user = {
   firstName: 'Сальвадор',
   lastName: 'Бананович',
   email: 'salsa@mail.com',
-  role: UserRole.Couch,
+  role: UserRole.Coach,
   userPhoto: '',
 };

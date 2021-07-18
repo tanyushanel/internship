@@ -1,7 +1,7 @@
 export enum Route {
-  users = 'users',
+  users = 'hrProfile',
   home = 'home',
-  check = 'check',
+  check = 'coach-profile',
   editor = 'editor',
   manage = 'manage',
   statistics = 'statistics',
@@ -17,4 +17,4 @@ export enum SidebarMenu {
   statistics = 'Statistics',
 }
 
-export const ServerUrl = 'http://elevel-001-site1.btempurl.com/api/User/token';
+export const LoginApiUrl = 'http://elevel-001-site1.btempurl.com/api/User/token';

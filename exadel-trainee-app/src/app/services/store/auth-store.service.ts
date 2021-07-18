@@ -4,8 +4,9 @@ import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthHttpService } from '../auth-http.service';
 import { UserResponseType } from '../../../interfaces/user.interfaces';
-import { SignIn } from '../../interfaces/user';
 import { ErrorStoreService } from './error-store.service';
+import { SignIn } from '../../interfaces/user';
+import { Route } from '../../../constants/route-constant';
 
 @Injectable({
   providedIn: 'root',
@@ -37,7 +38,7 @@ export class AuthStoreService {
     this.authHttpService.signIn(signInModel).subscribe({
       next: (user) => {
         this.user = { ...user };
-        this.router.navigate(['/home']);
+        this.router.navigate([Route.home]);
       },
       error: (e: Error) => {
         this.errorStoreService.setError({

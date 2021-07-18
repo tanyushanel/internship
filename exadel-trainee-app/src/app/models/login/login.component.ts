@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthStoreService } from '../../services/store/auth-store.service';
+import { usersMockDataResponse } from '../../../constants/mock-user-data';
+import { UserResponseType } from '../../../interfaces/user.interfaces';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +13,11 @@ import { AuthStoreService } from '../../services/store/auth-store.service';
 export class LoginComponent implements OnInit {
   public loginReactiveForm!: FormGroup;
 
+  selectedUser: any;
+
   submitted = false;
+
+  users: UserResponseType[] = usersMockDataResponse;
 
   constructor(private fb: FormBuilder, private readonly authStoreService: AuthStoreService) {}
 
@@ -27,8 +33,8 @@ export class LoginComponent implements OnInit {
     }
     this.submitted = false;
     this.authStoreService.signIn({
-      email: this.loginReactiveForm.value.userLogin,
-      password: this.loginReactiveForm.value.userPassword,
+      email: this.selectedUser || this.loginReactiveForm.value.userLogin,
+      password: 'Pa$$w0rd.' || this.loginReactiveForm.value.userPassword,
     });
   }
 
