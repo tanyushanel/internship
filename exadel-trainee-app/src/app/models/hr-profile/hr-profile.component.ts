@@ -13,7 +13,7 @@ import { User } from '../../interfaces/user';
   styleUrls: ['./hr-profile.component.scss'],
 })
 export class HrProfileComponent implements AfterViewInit {
-  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'assessment'];
+  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'assessment', 'info'];
 
   dataSource: MatTableDataSource<UserData>;
 
