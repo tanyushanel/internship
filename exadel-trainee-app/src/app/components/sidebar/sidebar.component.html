@@ -4,6 +4,7 @@
       <ng-container *ngIf="{ user: user$ | async } as $">
         <p class="sidebar__username">{{ $.user!.firstName }}</p>
         <div mat-card-avatar class="sidebar__logo"></div>
+        <app-notification class="notifications"> </app-notification>
         <nav class="sidebar__nav">
           <div class="sidebar__list">
             <div *ngFor="let route of usersRoute[$.user!.roles[0]].route; let i = index">

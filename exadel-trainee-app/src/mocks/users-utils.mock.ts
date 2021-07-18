@@ -1,5 +1,5 @@
 export interface UserData {
-  id: string;
+  id: number;
   firstName: string;
   lastName: string;
 }
@@ -40,7 +40,7 @@ export function createNewUser(id: number): UserData {
   const name = `${MOCK_FIRSTNAMES[Math.round(Math.random() * (MOCK_FIRSTNAMES.length - 1))]}`;
 
   return {
-    id: id.toString(),
+    id,
     firstName: name,
     lastName: MOCK_LASTNAMES[Math.round(Math.random() * (MOCK_LASTNAMES.length - 1))],
   };
