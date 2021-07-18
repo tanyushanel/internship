@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Level } from 'src/constants/data-constants';
 import { results } from 'src/constants/mock-test-data';
