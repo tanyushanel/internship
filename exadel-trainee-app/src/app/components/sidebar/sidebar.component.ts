@@ -10,7 +10,7 @@ import { UserResponseType } from '../../../interfaces/user.interfaces';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit {
-  isOpen = true;
+  isOpen = false;
 
   readonly user$: Observable<UserResponseType> = this.userRoleSvr.activeUser$;
 
