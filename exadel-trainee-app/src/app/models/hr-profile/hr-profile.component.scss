@@ -8,7 +8,11 @@ table {
   margin: 30px;
 }
 
-button:hover {
+.mat-flat-button:hover {
+  background-color: $light-cyan;
+}
+
+.mat-raised-button:hover {
   background-color: gray;
 }
 
