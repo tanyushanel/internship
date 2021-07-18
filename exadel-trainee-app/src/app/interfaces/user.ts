@@ -8,3 +8,8 @@ export interface User {
   role: UserRole;
   userPhoto?: string;
 }
+
+export interface SignIn {
+  email: string;
+  password: string;
+}
