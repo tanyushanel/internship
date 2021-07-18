@@ -4,9 +4,8 @@
 }
 
 .user-info-wrap {
-  display: inline-flex;
-  width: 65%;
-  margin-right: 1rem;
+  display: flex;
+  justify-content: space-between;
   padding: 0.5rem;
   overflow: hidden;
 }
@@ -29,8 +28,6 @@
 
 .submit-btn {
   display: inline-block;
-  line-height: 5rem;
-  vertical-align: bottom;
 }
 
 .table-caption {

@@ -1,10 +1,11 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { UserResultsDialogComponent } from '../dialog-module/user-results-dialog/user-results-dialog.component';
 import { MOCK_USERS, UserData } from '../../../mocks/users-utils.mock';
+import { User } from '../../interfaces/user';
 
 @Component({
   selector: 'app-hr-profile',
@@ -12,7 +13,7 @@ import { MOCK_USERS, UserData } from '../../../mocks/users-utils.mock';
   styleUrls: ['./hr-profile.component.scss'],
 })
 export class HrProfileComponent implements AfterViewInit {
-  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'assessment'];
+  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'assessment', 'info'];
 
   dataSource: MatTableDataSource<UserData>;
 
@@ -38,9 +39,10 @@ export class HrProfileComponent implements AfterViewInit {
     }
   }
 
-  onOpenUserResultsDialog(): void {
+  onOpenUserResultsDialog(row: User): void {
     this.dialog.open(UserResultsDialogComponent, {
       width: '35rem',
+      data: { id: row.id, firstName: row.firstName, lastName: row.lastName },
     });
   }
 }

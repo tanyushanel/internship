@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Level } from 'src/constants/data-constants';
+import { results } from 'src/constants/mock-test-data';
+import { Route } from 'src/constants/route-constant';
+import { Test } from '../../interfaces/test';
 
 @Component({
   selector: 'app-user-profile',
@@ -6,5 +11,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-profile.component.scss'],
 })
 export class UserProfileComponent implements OnInit {
-  ngOnInit(): void {}
+  results!: Test[];
+
+  levels = Level;
+
+  selectedLevel = Level.beginner;
+
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+    this.results = results;
+  }
+
+  onStartButtonClick(): void {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([Route.grammarTest]);
+    });
+  }
 }
