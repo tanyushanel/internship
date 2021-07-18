@@ -1,12 +1,12 @@
 <div class="container">
   <div class="main">
-    <h4>mat select</h4>
+    <h4>Assign Coach</h4>
     <mat-form-field appearance="fill">
       <mat-label> Assign coach</mat-label>
       <mat-select [formControl]="coachControl" required>
         <mat-option>--</mat-option>
-        <mat-option *ngFor="let coach of coachList" [value]="coach.name">
-          {{ coach.name }}
+        <mat-option *ngFor="let coach of dataSource" [value]="coach.coach">
+          {{ coach.coach }}
         </mat-option>
       </mat-select>
       <mat-error *ngIf="coachControl.hasError('required')">Please choose an animal</mat-error>

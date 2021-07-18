@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AdminDialogComponent } from './admin-dialog/admin-dialog.component';
-import { ELEMENT_DATA, PeriodicElement } from '../../../mocks/mock_adminProfile';
+import { MOCK_TEST, TestData } from '../../../mocks/admin-profile-utils.mock';
 
 @Component({
   selector: 'app-admin-profile',
@@ -25,9 +25,9 @@ export class AdminProfileComponent implements OnInit {
 
   displayedColumns1: string[] = ['Position', 'Level', 'Date', 'button'];
 
-  dataSource = ELEMENT_DATA;
+  dataSource = MOCK_TEST;
 
-  expandedElement: PeriodicElement | undefined;
+  expandedElement: TestData | undefined;
 
   ngOnInit(): void {}
 
