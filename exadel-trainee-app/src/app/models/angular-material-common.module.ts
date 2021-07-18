@@ -1,3 +1,4 @@
+import { MatCardModule } from '@angular/material/card';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -16,6 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     MatSortModule,
     MatButtonModule,
+    MatCardModule,
   ],
   declarations: [],
   exports: [
@@ -26,6 +28,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     MatSortModule,
     MatButtonModule,
+    MatCardModule,
   ],
 })
 export class AngularMaterialCommonModule {}

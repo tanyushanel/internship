@@ -45,7 +45,7 @@ export class SpeakingTestComponent implements OnInit {
 
   toggleRecording() {
     this.isRecording = !this.isRecording;
-    if (this.isRecording === true) {
+    if (this.isRecording) {
       this.startRecording();
     } else {
       this.stopRecording();
@@ -53,7 +53,7 @@ export class SpeakingTestComponent implements OnInit {
   }
 
   getColor() {
-    return this.isRecording === false ? 'primary' : 'warn';
+    return !this.isRecording ? 'primary' : 'warn';
   }
 
   startRecording() {
