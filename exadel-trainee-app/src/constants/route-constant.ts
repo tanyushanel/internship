@@ -3,7 +3,7 @@ export enum Route {
   home = 'home',
   check = 'coach-profile',
   editor = 'editor',
-  manage = 'manage',
+  manage = 'adminProfile',
   statistics = 'statistics',
   grammarTest = 'grammarTest',
 }

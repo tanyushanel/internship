@@ -1,4 +1,4 @@
-@import '../../../theme/variables';
+@import '../../../../theme/variables';
 
 button {
   float: right;
@@ -12,9 +12,9 @@ table {
   width: 100%;
 }
 
-.mat-elevation-z8 {
-  margin: 0 100px;
-  background-color: $white;
+td,
+th {
+  width: 33.333%;
 }
 
 mat-form-field {
@@ -22,4 +22,8 @@ mat-form-field {
   width: 100%;
   padding: 0 1rem;
   font-size: 14px;
+}
+
+.priority.high {
+  background-color: goldenrod;
 }

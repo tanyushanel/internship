@@ -10,6 +10,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatSortModule } from '@angular/material/sort';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatRadioModule, MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
 
@@ -22,6 +23,7 @@ import { MatRadioModule, MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/rad
     MatInputModule,
     MatSortModule,
     MatButtonModule,
+    MatTabsModule,
     MatStepperModule,
     MatRadioModule,
     FormsModule,
@@ -38,6 +40,7 @@ import { MatRadioModule, MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/rad
     MatInputModule,
     MatSortModule,
     MatButtonModule,
+    MatTabsModule,
     MatCardModule,
     MatStepperModule,
     MatRadioModule,
