@@ -1,5 +1,5 @@
-<mat-sidenav-container class="sidebar" autosize>
-  <mat-sidenav class="sidebar__container" mode="side" [opened]="isOpen">
+<mat-sidenav-container class="sidebar" autosize *ngIf="{ isSingIn: isSingIn$ | async } as $">
+  <mat-sidenav *ngIf="$.isSingIn" class="sidebar__container" mode="side" [opened]="isOpen">
     <mat-nav-list>
       <ng-container *ngIf="{ user: user$ | async } as $">
         <p class="sidebar__username">{{ $.user!.firstName }}</p>
@@ -13,7 +13,7 @@
               </mat-list-item>
             </div>
           </div>
-          <mat-list-item [routerLink]="'/logout'" class="sidebar__list_item">
+          <mat-list-item (click)="authService.signOut()" class="sidebar__list_item">
             <span>Exit</span>
           </mat-list-item>
         </nav>
@@ -22,6 +22,7 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-icon
+      *ngIf="$.isSingIn"
       mat-icon-button
       class="sidebar__button"
       (click)="handleSidebar()"
