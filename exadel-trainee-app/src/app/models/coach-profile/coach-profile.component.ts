@@ -9,7 +9,11 @@ import { CoachTestTabs } from '../../../constants/data-constants';
   styleUrls: ['./coach-profile.component.scss'],
 })
 export class CoachProfileComponent {
-  tabs: string[] = [CoachTestTabs.unchecked, CoachTestTabs.highPriority, CoachTestTabs.checked];
+  tabs: CoachTestTabs[] = [
+    CoachTestTabs.unchecked,
+    CoachTestTabs.highPriority,
+    CoachTestTabs.checked,
+  ];
 
   tables: { [key: string]: TestData[] } = {};
 
