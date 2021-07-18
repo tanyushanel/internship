@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Route } from '../../../constants/route-constant';
 
 @Component({
   selector: 'app-stepper',
@@ -13,7 +15,9 @@ export class StepperComponent implements OnInit {
 
   lastFormGroup: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  currentRoute: string | undefined;
+
+  constructor(private formBuilder: FormBuilder, private router: Router) {
     this.firstFormGroup = this.formBuilder.group({
       firstCtrl: ['', Validators.required],
     });
@@ -26,4 +30,12 @@ export class StepperComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  nextTest() {
+    if (this.router.url === `/${Route.grammarTest}`) {
+      this.router.navigate([Route.listening]);
+    } else {
+      this.router.navigate([Route.writing]);
+    }
+  }
 }

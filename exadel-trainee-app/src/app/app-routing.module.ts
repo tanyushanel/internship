@@ -55,6 +55,10 @@ const routes: Routes = [
       import('./models/listening-test/listening-test.module').then((m) => m.ListeningTestModule),
   },
   {
+    path: 'result',
+    loadChildren: () => import('./models/result/result.module').then((m) => m.ResultModule),
+  },
+  {
     path: Route.home,
     component: HomeComponent,
   },
