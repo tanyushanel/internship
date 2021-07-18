@@ -18,6 +18,8 @@ export class SpeakingTestComponent implements OnInit {
 
   audioFiles: { src: SafeUrl }[] = [];
 
+  counter = 0;
+
   constructor(
     private cd: ChangeDetectorRef,
     private dom: DomSanitizer,
@@ -55,6 +57,7 @@ export class SpeakingTestComponent implements OnInit {
     if (this.isRecording) {
       this.startRecording();
     } else {
+      this.counter += 1;
       this.stopRecording();
     }
   }
