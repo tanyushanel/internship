@@ -9,8 +9,6 @@
           {{ coach.coach }}
         </mat-option>
       </mat-select>
-      <mat-error *ngIf="coachControl.hasError('required')">Please choose an animal</mat-error>
-      <mat-hint>{{ coachControl.value?.sound }}</mat-hint>
     </mat-form-field>
   </div>
   <div class="btn">
