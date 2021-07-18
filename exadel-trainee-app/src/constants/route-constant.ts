@@ -5,6 +5,7 @@ export enum Route {
   editor = 'editor',
   manage = 'manage',
   statistics = 'statistics',
+  grammarTest = 'grammarTest',
 }
 
 export enum SidebarMenu {

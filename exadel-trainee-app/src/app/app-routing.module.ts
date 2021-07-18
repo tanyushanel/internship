@@ -7,6 +7,7 @@ import { CheckComponent } from './components/mock-component/check/check.componen
 import { StatisticsComponent } from './components/mock-component/statistics/statistics.component';
 import { EditorComponent } from './components/mock-component/editor/editor.component';
 import { Route } from '../constants/route-constant';
+import { GrammarTestComponent } from './models/grammar-test/grammar-test.component';
 
 const routes: Routes = [
   {
@@ -14,7 +15,7 @@ const routes: Routes = [
     loadChildren: () => import('./models/login/login.module').then((m) => m.LoginModule),
   },
   {
-    path: 'user',
+    path: 'home',
     loadChildren: () =>
       import('./models/user-profile/user-profile.module').then((m) => m.UserProfileModule),
   },
@@ -53,7 +54,6 @@ const routes: Routes = [
     loadChildren: () =>
       import('./models/listening-test/listening-test.module').then((m) => m.ListeningTestModule),
   },
-  // mock component for check business logic
   {
     path: Route.home,
     component: HomeComponent,
@@ -77,6 +77,10 @@ const routes: Routes = [
   {
     path: Route.editor,
     component: EditorComponent,
+  },
+  {
+    path: Route.grammarTest,
+    component: GrammarTestComponent,
   },
 ];
 
