@@ -9,6 +9,7 @@ export interface TestData {
   level: string;
   isChecked: boolean;
   isHigh: boolean;
+  date: string;
 }
 
 const MOCK_LASTNAMES: string[] = [
@@ -62,12 +63,24 @@ export function createNewUser(id: number): UserData {
   };
 }
 
+export function getRandomDate(from: Date, to: Date) {
+  const fromTime = from.getTime();
+  const toTime = to.getTime();
+  return new Date(fromTime + Math.random() * (toTime - fromTime));
+}
+
+const generateRandomDate = (): string => {
+  const random = getRandomDate(new Date('2020-10-12'), new Date('2021-07-12'));
+  return random.toLocaleDateString();
+};
+
 export function createNewCoachProfileTest(id: number): TestData {
   return {
     id: id.toString(),
     level: MOCK_LEVELS[Math.round(Math.random() * (MOCK_LEVELS.length - 1))],
-    isChecked: true,
-    isHigh: true,
+    date: generateRandomDate(),
+    isChecked: id % 2 === 1,
+    isHigh: id % 2 !== 1 && id % 10 === 0,
   };
 }
 
