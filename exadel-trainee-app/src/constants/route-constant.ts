@@ -15,3 +15,5 @@ export enum SidebarMenu {
   manage = 'Manage',
   statistics = 'Statistics',
 }
+
+export const ServerUrl = 'http://elevel-001-site1.btempurl.com/api/User/token';

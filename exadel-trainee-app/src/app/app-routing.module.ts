@@ -10,7 +10,7 @@ import { Route } from '../constants/route-constant';
 
 const routes: Routes = [
   {
-    path: 'login',
+    path: '',
     loadChildren: () => import('./models/login/login.module').then((m) => m.LoginModule),
   },
   {

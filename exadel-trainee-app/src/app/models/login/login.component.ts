@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthStoreService } from '../../services/store/auth-store.service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class LoginComponent implements OnInit {
   public loginReactiveForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  submitted = false;
+
+  constructor(private fb: FormBuilder, private readonly authStoreService: AuthStoreService) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -19,9 +22,14 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     const { controls } = this.loginReactiveForm;
     if (this.loginReactiveForm.invalid) {
+      this.submitted = true;
       Object.keys(controls).forEach((controlName) => controls[controlName].markAsTouched());
     }
-    // console.log(this.loginReactiveForm.value);
+    this.submitted = false;
+    this.authStoreService.signIn({
+      email: this.loginReactiveForm.value.userLogin,
+      password: this.loginReactiveForm.value.userPassword,
+    });
   }
 
   isControlInvalid(controlName: string): boolean {
@@ -32,9 +40,8 @@ export class LoginComponent implements OnInit {
 
   private initForm() {
     this.loginReactiveForm = this.fb.group({
-      // userLogin: ['', [Validators.pattern(/^[A-z @!#$_.,-]+$/)]],
-      userLogin: ['', [Validators.required]],
-      userPassword: ['', [Validators.required, Validators.pattern(/^[A-z _.-]+$/)]],
+      userLogin: ['eleveladministrator@gmail.com', [Validators.required, Validators.email]],
+      userPassword: ['Pa$$w0rd.', [Validators.required, Validators.minLength(6)]],
     });
   }
 }

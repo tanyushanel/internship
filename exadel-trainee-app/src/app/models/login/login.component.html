@@ -3,20 +3,42 @@
     <form [formGroup]="loginReactiveForm" (submit)="onSubmit()">
       <mat-form-field class="form-field">
         <mat-label for="userLogin">Login:</mat-label>
-        <input matInput type="text" id="userLogin" formControlName="userLogin" maxlength="30">
+        <input
+          matInput
+          placeholder="eleveluser@gmail.com"
+          value="eleveluser@gmail.com"
+          type="email"
+          id="userLogin"
+          formControlName="userLogin"
+          maxlength="30"
+        />
       </mat-form-field>
-      <div class="error" *ngIf="isControlInvalid('userLogin')" style="color: red">
-        Input valid user login, included "@", "A-z", "-", ".", "_"
-      </div>
+      <mat-error *ngIf="isControlInvalid('userLogin')">
+        Please enter a valid email address
+      </mat-error>
 
       <mat-form-field class="form-field">
         <mat-label for="userPassword">Password:</mat-label>
-        <input matInput type="text" id="userPassword" formControlName="userPassword" maxlength="30">
+        <input
+          matInput
+          type="password"
+          value="Pa$$w0rd."
+          id="userPassword"
+          formControlName="userPassword"
+          maxlength="30"
+        />
       </mat-form-field>
       <div class="error" *ngIf="isControlInvalid('userPassword')" style="color: red">
-        Input valid password, included "@", "A-z", "-", ".", "_"
+        Password is to short
       </div>
-      <button mat-raised-button color="primary" type="submit">Sign In</button>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="submitted || loginReactiveForm.invalid"
+      >
+        Sign In
+      </button>
     </form>
   </mat-card>
 </div>

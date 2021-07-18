@@ -15,7 +15,7 @@ export interface UserRoutesType {
 
 export const usersRoute: UserRoutesType = {
   [UserRole.User]: {
-    route: [Route.home],
+    route: ['user'],
     menuItem: [SidebarMenu.home],
   },
 
