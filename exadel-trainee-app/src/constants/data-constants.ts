@@ -5,7 +5,7 @@ export enum Level {
 }
 export enum UserRole {
   User = 'User',
-  Hr = 'Hr',
-  Couch = 'Couch',
+  HumanResourceManager = 'HumanResourceManager',
+  Coach = 'Coach',
   Administrator = 'Administrator',
 }
