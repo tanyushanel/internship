@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MOCK_TESTS, TestData } from '../../../mocks/users-utils.mock';
-import { Tabs } from '../../../constants/data-constants';
+import { CoachTestTabs } from '../../../constants/data-constants';
 
 @Component({
   selector: 'app-coach-profile',
@@ -9,15 +9,15 @@ import { Tabs } from '../../../constants/data-constants';
   styleUrls: ['./coach-profile.component.scss'],
 })
 export class CoachProfileComponent {
-  tabs: string[] = [Tabs.unchecked, Tabs.highPriority, Tabs.checked];
+  tabs: string[] = [CoachTestTabs.unchecked, CoachTestTabs.highPriority, CoachTestTabs.checked];
 
   tables: { [key: string]: TestData[] } = {};
 
   constructor(public dialog: MatDialog) {
     this.tables = {
-      [Tabs.unchecked]: MOCK_TESTS.filter((test) => !test.isChecked),
-      [Tabs.highPriority]: MOCK_TESTS.filter((test) => test.isHigh),
-      [Tabs.checked]: MOCK_TESTS.filter((test) => test.isChecked),
+      [CoachTestTabs.unchecked]: MOCK_TESTS.filter((test) => !test.isChecked),
+      [CoachTestTabs.highPriority]: MOCK_TESTS.filter((test) => test.isHigh),
+      [CoachTestTabs.checked]: MOCK_TESTS.filter((test) => test.isChecked),
     };
   }
 }

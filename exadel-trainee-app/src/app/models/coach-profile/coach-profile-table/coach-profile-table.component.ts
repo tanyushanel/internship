@@ -13,12 +13,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { TestData } from '../../../../mocks/users-utils.mock';
 import { CoachProfileDialogComponent } from '../coach-profile-dialog/coach-profile-dialog.component';
 
-export enum Level {
-  beginner = 'beginner',
-  intermediate = 'intermediate',
-  advanced = 'advanced',
-}
-
 @Component({
   selector: 'app-coach-profile-table',
   templateUrl: './coach-profile-table.component.html',
@@ -26,8 +20,6 @@ export enum Level {
 })
 export class CoachProfileTableComponent implements AfterViewInit, OnChanges {
   displayedColumns: string[] = ['id', 'level', 'date', 'button'];
-
-  tabs: string[] = [Level.beginner, Level.intermediate, Level.advanced];
 
   dataSource: MatTableDataSource<TestData>;
 
