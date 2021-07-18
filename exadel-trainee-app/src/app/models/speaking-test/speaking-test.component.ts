@@ -1,6 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { ErrorStoreService } from '../../services/store/error-store.service';
+import { Route } from '../../../constants/route-constant';
 
 declare let MediaRecorder: any;
 
@@ -24,6 +26,7 @@ export class SpeakingTestComponent implements OnInit {
     private cd: ChangeDetectorRef,
     private dom: DomSanitizer,
     private errorStoreService: ErrorStoreService,
+    private readonly router: Router,
   ) {}
 
   async ngOnInit() {
@@ -72,5 +75,9 @@ export class SpeakingTestComponent implements OnInit {
 
   stopRecording() {
     this.mediaRecorder.stop();
+  }
+
+  finishTest() {
+    this.router.navigate([Route.result]);
   }
 }

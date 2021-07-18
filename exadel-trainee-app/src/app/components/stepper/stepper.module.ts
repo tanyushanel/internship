@@ -6,6 +6,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 
+import { RouterModule } from '@angular/router';
 import { StepperComponent } from './stepper.component';
 
 @NgModule({
@@ -17,6 +18,7 @@ import { StepperComponent } from './stepper.component';
     MatStepperModule,
     ReactiveFormsModule,
     MatInputModule,
+    RouterModule,
   ],
   exports: [StepperComponent],
 })

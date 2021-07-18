@@ -5,7 +5,11 @@ export enum Route {
   editor = 'editor',
   manage = 'adminProfile',
   statistics = 'statistics',
-  grammarTest = 'grammarTest',
+  grammarTest = 'grammar',
+  listening = 'listening',
+  writing = 'writing',
+  speaking = 'speaking',
+  result = 'result',
 }
 
 export enum SidebarMenu {
