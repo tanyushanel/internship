@@ -1,3 +1,5 @@
+@import 'src/theme/variables';
+
 cdk-virtual-scroll-viewport {
   width: 100%;
 }
@@ -85,4 +87,11 @@ button {
 
 .mat-column-Coach {
   padding: 0 0 0 100px;
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 3rem;
 }

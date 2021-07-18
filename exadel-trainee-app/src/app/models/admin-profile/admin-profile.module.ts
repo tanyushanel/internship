@@ -7,7 +7,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { ScrollDispatcher, ScrollingModule } from '@angular/cdk/scrolling';
 import { MatDialogModule } from '@angular/material/dialog';
 
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { TableVirtualScrollModule } from 'ng-cdk-table-virtual-scroll';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
