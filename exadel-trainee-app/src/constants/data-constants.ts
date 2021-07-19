@@ -1,9 +1,9 @@
 export enum Level {
-  Elementary = 1,
-  PreIntermediate = 2,
-  Intermediate = 3,
-  UpperIntermediate = 4,
-  Advanced = 5,
+  Elementary = 'Elementary',
+  PreIntermediate = 'PreIntermediate',
+  Intermediate = 'Intermediate',
+  UpperIntermediate = 'UpperIntermediate',
+  Advanced = 'Advanced',
 }
 export enum UserRole {
   User = 'User',

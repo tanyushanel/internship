@@ -27,7 +27,7 @@ export const results: Test[] = [
     feedback: '',
   },
   {
-    id: 1,
+    id: 2,
     date: { creationDate: new Date().toDateString() },
     level: Level.Intermediate,
     content: {
@@ -51,7 +51,7 @@ export const results: Test[] = [
     feedback: '',
   },
   {
-    id: 1,
+    id: 3,
     date: { creationDate: new Date().toDateString() },
     level: Level.Elementary,
     content: {
@@ -75,7 +75,7 @@ export const results: Test[] = [
     feedback: '',
   },
   {
-    id: 1,
+    id: 4,
     date: { creationDate: new Date().toDateString() },
     level: Level.Advanced,
     content: {
@@ -99,7 +99,7 @@ export const results: Test[] = [
     feedback: '',
   },
   {
-    id: 1,
+    id: 5,
     date: { creationDate: new Date().toDateString() },
     level: Level.UpperIntermediate,
     content: {
@@ -123,7 +123,7 @@ export const results: Test[] = [
     feedback: '',
   },
   {
-    id: 1,
+    id: 6,
     date: { creationDate: new Date().toDateString() },
     level: Level.Advanced,
     content: {
@@ -148,7 +148,7 @@ export const results: Test[] = [
   },
 
   {
-    id: 2,
+    id: 7,
     date: { creationDate: new Date().toDateString() },
     level: Level.Intermediate,
     content: {
@@ -172,7 +172,7 @@ export const results: Test[] = [
     feedback: '',
   },
   {
-    id: 3,
+    id: 8,
     date: { creationDate: new Date().toDateString() },
     level: Level.Advanced,
     content: {
@@ -196,7 +196,7 @@ export const results: Test[] = [
     feedback: '',
   },
   {
-    id: 4,
+    id: 9,
     date: { creationDate: new Date().toDateString() },
     level: Level.Elementary,
     content: {
