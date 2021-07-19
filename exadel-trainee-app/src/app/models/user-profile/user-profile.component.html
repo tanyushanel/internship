@@ -6,6 +6,7 @@
       class="radio-btn"
       *ngFor="let level of levels; let ind = index"
       [value]="level"
+      [checked]="ind === 0"
     >
       {{ level }}
     </mat-radio-button>

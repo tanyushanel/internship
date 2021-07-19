@@ -1,6 +1,6 @@
 .profile-container {
-  width: 80%;
   margin: 0 auto;
+  padding: 0 2rem;
 }
 
 .notifications {
@@ -13,10 +13,11 @@
 
 .radio {
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 
   .radio-btn {
-    margin: 2rem;
+    margin: 1rem;
   }
 }
 
