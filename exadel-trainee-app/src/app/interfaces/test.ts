@@ -1,9 +1,11 @@
-import { Level } from '../../constants/data-constants';
+import { Priority, Level } from '../../constants/data-constants';
 import { TestModule } from './test-module';
 
 export interface Test {
   id: number;
   level: Level;
+  userId: number;
+  priority: Priority;
   date: {
     creationDate?: string;
     assignmentStartDate?: string;

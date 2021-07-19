@@ -11,3 +11,8 @@ export enum UserRole {
   Couch = 'Couch',
   Administrator = 'Administrator',
 }
+
+export enum Priority {
+  high = 1,
+  low = 2,
+}

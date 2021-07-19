@@ -13,14 +13,15 @@ import { Test } from '../../interfaces/test';
 export class UserProfileComponent implements OnInit {
   results!: Test[];
 
-  levels = Level;
+  levels = [...Object.values(Level)];
 
-  selectedLevel = Level.Elementary;
+  selectedLevel!: Level;
 
   constructor(private router: Router) {}
 
   ngOnInit() {
     this.results = results;
+    this.selectedLevel = this.levels[0];
   }
 
   onStartButtonClick(): void {

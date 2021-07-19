@@ -2,11 +2,13 @@
   <h3 class="table-caption">Choose your English level:</h3>
 
   <mat-radio-group name="levels" class="radio" [(ngModel)]="selectedLevel">
-    <mat-radio-button class="radio-btn" value="1" checked="true">Elementary</mat-radio-button>
-    <mat-radio-button class="radio-btn" value="2">PreIntermediate</mat-radio-button>
-    <mat-radio-button class="radio-btn" value="3">Intermediate</mat-radio-button>
-    <mat-radio-button class="radio-btn" value="4">UpperIntermediate</mat-radio-button>
-    <mat-radio-button class="radio-btn" value="5">Advanced</mat-radio-button>
+    <mat-radio-button
+      class="radio-btn"
+      *ngFor="let level of levels; let ind = index"
+      [value]="level"
+    >
+      {{ level }}
+    </mat-radio-button>
   </mat-radio-group>
 
   <p class="for-delete">
