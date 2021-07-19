@@ -5,7 +5,127 @@ export const results: Test[] = [
   {
     id: 1,
     date: { creationDate: new Date().toDateString() },
-    level: Level.advanced,
+    level: Level.UpperIntermediate,
+    content: {
+      grammar: {
+        id: 1,
+        mark: 10,
+      },
+      audition: {
+        id: 1,
+        mark: 20,
+      },
+      essay: {
+        id: 1,
+        mark: 20,
+      },
+      speaking: {
+        id: 1,
+        mark: 10,
+      },
+    },
+    feedback: '',
+  },
+  {
+    id: 1,
+    date: { creationDate: new Date().toDateString() },
+    level: Level.Intermediate,
+    content: {
+      grammar: {
+        id: 1,
+        mark: 10,
+      },
+      audition: {
+        id: 1,
+        mark: 20,
+      },
+      essay: {
+        id: 1,
+        mark: 20,
+      },
+      speaking: {
+        id: 1,
+        mark: 10,
+      },
+    },
+    feedback: '',
+  },
+  {
+    id: 1,
+    date: { creationDate: new Date().toDateString() },
+    level: Level.Elementary,
+    content: {
+      grammar: {
+        id: 1,
+        mark: 10,
+      },
+      audition: {
+        id: 1,
+        mark: 20,
+      },
+      essay: {
+        id: 1,
+        mark: 20,
+      },
+      speaking: {
+        id: 1,
+        mark: 10,
+      },
+    },
+    feedback: '',
+  },
+  {
+    id: 1,
+    date: { creationDate: new Date().toDateString() },
+    level: Level.Advanced,
+    content: {
+      grammar: {
+        id: 1,
+        mark: 10,
+      },
+      audition: {
+        id: 1,
+        mark: 20,
+      },
+      essay: {
+        id: 1,
+        mark: 20,
+      },
+      speaking: {
+        id: 1,
+        mark: 10,
+      },
+    },
+    feedback: '',
+  },
+  {
+    id: 1,
+    date: { creationDate: new Date().toDateString() },
+    level: Level.UpperIntermediate,
+    content: {
+      grammar: {
+        id: 1,
+        mark: 10,
+      },
+      audition: {
+        id: 1,
+        mark: 20,
+      },
+      essay: {
+        id: 1,
+        mark: 20,
+      },
+      speaking: {
+        id: 1,
+        mark: 10,
+      },
+    },
+    feedback: '',
+  },
+  {
+    id: 1,
+    date: { creationDate: new Date().toDateString() },
+    level: Level.Advanced,
     content: {
       grammar: {
         id: 1,
@@ -30,7 +150,7 @@ export const results: Test[] = [
   {
     id: 2,
     date: { creationDate: new Date().toDateString() },
-    level: Level.beginner,
+    level: Level.Intermediate,
     content: {
       grammar: {
         id: 1,
@@ -54,7 +174,7 @@ export const results: Test[] = [
   {
     id: 3,
     date: { creationDate: new Date().toDateString() },
-    level: Level.beginner,
+    level: Level.Advanced,
     content: {
       grammar: {
         id: 1,
@@ -78,7 +198,7 @@ export const results: Test[] = [
   {
     id: 4,
     date: { creationDate: new Date().toDateString() },
-    level: Level.beginner,
+    level: Level.Elementary,
     content: {
       grammar: {
         id: 1,

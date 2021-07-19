@@ -15,7 +15,7 @@ export class UserProfileComponent implements OnInit {
 
   levels = Level;
 
-  selectedLevel = Level.beginner;
+  selectedLevel = Level.Elementary;
 
   constructor(private router: Router) {}
 

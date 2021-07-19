@@ -30,6 +30,8 @@
     </td>
   </ng-container>
 
+  <!-- Expanded data -->
+
   <ng-container matColumnDef="expandedDetail">
     <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
       <div
@@ -70,3 +72,5 @@
   ></tr>
   <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
 </table>
+
+<mat-paginator [length]="50" [pageSize]="5" [pageSizeOptions]="[5]"> </mat-paginator>
