@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AdminDialogComponent } from './admin-dialog/admin-dialog.component';
 import { MOCK_TEST, TestData } from '../../../mocks/admin-profile-utils.mock';
+
+export interface SelectedValue {
+  position: number;
+  coach: string;
+}
 
 @Component({
   selector: 'app-admin-profile',
@@ -17,7 +22,9 @@ import { MOCK_TEST, TestData } from '../../../mocks/admin-profile-utils.mock';
   ],
 })
 export class AdminProfileComponent implements OnInit {
-  notAssign = false;
+  AssignSelector = '0';
+
+  selected: SelectedValue | undefined;
 
   constructor(public dialog: MatDialog) {}
 
@@ -31,14 +38,30 @@ export class AdminProfileComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  openDialog() {
-    const dialogRef = this.dialog.open(AdminDialogComponent, {});
+  openDialog(value: any) {
+    const dialogRef = this.dialog.open(AdminDialogComponent, {
+      data: { position: value - 1, coach: '--' },
+    });
     dialogRef.afterClosed().subscribe((result) => {
-      this.dataSource[0].coach = result;
+      //  this.selected?.coach=(result.coach);
+      //  this.selected?.position=result.position;
+      this.dataSource[result.position].coach = result.coach;
+      console.log(this.dataSource[result.position]);
     });
   }
 
-  onClickNotAssign(): boolean {
-    return (this.notAssign = !this.notAssign);
+  onClickNotAssigned(): void {
+    this.AssignSelector = '0';
+    console.log(this.AssignSelector);
+  }
+
+  onClickAssigned(): void {
+    this.AssignSelector = '1';
+    console.log(this.AssignSelector);
+  }
+
+  onClickReAssigned(): void {
+    this.AssignSelector = '2';
+    console.log(this.AssignSelector);
   }
 }
