@@ -21,7 +21,6 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {
     this.results = results;
-    this.selectedLevel = this.levels[0];
   }
 
   onStartButtonClick(): void {
