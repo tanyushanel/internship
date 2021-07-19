@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatButton } from '@angular/material/button';
+import { Router } from '@angular/router';
+import { Route } from '../../../constants/route-constant';
 
 @Component({
   selector: 'app-writing-test',
@@ -11,6 +12,8 @@ export class WritingTestComponent implements OnInit {
   form!: FormGroup;
 
   disabled = false;
+
+  constructor(private readonly router: Router) {}
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -26,5 +29,9 @@ export class WritingTestComponent implements OnInit {
 
   clear() {
     this.form.reset();
+  }
+
+  nextTest() {
+    this.router.navigate([Route.speaking]);
   }
 }

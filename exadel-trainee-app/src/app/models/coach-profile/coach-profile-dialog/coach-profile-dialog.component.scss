@@ -1,0 +1,29 @@
+@import '../../../../theme/variables';
+
+button {
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+button:hover {
+  background-color: $secondary-grey2;
+}
+
+mat-form-field {
+  width: 400px;
+}
+
+.mat-dialog-content {
+  min-width: 600px;
+}
+
+label {
+  float: right;
+  margin-top: 20px;
+}
+
+input {
+  max-width: 40px;
+  margin-left: 10px;
+}

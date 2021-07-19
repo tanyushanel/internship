@@ -11,7 +11,7 @@
         #text
         (paste)="$event.preventDefault()"
       ></textarea>
-      <mat-hint aligt="start">Max 512 characters</mat-hint>
+      <mat-hint align="start">Max 512 characters</mat-hint>
       <span>{{ text.value.length }}/ 512 </span>
 
       <div *ngIf="form.get('text')?.invalid && form.get('text')?.touched" class="validation">
@@ -41,3 +41,6 @@
     </div>
   </form>
 </div>
+<button mat-raised-button color="primary" class="button-submit" (click)="nextTest()">
+  Submit & Go Next
+</button>

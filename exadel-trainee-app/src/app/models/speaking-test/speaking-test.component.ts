@@ -1,5 +1,8 @@
-import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+import { ErrorStoreService } from '../../services/store/error-store.service';
+import { Route } from '../../../constants/route-constant';
 
 declare let MediaRecorder: any;
 
@@ -13,9 +16,18 @@ export class SpeakingTestComponent implements OnInit {
 
   chunks: Blob[] = [];
 
+  isRecording = false;
+
   audioFiles: { src: SafeUrl }[] = [];
 
-  constructor(private cd: ChangeDetectorRef, private dom: DomSanitizer) {}
+  counter = 0;
+
+  constructor(
+    private cd: ChangeDetectorRef,
+    private dom: DomSanitizer,
+    private errorStoreService: ErrorStoreService,
+    private readonly router: Router,
+  ) {}
 
   async ngOnInit() {
     let stream = null;
@@ -35,9 +47,26 @@ export class SpeakingTestComponent implements OnInit {
       this.mediaRecorder.ondataavailable = (e: { data: Blob }) => {
         this.chunks.push(e.data);
       };
-    } catch (err) {
-      alert('Error capturing audio.');
+    } catch (e) {
+      this.errorStoreService.setError({
+        message: e.message,
+        time: Date.now(),
+      });
     }
+  }
+
+  toggleRecording() {
+    this.isRecording = !this.isRecording;
+    if (this.isRecording) {
+      this.startRecording();
+    } else {
+      this.counter += 1;
+      this.stopRecording();
+    }
+  }
+
+  getColor() {
+    return !this.isRecording ? 'primary' : 'warn';
   }
 
   startRecording() {
@@ -46,5 +75,9 @@ export class SpeakingTestComponent implements OnInit {
 
   stopRecording() {
     this.mediaRecorder.stop();
+  }
+
+  finishTest() {
+    this.router.navigate([Route.result]);
   }
 }

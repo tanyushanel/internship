@@ -5,10 +5,17 @@ export enum Level {
   UpperIntermediate = 'UpperIntermediate',
   Advanced = 'Advanced',
 }
+
+export enum CoachTestTabs {
+  unchecked = 'Unchecked',
+  highPriority = 'High Priority',
+  checked = 'Checked',
+}
+
 export enum UserRole {
   User = 'User',
-  Hr = 'Hr',
-  Couch = 'Couch',
+  HumanResourceManager = 'HumanResourceManager',
+  Coach = 'Coach',
   Administrator = 'Administrator',
 }
 

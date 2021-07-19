@@ -11,7 +11,7 @@ import { GrammarTestComponent } from './models/grammar-test/grammar-test.compone
 
 const routes: Routes = [
   {
-    path: 'login',
+    path: '',
     loadChildren: () => import('./models/login/login.module').then((m) => m.LoginModule),
   },
   {
@@ -53,6 +53,10 @@ const routes: Routes = [
     path: 'listening',
     loadChildren: () =>
       import('./models/listening-test/listening-test.module').then((m) => m.ListeningTestModule),
+  },
+  {
+    path: 'result',
+    loadChildren: () => import('./models/result/result.module').then((m) => m.ResultModule),
   },
   {
     path: Route.home,

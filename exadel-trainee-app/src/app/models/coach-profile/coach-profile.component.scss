@@ -1,11 +1,11 @@
-@import 'src/theme/variables';
+@import '../../../theme/variables';
 
 button {
   float: right;
 }
 
 button:hover {
-  background-color: gray;
+  background-color: $secondary-grey2;
 }
 
 table {
@@ -13,14 +13,13 @@ table {
 }
 
 .mat-elevation-z8 {
-  margin: 0 100px;
+  margin: 20% 100px 0;
+  background-color: $white;
 }
 
 mat-form-field {
   box-sizing: border-box;
   width: 100%;
   padding: 0 1rem;
-  color: white;
   font-size: 14px;
-  background-color: $secondary-grey1;
 }
