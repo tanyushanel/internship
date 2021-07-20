@@ -7,8 +7,6 @@ import { CheckComponent } from './components/mock-component/check/check.componen
 import { StatisticsComponent } from './components/mock-component/statistics/statistics.component';
 import { EditorComponent } from './components/mock-component/editor/editor.component';
 import { Route } from '../constants/route-constant';
-import { GrammarTestComponent } from './models/grammar-test/grammar-test.component';
-import { CommonTestComponent } from './models/common-test/common-test.component';
 
 const routes: Routes = [
   {
@@ -69,10 +67,6 @@ const routes: Routes = [
   {
     path: Route.editor,
     component: EditorComponent,
-  },
-  {
-    path: Route.commonTest,
-    component: CommonTestComponent,
   },
 ];
 
