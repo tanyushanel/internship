@@ -8,6 +8,7 @@ import { StatisticsComponent } from './components/mock-component/statistics/stat
 import { EditorComponent } from './components/mock-component/editor/editor.component';
 import { Route } from '../constants/route-constant';
 import { GrammarTestComponent } from './models/grammar-test/grammar-test.component';
+import { CommonTestComponent } from './models/common-test/common-test.component';
 
 const routes: Routes = [
   {
@@ -85,6 +86,10 @@ const routes: Routes = [
   {
     path: Route.grammarTest,
     component: GrammarTestComponent,
+  },
+  {
+    path: Route.commonTest,
+    component: CommonTestComponent,
   },
 ];
 

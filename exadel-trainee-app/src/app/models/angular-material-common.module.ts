@@ -10,7 +10,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatSortModule } from '@angular/material/sort';
 import { MatButtonModule } from '@angular/material/button';
-import { MatTabsModule } from '@angular/material/tabs';
+import { MatTabsModule, MAT_TABS_CONFIG } from '@angular/material/tabs';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule } from '@angular/material/radio';
 
@@ -23,13 +23,13 @@ import { MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule } from '@angular/material/rad
     MatInputModule,
     MatSortModule,
     MatButtonModule,
-    MatTabsModule,
     MatStepperModule,
     MatRadioModule,
     FormsModule,
     MatIconModule,
     MatCardModule,
     MatDialogModule,
+    MatTabsModule,
   ],
   declarations: [],
   exports: [
@@ -52,6 +52,10 @@ import { MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule } from '@angular/material/rad
     {
       provide: MAT_RADIO_DEFAULT_OPTIONS,
       useValue: { color: 'accent' },
+    },
+    {
+      provide: MAT_TABS_CONFIG,
+      useValue: { dynamicHeight: true },
     },
   ],
 })

@@ -10,6 +10,7 @@ export enum Route {
   writing = 'writing',
   speaking = 'speaking',
   result = 'result',
+  commonTest = 'commonTest',
 }
 
 export enum SidebarMenu {
