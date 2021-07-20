@@ -27,16 +27,6 @@ const routes: Routes = [
   },
 
   {
-    path: 'speaking',
-    loadChildren: () =>
-      import('./models/speaking-test/speaking-test.module').then((m) => m.SpeakingTestModule),
-  },
-  {
-    path: 'grammar',
-    loadChildren: () =>
-      import('./models/grammar-test/grammar-test.module').then((m) => m.GrammarTestModule),
-  },
-  {
     path: 'hrProfile',
     loadChildren: () =>
       import('./models/hr-profile/hr-profile.module').then((m) => m.HrProfileModule),
@@ -47,20 +37,11 @@ const routes: Routes = [
       import('./models/coach-profile/coach-profile.module').then((m) => m.CoachProfileModule),
   },
   {
-    path: 'writing',
-    loadChildren: () =>
-      import('./models/writing-test/writing-test.module').then((m) => m.WritingTestModule),
-  },
-  {
     path: 'adminProfile',
     loadChildren: () =>
       import('./models/admin-profile/admin-profile.module').then((m) => m.AdminProfileModule),
   },
-  {
-    path: 'listening',
-    loadChildren: () =>
-      import('./models/listening-test/listening-test.module').then((m) => m.ListeningTestModule),
-  },
+
   {
     path: 'result',
     loadChildren: () => import('./models/result/result.module').then((m) => m.ResultModule),
