@@ -2,6 +2,7 @@
   "name": "exadel-trainee-app",
   "version": "0.0.0",
   "scripts": {
+    "heroku-build": "ng build --prod",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
@@ -14,6 +15,8 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-devkit/build-angular": "~12.1.1",
+    "@angular/cli": "~12.1.1",
     "@angular/animations": "~12.1.1",
     "@angular/cdk": "^12.1.1",
     "@angular/common": "~12.1.1",
@@ -26,6 +29,7 @@
     "@angular/router": "~12.1.1",
     "material-icons": "^0.7.6",
     "ng-cdk-table-virtual-scroll": "^1.0.2",
+    "typescript": "~4.3.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
@@ -65,6 +69,10 @@
     "stylelint-order": "^4.1.0",
     "stylelint-scss": "3.18.0",
     "typescript": "~4.3.2"
+  },
+  "engines": {
+    "node": "14.15.1",
+    "npm": "6.14.8"
   },
   "husky": {
     "hooks": {
