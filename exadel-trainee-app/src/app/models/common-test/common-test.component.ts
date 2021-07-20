@@ -11,12 +11,4 @@ export class CommonTestComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {}
-
-  nextTest(): void {
-    // if (this.router.url === `/${Route.grammarTest}`) {
-    //   this.router.navigate([Route.listening]);
-    // } else {
-    //   this.router.navigate([Route.writing]);
-    // }
-  }
 }
