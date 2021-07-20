@@ -10,8 +10,8 @@ import { CoachTestTabs } from '../../../constants/data-constants';
 })
 export class CoachProfileComponent {
   tabs: CoachTestTabs[] = [
-    CoachTestTabs.unchecked,
     CoachTestTabs.highPriority,
+    CoachTestTabs.unchecked,
     CoachTestTabs.checked,
   ];
 
