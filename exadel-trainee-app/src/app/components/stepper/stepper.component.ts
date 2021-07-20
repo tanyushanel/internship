@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Route } from '../../../constants/route-constant';
 
 @Component({
   selector: 'app-stepper',

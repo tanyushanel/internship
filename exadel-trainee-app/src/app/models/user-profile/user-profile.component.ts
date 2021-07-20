@@ -25,7 +25,7 @@ export class UserProfileComponent implements OnInit {
 
   onStartButtonClick(): void {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['commonTest']);
+      this.router.navigate([Route.test]);
     });
   }
 }

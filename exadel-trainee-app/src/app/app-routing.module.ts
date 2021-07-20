@@ -1,9 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './components/mock-component/home/home.component';
-import { UsersComponent } from './components/mock-component/users/users.component';
-import { ManageComponent } from './components/mock-component/manage/manage.component';
-import { CheckComponent } from './components/mock-component/check/check.component';
 import { StatisticsComponent } from './components/mock-component/statistics/statistics.component';
 import { EditorComponent } from './components/mock-component/editor/editor.component';
 import { Route } from '../constants/route-constant';
@@ -14,51 +10,33 @@ const routes: Routes = [
     loadChildren: () => import('./models/login/login.module').then((m) => m.LoginModule),
   },
   {
-    path: 'home',
+    path: Route.home,
     loadChildren: () =>
       import('./models/user-profile/user-profile.module').then((m) => m.UserProfileModule),
   },
   {
-    path: 'commonTest',
+    path: Route.test,
     loadChildren: () =>
       import('./models/common-test/common-test.module').then((m) => m.CommonTestModule),
   },
-
   {
-    path: 'hrProfile',
+    path: Route.users,
     loadChildren: () =>
       import('./models/hr-profile/hr-profile.module').then((m) => m.HrProfileModule),
   },
   {
-    path: 'coach-profile',
+    path: Route.check,
     loadChildren: () =>
       import('./models/coach-profile/coach-profile.module').then((m) => m.CoachProfileModule),
   },
   {
-    path: 'adminProfile',
+    path: Route.manage,
     loadChildren: () =>
       import('./models/admin-profile/admin-profile.module').then((m) => m.AdminProfileModule),
   },
-
   {
-    path: 'result',
+    path: Route.result,
     loadChildren: () => import('./models/result/result.module').then((m) => m.ResultModule),
-  },
-  {
-    path: Route.home,
-    component: HomeComponent,
-  },
-  {
-    path: Route.users,
-    component: UsersComponent,
-  },
-  {
-    path: Route.manage,
-    component: ManageComponent,
-  },
-  {
-    path: Route.check,
-    component: CheckComponent,
   },
   {
     path: Route.statistics,

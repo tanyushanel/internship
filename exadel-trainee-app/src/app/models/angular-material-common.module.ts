@@ -1,7 +1,7 @@
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -30,6 +30,7 @@ import { MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule } from '@angular/material/rad
     MatCardModule,
     MatDialogModule,
     MatTabsModule,
+    ReactiveFormsModule,
   ],
   declarations: [],
   exports: [
@@ -47,6 +48,7 @@ import { MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule } from '@angular/material/rad
     FormsModule,
     MatIconModule,
     MatDialogModule,
+    ReactiveFormsModule,
   ],
   providers: [
     {

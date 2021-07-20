@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Route } from 'src/constants/route-constant';
 
 @Component({
   selector: 'app-common-test',
@@ -8,7 +6,5 @@ import { Route } from 'src/constants/route-constant';
   styleUrls: ['./common-test.component.scss'],
 })
 export class CommonTestComponent implements OnInit {
-  constructor(private router: Router) {}
-
   ngOnInit(): void {}
 }
