@@ -6,7 +6,7 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
@@ -29,7 +29,7 @@ export class CoachProfileTableComponent implements AfterViewInit, OnChanges {
 
   @ViewChild(MatSort) sort!: MatSort;
 
-  @ViewChild(MatTable) tabelView!: MatTable<TestData>;
+  @ViewChild(MatTable) tableView!: MatTable<TestData>;
 
   constructor(public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource(this.table);
@@ -38,6 +38,11 @@ export class CoachProfileTableComponent implements AfterViewInit, OnChanges {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+
+    const sortState: Sort = { active: 'date', direction: 'desc' };
+    this.sort.active = sortState.active;
+    this.sort.direction = sortState.direction;
+    this.sort.sortChange.emit(sortState);
   }
 
   ngOnChanges(changes: SimpleChanges) {
