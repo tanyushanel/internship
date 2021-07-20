@@ -13,8 +13,6 @@ export class WritingTestComponent implements OnInit {
 
   disabled = false;
 
-  constructor(private readonly router: Router) {}
-
   ngOnInit() {
     this.form = new FormGroup({
       text: new FormControl('', [Validators.required, Validators.minLength(10)]),
@@ -31,7 +29,5 @@ export class WritingTestComponent implements OnInit {
     this.form.reset();
   }
 
-  nextTest() {
-    this.router.navigate([Route.speaking]);
-  }
+  nextTest() {}
 }

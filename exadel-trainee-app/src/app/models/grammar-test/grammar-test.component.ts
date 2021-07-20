@@ -6,5 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./grammar-test.component.scss'],
 })
 export class GrammarTestComponent implements OnInit {
+  selectedIndex = 0;
+
   ngOnInit(): void {}
 }

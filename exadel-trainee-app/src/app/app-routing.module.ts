@@ -90,10 +90,6 @@ const routes: Routes = [
     component: EditorComponent,
   },
   {
-    path: Route.grammarTest,
-    component: GrammarTestComponent,
-  },
-  {
     path: Route.commonTest,
     component: CommonTestComponent,
   },

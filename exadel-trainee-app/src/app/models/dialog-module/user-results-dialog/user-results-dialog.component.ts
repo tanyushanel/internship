@@ -1,5 +1,5 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Test } from '../../../interfaces/test';
 import { results } from '../../../../constants/mock-test-data';
 import { User } from '../../../interfaces/user';
@@ -11,7 +11,7 @@ import { UserRole } from '../../../../constants/data-constants';
   templateUrl: './user-results-dialog.component.html',
   styleUrls: ['./user-results-dialog.component.scss'],
 })
-export class UserResultsDialogComponent {
+export class UserResultsDialogComponent implements OnInit {
   user: User = {
     id: 1,
     firstName: 'Сальвадор',
