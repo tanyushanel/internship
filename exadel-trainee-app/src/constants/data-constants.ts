@@ -20,6 +20,6 @@ export enum UserRole {
 }
 
 export enum Priority {
-  high = 1,
-  low = 2,
+  High = 1,
+  Low = 2,
 }

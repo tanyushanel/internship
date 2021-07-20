@@ -6,7 +6,7 @@ export const results: Test[] = [
     id: 1,
     date: { creationDate: new Date().toDateString() },
     level: Level.UpperIntermediate,
-    priority: Priority.high,
+    priority: Priority.High,
     userId: 3,
     content: {
       grammar: {
@@ -32,7 +32,7 @@ export const results: Test[] = [
     id: 2,
     date: { creationDate: new Date().toDateString() },
     level: Level.Intermediate,
-    priority: Priority.high,
+    priority: Priority.High,
     userId: 3,
     content: {
       grammar: {
@@ -58,7 +58,7 @@ export const results: Test[] = [
     id: 3,
     date: { creationDate: new Date().toDateString() },
     level: Level.Elementary,
-    priority: Priority.high,
+    priority: Priority.Low,
     userId: 3,
     content: {
       grammar: {
@@ -84,7 +84,7 @@ export const results: Test[] = [
     id: 4,
     date: { creationDate: new Date().toDateString() },
     level: Level.Advanced,
-    priority: Priority.high,
+    priority: Priority.Low,
     userId: 3,
     content: {
       grammar: {
@@ -110,7 +110,7 @@ export const results: Test[] = [
     id: 5,
     date: { creationDate: new Date().toDateString() },
     level: Level.UpperIntermediate,
-    priority: Priority.high,
+    priority: Priority.Low,
     userId: 3,
     content: {
       grammar: {
@@ -136,7 +136,7 @@ export const results: Test[] = [
     id: 6,
     date: { creationDate: new Date().toDateString() },
     level: Level.Advanced,
-    priority: Priority.high,
+    priority: Priority.High,
     userId: 3,
     content: {
       grammar: {
@@ -163,7 +163,7 @@ export const results: Test[] = [
     id: 7,
     date: { creationDate: new Date().toDateString() },
     level: Level.Intermediate,
-    priority: Priority.low,
+    priority: Priority.High,
     userId: 3,
     content: {
       grammar: {
@@ -189,7 +189,7 @@ export const results: Test[] = [
     id: 8,
     date: { creationDate: new Date().toDateString() },
     level: Level.Advanced,
-    priority: Priority.low,
+    priority: Priority.Low,
     userId: 3,
     content: {
       grammar: {
@@ -216,7 +216,7 @@ export const results: Test[] = [
     date: { creationDate: new Date().toDateString() },
     level: Level.Elementary,
     userId: 3,
-    priority: Priority.low,
+    priority: Priority.High,
     content: {
       grammar: {
         id: 1,

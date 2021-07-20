@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Test } from 'src/app/interfaces/test';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { results } from 'src/constants/mock-test-data';
+import { results } from 'src/constants/mock-test-results';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -18,11 +18,11 @@ import { MatTableDataSource } from '@angular/material/table';
   ],
 })
 export class UserResultsTableComponent implements OnInit, AfterViewInit {
-  results!: Test[];
+  results: Test[] = [];
 
   columnsToDisplay: string[] = ['id', 'date', 'level', 'result'];
 
-  expandedElement!: Test;
+  expandedElement: Test | undefined;
 
   dataSource: MatTableDataSource<Test> = new MatTableDataSource(results);
 

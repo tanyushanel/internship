@@ -30,8 +30,6 @@ import { MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule } from '@angular/material/rad
     MatIconModule,
     MatCardModule,
     MatDialogModule,
-    // MatTableDataSource,
-    // MatPaginator,
   ],
   declarations: [],
   exports: [

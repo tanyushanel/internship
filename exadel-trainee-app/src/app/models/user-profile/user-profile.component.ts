@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Level } from 'src/constants/data-constants';
-import { results } from 'src/constants/mock-test-data';
+import { results } from 'src/constants/mock-test-results';
 import { Route } from 'src/constants/route-constant';
 import { Test } from '../../interfaces/test';
 
@@ -11,11 +11,11 @@ import { Test } from '../../interfaces/test';
   styleUrls: ['./user-profile.component.scss'],
 })
 export class UserProfileComponent implements OnInit {
-  results!: Test[];
+  results: Test[] = [];
 
   levels = [...Object.values(Level)];
 
-  selectedLevel!: Level;
+  selectedLevel: Level | undefined;
 
   constructor(private router: Router) {}
 
