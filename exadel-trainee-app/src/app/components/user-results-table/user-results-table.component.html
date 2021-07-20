@@ -39,6 +39,9 @@
         [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'"
       >
         <div class="element-diagram">
+          <div class="element-description">
+            <span class="element-description-attribution"> ...Feedback... </span>
+          </div>
           <div>
             <div class="desc">
               <span>Gramm</span>
@@ -52,10 +55,6 @@
               <span>{{ element.content.essay.mark }}</span>
               <span>{{ element.content.speaking.mark }}</span>
             </div>
-          </div>
-
-          <div class="element-description">
-            <span class="element-description-attribution"> ...Feedback... </span>
           </div>
         </div>
       </div>
@@ -73,4 +72,5 @@
   <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
 </table>
 
-<mat-paginator [length]="50" [pageSize]="5" [pageSizeOptions]="[5]"> </mat-paginator>
+<mat-paginator [length]="50" [pageSize]="5" [pageSizeOptions]="[5]" showFirstLastButtons>
+</mat-paginator>

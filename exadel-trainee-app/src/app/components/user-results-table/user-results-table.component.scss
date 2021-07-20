@@ -19,13 +19,12 @@ table {
 
 .scale {
   display: flex;
-  justify-content: space-between;
-  width: 15em;
+  justify-content: space-around;
   background: linear-gradient(to right, #3366cc 0%, #333399 100%);
   border-radius: 0.25rem;
 
   & span {
-    padding: 0.5rem 0.75rem;
+    padding: 0.5rem 1rem;
     color: white;
   }
 }
@@ -67,10 +66,13 @@ tr.element-row:not(.expanded-row):active {
 
 .element-diagram {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   min-width: 2rem;
-  margin: 0.5rem 0;
-  font-weight: lighter;
+  margin: 1rem 0;
+
+  .element-description-attribution {
+    margin: 0 2rem;
+  }
 }
 
 .element-symbol {
