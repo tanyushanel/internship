@@ -9,7 +9,7 @@ export interface TestData {
   level: string;
   isChecked: boolean;
   isHigh: boolean;
-  date: string;
+  date: Date;
 }
 
 const MOCK_LASTNAMES: string[] = [
@@ -69,9 +69,8 @@ export function getRandomDate(from: Date, to: Date) {
   return new Date(fromTime + Math.random() * (toTime - fromTime));
 }
 
-const generateRandomDate = (): string => {
-  const random = getRandomDate(new Date('2020-10-12'), new Date('2021-07-12'));
-  return random.toLocaleDateString();
+const generateRandomDate = (): Date => {
+  return getRandomDate(new Date('2020-10-12'), new Date('2021-07-12'));
 };
 
 export function createNewCoachProfileTest(id: number): TestData {

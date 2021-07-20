@@ -1,7 +1,7 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Component, Inject, OnInit } from '@angular/core';
 import { Test } from '../../../interfaces/test';
-import { results } from '../../../../constants/mock-test-data';
+import { results } from '../../../../constants/mock-test-results';
 import { User } from '../../../interfaces/user';
 import { user } from '../../../../constants/mock-user-data';
 import { UserRole } from '../../../../constants/data-constants';
@@ -28,7 +28,7 @@ export class UserResultsDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: User,
   ) {}
 
-  results!: Test[];
+  results: Test[] = [];
 
   ngOnInit() {
     this.results = results;

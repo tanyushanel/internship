@@ -39,7 +39,7 @@ export class HrProfileComponent implements AfterViewInit {
     }
   }
 
-  onOpenUserResultsDialog(row: User): void {
+  onOpenInfoDialog(row: User): void {
     this.dialog.open(UserResultsDialogComponent, {
       width: '35rem',
       data: { id: row.id, firstName: row.firstName, lastName: row.lastName },
