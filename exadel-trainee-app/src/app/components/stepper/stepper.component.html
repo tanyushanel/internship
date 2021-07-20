@@ -1,0 +1,134 @@
+<mat-stepper class="stepper" labelPosition="bottom" #stepper>
+  <mat-step class="step" [stepControl]="firstFormGroup">
+    <form class="form__color" [formGroup]="firstFormGroup">
+      <p class="text__center">Question 1</p>
+      <mat-form-field appearance="fill">
+        <mat-label>Answer</mat-label>
+        <input matInput formControlName="firstCtrl" required />
+      </mat-form-field>
+      <div>
+        <button class="button__color" mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form class="form__color" [formGroup]="secondFormGroup">
+      <p class="text__center">Question 2</p>
+      <mat-form-field appearance="fill">
+        <mat-label>Answer</mat-label>
+        <input matInput formControlName="secondCtrl" required />
+      </mat-form-field>
+      <div>
+        <button class="button__color" mat-button matStepperPrevious>Back</button>
+        <button class="button__color" mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form class="form__color" [formGroup]="secondFormGroup">
+      <p class="text__center">Question 3</p>
+      <mat-form-field appearance="fill">
+        <mat-label>Answer</mat-label>
+        <input matInput formControlName="secondCtrl" required />
+      </mat-form-field>
+      <div>
+        <button class="button__color" mat-button matStepperPrevious>Back</button>
+        <button class="button__color" mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form class="form__color" [formGroup]="secondFormGroup">
+      <p class="text__center">Question 4</p>
+      <mat-form-field appearance="fill">
+        <mat-label>Answer</mat-label>
+        <input matInput formControlName="secondCtrl" required />
+      </mat-form-field>
+      <div>
+        <button class="button__color" mat-button matStepperPrevious>Back</button>
+        <button class="button__color" mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form class="form__color" [formGroup]="secondFormGroup">
+      <p class="text__center">Question 5</p>
+      <mat-form-field appearance="fill">
+        <mat-label>Answer</mat-label>
+        <input matInput formControlName="secondCtrl" required />
+      </mat-form-field>
+      <div>
+        <button class="button__color" mat-button matStepperPrevious>Back</button>
+        <button class="button__color" mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form class="form__color" [formGroup]="secondFormGroup">
+      <p class="text__center">Question 6</p>
+      <mat-form-field appearance="fill">
+        <mat-label>Answer</mat-label>
+        <input matInput formControlName="secondCtrl" required />
+      </mat-form-field>
+      <div>
+        <button class="button__color" mat-button matStepperPrevious>Back</button>
+        <button class="button__color" mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form class="form__color" [formGroup]="secondFormGroup">
+      <p class="text__center">Question 7</p>
+      <mat-form-field appearance="fill">
+        <mat-label>Answer</mat-label>
+        <input matInput formControlName="secondCtrl" required />
+      </mat-form-field>
+      <div>
+        <button class="button__color" mat-button matStepperPrevious>Back</button>
+        <button class="button__color" mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form class="form__color" [formGroup]="secondFormGroup">
+      <p class="text__center">Question 8</p>
+      <mat-form-field appearance="fill">
+        <mat-label>Answer</mat-label>
+        <input matInput formControlName="secondCtrl" required />
+      </mat-form-field>
+      <div>
+        <button class="button__color" mat-button matStepperPrevious>Back</button>
+        <button class="button__color" mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form class="form__color" [formGroup]="secondFormGroup">
+      <p class="text__center">Question 9</p>
+      <mat-form-field appearance="fill">
+        <mat-label>Answer</mat-label>
+        <input matInput formControlName="secondCtrl" required />
+      </mat-form-field>
+      <div>
+        <button class="button__color" mat-button matStepperPrevious>Back</button>
+        <button class="button__color" mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="lastFormGroup">
+    <form class="form__color" [formGroup]="lastFormGroup">
+      <p class="text__center">Question 10</p>
+      <mat-form-field appearance="fill">
+        <mat-label>Answer</mat-label>
+        <input matInput formControlName="lastCtrl" required />
+      </mat-form-field>
+      <div>
+        <button class="button__color" mat-button matStepperPrevious>Back</button>
+        <button class="button__color" mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </form>
+  </mat-step>
+</mat-stepper>
+<button mat-raised-button color="primary" class="button-submit" (click)="nextTest()">
+  Submit & Go Next
+</button>
