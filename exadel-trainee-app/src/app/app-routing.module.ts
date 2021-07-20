@@ -21,6 +21,12 @@ const routes: Routes = [
       import('./models/user-profile/user-profile.module').then((m) => m.UserProfileModule),
   },
   {
+    path: 'commonTest',
+    loadChildren: () =>
+      import('./models/common-test/common-test.module').then((m) => m.CommonTestModule),
+  },
+
+  {
     path: 'speaking',
     loadChildren: () =>
       import('./models/speaking-test/speaking-test.module').then((m) => m.SpeakingTestModule),

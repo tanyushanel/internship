@@ -8,5 +8,6 @@ import { StepperModule } from '../../components/stepper/stepper.module';
 @NgModule({
   declarations: [GrammarTestComponent],
   imports: [CommonModule, GrammarTestRoutingModule, StepperModule],
+  exports: [GrammarTestComponent],
 })
 export class GrammarTestModule {}

@@ -7,5 +7,6 @@ import { StepperModule } from '../../components/stepper/stepper.module';
 @NgModule({
   declarations: [ListeningTestComponent],
   imports: [CommonModule, ListeningTestRoutingModule, StepperModule],
+  exports: [ListeningTestComponent],
 })
 export class ListeningTestModule {}

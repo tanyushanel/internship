@@ -15,5 +15,6 @@ import { AngularMaterialCommonModule } from '../angular-material-common.module';
     FormsModule,
     ReactiveFormsModule,
   ],
+  exports: [WritingTestComponent],
 })
 export class WritingTestModule {}

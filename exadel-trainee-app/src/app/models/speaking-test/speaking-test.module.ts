@@ -7,5 +7,6 @@ import { AngularMaterialCommonModule } from '../angular-material-common.module';
 @NgModule({
   imports: [SpeakingTestRoutingModule, CommonModule, AngularMaterialCommonModule],
   declarations: [SpeakingTestComponent],
+  exports: [SpeakingTestComponent],
 })
 export class SpeakingTestModule {}
