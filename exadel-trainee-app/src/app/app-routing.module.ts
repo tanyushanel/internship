@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { StatisticsComponent } from './components/mock-component/statistics/statistics.component';
 import { EditorComponent } from './components/mock-component/editor/editor.component';
 import { Route } from '../constants/route-constant';
+import { NotFoundComponent } from './models/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,7 @@ const routes: Routes = [
     path: Route.result,
     loadChildren: () => import('./models/result/result.module').then((m) => m.ResultModule),
   },
+  { path: '**', component: NotFoundComponent },
   {
     path: Route.statistics,
     component: StatisticsComponent,
