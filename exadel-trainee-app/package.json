@@ -4,14 +4,16 @@
   "scripts": {
     "heroku-build": "ng build --prod",
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
+    "start:app": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "eslint \"**/*.{ts,tsx}\"",
     "lint:fix": "eslint \"**/*.{ts,tsx}\" --fix --color --format visualstudio",
     "lint:styles": "stylelint \"src/**/*.scss\" --fix",
-    "prettier:fix": "prettier \"src/**/*.*\" --write"
+    "prettier:fix": "prettier \"src/**/*.*\" --write",
+    "heroku-postbuild": "ng build --prod"
   },
   "private": true,
   "dependencies": {
@@ -72,7 +74,8 @@
   },
   "engines": {
     "node": "14.15.1",
-    "npm": "6.14.8"
+    "npm": "6.14.8",
+    "yarn": "1.22.5"
   },
   "husky": {
     "hooks": {
