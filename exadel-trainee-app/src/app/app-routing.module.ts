@@ -39,7 +39,6 @@ const routes: Routes = [
     path: Route.result,
     loadChildren: () => import('./models/result/result.module').then((m) => m.ResultModule),
   },
-  { path: '**', component: NotFoundComponent },
   {
     path: Route.statistics,
     component: StatisticsComponent,
@@ -48,6 +47,7 @@ const routes: Routes = [
     path: Route.editor,
     component: EditorComponent,
   },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
