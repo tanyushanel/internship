@@ -23,7 +23,7 @@
 
   <app-user-results-table
     class="user-results-table"
-    *ngIf="results.length > 0; else noResults"
+    *ngIf="length > 0; else noResults"
   ></app-user-results-table>
 
   <ng-template #noResults>
