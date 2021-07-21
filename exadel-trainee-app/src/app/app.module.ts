@@ -11,6 +11,7 @@ import { CheckComponent } from './components/mock-component/check/check.componen
 import { EditorComponent } from './components/mock-component/editor/editor.component';
 import { ManageComponent } from './components/mock-component/manage/manage.component';
 import { StatisticsComponent } from './components/mock-component/statistics/statistics.component';
+import { NotFoundComponent } from './models/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { StatisticsComponent } from './components/mock-component/statistics/stat
     EditorComponent,
     ManageComponent,
     StatisticsComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
