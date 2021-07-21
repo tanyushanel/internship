@@ -18,4 +18,6 @@ export enum SidebarMenu {
   statistics = 'Statistics',
 }
 
+export const BASE_API_URL = 'http://elevel-001-site1.btempurl.com';
+
 export const LoginApiUrl = 'http://elevel-001-site1.btempurl.com/api/User/token';
