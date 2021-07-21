@@ -1,6 +1,8 @@
 import { TestResult } from 'src/app/interfaces/result';
 import { Level } from 'src/constants/data-constants';
 
+const feedback: string[] = ['Well done', 'According to the level', '', 'Ok', 'Normally'];
+
 export function getRandomDate(from: Date, to: Date) {
   const fromTime = from.getTime();
   const toTime = to.getTime();
@@ -40,7 +42,7 @@ export function createNewTestResult(id: number): TestResult {
         mark: generateRandomMark(),
       },
     },
-    feedback: '',
+    feedback: feedback[Math.floor(Math.random() * 5)],
   };
 }
 
