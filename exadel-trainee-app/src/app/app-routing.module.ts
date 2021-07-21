@@ -47,6 +47,10 @@ const routes: Routes = [
     path: Route.editor,
     component: EditorComponent,
   },
+  {
+    path: Route.error,
+    component: NotFoundComponent,
+  },
   { path: '**', component: NotFoundComponent },
 ];
 
