@@ -2,7 +2,6 @@
   "name": "exadel-trainee-app",
   "version": "0.0.0",
   "scripts": {
-    "heroku-build": "ng build --prod",
     "ng": "ng",
     "start": "node server.js",
     "start:app": "ng serve",
