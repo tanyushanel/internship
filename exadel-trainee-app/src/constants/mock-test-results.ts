@@ -1,5 +1,6 @@
-import { TestResult } from 'src/app/interfaces/result';
+import { Test } from 'src/app/interfaces/test';
 import { Level } from 'src/constants/data-constants';
+import { Priority } from './data-constants';
 
 const feedback: string[] = ['Well done', 'According to the level', '', 'Ok', 'Normally'];
 
@@ -17,13 +18,13 @@ export function generateRandomMark() {
   return Math.floor(10 + Math.random() * (25 + 1 - 10));
 }
 
-export function createNewTestResult(id: number): TestResult {
+export function createNewTestResult(id: number): Test {
   return {
     id,
     date: { creationDate: generateRandomDate().toDateString() },
     level: [...Object.values(Level)][Math.floor(Math.random() * 5)],
     userId: 1,
-    testId: 1,
+    priority: [...Object.values(Priority)][Math.floor(Math.random() * 2)],
     content: {
       grammar: {
         id,

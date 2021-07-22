@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TestResult } from 'src/app/interfaces/result';
+import { Test } from 'src/app/interfaces/test';
 import { Level } from 'src/constants/data-constants';
 import { Route } from 'src/constants/route-constant';
 import { MOCK_TEST_RESULTS } from '../../../constants/mock-test-results';
@@ -11,18 +11,19 @@ import { MOCK_TEST_RESULTS } from '../../../constants/mock-test-results';
   styleUrls: ['./user-profile.component.scss'],
 })
 export class UserProfileComponent implements OnInit {
-  MOCK_TEST_RESULTS: TestResult[] = [];
+  results: Test[] = [];
 
   levels = [...Object.values(Level)];
 
   selectedLevel: Level | undefined;
 
-  length = MOCK_TEST_RESULTS.length;
+  length = 0;
 
   constructor(private router: Router) {}
 
   ngOnInit() {
-    this.MOCK_TEST_RESULTS = MOCK_TEST_RESULTS;
+    this.results = [...MOCK_TEST_RESULTS];
+    this.length = this.results.length;
   }
 
   onStartButtonClick(): void {
