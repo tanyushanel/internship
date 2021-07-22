@@ -6,7 +6,5 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./listening-test.component.scss'],
 })
 export class ListeningTestComponent implements OnInit {
-  // constructor() { }
-
   ngOnInit(): void {}
 }

@@ -12,6 +12,7 @@ import { EditorComponent } from './components/mock-component/editor/editor.compo
 import { ManageComponent } from './components/mock-component/manage/manage.component';
 import { StatisticsComponent } from './components/mock-component/statistics/statistics.component';
 import { AuthInterseptor } from './shared/auth.interseptor';
+import { NotFoundComponent } from './models/not-found/not-found.component';
 
 const INTERSEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -28,6 +29,7 @@ const INTERSEPTOR_PROVIDER: Provider = {
     EditorComponent,
     ManageComponent,
     StatisticsComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

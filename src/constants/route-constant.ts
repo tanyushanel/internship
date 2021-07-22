@@ -1,15 +1,13 @@
 export enum Route {
   users = 'hrProfile',
   home = 'home',
-  check = 'coach-profile',
+  check = 'coachProfile',
   editor = 'editor',
   manage = 'adminProfile',
   statistics = 'statistics',
-  grammarTest = 'grammar',
-  listening = 'listening',
-  writing = 'writing',
-  speaking = 'speaking',
   result = 'result',
+  test = 'test',
+  error = 'error',
 }
 
 export enum SidebarMenu {
