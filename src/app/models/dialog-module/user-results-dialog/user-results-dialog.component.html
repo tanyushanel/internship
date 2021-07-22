@@ -17,12 +17,9 @@
     </button>
   </mat-card>
 
-  <div *ngIf="results.length > 0; else noResults">
-    <app-user-results-table
-      class="user-results-table"
-      *ngIf="results.length > 0; else noResults"
-    ></app-user-results-table>
-  </div>
+  <app-user-results-table class="user-results-table" *ngIf="testsCount > 0; else noResults">
+  </app-user-results-table>
+
   <ng-template #noResults>
     <h3 class="table-caption">No results yet</h3>
   </ng-template>
