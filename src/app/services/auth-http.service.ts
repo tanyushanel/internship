@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { UserResponseType } from '../../interfaces/user.interfaces';
 import { SignIn } from '../interfaces/user';
-import { LoginApiUrl } from '../../constants/route-constant';
+import { LoginApiUrl, RefreshUserDataUrl } from '../../constants/route-constant';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +16,6 @@ export class AuthHttpService {
   }
 
   getUser(): Observable<UserResponseType> {
-    return this.http.get<UserResponseType>('http://elevel-001-site1.btempurl.com/api/User/info');
+    return this.http.get<UserResponseType>(RefreshUserDataUrl);
   }
 }

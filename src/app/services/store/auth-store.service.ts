@@ -53,13 +53,14 @@ export class AuthStoreService {
   getUser(): void {
     this.authHttpService.getUser().subscribe({
       next: (user) => {
-        console.log(user, 'User');
+        this.user = { ...user };
       },
     });
   }
 
   signOut(): void {
+    this.user = null;
     localStorage.clear();
-    this.router.navigate(['']);
+    this.router.navigate(['/']);
   }
 }
