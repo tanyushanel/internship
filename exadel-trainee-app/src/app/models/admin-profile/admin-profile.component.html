@@ -1,16 +1,14 @@
 <div class="btn-container">
-  <button mat-button (click)="onClickNotAssigned()">Not Assigned</button>
-  <button mat-button (click)="onClickAssigned()">Assigned</button>
-  <button mat-button (click)="onClickReAssigned()">Reassign</button>
+  <button mat-button (click)="onTabChange('Not Assigned')">Not Assigned</button>
+  <button mat-button (click)="onTabChange('Assigned')">Assigned</button>
 </div>
 
-<p></p>
-<cdk-virtual-scroll-viewport itemSize="500" style="height: 100%">
+<cdk-virtual-scroll-viewport itemSize="1" style="height: 80%">
   <div *ngIf="AssignSelector === '0'">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <table mat-table [dataSource]="isAssignFalseArray" class="mat-elevation-z8 data-table">
       <ng-container matColumnDef="Position">
         <th mat-header-cell *matHeaderCellDef>No.</th>
-        <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+        <td mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</td>
       </ng-container>
 
       <ng-container matColumnDef="Level">
@@ -38,50 +36,10 @@
   </div>
 
   <div *ngIf="AssignSelector === '1'">
-    <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z10">
-      <ng-container matColumnDef="{{ column }}" *ngFor="let column of displayedColumns">
-        <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
-        <td mat-cell *matCellDef="let element">
-          {{
-            column.toLowerCase() == 'date'
-              ? (element[column.toLowerCase()] | date)
-              : element[column.toLowerCase()]
-          }}
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="expandedDetail">
-        <td *matCellDef="let element" [attr.colspan]="displayedColumns.length">
-          <div
-            class="example-element-detail"
-            [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'"
-          >
-            <div class="example-element-description"></div>
-            <div class="test">
-              <p>Grammar section score: {{ element.expl }}</p>
-              <button mat-raised-button color="primary">Check</button>
-            </div>
-          </div>
-        </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-      <tr
-        mat-row
-        *matRowDef="let element; columns: displayedColumns"
-        class="example-element-row"
-        [class.example-expanded-row]="expandedElement === element"
-        (click)="expandedElement = expandedElement === element ? null : element"
-      ></tr>
-      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-    </table>
-  </div>
-
-  <div *ngIf="AssignSelector === '2'">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <table mat-table [dataSource]="isAssignTrueArray" class="mat-elevation-z8 data-table">
       <ng-container matColumnDef="Position">
         <th mat-header-cell *matHeaderCellDef>No.</th>
-        <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+        <td mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</td>
       </ng-container>
 
       <ng-container matColumnDef="Level">
@@ -94,17 +52,21 @@
         <td mat-cell *matCellDef="let element">{{ element.date | date }}</td>
       </ng-container>
 
-      <ng-container matColumnDef="button">
-        <th mat-header-cell *matHeaderCellDef>Assign</th>
+      <ng-container matColumnDef="Coach">
+        <th mat-header-cell *matHeaderCellDef>Coach</th>
+        <td mat-cell *matCellDef="let element">{{ element.coach.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Button">
+        <th mat-header-cell *matHeaderCellDef>Assigned</th>
         <td mat-cell *matCellDef="let element">
           <button mat-raised-button color="primary" (click)="openDialog(element.position)">
-            Reassign
+            Ressign
           </button>
         </td>
       </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns1; sticky: true"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns1"></tr>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
   </div>
 </cdk-virtual-scroll-viewport>

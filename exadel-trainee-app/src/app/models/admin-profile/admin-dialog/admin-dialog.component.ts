@@ -3,7 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MOCK_TEST } from '../../../../mocks/admin-profile-utils.mock';
 
-export interface SelectedValue {
+export interface CoachInfo {
   position: number;
   coach: string;
 }
@@ -20,12 +20,8 @@ export class AdminDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<AdminDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: SelectedValue,
+    @Inject(MAT_DIALOG_DATA) public data: CoachInfo,
   ) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
 
   ngOnInit(): void {}
 }

@@ -1,9 +1,16 @@
+export interface CoachData {
+  name: string;
+  email: string;
+  phoneNumber: string;
+}
+
 export interface TestData {
   position: number;
   date: number;
   level: string;
-  coach: string;
-  expl: string;
+  coach: CoachData;
+  grammarGrade: string;
+  isAssign: boolean;
 }
 
 const MOCK_FIRSTNAMES: string[] = [
@@ -26,25 +33,55 @@ const MOCK_FIRSTNAMES: string[] = [
   'Mia',
   'Thomas',
   'Elizabeth',
-  'Not assign',
-  'Not assign',
-  'Not assign',
-  'Not assign',
-  'Not assign',
-  'Not assign',
-  'Not assign',
-  'Not assign',
+];
+
+const MOCK_COACH: CoachData[] = [
+  {
+    name: 'Elizabeth',
+    email: 'Elizabeth@email.net',
+    phoneNumber: '1234567',
+  },
+  {
+    name: 'Thomas',
+    email: 'Thomas@email.net',
+    phoneNumber: '1234567',
+  },
+  {
+    name: 'Mia',
+    email: 'Mia@email.net',
+    phoneNumber: '1234567',
+  },
+  {
+    name: 'Arthur',
+    email: 'Arthur@email.net',
+    phoneNumber: '1234567',
+  },
+  {
+    name: 'Violet',
+    email: 'Violet@email.net',
+    phoneNumber: '1234567',
+  },
+  {
+    name: 'Levi',
+    email: 'Levi@email.net',
+    phoneNumber: '1234567',
+  },
+  {
+    name: 'Atticus',
+    email: 'Atticus@email.net',
+    phoneNumber: '1234567',
+  },
 ];
 
 export function createNewTest(position: number): TestData {
-  const name = `${MOCK_FIRSTNAMES[Math.round(Math.random() * (MOCK_FIRSTNAMES.length - 1))]}`;
-
+  const coachData = MOCK_COACH[Math.round(Math.random() * (MOCK_COACH.length - 1))];
   return {
     position,
     date: Date.now(),
+    isAssign: !!Math.round(Math.random()),
     level: ['beginner', 'intermediate', 'advanced'][Math.floor(Math.random() * 3)],
-    coach: name,
-    expl: Math.floor(Math.random() * 100).toString(),
+    coach: coachData,
+    grammarGrade: Math.floor(Math.random() * 100).toString(),
   };
 }
 
