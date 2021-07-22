@@ -8,5 +8,5 @@ export interface UserResponseType {
   lastName: string;
   email: string;
   roles: UserRole[];
-  token: string;
+  token?: string;
 }

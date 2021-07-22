@@ -14,4 +14,8 @@ export class AuthHttpService {
   signIn(signInModel: SignIn): Observable<UserResponseType> {
     return this.http.post<UserResponseType>(LoginApiUrl, { ...signInModel });
   }
+
+  getUser(): Observable<UserResponseType> {
+    return this.http.get<UserResponseType>('http://elevel-001-site1.btempurl.com/api/User/info');
+  }
 }

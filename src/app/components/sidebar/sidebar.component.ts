@@ -21,9 +21,13 @@ export class SidebarComponent implements OnInit {
   constructor(
     private readonly userService: AuthStoreService,
     public readonly authService: AuthStoreService,
-  ) {}
+  ) {
+    console.log('HI');
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.authService.getUser();
+  }
 
   handleSidebar() {
     this.isOpen = !this.isOpen;

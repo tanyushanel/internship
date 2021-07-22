@@ -38,6 +38,7 @@ export class AuthStoreService {
     this.authHttpService.signIn(signInModel).subscribe({
       next: (user) => {
         this.user = { ...user };
+        localStorage.setItem('token', <string>this.user.token);
         this.router.navigate([Route.home]);
       },
       error: (e: Error) => {
@@ -49,8 +50,16 @@ export class AuthStoreService {
     });
   }
 
+  getUser(): void {
+    this.authHttpService.getUser().subscribe({
+      next: (user) => {
+        console.log(user, 'User');
+      },
+    });
+  }
+
   signOut(): void {
-    this.user = this.initialState;
-    this.router.navigate(['/']);
+    localStorage.clear();
+    this.router.navigate(['']);
   }
 }
