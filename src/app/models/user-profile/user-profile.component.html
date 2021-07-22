@@ -21,10 +21,8 @@
     START TEST
   </button>
 
-  <app-user-results-table
-    class="user-results-table"
-    *ngIf="length > 0; else noResults"
-  ></app-user-results-table>
+  <app-user-results-table class="user-results-table" *ngIf="testsCount > 0; else noResults">
+  </app-user-results-table>
 
   <ng-template #noResults>
     <p class="table-caption">You have no test results yet</p>

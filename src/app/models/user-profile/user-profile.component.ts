@@ -21,9 +21,12 @@ export class UserProfileComponent implements OnInit {
 
   constructor(private router: Router) {}
 
+  get testsCount() {
+    return this.results.length;
+  }
+
   ngOnInit() {
     this.results = [...MOCK_TEST_RESULTS];
-    this.length = this.results.length;
   }
 
   onStartButtonClick(): void {

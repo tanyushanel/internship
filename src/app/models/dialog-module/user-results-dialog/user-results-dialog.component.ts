@@ -25,7 +25,11 @@ export class UserResultsDialogComponent implements OnInit {
 
   results: Test[] = [];
 
-  length = 0;
+  pageSizeOptions = [5];
+
+  get testsCount() {
+    return this.results.length;
+  }
 
   constructor(
     public dialogRef: MatDialogRef<UserResultsDialogComponent>,
@@ -34,7 +38,6 @@ export class UserResultsDialogComponent implements OnInit {
 
   ngOnInit() {
     this.results = [...MOCK_TEST_RESULTS];
-    this.length = this.results.length;
     this.user = { ...user, ...this.data };
   }
 
