@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { Test } from 'src/app/interfaces/test';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { results } from 'src/constants/mock-test-results';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Test } from 'src/app/interfaces/test';
+import { MOCK_TEST_RESULTS } from '../../../constants/mock-test-results';
 
 @Component({
   selector: 'app-user-results-table',
@@ -24,7 +24,7 @@ export class UserResultsTableComponent implements OnInit, AfterViewInit {
 
   expandedElement: Test | undefined;
 
-  dataSource: MatTableDataSource<Test> = new MatTableDataSource(results);
+  dataSource!: MatTableDataSource<Test>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -32,5 +32,8 @@ export class UserResultsTableComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.results = [...MOCK_TEST_RESULTS];
+    this.dataSource = new MatTableDataSource(this.results);
+  }
 }
