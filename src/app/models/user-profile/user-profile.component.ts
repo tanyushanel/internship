@@ -17,8 +17,6 @@ export class UserProfileComponent implements OnInit {
 
   selectedLevel: Level | undefined;
 
-  length = 0;
-
   constructor(private router: Router) {}
 
   get testsCount() {

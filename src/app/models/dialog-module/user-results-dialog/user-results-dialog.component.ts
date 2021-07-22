@@ -25,8 +25,6 @@ export class UserResultsDialogComponent implements OnInit {
 
   results: Test[] = [];
 
-  pageSizeOptions = [5];
-
   get testsCount() {
     return this.results.length;
   }
