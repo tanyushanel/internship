@@ -15,7 +15,9 @@ const generateRandomDate = (): Date => {
 };
 
 export function generateRandomMark() {
-  return Math.floor(10 + Math.random() * (25 + 1 - 10));
+  const from = 10;
+  const to = 25;
+  return Math.floor(from + Math.random() * (to + 1 - from));
 }
 
 export function createNewTestResult(id: number): Test {
