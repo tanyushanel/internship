@@ -5,7 +5,6 @@ import { UsersComponent } from './components/mock-component/users/users.componen
 import { ManageComponent } from './components/mock-component/manage/manage.component';
 import { CheckComponent } from './components/mock-component/check/check.component';
 import { StatisticsComponent } from './components/mock-component/statistics/statistics.component';
-import { EditorComponent } from './components/mock-component/editor/editor.component';
 import { Route } from '../constants/route-constant';
 import { GrammarTestComponent } from './models/grammar-test/grammar-test.component';
 
@@ -59,6 +58,13 @@ const routes: Routes = [
     loadChildren: () => import('./models/result/result.module').then((m) => m.ResultModule),
   },
   {
+    path: 'editor',
+    loadChildren: () =>
+      import('./models/coach-profile/coach-profile-editor/coach-profile-editor.module').then(
+        (m) => m.CoachProfileEditorModule,
+      ),
+  },
+  {
     path: Route.home,
     component: HomeComponent,
   },
@@ -77,10 +83,6 @@ const routes: Routes = [
   {
     path: Route.statistics,
     component: StatisticsComponent,
-  },
-  {
-    path: Route.editor,
-    component: EditorComponent,
   },
   {
     path: Route.grammarTest,

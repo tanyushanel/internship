@@ -16,3 +16,9 @@ export enum UserRole {
   Coach = 'Coach',
   Administrator = 'Administrator',
 }
+
+export enum CoachEditorTabs {
+  grammar = 'Grammar',
+  audition = 'Audition',
+  writingAndSpeaking = 'Writing & Speaking',
+}

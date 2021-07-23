@@ -1,0 +1,17 @@
+@import '../../../../../theme/variables';
+
+table {
+  width: 100%;
+}
+
+td,
+th {
+  width: 50%;
+}
+
+mat-form-field {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 1rem;
+  font-size: 14px;
+}
