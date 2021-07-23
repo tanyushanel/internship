@@ -4,7 +4,7 @@ import { Test } from 'src/app/interfaces/test';
 import { Level } from 'src/constants/data-constants';
 import { Route } from 'src/constants/route-constant';
 import { MOCK_TEST_RESULTS } from '../../../constants/mock-test-results';
-import { UserProfileService } from '../../services/user-profile/user-profile.service';
+import { TestResultsService } from '../../services/test-results/test-results.service';
 import { AuthStoreService } from '../../services/store/auth-store.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class UserProfileComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private userProfileService: UserProfileService,
+    private testResultsService: TestResultsService,
     private authStoreService: AuthStoreService,
   ) {}
 
@@ -37,7 +37,7 @@ export class UserProfileComponent implements OnInit {
   setTestResults(): void {
     if (this.authStoreService.user) {
       const userId = this.authStoreService.user.id;
-      this.userProfileService.getTestResults(userId).subscribe((tests: Test[]) => {
+      this.testResultsService.getTestResults(userId).subscribe((tests: Test[]) => {
         this.results = tests;
       });
     }

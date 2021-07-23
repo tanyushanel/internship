@@ -7,7 +7,7 @@ import { BASE_API_URL } from '../../../constants/route-constant';
 @Injectable({
   providedIn: 'root',
 })
-export class UserProfileService {
+export class TestResultsService {
   constructor(private http: HttpClient) {}
 
   getTestResults(userId: number): Observable<Test[]> {
