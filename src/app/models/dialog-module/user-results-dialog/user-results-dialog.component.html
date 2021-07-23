@@ -1,0 +1,30 @@
+<div class="content" mat-dialog-content>
+  <mat-card class="user-info-wrap">
+    <div mat-card-avatar class="user-pic"></div>
+    <div class="user-info">
+      <b>{{ user.firstName }} {{ user.lastName }}</b>
+      <p>{{ user.email }}</p>
+    </div>
+
+    <button
+      class="submit-btn"
+      mat-raised-button
+      color="primary"
+      (click)="onAssignBtnClick()"
+      [disabled]="isClicked"
+    >
+      Assign test to User
+    </button>
+  </mat-card>
+
+  <app-user-results-table class="user-results-table" *ngIf="testsCount > 0; else noResults">
+  </app-user-results-table>
+
+  <ng-template #noResults>
+    <h3 class="table-caption">No results yet</h3>
+  </ng-template>
+</div>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close cdkFocusInitial>Close</button>
+</mat-dialog-actions>

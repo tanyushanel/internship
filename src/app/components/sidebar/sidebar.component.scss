@@ -1,0 +1,49 @@
+@import 'src/theme/variables';
+
+.sidebar {
+  height: 100%;
+  margin: auto;
+  color: $black;
+  background-color: $others-grey6;
+
+  &__container {
+    width: 20%;
+    overflow-y: hidden;
+    background-color: $secondary-grey2;
+  }
+
+  &__username {
+    text-align: center;
+  }
+
+  &__logo {
+    width: 100px;
+    height: 100px;
+    margin: 10% 25%;
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+    border-radius: 50%;
+  }
+
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  mat-list-item {
+    margin: 1em auto;
+  }
+
+  &__button {
+    position: absolute;
+    bottom: 50%;
+    transform: rotate(0deg);
+    cursor: pointer;
+    transition: 300ms ease-in-out;
+
+    &_close {
+      transform: rotate(180deg);
+    }
+  }
+}
