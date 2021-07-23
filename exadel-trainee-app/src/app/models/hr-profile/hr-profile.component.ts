@@ -1,4 +1,11 @@
-import { Component, AfterViewInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -6,6 +13,7 @@ import { MatSort } from '@angular/material/sort';
 import { UserResultsDialogComponent } from '../dialog-module/user-results-dialog/user-results-dialog.component';
 import { MOCK_USERS, UserData } from '../../../mocks/users-utils.mock';
 import { User } from '../../interfaces/user';
+import { HrProfileDialogComponent } from './hr-profile-dialog/hr-profile-dialog.component';
 
 @Component({
   selector: 'app-hr-profile',
@@ -44,5 +52,9 @@ export class HrProfileComponent implements AfterViewInit {
       width: '35rem',
       data: { id: row.id, firstName: row.firstName, lastName: row.lastName },
     });
+  }
+
+  onClick(id: number) {
+    this.dialog.open(HrProfileDialogComponent, { data: { id } });
   }
 }
