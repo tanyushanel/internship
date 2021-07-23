@@ -4,7 +4,7 @@ import { Test } from 'src/app/interfaces/test';
 import { Level } from 'src/constants/data-constants';
 import { Route } from 'src/constants/route-constant';
 import { MOCK_TEST_RESULTS } from '../../../constants/mock-test-results';
-import { TestHttpService } from '../../services/test/test-http.service';
+import { TestHttpService } from '../../services/test/test/test-http.service';
 import { AuthStoreService } from '../../services/store/auth-store.service';
 
 @Component({
