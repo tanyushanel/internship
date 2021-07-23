@@ -22,6 +22,15 @@ export class SpeakingTestComponent implements OnInit {
 
   counter = 0;
 
+  // for countdpown timer
+  intervalId = 0;
+
+  message = '';
+
+  minutes = 4;
+
+  seconds = 59;
+
   constructor(
     private cd: ChangeDetectorRef,
     private dom: DomSanitizer,
@@ -55,6 +64,38 @@ export class SpeakingTestComponent implements OnInit {
     }
   }
 
+  // for countdown timer
+  ngOnDestroy() {
+    this.clearTimer();
+  }
+
+  startTimer() {
+    this.countDown();
+  }
+
+  stopTimer() {
+    this.clearTimer();
+  }
+
+  private clearTimer() {
+    clearInterval(this.intervalId);
+  }
+
+  private countDown() {
+    this.clearTimer();
+    this.intervalId = window.setInterval(() => {
+      this.seconds -= 1;
+      if (this.minutes === 0 && this.seconds === 0) {
+        this.toggleRecording();
+      } else if (this.seconds === 0) {
+        this.minutes -= 1;
+        this.seconds = 59;
+      }
+    }, 1000);
+  }
+
+  // finish coundown timer
+
   toggleRecording() {
     this.isRecording = !this.isRecording;
     if (this.isRecording) {
@@ -71,10 +112,12 @@ export class SpeakingTestComponent implements OnInit {
 
   startRecording() {
     this.mediaRecorder.start();
+    this.startTimer();
   }
 
   stopRecording() {
     this.mediaRecorder.stop();
+    this.stopTimer();
   }
 
   finishTest() {
