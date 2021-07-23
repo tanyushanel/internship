@@ -26,7 +26,7 @@ export class AuthStoreService {
     private readonly router: Router,
   ) {}
 
-  private get user(): UserResponseType | null {
+  public get user(): UserResponseType | null {
     return this.userSubject$.getValue();
   }
 
