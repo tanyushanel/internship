@@ -7,6 +7,7 @@ export enum Route {
   statistics = 'statistics',
   result = 'result',
   test = 'test',
+  error = 'error',
 }
 
 export enum SidebarMenu {
