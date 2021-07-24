@@ -10,3 +10,13 @@ export interface UserResponseType {
   roles: UserRole[];
   token?: string;
 }
+export interface UserToken {
+  aud: string;
+  email: string;
+  exp: number;
+  iss: string;
+  jti: string;
+  roles: string;
+  sub: string;
+  uid: string;
+}

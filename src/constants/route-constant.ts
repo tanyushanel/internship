@@ -8,6 +8,7 @@ export enum Route {
   result = 'result',
   test = 'test',
   error = 'error',
+  login = '/',
 }
 
 export enum SidebarMenu {
