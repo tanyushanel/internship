@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthHttpService } from '../auth-http.service';
 import { UserResponseType } from '../../../interfaces/user.interfaces';
@@ -26,7 +26,7 @@ export class AuthStoreService {
     private readonly router: Router,
   ) {}
 
-  private get user(): UserResponseType | null {
+  get user(): UserResponseType | null {
     return this.userSubject$.getValue();
   }
 
@@ -50,13 +50,12 @@ export class AuthStoreService {
     });
   }
 
-  getUser(): Observable<UserResponseType> {
-    return this.authHttpService.getUser().pipe(
-      map((user) => {
+  getUser() {
+    this.authHttpService.getUser().subscribe({
+      next: (user) => {
         this.user = { ...user };
-        return user;
-      }),
-    );
+      },
+    });
   }
 
   signOut(): void {

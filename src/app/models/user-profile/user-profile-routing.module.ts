@@ -9,7 +9,12 @@ const routes: Routes = [
     path: '',
     component: UserProfileComponent,
     data: {
-      accessRoles: [UserRole.User, UserRole.Administrator],
+      accessRoles: [
+        UserRole.User,
+        UserRole.Administrator,
+        UserRole.Coach,
+        UserRole.HumanResourceManager,
+      ],
     },
     canActivate: [AuthGuard],
   },
