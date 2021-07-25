@@ -15,7 +15,6 @@ import { isRoleExist } from '../helpers/check-role';
 export class AuthGuard implements CanActivate {
   constructor(
     private readonly localStorageService: LocalStorageService,
-    private readonly userService: AuthStoreService,
     public readonly authService: AuthStoreService,
     private router: Router,
   ) {}
@@ -37,7 +36,7 @@ export class AuthGuard implements CanActivate {
     if (token) {
       if (this.checkValidToken(token)) {
         this.authService.getUser();
-        return this.userService.activeUser$.pipe(
+        return this.authService.activeUser$.pipe(
           skip(1),
           map((user) => {
             if (user) {
