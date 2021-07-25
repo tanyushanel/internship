@@ -13,7 +13,6 @@
 chrome-profiler-events*.json
 # IDEs and editors
 /.idea
-.DS_Store
 .xml
 .json
 .project

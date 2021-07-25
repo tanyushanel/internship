@@ -1,0 +1,44 @@
+.profile-container {
+  min-width: 30rem;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.notifications {
+  float: right;
+}
+
+.user-results-table {
+  max-width: 60%;
+}
+
+.radio {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+
+  .radio-btn {
+    margin: 1rem;
+  }
+}
+
+.start-btn {
+  display: block;
+  width: 15rem;
+  height: 5rem;
+  margin: 2rem auto;
+}
+
+.note-icon {
+  color: green;
+}
+
+.table-caption {
+  margin: 1rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.for-delete {
+  text-align: center;
+}

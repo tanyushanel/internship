@@ -1,0 +1,29 @@
+@import '../../../../theme/variables';
+
+button {
+  float: right;
+}
+
+button:hover {
+  background-color: $secondary-grey2;
+}
+
+table {
+  width: 100%;
+}
+
+td,
+th {
+  width: 33.333%;
+}
+
+mat-form-field {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 1rem;
+  font-size: 14px;
+}
+
+.priority.high {
+  background-color: $light-cyan;
+}
