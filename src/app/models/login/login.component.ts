@@ -33,8 +33,8 @@ export class LoginComponent implements OnInit {
     }
     this.submitted = false;
     this.authStoreService.signIn({
-      email: this.selectedUser || this.loginReactiveForm.value.userLogin,
-      password: 'Pa$$w0rd.' || this.loginReactiveForm.value.userPassword,
+      email: this.loginReactiveForm.value.userLogin || this.selectedUser,
+      password: this.loginReactiveForm.value.userPassword || 'Pa$$w0rd.',
     });
   }
 

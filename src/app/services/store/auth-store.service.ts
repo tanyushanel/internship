@@ -7,6 +7,7 @@ import { UserResponseType } from '../../../interfaces/user.interfaces';
 import { ErrorStoreService } from './error-store.service';
 import { SignIn } from '../../interfaces/user';
 import { Route } from '../../../constants/route-constant';
+import { LocalStorageService } from '../local-storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -23,10 +24,11 @@ export class AuthStoreService {
   constructor(
     private readonly authHttpService: AuthHttpService,
     private readonly errorStoreService: ErrorStoreService,
+    private readonly localStorageService: LocalStorageService,
     private readonly router: Router,
   ) {}
 
-  private get user(): UserResponseType | null {
+  get user(): UserResponseType | null {
     return this.userSubject$.getValue();
   }
 
@@ -38,6 +40,7 @@ export class AuthStoreService {
     this.authHttpService.signIn(signInModel).subscribe({
       next: (user) => {
         this.user = { ...user };
+        this.localStorageService.setAccessToken(<string>this.user.token);
         this.router.navigate([Route.home]);
       },
       error: (e: Error) => {
@@ -49,8 +52,17 @@ export class AuthStoreService {
     });
   }
 
+  getUser() {
+    return this.authHttpService.getUser().subscribe({
+      next: (user) => {
+        this.user = { ...user };
+      },
+    });
+  }
+
   signOut(): void {
-    this.user = this.initialState;
-    this.router.navigate(['/']);
+    this.user = null;
+    this.localStorageService.clearAccessToken();
+    this.router.navigate([Route.login]);
   }
 }
