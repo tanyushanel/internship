@@ -12,29 +12,6 @@ export interface TestData {
   grammarGrade: string;
   isAssign: boolean;
 }
-
-const MOCK_FIRSTNAMES: string[] = [
-  'Maia',
-  'Asher',
-  'Olivia',
-  'Atticus',
-  'Amelia',
-  'Jack',
-  'Charlotte',
-  'Theodore',
-  'Isla',
-  'Oliver',
-  'Isabella',
-  'Jasper',
-  'Cora',
-  'Levi',
-  'Violet',
-  'Arthur',
-  'Mia',
-  'Thomas',
-  'Elizabeth',
-];
-
 const MOCK_COACH: CoachData[] = [
   {
     name: 'Elizabeth',
@@ -84,5 +61,4 @@ export function createNewTest(position: number): TestData {
     grammarGrade: Math.floor(Math.random() * 100).toString(),
   };
 }
-
 export const MOCK_TEST = Array.from({ length: 100 }, (_, k) => createNewTest(k + 1));

@@ -49,11 +49,12 @@ button {
 .mat-column-ID {
   width: 32px;
   padding-right: 24px;
-  border-right: 1px solid currentColor;
+  text-align: center;
+  border-right: 1.5px solid currentColor;
 }
 
 .mat-column-Position {
-  padding-left: 45px;
+  padding-left: 50px;
 }
 
 .mat-column-Level {

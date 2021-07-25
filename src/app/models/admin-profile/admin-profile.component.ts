@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
 import { AdminDialogComponent } from './admin-dialog/admin-dialog.component';
 import { MOCK_TEST, TestData } from '../../../mocks/admin-profile-utils.mock';
 
@@ -11,29 +10,26 @@ import { MOCK_TEST, TestData } from '../../../mocks/admin-profile-utils.mock';
   styleUrls: ['./admin-profile.component.scss'],
 })
 export class AdminProfileComponent implements OnInit {
-  constructor(public dialog: MatDialog) {
-    this.dataSource = new MatTableDataSource<TestData>(MOCK_TEST);
-    this.sortByIsAssign(this.dataSource.data);
-  }
-
-  AssignSelector = '0';
+  AssignSelector = false;
 
   assignedTests: TestData[] = [];
 
   notAssignedTests: TestData[] = [];
 
+  constructor(public dialog: MatDialog) {
+    this.dataSource = new MatTableDataSource<TestData>(MOCK_TEST);
+  }
+
   displayedColumns: string[] = ['ID', 'Position', 'Level', 'Date', 'Coach', 'Button'];
 
   displayedColumns1: string[] = ['ID', 'Position', 'Level', 'Date', 'button'];
-
-  @ViewChild(MatSort) sort!: MatSort;
 
   @ViewChild(MatTable) table!: MatTable<any>;
 
   dataSource: MatTableDataSource<TestData>;
 
   ngOnInit(): void {
-    this.dataSource.sort = this.sort;
+    this.sortByIsAssign(this.dataSource.data);
   }
 
   openDialog(value: number) {
@@ -50,8 +46,9 @@ export class AdminProfileComponent implements OnInit {
           assignedTest.isAssign = true;
           this.table.renderRows();
         }
-        // eslint-disable-next-line no-empty
-      } catch (e) {}
+      } catch (e) {
+        console.log(e);
+      }
     });
   }
 
@@ -63,11 +60,7 @@ export class AdminProfileComponent implements OnInit {
     });
   }
 
-  onTabChange(selector: string): void {
-    if (selector === 'Not Assigned') {
-      this.AssignSelector = '0';
-    } else if (selector === 'Assigned') {
-      this.AssignSelector = '1';
-    }
+  onTabChange(): void {
+    this.AssignSelector = !this.AssignSelector;
   }
 }
