@@ -64,7 +64,6 @@ export class SpeakingTestComponent implements OnInit {
     }
   }
 
-  // for countdown timer
   ngOnDestroy() {
     this.clearTimer();
   }
@@ -93,8 +92,6 @@ export class SpeakingTestComponent implements OnInit {
       }
     }, 1000);
   }
-
-  // finish coundown timer
 
   toggleRecording() {
     this.isRecording = !this.isRecording;
