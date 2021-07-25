@@ -5,7 +5,7 @@
 </div>
 
 <cdk-virtual-scroll-viewport itemSize="1" style="height: 80%">
-  <div *ngIf="AssignSelector">
+  <div *ngIf="!AssignSelector">
     <table mat-table #table [dataSource]="notAssignedTests" class="mat-elevation-z8 data-table">
       <ng-container matColumnDef="ID">
         <th mat-header-cell *matHeaderCellDef>No.</th>
@@ -41,7 +41,7 @@
     </table>
   </div>
 
-  <div *ngIf="!AssignSelector">
+  <div *ngIf="AssignSelector">
     <table mat-table [dataSource]="assignedTests" class="mat-elevation-z8 data-table">
       <ng-container matColumnDef="ID">
         <th mat-header-cell *matHeaderCellDef>No.</th>
