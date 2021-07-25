@@ -48,7 +48,6 @@ export class SpeakingTestComponent implements OnInit {
         this.chunks.push(e.data);
       };
     } catch (e) {
-      console.log(e, 'ERROR');
       this.errorStoreService.setError({
         message: e.message,
         time: Date.now(),
