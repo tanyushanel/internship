@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
 
 import { RouterModule } from '@angular/router';
 import { StepperComponent } from './stepper.component';
@@ -18,6 +19,7 @@ import { StepperComponent } from './stepper.component';
     MatStepperModule,
     ReactiveFormsModule,
     MatInputModule,
+    MatRadioModule,
     RouterModule,
   ],
   exports: [StepperComponent],
