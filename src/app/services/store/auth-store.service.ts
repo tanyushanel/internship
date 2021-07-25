@@ -59,14 +59,6 @@ export class AuthStoreService {
       },
     });
   }
-  //
-  // getUser() {
-  //   return this.authHttpService.getUser().pipe(
-  //     map((user) => {
-  //       this.user = { ...user };
-  //     }),
-  //   );
-  // }
 
   signOut(): void {
     this.user = null;
