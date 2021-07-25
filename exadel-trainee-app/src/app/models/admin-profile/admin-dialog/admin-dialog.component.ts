@@ -5,7 +5,13 @@ import { MOCK_TEST } from '../../../../mocks/admin-profile-utils.mock';
 
 export interface CoachInfo {
   position: number;
-  coach: string;
+  coach: CoachData;
+}
+
+export interface CoachData {
+  name: string;
+  email: string;
+  phoneNumber: string;
 }
 
 @Component({

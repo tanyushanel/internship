@@ -11,6 +11,7 @@ import { TableVirtualScrollModule } from 'ng-cdk-table-virtual-scroll';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSortModule } from '@angular/material/sort';
 import { AdminProfileRouting } from './admin-profile-routing';
 import { AdminProfileComponent } from './admin-profile.component';
 import { AdminDialogComponent } from './admin-dialog/admin-dialog.component';
@@ -31,6 +32,7 @@ import { AdminDialogComponent } from './admin-dialog/admin-dialog.component';
     ReactiveFormsModule,
     MatSelectModule,
     FormsModule,
+    MatSortModule,
   ],
   providers: [DatePipe, ScrollDispatcher],
 })

@@ -35,9 +35,8 @@ export class SpeakingTestComponent implements OnInit {
       this.mediaRecorder.ondataavailable = (e: { data: Blob }) => {
         this.chunks.push(e.data);
       };
-    } catch (err) {
-      alert('Error capturing audio.');
-    }
+      // eslint-disable-next-line no-empty
+    } catch (err) {}
   }
 
   startRecording() {

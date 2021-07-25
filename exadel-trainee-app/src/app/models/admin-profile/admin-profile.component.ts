@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 import { AdminDialogComponent } from './admin-dialog/admin-dialog.component';
 import { MOCK_TEST, TestData } from '../../../mocks/admin-profile-utils.mock';
 
@@ -10,55 +11,55 @@ import { MOCK_TEST, TestData } from '../../../mocks/admin-profile-utils.mock';
   styleUrls: ['./admin-profile.component.scss'],
 })
 export class AdminProfileComponent implements OnInit {
-  AssignSelector = '0';
-
-  isAssignTrueArray: TestData[] = [];
-
-  isAssignFalseArray: TestData[] = [];
-
   constructor(public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource<TestData>(MOCK_TEST);
+    this.sortByIsAssign(this.dataSource.data);
   }
 
-  displayedColumns: string[] = ['Position', 'Level', 'Date', 'Coach', 'Button'];
+  AssignSelector = '0';
 
-  displayedColumns1: string[] = ['Position', 'Level', 'Date', 'button'];
+  assignedTests: TestData[] = [];
+
+  notAssignedTests: TestData[] = [];
+
+  displayedColumns: string[] = ['ID', 'Position', 'Level', 'Date', 'Coach', 'Button'];
+
+  displayedColumns1: string[] = ['ID', 'Position', 'Level', 'Date', 'button'];
+
+  @ViewChild(MatSort) sort!: MatSort;
+
+  @ViewChild(MatTable) table!: MatTable<any>;
 
   dataSource: MatTableDataSource<TestData>;
 
   ngOnInit(): void {
-    this.sortByIsAssign(this.dataSource.data);
+    this.dataSource.sort = this.sort;
   }
 
   openDialog(value: number) {
     const dialogRef = this.dialog.open(AdminDialogComponent, {
       data: { position: value - 1, coach: '--' },
     });
-
     dialogRef.afterClosed().subscribe((result) => {
+      const assignedTest = this.dataSource.data[result.position];
       try {
-        this.dataSource.data[result.position].coach = result.coach;
-        if (this.dataSource.data[result.position].isAssign === false) {
-          this.isAssignTrueArray.reverse();
-          this.isAssignTrueArray.push(this.dataSource.data[result.position]);
-          this.isAssignTrueArray.reverse();
-          this.isAssignFalseArray.splice(
-            this.isAssignFalseArray.indexOf(this.dataSource.data[result.position]),
-            1,
-          );
-          this.dataSource.data[result.position].isAssign = true;
+        assignedTest.coach = result.coach;
+        if (assignedTest.isAssign === false) {
+          this.assignedTests.unshift(assignedTest);
+          this.notAssignedTests.splice(this.notAssignedTests.indexOf(assignedTest), 1);
+          assignedTest.isAssign = true;
+          this.table.renderRows();
         }
-      } catch (e) {
-        console.log(e);
-      }
+        // eslint-disable-next-line no-empty
+      } catch (e) {}
     });
   }
 
   sortByIsAssign(data: TestData[]) {
     data.forEach((element) => {
       if (element.isAssign) {
-        this.isAssignTrueArray.push(element);
-      } else this.isAssignFalseArray.push(element);
+        this.assignedTests.push(element);
+      } else this.notAssignedTests.push(element);
     });
   }
 
