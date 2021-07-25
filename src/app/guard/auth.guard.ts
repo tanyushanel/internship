@@ -33,11 +33,11 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot,
   ): Observable<boolean> | boolean {
     const activeUser: UserResponseType | null = this.authService.user;
-    if (activeUser) {
+    if (activeUser && activeUser.token !== null) {
       return isRoleExist(route, activeUser.roles[0]);
     }
     const token = this.localStorageService.getAccessToken();
-    if (token) {
+    if (token && token !== 'null') {
       if (true) {
         this.authService.getUser();
         return this.authService.activeUser$.pipe(

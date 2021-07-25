@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { AuthStoreService } from '../../services/store/auth-store.service';
 import { usersMockDataResponse } from '../../../constants/mock-user-data';
 import { UserResponseType } from '../../../interfaces/user.interfaces';
@@ -18,6 +19,8 @@ export class LoginComponent implements OnInit {
   submitted = false;
 
   users: UserResponseType[] = usersMockDataResponse;
+
+  readonly validate$: Observable<string | undefined> = this.authStoreService.validate$;
 
   constructor(private fb: FormBuilder, private readonly authStoreService: AuthStoreService) {}
 
@@ -47,7 +50,7 @@ export class LoginComponent implements OnInit {
   private initForm() {
     this.loginReactiveForm = this.fb.group({
       userLogin: ['', [Validators.required, Validators.email]],
-      userPassword: ['', [Validators.required, Validators.minLength(6)]],
+      userPassword: ['Pa$$w0rd.', [Validators.required, Validators.minLength(6)]],
     });
   }
 }

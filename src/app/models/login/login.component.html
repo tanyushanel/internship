@@ -14,7 +14,7 @@
         <input
           matInput
           placeholder="eleveluser@gmail.com"
-          value="eleveluser@gmail.com"
+          [value]="selectedUser"
           type="email"
           id="userLogin"
           formControlName="userLogin"
@@ -37,7 +37,17 @@
       <div class="error" *ngIf="isControlInvalid('userPassword')" style="color: red">
         Password is to short
       </div>
-      <button mat-raised-button color="primary" type="submit">Sign In</button>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="loginReactiveForm.invalid || submitted"
+      >
+        Sign In
+      </button>
     </form>
+    <ng-container *ngIf="{ validate: validate$ | async } as $">
+      <mat-error *ngIf="$.validate === null">Error login or password</mat-error>
+    </ng-container>
   </mat-card>
 </div>
