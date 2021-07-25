@@ -9,11 +9,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { HrProfileComponent } from './hr-profile.component';
 import { CommonDialogModule } from '../dialog-module/common-dialog.module';
 import { HrProfileRoutingModule } from './hr-profile-routing.module';
+import { AngularMaterialCommonModule } from '../angular-material-common.module';
+import { HrProfileDialogModule } from './hr-profile-dialog/hr-profile-dialog.module';
 
 @NgModule({
   declarations: [HrProfileComponent],
   imports: [
     CommonModule,
+    AngularMaterialCommonModule,
+    HrProfileDialogModule,
     HrProfileRoutingModule,
     CommonDialogModule,
     MatFormFieldModule,
