@@ -9,7 +9,12 @@ const routes: Routes = [
     path: '',
     component: CommonTestComponent,
     data: {
-      accessRoles: [UserRole.User, UserRole.Administrator],
+      accessRoles: [
+        UserRole.User,
+        UserRole.Coach,
+        UserRole.Administrator,
+        UserRole.HumanResourceManager,
+      ],
     },
     canActivate: [AuthGuard],
   },

@@ -6,7 +6,7 @@ import { AuthStoreService } from '../services/store/auth-store.service';
 import { parseJwt } from '../helpers/perserJWT';
 import { Route } from '../../constants/route-constant';
 import { LocalStorageService } from '../services/local-storage.service';
-import { UserToken } from '../../interfaces/user.interfaces';
+import { UserResponseType, UserToken } from '../../interfaces/user.interfaces';
 import { isRoleExist } from '../helpers/check-role';
 
 @Injectable({
@@ -32,6 +32,10 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
   ): Observable<boolean> | boolean {
+    const activeUser: UserResponseType | null = this.authService.user;
+    if (activeUser) {
+      return isRoleExist(route, activeUser.roles[0]);
+    }
     const token = this.localStorageService.getAccessToken();
     if (token) {
       if (this.checkValidToken(token)) {
