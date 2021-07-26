@@ -9,7 +9,11 @@ export class LocalStorageService {
   }
 
   setAccessToken(token: string): void {
-    localStorage.setItem('token', token);
+    if (token === 'null') {
+      this.clearAccessToken();
+    } else {
+      localStorage.setItem('token', token);
+    }
   }
 
   clearAccessToken(): void {

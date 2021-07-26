@@ -1,5 +1,8 @@
 export interface ErrorModel {
-  type?: string;
+  type?: ErrorType;
   message: string | null;
   time: number;
+}
+export enum ErrorType {
+  login = 'login',
 }

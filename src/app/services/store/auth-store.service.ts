@@ -9,6 +9,7 @@ import { SignIn } from '../../interfaces/user';
 import { Route } from '../../../constants/route-constant';
 import { LocalStorageService } from '../local-storage.service';
 import { parseJwt } from '../../helpers/perserJWT';
+import { ErrorType } from '../../interfaces/error';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +21,7 @@ export class AuthStoreService {
 
   readonly activeUser$ = this.userSubject$.asObservable();
 
-  readonly isSignIn$ = this.activeUser$.pipe(map((user) => user?.isAuthenticated));
+  readonly isSignIn$ = this.activeUser$.pipe(map((user) => !!user));
 
   constructor(
     private readonly authHttpService: AuthHttpService,
@@ -42,10 +43,11 @@ export class AuthStoreService {
       next: (user) => {
         if (user.email === null) {
           this.errorStoreService.setError({
-            type: 'login',
+            type: ErrorType.login,
             message: user.message,
             time: Date.now(),
           });
+          return;
         }
         this.user = { ...user };
         this.localStorageService.setAccessToken(<string>this.user.token);

@@ -26,7 +26,7 @@ export class LoginGuard implements CanActivate {
       return false;
     }
     const token = this.localStorageService.getAccessToken();
-    if (token && token !== 'null') {
+    if (token) {
       if (true) {
         this.router.navigate([Route.home]);
         return false;
