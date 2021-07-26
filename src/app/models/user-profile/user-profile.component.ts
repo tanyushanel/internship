@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Test } from 'src/app/interfaces/test';
 import { Level } from 'src/constants/data-constants';
-import { results } from 'src/constants/mock-test-results';
 import { Route } from 'src/constants/route-constant';
-import { Test } from '../../interfaces/test';
+import { MOCK_TEST_RESULTS } from '../../../constants/mock-test-results';
 
 @Component({
   selector: 'app-user-profile',
@@ -19,13 +19,17 @@ export class UserProfileComponent implements OnInit {
 
   constructor(private router: Router) {}
 
+  get testsCount() {
+    return this.results.length;
+  }
+
   ngOnInit() {
-    this.results = results;
+    this.results = [...MOCK_TEST_RESULTS];
   }
 
   onStartButtonClick(): void {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate([Route.grammarTest]);
+      this.router.navigate([Route.test]);
     });
   }
 }

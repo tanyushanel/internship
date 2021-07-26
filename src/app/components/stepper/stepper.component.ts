@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Route } from '../../../constants/route-constant';
 
 @Component({
   selector: 'app-stepper',
@@ -30,12 +29,4 @@ export class StepperComponent implements OnInit {
   }
 
   ngOnInit(): void {}
-
-  nextTest() {
-    if (this.router.url === `/${Route.grammarTest}`) {
-      this.router.navigate([Route.listening]);
-    } else {
-      this.router.navigate([Route.writing]);
-    }
-  }
 }
