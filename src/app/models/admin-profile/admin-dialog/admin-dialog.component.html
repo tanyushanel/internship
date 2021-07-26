@@ -16,20 +16,27 @@
     <div class="coach_info">
       <p>
         Name:
-        {{ getSelectedCoach(data.coach.name, data.position) }}
+        {{ getSelectedCoach(data.coach.name, data.position, 0) }}
       </p>
       <p>
         Phone number:
-        {{ getSelectedCoach(data.coach.phoneNumber, data.position) }}
+        {{ getSelectedCoach(data.coach.phoneNumber, data.position, 1) }}
       </p>
       <p>
         Email:
-        {{ getSelectedCoach(data.coach.email, data.position) }}
+        {{ getSelectedCoach(data.coach.email, data.position, 2) }}
       </p>
     </div>
   </div>
   <div class="btn">
-    <button mat-raised-button color="primary" [mat-dialog-close]="data">Save</button>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="data.coach.name == null"
+      [mat-dialog-close]="data"
+    >
+      Save
+    </button>
     <button mat-raised-button color="primary" mat-dialog-close>Cancel</button>
   </div>
 </div>

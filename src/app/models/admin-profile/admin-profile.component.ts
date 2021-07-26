@@ -34,7 +34,7 @@ export class AdminProfileComponent implements OnInit {
 
   openDialog(value: number) {
     const dialogRef = this.dialog.open(AdminDialogComponent, {
-      data: { position: value - 1, coach: '--' },
+      data: { position: value - 1, coach: '' },
     });
     dialogRef.afterClosed().subscribe((result) => {
       const assignedTest = this.dataSource.data[result.position];
