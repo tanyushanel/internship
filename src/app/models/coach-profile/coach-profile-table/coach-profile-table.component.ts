@@ -39,10 +39,12 @@ export class CoachProfileTableComponent implements AfterViewInit, OnChanges {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
 
-    const sortState: Sort = { active: 'date', direction: 'desc' };
-    this.sort.active = sortState.active;
-    this.sort.direction = sortState.direction;
-    this.sort.sortChange.emit(sortState);
+    setTimeout(() => {
+      const sortState: Sort = { active: 'date', direction: 'desc' };
+      this.sort.active = sortState.active;
+      this.sort.direction = sortState.direction;
+      this.sort.sortChange.emit(sortState);
+    }, 10);
   }
 
   ngOnChanges(changes: SimpleChanges) {
