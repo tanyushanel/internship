@@ -1,0 +1,24 @@
+<mat-card class="text-of-theme">What are you speaking about?</mat-card>
+<section class="speaking-module-position" ng-controller="controller">
+  <button
+    mat-raised-button
+    class="button-position"
+    [color]="getColor()"
+    (click)="toggleRecording()"
+    [disabled]="counter === 1"
+  >
+    {{ !isRecording ? 'Start Recording' : 'Stop Recording' }}
+  </button>
+  <figure class="countdown-position">
+    <p class="countdown">{{ minutes }} : {{ seconds }}</p>
+  </figure>
+  <audio
+    class="audio-speaking"
+    *ngFor="let audio of audioFiles"
+    controls="true"
+    [src]="audio.src"
+  ></audio>
+</section>
+<button mat-raised-button color="secondary" class="button-submit" (click)="finishTest()">
+  Finish Test
+</button>
