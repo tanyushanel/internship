@@ -10,14 +10,15 @@
     {{ !isRecording ? 'Start Recording' : 'Stop Recording' }}
   </button>
   <figure class="countdown-position">
-    <p class="countdown">{{ minutes }} : {{ seconds }}</p>
+    <p class="countdown">{{ minutes }} : {{ getSeconds() }}</p>
   </figure>
   <audio
     class="audio-speaking"
-    *ngFor="let audio of audioFiles"
+    *ngIf="audioFile !== null"
     controls="true"
-    [src]="audio.src"
+    [src]="audioFile.src"
   ></audio>
+  <p class="number-of-attempt">{{ numberAttempt }}</p>
 </section>
 <button mat-raised-button color="secondary" class="button-submit" (click)="finishTest()">
   Finish Test
