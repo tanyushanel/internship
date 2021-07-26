@@ -3,20 +3,32 @@
     <textarea matInput> Essay {{ data.id }}</textarea>
   </mat-form-field>
   <label
-    >Essay score<input
+    >Essay score
+    <input
+      #childInput1
       required
       type="number"
       name="essayScore"
       min="0"
       max="100"
       step="1"
-      value="0"
-  /></label>
+      value=""
+    />
+  </label>
   <p>
     <audio controls></audio
     ><label
       >Listening score
-      <input required type="number" name="speakingScore" min="0" max="100" step="1" value="0" />
+      <input
+        required
+        type="number"
+        name="speakingScore"
+        min="0"
+        max="100"
+        step="1"
+        value=""
+        #childInput2
+      />
     </label>
   </p>
   <mat-form-field appearance="fill">

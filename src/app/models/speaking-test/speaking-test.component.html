@@ -9,6 +9,9 @@
   >
     {{ !isRecording ? 'Start Recording' : 'Stop Recording' }}
   </button>
+  <figure class="countdown-position">
+    <p class="countdown">{{ minutes }} : {{ seconds }}</p>
+  </figure>
   <audio
     class="audio-speaking"
     *ngFor="let audio of audioFiles"
