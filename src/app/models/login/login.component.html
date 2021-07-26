@@ -46,7 +46,7 @@
         Sign In
       </button>
     </form>
-    <ng-container *ngIf="{ validate: validate$ | async } as $">
+    <ng-container *ngIf="{ validate: isSingIn$ | async } as $">
       <mat-error *ngIf="$.validate === null">Error login or password</mat-error>
     </ng-container>
   </mat-card>

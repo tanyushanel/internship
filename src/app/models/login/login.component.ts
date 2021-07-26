@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   users: UserResponseType[] = usersMockDataResponse;
 
-  readonly validate$: Observable<string | undefined> = this.authStoreService.validate$;
+  readonly isSingIn$: Observable<string | undefined> = this.authStoreService.isSignIn$;
 
   constructor(private fb: FormBuilder, private readonly authStoreService: AuthStoreService) {}
 

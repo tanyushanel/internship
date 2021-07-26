@@ -14,7 +14,7 @@ export class SidebarComponent implements OnInit {
 
   readonly user$: Observable<UserResponseType | null> = this.userService.activeUser$;
 
-  readonly isSingIn$: Observable<boolean | null> = this.userService.isSignIn$;
+  readonly isSingIn$: Observable<string | undefined> = this.userService.isSignIn$;
 
   usersRoute: UserRoutesType = usersRoute;
 
