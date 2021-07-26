@@ -20,7 +20,7 @@ export class AuthStoreService {
 
   readonly activeUser$ = this.userSubject$.asObservable();
 
-  readonly isSignIn$ = this.activeUser$.pipe(map((user) => !!user));
+  readonly isSignIn$ = this.activeUser$.pipe(map((user) => user?.isAuthenticated));
 
   constructor(
     private readonly authHttpService: AuthHttpService,
