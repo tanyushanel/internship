@@ -22,7 +22,6 @@ export class SpeakingTestComponent implements OnInit {
 
   counter = 0;
 
-  // for countdpown timer
   intervalId = 0;
 
   message = '';
@@ -93,6 +92,11 @@ export class SpeakingTestComponent implements OnInit {
     }, 1000);
   }
 
+  resetTimer() {
+    this.minutes = 4;
+    this.seconds = 59;
+  }
+
   toggleRecording() {
     this.isRecording = !this.isRecording;
     if (this.isRecording) {
@@ -115,6 +119,7 @@ export class SpeakingTestComponent implements OnInit {
   stopRecording() {
     this.mediaRecorder.stop();
     this.stopTimer();
+    this.resetTimer();
   }
 
   finishTest() {
