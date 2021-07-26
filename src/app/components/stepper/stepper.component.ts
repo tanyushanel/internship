@@ -1,32 +1,47 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { Question } from '../../interfaces/question';
 
 @Component({
   selector: 'app-stepper',
   templateUrl: './stepper.component.html',
   styleUrls: ['./stepper.component.scss'],
+  providers: [
+    {
+      provide: STEPPER_GLOBAL_OPTIONS,
+      useValue: { showError: true },
+    },
+  ],
 })
 export class StepperComponent implements OnInit {
-  firstFormGroup: FormGroup;
+  stepperFormGroup: FormGroup;
 
-  secondFormGroup: FormGroup;
+  radioFormGroup: FormGroup;
 
-  lastFormGroup: FormGroup;
+  steps = Array.from({ length: 10 }, (_v, i) => i);
 
-  currentRoute: string | undefined;
+  questionList = new Array(10);
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {
-    this.firstFormGroup = this.formBuilder.group({
-      firstCtrl: ['', Validators.required],
+  answerCases = ['Option 1', 'Option 2', 'Option 3'];
+
+  selectedCase = '';
+
+  constructor(private formBuilder: FormBuilder) {
+    this.stepperFormGroup = this.formBuilder.group({
+      stepCtrl: ['', Validators.required],
     });
-    this.secondFormGroup = this.formBuilder.group({
-      secondCtrl: ['', Validators.required],
-    });
-    this.lastFormGroup = this.formBuilder.group({
-      lastCtrl: ['', Validators.required],
+    this.radioFormGroup = new FormGroup({
+      options: new FormControl(),
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit() {
+    // this.stepperFormGroup = this.formBuilder.group({
+    //   stepCtrl: ['', Validators.required],
+    // });
+    // this.radioFormGroup = new FormGroup({
+    //   firstName: new FormControl(),
+    // });
+  }
 }
