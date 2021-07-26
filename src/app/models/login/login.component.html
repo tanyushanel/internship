@@ -47,7 +47,7 @@
       </button>
     </form>
     <ng-container *ngIf="{ error: error$ | async } as $">
-      <mat-error *ngIf="$.error?.message !== null">Error login or password</mat-error>
+      <mat-error *ngIf="$.error?.message !== null">Incorrect login or password</mat-error>
     </ng-container>
   </mat-card>
 </div>

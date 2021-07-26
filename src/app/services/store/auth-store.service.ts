@@ -55,6 +55,7 @@ export class AuthStoreService {
       },
       error: (e: Error) => {
         this.errorStoreService.setError({
+          type: ErrorType.login,
           message: e.message,
           time: Date.now(),
         });
