@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot,
   ): Observable<boolean> | boolean {
     const activeUser: UserResponseType | null = this.authService.user;
-    if (activeUser && activeUser.token !== null) {
+    if (activeUser) {
       return isRoleExist(route, activeUser.roles[0]);
     }
     const token = this.localStorageService.getAccessToken();
