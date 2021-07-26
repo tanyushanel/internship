@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { AuthStoreService } from '../../services/store/auth-store.service';
 import { usersMockDataResponse } from '../../../constants/mock-user-data';
 import { UserResponseType } from '../../../interfaces/user.interfaces';
+import { ErrorStoreService } from '../../services/store/error-store.service';
+import { ErrorModel } from '../../interfaces/error';
 
 @Component({
   selector: 'app-login',
@@ -20,9 +22,13 @@ export class LoginComponent implements OnInit {
 
   users: UserResponseType[] = usersMockDataResponse;
 
-  readonly isSingIn$: Observable<string | undefined> = this.authStoreService.isSignIn$;
+  readonly error$: Observable<ErrorModel | null> = this.errorStoreService.error$;
 
-  constructor(private fb: FormBuilder, private readonly authStoreService: AuthStoreService) {}
+  constructor(
+    private fb: FormBuilder,
+    private readonly authStoreService: AuthStoreService,
+    private readonly errorStoreService: ErrorStoreService,
+  ) {}
 
   ngOnInit(): void {
     this.initForm();

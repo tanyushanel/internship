@@ -20,7 +20,7 @@ export class AuthStoreService {
 
   readonly activeUser$ = this.userSubject$.asObservable();
 
-  readonly isSignIn$ = this.activeUser$.pipe(map((user) => user?.email));
+  readonly isSignIn$ = this.activeUser$.pipe(map((user) => !!user));
 
   constructor(
     private readonly authHttpService: AuthHttpService,
@@ -40,6 +40,13 @@ export class AuthStoreService {
   signIn(signInModel: SignIn): void {
     this.authHttpService.signIn(signInModel).subscribe({
       next: (user) => {
+        if (user.email === null) {
+          this.errorStoreService.setError({
+            type: 'login',
+            message: user.message,
+            time: Date.now(),
+          });
+        }
         this.user = { ...user };
         this.localStorageService.setAccessToken(<string>this.user.token);
         this.router.navigate([Route.home]);

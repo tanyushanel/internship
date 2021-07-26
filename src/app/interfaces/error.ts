@@ -1,4 +1,5 @@
 export interface ErrorModel {
-  message: string;
+  type?: string;
+  message: string | null;
   time: number;
 }
