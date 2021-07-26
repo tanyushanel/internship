@@ -16,39 +16,15 @@
     <div class="coach_info">
       <p>
         Name:
-        {{
-          dataSource[data.position].isAssign
-            ? data.coach.name == null
-              ? dataSource[data.position].coach.name
-              : data.coach.name
-            : data.coach.name == null
-            ? '--'
-            : data.coach.name
-        }}
+        {{ getSelectedCoach(data.coach.name, data.position) }}
       </p>
       <p>
         Phone number:
-        {{
-          dataSource[data.position].isAssign
-            ? data.coach.name == null
-              ? dataSource[data.position].coach.phoneNumber
-              : data.coach.phoneNumber
-            : data.coach.name == null
-            ? '--'
-            : data.coach.phoneNumber
-        }}
+        {{ getSelectedCoach(data.coach.phoneNumber, data.position) }}
       </p>
       <p>
         Email:
-        {{
-          dataSource[data.position].isAssign
-            ? data.coach.name == null
-              ? dataSource[data.position].coach.email
-              : data.coach.email
-            : data.coach.name == null
-            ? '--'
-            : data.coach.email
-        }}
+        {{ getSelectedCoach(data.coach.email, data.position) }}
       </p>
     </div>
   </div>

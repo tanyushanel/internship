@@ -30,4 +30,26 @@ export class AdminDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
+
+  getSelectedCoach(coachName: string, coachPosition: number): string {
+    if (this.dataSource[coachPosition].isAssign) {
+      if (coachName == null) {
+        return this.dataSource[coachPosition].coach.name;
+      }
+      return coachName;
+    }
+
+    if (coachName == null) {
+      return '--';
+    }
+    return coachName;
+
+    // this.dataSource[this.data.position].isAssign
+    //   ? this.data.coach.name == null
+    //     ? this.dataSource[this.data.position].coach.name
+    //     : this.data.coach.name
+    //   : this.data.coach.name == null
+    //   ? '--'
+    //   : this.data.coach.name;
+  }
 }
