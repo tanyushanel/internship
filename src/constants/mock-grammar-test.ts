@@ -1,11 +1,4 @@
-import { User } from '../app/interfaces/user';
-import { Level, Priority } from './data-constants';
-
-export interface TestModule {
-  id: number;
-  mark?: number;
-  textContent?: string;
-}
+import { Level } from './data-constants';
 
 export interface Question {
   id: number;
@@ -21,27 +14,6 @@ export interface Answer {
   text: string;
   questionId: Question['id'];
   isRight: boolean;
-}
-
-export interface Test {
-  id: number;
-  level: Level;
-  userId: User['id'];
-  hrId?: User['id'];
-  coachId?: User['id'];
-  priority?: Priority;
-  date: {
-    creationDate?: string;
-    assignmentStartDate?: string;
-    assignmentEndDate?: string;
-  };
-  content: {
-    grammar: TestModule['id'];
-    audition: TestModule['id'];
-    essay: TestModule['id'];
-    speaking: TestModule['id'];
-  };
-  feedback?: string;
 }
 
 const QUESTION = [

@@ -1,8 +1,8 @@
 export enum Level {
   Elementary = 'Elementary',
-  PreIntermediate = 'PreIntermediate',
+  PreIntermediate = 'Pre-Intermediate',
   Intermediate = 'Intermediate',
-  UpperIntermediate = 'UpperIntermediate',
+  UpperIntermediate = 'Upper-Intermediate',
   Advanced = 'Advanced',
 }
 
