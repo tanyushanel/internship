@@ -8,7 +8,7 @@ import { LoadingIndicatorService } from '../services/loading-indicator.service';
   providedIn: 'root',
 })
 export class LoadingIndicatorInterceptor implements HttpInterceptor {
-  private readonly observer: PartialObserver<any> = {
+  private readonly observer: PartialObserver<HttpEvent<string>> = {
     error: () => this.loadingIndicatorService.stop(),
     complete: () => this.loadingIndicatorService.stop(),
   };
