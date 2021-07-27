@@ -1,18 +1,16 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
+import { MOCK_QUESTION_LIST } from '../../../constants/mock-grammar-test';
+import { Question } from '../../interfaces/question-answer';
 
 @Component({
   selector: 'app-grammar-test',
   templateUrl: './grammar-test.component.html',
   styleUrls: ['./grammar-test.component.scss'],
 })
-export class GrammarTestComponent implements OnInit, OnChanges {
-  steps = 0;
+export class GrammarTestComponent implements OnInit {
+  questions!: Question[];
 
   ngOnInit(): void {
-    this.steps = 12;
-  }
-
-  ngOnChanges(): void {
-    this.steps = 10;
+    this.questions = [...MOCK_QUESTION_LIST];
   }
 }

@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { Question } from '../../interfaces/question-answer';
+import { Question, Answer } from '../../interfaces/question-answer';
 
 @Component({
   selector: 'app-stepper',
@@ -14,16 +14,10 @@ import { Question } from '../../interfaces/question-answer';
     },
   ],
 })
-export class StepperComponent implements OnInit {
-  @Input() steps!: number;
+export class StepperComponent implements OnInit, OnChanges {
+  @Input() questionList!: Question[];
 
   stepperFormGroup: FormGroup;
-
-  stepArray: number[] | undefined;
-
-  questionList = new Array(10);
-
-  answerCases = ['Option 1', 'Option 2', 'Option 3'];
 
   constructor(private formBuilder: FormBuilder) {
     this.stepperFormGroup = this.formBuilder.group({
@@ -32,7 +26,7 @@ export class StepperComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.stepArray = Array.from({ length: this.steps }, (_v, i) => i);
-  }
+  ngOnInit() {}
+
+  ngOnChanges() {}
 }

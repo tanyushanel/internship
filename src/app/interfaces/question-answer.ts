@@ -2,15 +2,16 @@ import { Level } from '../../constants/data-constants';
 
 export interface Question {
   id: number;
-  questionText: string;
-  auditionId: null;
+  text: string;
   level: Level;
-  creationDate: string;
+  auditionId: number;
+  answerId: number;
+  answers: Answer[];
 }
 
 export interface Answer {
   id: number;
-  answerText: string;
+  text: string;
   questionId: Question['id'];
   isRight: boolean;
 }
