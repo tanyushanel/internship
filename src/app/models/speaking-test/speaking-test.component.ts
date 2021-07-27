@@ -16,8 +16,6 @@ export class SpeakingTestComponent implements OnInit {
 
   chunks: Blob[] = [];
 
-  obj = {};
-
   isRecording = false;
 
   audioFile: { src: SafeUrl } | null = null;
@@ -25,6 +23,8 @@ export class SpeakingTestComponent implements OnInit {
   counter = 0;
 
   intervalId = 0;
+
+  ç;
 
   message = '';
 
