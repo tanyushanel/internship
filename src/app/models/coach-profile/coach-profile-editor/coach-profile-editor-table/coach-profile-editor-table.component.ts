@@ -10,7 +10,11 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 
+import { MatDialog } from '@angular/material/dialog';
 import { CoachEditorTest } from '../../../../../mocks/users-utils.mock';
+import { CoachEditorTabs } from '../../../../../constants/data-constants';
+import { CoachProfileEditorTopicEditDialogComponent } from '../coach-profile-editor-topic-edit-dialog/coach-profile-editor-topic-edit-dialog.component';
+import { CoachProfileEditorGrammarEditDialogComponent } from '../coach-profile-editor-grammar-edit-dialog/coach-profile-editor-grammar-edit-dialog.component';
 
 @Component({
   selector: 'app-coach-profile-editor-table',
@@ -32,7 +36,7 @@ export class CoachProfileEditorTableComponent implements AfterViewInit, OnChange
 
   @ViewChild(MatTable) tableView!: MatTable<CoachEditorTest>;
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource(this.table);
   }
 
@@ -61,5 +65,17 @@ export class CoachProfileEditorTableComponent implements AfterViewInit, OnChange
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  openEditor(row: any) {
+    if (this.selectTab === CoachEditorTabs.grammar)
+      this.dialog.open(CoachProfileEditorGrammarEditDialogComponent, {
+        data: { id: row.id, level: row.level },
+      });
+    else if (this.selectTab === CoachEditorTabs.audition) console.log('Andrei modal');
+    else if (this.selectTab === CoachEditorTabs.writingAndSpeaking)
+      this.dialog.open(CoachProfileEditorTopicEditDialogComponent, {
+        data: { id: row.id, level: row.level },
+      });
   }
 }

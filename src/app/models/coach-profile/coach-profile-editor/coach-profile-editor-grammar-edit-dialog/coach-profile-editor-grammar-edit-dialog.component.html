@@ -1,0 +1,25 @@
+<div class="container">
+  <h1>Edit Grammar</h1>
+  <mat-form-field appearance="fill">
+    <mat-label>Grammar Question</mat-label>
+    <textarea matInput>Grammar Question {{ data.id }}</textarea>
+  </mat-form-field>
+  <h3>Select level</h3>
+  <mat-form-field appearance="fill">
+    <mat-label>Choose level:</mat-label>
+    <mat-select [value]="data.level">
+      <mat-option *ngFor="let level of levels" [value]="level">
+        {{ level }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-radio-group class="radio-group">
+    <div *ngFor="let question of questions">
+      <mat-radio-button [value]="question" class="radio-button">{{ question }}</mat-radio-button>
+      <span
+        ><mat-form-field><input matInput /></mat-form-field
+      ></span>
+    </div>
+  </mat-radio-group>
+  <button mat-raised-button color="primary">UPDATE</button>
+</div>

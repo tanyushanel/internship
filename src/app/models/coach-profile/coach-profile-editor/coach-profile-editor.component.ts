@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { MatDialog } from '@angular/material/dialog';
 import { CoachEditorTabs } from '../../../../constants/data-constants';
 import {
   CoachEditorTest,
@@ -7,6 +8,8 @@ import {
   MOCK_GRAMMAR_QUESTIONS,
   MOCK_WRITING_AND_SPEAKING_QUESTIONS,
 } from '../../../../mocks/users-utils.mock';
+import { CoachProfileEditorGrammarCreateDialogComponent } from './coach-profile-editor-grammar-create-dialog/coach-profile-editor-grammar-create-dialog.component';
+import { CoachProfileEditorTopicCreateDialogComponent } from './coach-profile-editor-topic-create-dialog/coach-profile-editor-topic-create-dialog.component';
 
 @Component({
   selector: 'app-coach-profile-editor',
@@ -14,9 +17,9 @@ import {
   styleUrls: ['./coach-profile-editor.component.scss'],
 })
 export class CoachProfileEditorComponent implements OnInit {
-  public selectedTab = 'Grammar Question';
+  public selectedTab = CoachEditorTabs.grammar;
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
     this.tables = {
       [CoachEditorTabs.grammar]: MOCK_GRAMMAR_QUESTIONS,
       [CoachEditorTabs.audition]: MOCK_AUDITION_QUESTIONS,
@@ -43,4 +46,12 @@ export class CoachProfileEditorComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  openGrammarModal() {
+    this.dialog.open(CoachProfileEditorGrammarCreateDialogComponent);
+  }
+
+  openTopicModal() {
+    this.dialog.open(CoachProfileEditorTopicCreateDialogComponent);
+  }
 }

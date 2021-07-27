@@ -1,0 +1,17 @@
+<div class="container">
+  <h1>Edit Writing Test</h1>
+  <mat-form-field appearance="fill">
+    <mat-label>Writing Topic</mat-label>
+    <textarea matInput>Topic {{ data.id }}</textarea>
+  </mat-form-field>
+  <h3>Select level</h3>
+  <mat-form-field appearance="fill">
+    <mat-label>Choose level:</mat-label>
+    <mat-select [value]="data.level">
+      <mat-option *ngFor="let level of levels" [value]="level">
+        {{ level }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <p><button mat-raised-button color="primary">SAVE</button></p>
+</div>

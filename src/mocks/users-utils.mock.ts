@@ -12,9 +12,28 @@ export interface TestData {
   date: Date;
 }
 
+// export interface CoachEditorTest {
+//   id: string;
+//   level: string;
+//   question: {
+//     questionAnswer: string;
+//     isRight: boolean;
+//   };
+//   questionName: string;
+// }
+
 export interface CoachEditorTest {
   id: string;
   level: string;
+}
+
+export interface DialogData {
+  id: number;
+  level: string;
+}
+
+export interface Level {
+  levelName: string;
 }
 
 const MOCK_LASTNAMES: string[] = [
@@ -52,9 +71,9 @@ const MOCK_FIRSTNAMES: string[] = [
 const MOCK_LEVELS: string[] = [
   'Starter',
   'Elementary',
-  'Pre-intermediate',
+  'Pre-Intermediate',
   'Intermediate',
-  'Upper-intermediate',
+  'Upper-Intermediate',
   'Advanced',
 ];
 
