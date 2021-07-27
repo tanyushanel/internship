@@ -10,7 +10,9 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 
+import { MatDialog } from '@angular/material/dialog';
 import { CoachEditorTest } from '../../../../../mocks/users-utils.mock';
+import { EditListeningDialogComponent } from '../edit-listening-dialog/edit-listening-dialog.component';
 
 @Component({
   selector: 'app-coach-profile-editor-table',
@@ -32,7 +34,7 @@ export class CoachProfileEditorTableComponent implements AfterViewInit, OnChange
 
   @ViewChild(MatTable) tableView!: MatTable<CoachEditorTest>;
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource(this.table);
   }
 
@@ -52,6 +54,10 @@ export class CoachProfileEditorTableComponent implements AfterViewInit, OnChange
     if (changes.table?.currentValue) {
       this.dataSource.data = changes.table.currentValue;
     }
+  }
+
+  onEditAudioClick(): void {
+    this.dialog.open(EditListeningDialogComponent);
   }
 
   applyFilter(event: Event) {
