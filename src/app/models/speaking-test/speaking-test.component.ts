@@ -24,8 +24,6 @@ export class SpeakingTestComponent implements OnInit {
 
   intervalId = 0;
 
-  ç;
-
   message = '';
 
   minutes = 5;
