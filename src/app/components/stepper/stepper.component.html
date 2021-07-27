@@ -2,20 +2,16 @@
   <mat-step
     class="step"
     [stepControl]="stepperFormGroup"
-    *ngFor="let step of steps; let ind = index; let first = first; let last = last"
+    *ngFor="let step of stepArray; let ind = index; let first = first; let last = last"
     label="Question {{ ind + 1 }}"
     errorMessage="Answer is required."
   >
     <form class="form__color" [formGroup]="stepperFormGroup">
-      <p class="text__center" [formGroup]="radioFormGroup">Question 1</p>
+      <p class="text__center">Question 1</p>
 
-      <mat-radio-group
-        id="answer-label-group"
-        class="mat-radio-group"
-        formControlName="options"
-        required
-      >
-        <p>{{ selectedCase }}</p>
+      <mat-radio-group id="answer-label-group" class="mat-radio-group" formControlName="options">
+        <p>{{ stepperFormGroup.controls.options.value }}</p>
+        <!-- just for check -->
 
         <mat-radio-button
           class="answer-radio-button"

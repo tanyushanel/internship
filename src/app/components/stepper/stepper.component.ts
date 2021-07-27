@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { Question } from '../../interfaces/question';
+import { Question } from '../../interfaces/question-answer';
 
 @Component({
   selector: 'app-stepper',
@@ -15,33 +15,24 @@ import { Question } from '../../interfaces/question';
   ],
 })
 export class StepperComponent implements OnInit {
+  @Input() steps!: number;
+
   stepperFormGroup: FormGroup;
 
-  radioFormGroup: FormGroup;
-
-  steps = Array.from({ length: 10 }, (_v, i) => i);
+  stepArray: number[] | undefined;
 
   questionList = new Array(10);
 
   answerCases = ['Option 1', 'Option 2', 'Option 3'];
 
-  selectedCase = '';
-
   constructor(private formBuilder: FormBuilder) {
     this.stepperFormGroup = this.formBuilder.group({
       stepCtrl: ['', Validators.required],
-    });
-    this.radioFormGroup = new FormGroup({
-      options: new FormControl(),
+      options: new FormControl('', Validators.required),
     });
   }
 
   ngOnInit() {
-    // this.stepperFormGroup = this.formBuilder.group({
-    //   stepCtrl: ['', Validators.required],
-    // });
-    // this.radioFormGroup = new FormGroup({
-    //   firstName: new FormControl(),
-    // });
+    this.stepArray = Array.from({ length: this.steps }, (_v, i) => i);
   }
 }
