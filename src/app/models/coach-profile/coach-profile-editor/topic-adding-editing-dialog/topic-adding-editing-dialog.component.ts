@@ -1,6 +1,5 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Level } from '../../../../../constants/data-constants';
 import {
   CreateDialogData,
   EditDialogData,
@@ -29,12 +28,4 @@ export class TopicAddingEditingDialogComponent {
       };
     }
   }
-
-  levels: Level[] = [
-    Level.Advanced,
-    Level.UpperIntermediate,
-    Level.Intermediate,
-    Level.PreIntermediate,
-    Level.Elementary,
-  ];
 }

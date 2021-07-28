@@ -12,16 +12,6 @@ export interface TestData {
   date: Date;
 }
 
-// export interface CoachEditorTest {
-//   id: string;
-//   level: string;
-//   question: {
-//     questionAnswer: string;
-//     isRight: boolean;
-//   };
-//   questionName: string;
-// }
-
 export interface CoachEditorTest {
   id: string;
   level: string;
@@ -30,10 +20,6 @@ export interface CoachEditorTest {
 export interface DialogData {
   id: number;
   level: string;
-}
-
-export interface Level {
-  levelName: string;
 }
 
 const MOCK_LASTNAMES: string[] = [

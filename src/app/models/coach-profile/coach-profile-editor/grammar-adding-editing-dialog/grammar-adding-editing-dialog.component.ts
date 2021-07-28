@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { GrammarAnswers, Level } from '../../../../../constants/data-constants';
 
@@ -60,14 +60,6 @@ export class GrammarAddingEditingDialogComponent {
       };
     }
   }
-
-  levels: Level[] = [
-    Level.Advanced,
-    Level.UpperIntermediate,
-    Level.Intermediate,
-    Level.PreIntermediate,
-    Level.Elementary,
-  ];
 
   questions: GrammarAnswers[] = [
     GrammarAnswers.first,
