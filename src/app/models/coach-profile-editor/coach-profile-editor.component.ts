@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { MatTabChangeEvent } from '@angular/material/tabs';
-import { CoachEditorTabs } from '../../../../constants/data-constants';
+import { MatDialog } from '@angular/material/dialog';
+import { CoachEditorTabs } from '../../../constants/data-constants';
 import {
   CoachEditorTest,
   MOCK_AUDITION_QUESTIONS,
   MOCK_GRAMMAR_QUESTIONS,
   MOCK_WRITING_AND_SPEAKING_QUESTIONS,
-} from '../../../../mocks/users-utils.mock';
+} from '../../../mocks/users-utils.mock';
+import { GrammarAddingEditingDialogComponent } from './grammar-adding-editing-dialog/grammar-adding-editing-dialog.component';
+import { TopicAddingEditingDialogComponent } from './topic-adding-editing-dialog/topic-adding-editing-dialog.component';
 import { AddListeningDialogComponent } from './add-listening-dialog/add-listening-dialog.component';
 import { EditListeningDialogComponent } from './edit-listening-dialog/edit-listening-dialog.component';
 
@@ -17,7 +19,7 @@ import { EditListeningDialogComponent } from './edit-listening-dialog/edit-liste
   styleUrls: ['./coach-profile-editor.component.scss'],
 })
 export class CoachProfileEditorComponent implements OnInit {
-  public selectedTab = 'Grammar Question';
+  public selectedTab = CoachEditorTabs.grammar;
 
   constructor(public dialog: MatDialog) {
     this.tables = {
@@ -49,5 +51,13 @@ export class CoachProfileEditorComponent implements OnInit {
 
   onAddAudioClick(): void {
     this.dialog.open(AddListeningDialogComponent);
+  }
+
+  openGrammarModal() {
+    this.dialog.open(GrammarAddingEditingDialogComponent, { data: { isEdit: false } });
+  }
+
+  openTopicModal() {
+    this.dialog.open(TopicAddingEditingDialogComponent, { data: { isEdit: false } });
   }
 }

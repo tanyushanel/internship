@@ -45,7 +45,7 @@ const routes: Routes = [
   {
     path: Route.editor,
     loadChildren: () =>
-      import('./models/coach-profile/coach-profile-editor/coach-profile-editor.module').then(
+      import('./models/coach-profile-editor/coach-profile-editor.module').then(
         (m) => m.CoachProfileEditorModule,
       ),
   },

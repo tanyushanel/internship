@@ -5,7 +5,7 @@ import { CoachProfileRoutingModule } from './coach-profile-routing.module';
 import { AngularMaterialCommonModule } from '../angular-material-common.module';
 import { CoachProfileDialog } from './coach-profile-dialog/coach-profile-dialog.module';
 import { CoachProfileTableComponent } from './coach-profile-table/coach-profile-table.component';
-import { CoachProfileEditorModule } from './coach-profile-editor/coach-profile-editor.module';
+import { CoachProfileEditorModule } from '../coach-profile-editor/coach-profile-editor.module';
 
 @NgModule({
   declarations: [CoachProfileComponent, CoachProfileTableComponent],
