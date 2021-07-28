@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MatOptionSelectionChange } from '@angular/material/core';
 import { Level } from '../../../constants/data-constants';
 
@@ -12,13 +12,7 @@ export class ChooseLevelComponent {
 
   @Output() changeLevel = new EventEmitter<Level>();
 
-  levels: Level[] = [
-    Level.Advanced,
-    Level.UpperIntermediate,
-    Level.Intermediate,
-    Level.PreIntermediate,
-    Level.Elementary,
-  ];
+  LevelList = Object.values(Level);
 
   onLevelChange($event: MatOptionSelectionChange) {
     this.changeLevel.emit($event.source.value);

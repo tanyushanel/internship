@@ -55,7 +55,6 @@ const MOCK_FIRSTNAMES: string[] = [
 ];
 
 const MOCK_LEVELS: string[] = [
-  'Starter',
   'Elementary',
   'Pre-Intermediate',
   'Intermediate',

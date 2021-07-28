@@ -11,8 +11,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 
 import { MatDialog } from '@angular/material/dialog';
-import { CoachEditorTest } from '../../../../../mocks/users-utils.mock';
-import { CoachEditorTabs } from '../../../../../constants/data-constants';
+import { CoachEditorTest } from '../../../../mocks/users-utils.mock';
+import { CoachEditorTabs } from '../../../../constants/data-constants';
 import { GrammarAddingEditingDialogComponent } from '../grammar-adding-editing-dialog/grammar-adding-editing-dialog.component';
 import { TopicAddingEditingDialogComponent } from '../topic-adding-editing-dialog/topic-adding-editing-dialog.component';
 

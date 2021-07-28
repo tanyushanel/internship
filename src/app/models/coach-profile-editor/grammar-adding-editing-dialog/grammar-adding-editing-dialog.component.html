@@ -8,8 +8,8 @@
   <app-choose-level [currentLevel]="data.level"></app-choose-level>
   <mat-radio-group class="radio-group">
     <div *ngFor="let answer of grammar.answers; let i = index">
-      <mat-radio-button [checked]="answer.isRight" [value]="questions[i]" class="radio-button">{{
-        questions[i]
+      <mat-radio-button [checked]="answer.isRight" [value]="QuestionList[i]" class="radio-button">{{
+        QuestionList[i]
       }}</mat-radio-button>
       <span>
         <mat-form-field><input matInput [value]="answer.title" /></mat-form-field>

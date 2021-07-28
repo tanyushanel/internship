@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { MatDialog } from '@angular/material/dialog';
-import { CoachEditorTabs } from '../../../../constants/data-constants';
+import { CoachEditorTabs } from '../../../constants/data-constants';
 import {
   CoachEditorTest,
   MOCK_AUDITION_QUESTIONS,
   MOCK_GRAMMAR_QUESTIONS,
   MOCK_WRITING_AND_SPEAKING_QUESTIONS,
-} from '../../../../mocks/users-utils.mock';
+} from '../../../mocks/users-utils.mock';
 import { GrammarAddingEditingDialogComponent } from './grammar-adding-editing-dialog/grammar-adding-editing-dialog.component';
 import { TopicAddingEditingDialogComponent } from './topic-adding-editing-dialog/topic-adding-editing-dialog.component';
 

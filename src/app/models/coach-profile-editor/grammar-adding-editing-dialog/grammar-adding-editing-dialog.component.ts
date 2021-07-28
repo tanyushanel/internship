@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { GrammarAnswers, Level } from '../../../../../constants/data-constants';
+import { GrammarAnswers, Level } from '../../../../constants/data-constants';
 
 export interface CreateDialogData {
   id: string;
@@ -61,10 +61,5 @@ export class GrammarAddingEditingDialogComponent {
     }
   }
 
-  questions: GrammarAnswers[] = [
-    GrammarAnswers.first,
-    GrammarAnswers.second,
-    GrammarAnswers.third,
-    GrammarAnswers.fourth,
-  ];
+  QuestionList = Object.values(GrammarAnswers);
 }
