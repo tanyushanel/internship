@@ -6,21 +6,18 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AngularMaterialCommonModule } from '../../angular-material-common.module';
 import { CoachProfileEditorRoutingModule } from './coach-profile-editor-routing.module';
-import { CoachProfileEditorTableComponent } from './coach-profile-editor-table/coach-profile-editor-table.component';
+import { EditorTableComponent } from './editor-table/editor-table.component';
 import { CoachProfileEditorComponent } from './coach-profile-editor.component';
-import { CoachProfileEditorTopicCreateDialogComponent } from './coach-profile-editor-topic-create-dialog/coach-profile-editor-topic-create-dialog.component';
-import { CoachProfileEditorGrammarCreateDialogComponent } from './coach-profile-editor-grammar-create-dialog/coach-profile-editor-grammar-create-dialog.component';
-import { CoachProfileEditorGrammarEditDialogComponent } from './coach-profile-editor-grammar-edit-dialog/coach-profile-editor-grammar-edit-dialog.component';
-import { CoachProfileEditorTopicEditDialogComponent } from './coach-profile-editor-topic-edit-dialog/coach-profile-editor-topic-edit-dialog.component';
+import { TopicAddingEditingDialogComponent } from './topic-adding-editing-dialog/topic-adding-editing-dialog.component';
+import { GrammarAddingEditingDialogComponent } from './grammar-adding-editing-dialog/grammar-adding-editing-dialog.component';
+import { ChooseLevelModule } from '../../../components/choose-level/choose-level.module';
 
 @NgModule({
   declarations: [
-    CoachProfileEditorTableComponent,
+    EditorTableComponent,
     CoachProfileEditorComponent,
-    CoachProfileEditorGrammarCreateDialogComponent,
-    CoachProfileEditorTopicCreateDialogComponent,
-    CoachProfileEditorGrammarEditDialogComponent,
-    CoachProfileEditorTopicEditDialogComponent,
+    TopicAddingEditingDialogComponent,
+    GrammarAddingEditingDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -30,7 +27,8 @@ import { CoachProfileEditorTopicEditDialogComponent } from './coach-profile-edit
     MatOptionModule,
     MatSelectModule,
     MatCheckboxModule,
+    ChooseLevelModule,
   ],
-  exports: [CoachProfileEditorTableComponent],
+  exports: [EditorTableComponent],
 })
 export class CoachProfileEditorModule {}

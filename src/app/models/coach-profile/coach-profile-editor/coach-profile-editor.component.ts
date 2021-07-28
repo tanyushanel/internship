@@ -8,8 +8,8 @@ import {
   MOCK_GRAMMAR_QUESTIONS,
   MOCK_WRITING_AND_SPEAKING_QUESTIONS,
 } from '../../../../mocks/users-utils.mock';
-import { CoachProfileEditorGrammarCreateDialogComponent } from './coach-profile-editor-grammar-create-dialog/coach-profile-editor-grammar-create-dialog.component';
-import { CoachProfileEditorTopicCreateDialogComponent } from './coach-profile-editor-topic-create-dialog/coach-profile-editor-topic-create-dialog.component';
+import { GrammarAddingEditingDialogComponent } from './grammar-adding-editing-dialog/grammar-adding-editing-dialog.component';
+import { TopicAddingEditingDialogComponent } from './topic-adding-editing-dialog/topic-adding-editing-dialog.component';
 
 @Component({
   selector: 'app-coach-profile-editor',
@@ -48,10 +48,10 @@ export class CoachProfileEditorComponent implements OnInit {
   ngOnInit(): void {}
 
   openGrammarModal() {
-    this.dialog.open(CoachProfileEditorGrammarCreateDialogComponent);
+    this.dialog.open(GrammarAddingEditingDialogComponent, { data: { isEdit: false } });
   }
 
   openTopicModal() {
-    this.dialog.open(CoachProfileEditorTopicCreateDialogComponent);
+    this.dialog.open(TopicAddingEditingDialogComponent, { data: { isEdit: false } });
   }
 }

@@ -13,15 +13,15 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { CoachEditorTest } from '../../../../../mocks/users-utils.mock';
 import { CoachEditorTabs } from '../../../../../constants/data-constants';
-import { CoachProfileEditorTopicEditDialogComponent } from '../coach-profile-editor-topic-edit-dialog/coach-profile-editor-topic-edit-dialog.component';
-import { CoachProfileEditorGrammarEditDialogComponent } from '../coach-profile-editor-grammar-edit-dialog/coach-profile-editor-grammar-edit-dialog.component';
+import { GrammarAddingEditingDialogComponent } from '../grammar-adding-editing-dialog/grammar-adding-editing-dialog.component';
+import { TopicAddingEditingDialogComponent } from '../topic-adding-editing-dialog/topic-adding-editing-dialog.component';
 
 @Component({
   selector: 'app-coach-profile-editor-table',
-  templateUrl: './coach-profile-editor-table.component.html',
-  styleUrls: ['./coach-profile-editor-table.component.scss'],
+  templateUrl: './editor-table.component.html',
+  styleUrls: ['./editor-table.component.scss'],
 })
-export class CoachProfileEditorTableComponent implements AfterViewInit, OnChanges {
+export class EditorTableComponent implements AfterViewInit, OnChanges {
   displayedColumns: string[] = ['id', 'level', 'edit'];
 
   dataSource: MatTableDataSource<CoachEditorTest>;
@@ -67,15 +67,38 @@ export class CoachProfileEditorTableComponent implements AfterViewInit, OnChange
     }
   }
 
-  openEditor(row: any) {
+  openEditor(row: CoachEditorTest) {
     if (this.selectTab === CoachEditorTabs.grammar)
-      this.dialog.open(CoachProfileEditorGrammarEditDialogComponent, {
-        data: { id: row.id, level: row.level },
+      this.dialog.open(GrammarAddingEditingDialogComponent, {
+        data: {
+          id: row.id,
+          level: row.level,
+          answers: [
+            {
+              title: '1',
+              isRight: true,
+            },
+            {
+              title: '2',
+              isRight: false,
+            },
+            {
+              title: '3',
+              isRight: false,
+            },
+            {
+              title: '4',
+              isRight: false,
+            },
+          ],
+          question: 'Question',
+          isEdit: true,
+        },
       });
     else if (this.selectTab === CoachEditorTabs.audition) console.log('Andrei modal');
     else if (this.selectTab === CoachEditorTabs.writingAndSpeaking)
-      this.dialog.open(CoachProfileEditorTopicEditDialogComponent, {
-        data: { id: row.id, level: row.level },
+      this.dialog.open(TopicAddingEditingDialogComponent, {
+        data: { id: row.id, level: row.level, question: 'Question', isEdit: true },
       });
   }
 }

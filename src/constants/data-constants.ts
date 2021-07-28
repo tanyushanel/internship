@@ -30,7 +30,7 @@ export enum CoachEditorTabs {
   writingAndSpeaking = 'Writing & Speaking',
 }
 
-export enum GrammarQuestions {
+export enum GrammarAnswers {
   first = 'A)',
   second = 'B)',
   third = 'C)',
