@@ -1,84 +1,30 @@
 <mat-stepper class="stepper" labelPosition="bottom">
-  <!-- <mat-step [stepControl]="firstFormGroup"
-            errorMessage="Name is required.">
-    <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Fill out your name</ng-template>
-      <mat-form-field appearance="fill">
-        <mat-label>Name</mat-label>
-        <input matInput
-               placeholder="Last name, First name"
-               formControlName="firstCtrl"
-               required>
-      </mat-form-field>
-      <div>
-        <p>Go to a different step to see the error state</p>
-        <button mat-button
-                matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
-  <mat-step [stepControl]="secondFormGroup"
-            errorMessage="Address is required.">
-    <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Fill out your address</ng-template>
-      <mat-form-field appearance="fill">
-        <mat-label>Address</mat-label>
-        <input matInput
-               placeholder="Ex. 1 Main St, New York, NY"
-               formControlName="secondCtrl"
-               required>
-      </mat-form-field>
-      <div>
-        <p>Go to a different step to see the error state</p>
-        <button mat-button
-                matStepperPrevious>Back</button>
-        <button mat-button
-                matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step> -->
-
   <mat-step
     class="step"
-    [stepControl]="stepperForm"
-    *ngFor="let step of questionList; let ind = index"
+    [stepControl]="stepperFormGroups[ind]"
+    *ngFor="let question of questionList; let ind = index; let first = first; let last = last"
     label="Question {{ ind + 1 }}"
     errorMessage="Not Answered"
   >
-    <!-- <form [formGroup]="stepperForm"
-          class="form__color">
+    <form class="form__color" [formGroup]="stepperFormGroups[ind]">
+      <p class="text__center">{{ question.text }}</p>
 
+      <p></p>
 
-      <div formArrayName="questions"
-           *ngFor="let question of questions.controls; let n = index">
+      <mat-radio-group id="answer-label-group" class="mat-radio-group" formControlName="stepCtrl">
+        <mat-radio-button
+          class="answer-radio-button"
+          *ngFor="let answerCase of question.answers"
+          [value]="answerCase"
+        >
+          {{ answerCase.text }}
+        </mat-radio-button>
+      </mat-radio-group>
 
-        <div formGroupName="{{n}}"> -->
-    <!-- *ngFor="let question of questionList; let ind = index; let first = first; let last = last" -->
-
-    <!-- <p class="text__center">{{ question.text }}</p> -->
-
-    <!-- <mat-radio-group formControlName="options">
-              <mat-radio-button class="answer-radio-button"
-                                *ngFor="let answerCase of question.answers"
-                                [value]="answerCase">
-                {{ answerCase.text }}
-              </mat-radio-button>
-            </mat-radio-group> -->
-
-    <!-- <div>
-            <button class="button__color"
-                    mat-button
-                    matStepperPrevious
-                    *ngIf="!first">Back</button>
-            <button class="button__color"
-                    mat-button
-                    matStepperNext
-                    *ngIf="!last">Next</button>
-          </div> -->
-
-    <!-- </div>
+      <div>
+        <button class="button__color" mat-button matStepperPrevious *ngIf="!first">Back</button>
+        <button class="button__color" mat-button matStepperNext *ngIf="!last">Next</button>
       </div>
-
-    </form> -->
+    </form>
   </mat-step>
 </mat-stepper>
