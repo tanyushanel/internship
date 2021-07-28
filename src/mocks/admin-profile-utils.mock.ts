@@ -1,7 +1,7 @@
 export interface CoachData {
-  name: string;
-  email: string;
-  phoneNumber: string;
+  name: string | null;
+  email: string | null;
+  phoneNumber: string | null;
 }
 
 export interface TestData {
@@ -12,7 +12,14 @@ export interface TestData {
   grammarGrade: string;
   isAssign: boolean;
 }
-const MOCK_COACH: CoachData[] = [
+
+const MOCK_EMPTY_COACH: CoachData = {
+  name: null,
+  email: null,
+  phoneNumber: null,
+};
+
+export const MOCK_COACH: CoachData[] = [
   {
     name: 'Elizabeth',
     email: 'Elizabeth@email.net',
@@ -52,12 +59,13 @@ const MOCK_COACH: CoachData[] = [
 
 export function createNewTest(position: number): TestData {
   const coachData = MOCK_COACH[Math.round(Math.random() * (MOCK_COACH.length - 1))];
+  const isTestAssigned = !!Math.round(Math.random());
   return {
     position,
     date: Date.now(),
-    isAssign: !!Math.round(Math.random()),
+    isAssign: isTestAssigned,
     level: ['beginner', 'intermediate', 'advanced'][Math.floor(Math.random() * 3)],
-    coach: coachData,
+    coach: isTestAssigned ? coachData : MOCK_EMPTY_COACH,
     grammarGrade: Math.floor(Math.random() * 100).toString(),
   };
 }

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { AdminDialogComponent } from './admin-dialog/admin-dialog.component';
-import { MOCK_TEST, TestData } from '../../../mocks/admin-profile-utils.mock';
+import { CoachData, MOCK_TEST, TestData } from '../../../mocks/admin-profile-utils.mock';
 
 @Component({
   selector: 'app-admin-profile',
@@ -32,22 +32,23 @@ export class AdminProfileComponent implements OnInit {
     this.sortByIsAssign(this.dataSource.data);
   }
 
-  openDialog(value: number) {
+  openDialog(positionValue: number, coachData: CoachData, Assign: boolean) {
     const dialogRef = this.dialog.open(AdminDialogComponent, {
-      data: { position: value - 1, coach: '' },
+      data: {
+        position: positionValue - 1,
+        coach: coachData,
+        isAssign: Assign,
+      },
     });
     dialogRef.afterClosed().subscribe((result) => {
+      if (result.coach === undefined) return;
       const assignedTest = this.dataSource.data[result.position];
-      try {
-        assignedTest.coach = result.coach;
-        if (assignedTest.isAssign === false) {
-          this.assignedTests.unshift(assignedTest);
-          this.notAssignedTests.splice(this.notAssignedTests.indexOf(assignedTest), 1);
-          assignedTest.isAssign = true;
-          this.table.renderRows();
-        }
-      } catch (e) {
-        console.log(e);
+      assignedTest.coach = result.coach;
+      if (!assignedTest.isAssign) {
+        this.assignedTests.unshift(assignedTest);
+        this.notAssignedTests.splice(this.notAssignedTests.indexOf(assignedTest), 1);
+        assignedTest.isAssign = true;
+        this.table.renderRows();
       }
     });
   }

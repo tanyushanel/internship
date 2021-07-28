@@ -1,18 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MOCK_TEST } from '../../../../mocks/admin-profile-utils.mock';
-
-export interface CoachInfo {
-  position: number;
-  coach: CoachData;
-}
-
-export interface CoachData {
-  name: string;
-  email: string;
-  phoneNumber: string;
-}
+import { MOCK_COACH, TestData } from '../../../../mocks/admin-profile-utils.mock';
 
 @Component({
   selector: 'app-admin-dialog',
@@ -20,32 +9,20 @@ export interface CoachData {
   styleUrls: ['./admin-dialog.component.scss'],
 })
 export class AdminDialogComponent implements OnInit {
-  dataSource = MOCK_TEST;
+  coaches = MOCK_COACH;
 
   coachControl = new FormControl('', Validators.required);
 
   constructor(
     public dialogRef: MatDialogRef<AdminDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: CoachInfo,
+    @Inject(MAT_DIALOG_DATA) public data: TestData,
   ) {}
 
   ngOnInit(): void {}
 
-  getSelectedCoach(coachInfo: string, coachPosition: number, selector: number): string {
-    if (this.dataSource[coachPosition].isAssign) {
-      if (coachInfo == null) {
-        if (selector === 0) {
-          return this.dataSource[coachPosition].coach.name;
-        }
-        if (selector === 1) {
-          return this.dataSource[coachPosition].coach.phoneNumber;
-        }
-        return this.dataSource[coachPosition].coach.email;
-      }
-      return coachInfo;
-    }
-    if (coachInfo == null) {
-      return '--';
+  getSelectedCoach(coachInfo: string | null): string | null {
+    if (this.data.coach.name === null) {
+      return 'Not Assign';
     }
     return coachInfo;
   }
