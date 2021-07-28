@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Form, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { Question } from '../../interfaces/question-answer';
 
@@ -14,21 +14,70 @@ import { Question } from '../../interfaces/question-answer';
     },
   ],
 })
-export class StepperComponent implements OnInit, OnChanges {
+export class StepperComponent implements OnInit {
   @Input() questionList!: Question[];
 
   @Input() selectedIndex = 0;
 
-  stepperFormGroup: FormGroup;
+  questions!: FormArray;
+
+  // get questionsCount() {
+  //   return this.questionList.length;
+  // }
+
+  // stepperFormGroup: FormGroup;
+
+  // firstFormGroup: FormGroup;
+
+  // secondFormGroup: FormGroup;
+
+  // //////////////////////////////
+
+  stepperForm = new FormGroup({
+    questions: new FormArray([new FormControl('options')]),
+  });
+
+  // /////////////////////////
 
   constructor(private formBuilder: FormBuilder) {
-    this.stepperFormGroup = this.formBuilder.group({
-      stepCtrl: ['', Validators.required],
-      options: new FormControl('', Validators.required),
+    this.stepperForm = this.formBuilder.group({
+      questions: this.formBuilder.array([
+        this.formBuilder.group({
+          options: [null, [Validators.required]],
+        }),
+      ]),
     });
+    // this.stepperForm = this.formBuilder.group({
+    //   stepCtrl: ['', Validators.required],
+    //   // options: new FormControl('', Validators.required),
+    // });
+    // this.radioFormGroup = this.formBuilder.group({
+    //   stepCtrl: ['', Validators.required],
+    // });
+    // this.firstFormGroup = this.formBuilder.group({
+    //   firstCtrl: ['', Validators.required],
+    // });
+    // this.secondFormGroup = this.formBuilder.group({
+    //   secondCtrl: ['', Validators.required],
+    // });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.stepperForm = this.formBuilder.group({
+      questions: this.formBuilder.array([
+        this.formBuilder.group({
+          options: [null, [Validators.required]],
+        }),
+      ]),
+    });
 
-  ngOnChanges() {}
+    // this.firstFormGroup = this.formBuilder.group({
+    //   firstCtrl: ['', Validators.required],
+    // });
+    // this.secondFormGroup = this.formBuilder.group({
+    //   secondCtrl: ['', Validators.required],
+    // });
+  }
+
+  // radioFormGroup: FormGroup;
 }

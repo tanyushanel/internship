@@ -7,5 +7,5 @@ import { BehaviorSubject } from 'rxjs';
 export class CommonTestService {
   selectedIndex = 0;
 
-  currentIndex = new BehaviorSubject<number>(this.selectedIndex);
+  // currentIndex = new BehaviorSubject<number>(this.selectedIndex);
 }

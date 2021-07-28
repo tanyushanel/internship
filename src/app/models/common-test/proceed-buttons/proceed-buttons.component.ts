@@ -6,21 +6,11 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
   styleUrls: ['./proceed-buttons.component.scss'],
 })
 export class ProceedButtonsComponent implements OnInit {
-  @Input() selectedIndex: number;
-
-  @Output() selectedIndexOut: EventEmitter<number> = new EventEmitter<number>();
-
-  tabCount = 4;
-
-  constructor() {
-    this.selectedIndex = 0;
-  }
+  @Output() moveClicked: EventEmitter<number> = new EventEmitter<number>();
 
   ngOnInit(): void {}
 
   onClick(i: number) {
-    this.selectedIndex = (this.selectedIndex + i) % this.tabCount;
-
-    this.selectedIndexOut.emit(this.selectedIndex);
+    this.moveClicked.emit(i);
   }
 }

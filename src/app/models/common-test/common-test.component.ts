@@ -7,18 +7,15 @@ import { CommonTestService } from './common-test.service';
   templateUrl: './common-test.component.html',
   styleUrls: ['./common-test.component.scss'],
 })
-export class CommonTestComponent implements OnChanges {
-  selectedIndex = 0;
+export class CommonTestComponent {
+  // selectedIndex = 0;
 
-  @ViewChild('tabGroup', { static: false }) tabGroup!: MatTabGroup;
+  // tabCount = 4;
 
-  constructor(private commonTestService: CommonTestService) {}
-
-  ngOnChanges(): void {
-    this.selectedIndex = this.commonTestService.selectedIndex;
-  }
+  @ViewChild('tabGroup') tabGroup!: MatTabGroup;
 
   setTabIndex(ind: number): void {
-    this.tabGroup.selectedIndex = ind;
+    if (this.tabGroup !== null && this.tabGroup.selectedIndex !== null)
+      this.tabGroup.selectedIndex += ind;
   }
 }

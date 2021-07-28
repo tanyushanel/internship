@@ -1,14 +1,5 @@
 <div class="buttons">
-  <button mat-raised-button *ngIf="selectedIndex" color="primary" (click)="onClick(-1)">
-    Prev Module
-  </button>
+  <button mat-raised-button color="primary" (click)="onClick(-1)">Prev Module</button>
 
-  <button
-    *ngIf="selectedIndex !== tabCount - 1"
-    mat-raised-button
-    color="primary"
-    (click)="onClick(1)"
-  >
-    Next Module
-  </button>
+  <button mat-raised-button color="primary" (click)="onClick(1)">Next Module</button>
 </div>
