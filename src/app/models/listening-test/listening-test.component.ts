@@ -9,6 +9,8 @@ import { MOCK_QUESTION_LIST, Question } from '../../../constants/mock-grammar-te
 export class ListeningTestComponent implements OnInit {
   questions!: Question[];
 
+  selectedIndex = 1;
+
   ngOnInit(): void {
     this.questions = [...MOCK_QUESTION_LIST];
   }
