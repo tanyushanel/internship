@@ -15,6 +15,7 @@ import { CoachEditorTest } from '../../../../mocks/users-utils.mock';
 import { CoachEditorTabs } from '../../../../constants/data-constants';
 import { GrammarAddingEditingDialogComponent } from '../grammar-adding-editing-dialog/grammar-adding-editing-dialog.component';
 import { TopicAddingEditingDialogComponent } from '../topic-adding-editing-dialog/topic-adding-editing-dialog.component';
+import { EditListeningDialogComponent } from '../edit-listening-dialog/edit-listening-dialog.component';
 
 @Component({
   selector: 'app-coach-profile-editor-table',
@@ -95,8 +96,9 @@ export class EditorTableComponent implements AfterViewInit, OnChanges {
           isEdit: true,
         },
       });
-    else if (this.selectTab === CoachEditorTabs.audition) console.log('Andrei modal');
-    else if (this.selectTab === CoachEditorTabs.writingAndSpeaking)
+    else if (this.selectTab === CoachEditorTabs.audition) {
+      this.dialog.open(EditListeningDialogComponent);
+    } else if (this.selectTab === CoachEditorTabs.writingAndSpeaking)
       this.dialog.open(TopicAddingEditingDialogComponent, {
         data: { id: row.id, level: row.level, question: 'Question', isEdit: true },
       });

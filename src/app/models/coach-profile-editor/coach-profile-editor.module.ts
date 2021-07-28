@@ -11,6 +11,8 @@ import { CoachProfileEditorComponent } from './coach-profile-editor.component';
 import { TopicAddingEditingDialogComponent } from './topic-adding-editing-dialog/topic-adding-editing-dialog.component';
 import { GrammarAddingEditingDialogComponent } from './grammar-adding-editing-dialog/grammar-adding-editing-dialog.component';
 import { ChooseLevelModule } from '../../components/choose-level/choose-level.module';
+import { EditListeningDialogModule } from './edit-listening-dialog/edit-listening-dialog.module';
+import { AddListeningDialogModule } from './add-listening-dialog/add-listening-dialog.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { ChooseLevelModule } from '../../components/choose-level/choose-level.mo
     CoachProfileEditorRoutingModule,
     MatIconModule,
     MatOptionModule,
+    EditListeningDialogModule,
+    AddListeningDialogModule,
     MatSelectModule,
     MatCheckboxModule,
     ChooseLevelModule,
