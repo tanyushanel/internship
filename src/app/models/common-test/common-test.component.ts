@@ -1,6 +1,5 @@
-import { Component, ViewChild, OnChanges } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatTabGroup } from '@angular/material/tabs';
-import { CommonTestService } from './common-test.service';
 
 @Component({
   selector: 'app-common-test',
@@ -8,10 +7,6 @@ import { CommonTestService } from './common-test.service';
   styleUrls: ['./common-test.component.scss'],
 })
 export class CommonTestComponent {
-  // selectedIndex = 0;
-
-  // tabCount = 4;
-
   @ViewChild('tabGroup') tabGroup!: MatTabGroup;
 
   setTabIndex(ind: number): void {

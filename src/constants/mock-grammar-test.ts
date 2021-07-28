@@ -90,3 +90,7 @@ export function createNewTestQuestion(id: number): Question {
 export const MOCK_QUESTION_LIST = Array.from({ length: 12 }, (_, k) =>
   createNewTestQuestion(k + 1),
 );
+
+export const MOCK_QUESTION_LIST_AUDITION = Array.from({ length: 10 }, (_, k) =>
+  createNewTestQuestion(k + 1),
+);
