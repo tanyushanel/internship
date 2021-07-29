@@ -1,21 +1,33 @@
 <mat-tab-group #tabGroup mat-stretch-tabs mat-align-tabs="center">
   <mat-tab label="GRAMMAR">
     <app-grammar-test></app-grammar-test>
-    <app-proceed-buttons (moveClicked)="setTabIndex($event)"></app-proceed-buttons>
+    <app-proceed-buttons
+      [number]="tabGroup.selectedIndex"
+      (moveClicked)="setTabIndex($event)"
+    ></app-proceed-buttons>
   </mat-tab>
 
   <mat-tab label="LISTENING">
     <app-listening></app-listening>
-    <app-proceed-buttons (moveClicked)="setTabIndex($event)"></app-proceed-buttons>
+    <app-proceed-buttons
+      [number]="tabGroup.selectedIndex"
+      (moveClicked)="setTabIndex($event)"
+    ></app-proceed-buttons>
   </mat-tab>
 
   <mat-tab label="ESSAY">
     <app-writing-test></app-writing-test>
-    <app-proceed-buttons (moveClicked)="setTabIndex($event)"></app-proceed-buttons>
+    <app-proceed-buttons
+      [number]="tabGroup.selectedIndex"
+      (moveClicked)="setTabIndex($event)"
+    ></app-proceed-buttons>
   </mat-tab>
 
   <mat-tab label="SPEAKING">
     <app-speaking></app-speaking>
-    <app-proceed-buttons (moveClicked)="setTabIndex($event)"></app-proceed-buttons>
+    <app-proceed-buttons
+      [number]="tabGroup.selectedIndex"
+      (moveClicked)="setTabIndex($event)"
+    ></app-proceed-buttons>
   </mat-tab>
 </mat-tab-group>

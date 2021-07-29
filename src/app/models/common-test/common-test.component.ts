@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatTabGroup } from '@angular/material/tabs';
 
 @Component({
@@ -6,11 +6,14 @@ import { MatTabGroup } from '@angular/material/tabs';
   templateUrl: './common-test.component.html',
   styleUrls: ['./common-test.component.scss'],
 })
-export class CommonTestComponent {
+export class CommonTestComponent implements OnInit {
   @ViewChild('tabGroup') tabGroup!: MatTabGroup;
 
+  ngOnInit() {}
+
   setTabIndex(ind: number): void {
-    if (this.tabGroup !== null && this.tabGroup.selectedIndex !== null)
+    if (this.tabGroup !== null && this.tabGroup.selectedIndex !== null) {
       this.tabGroup.selectedIndex += ind;
+    }
   }
 }

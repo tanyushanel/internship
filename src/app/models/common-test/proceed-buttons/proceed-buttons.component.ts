@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'app-proceed-buttons',
@@ -6,6 +6,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./proceed-buttons.component.scss'],
 })
 export class ProceedButtonsComponent implements OnInit {
+  @Input() number: any;
+
   @Output() moveClicked: EventEmitter<number> = new EventEmitter<number>();
 
   ngOnInit(): void {}
