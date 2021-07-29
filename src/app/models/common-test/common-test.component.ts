@@ -7,7 +7,7 @@ import { MatTabGroup } from '@angular/material/tabs';
   styleUrls: ['./common-test.component.scss'],
 })
 export class CommonTestComponent implements OnInit {
-  @Input() selectedIndex = 0;
+  selectedIndex = 0;
 
   ngOnInit() {}
 
