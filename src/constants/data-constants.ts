@@ -23,3 +23,16 @@ export enum Priority {
   High = 'High',
   Low = 'Low',
 }
+
+export enum CoachEditorTabs {
+  grammar = 'Grammar',
+  audition = 'Audition',
+  writingAndSpeaking = 'Writing & Speaking',
+}
+
+export enum GrammarAnswers {
+  first = 'A)',
+  second = 'B)',
+  third = 'C)',
+  fourth = 'D)',
+}

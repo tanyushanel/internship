@@ -5,16 +5,6 @@
       <b>{{ user.firstName }} {{ user.lastName }}</b>
       <p>{{ user.email }}</p>
     </div>
-
-    <button
-      class="submit-btn"
-      mat-raised-button
-      color="primary"
-      (click)="onAssignBtnClick()"
-      [disabled]="isClicked"
-    >
-      Assign test to User
-    </button>
   </mat-card>
 
   <app-user-results-table class="user-results-table" *ngIf="testsCount > 0; else noResults">
