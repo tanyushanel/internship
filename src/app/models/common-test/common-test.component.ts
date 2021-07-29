@@ -6,5 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./common-test.component.scss'],
 })
 export class CommonTestComponent implements OnInit {
-  ngOnInit(): void {}
+  selectedIndex = 0;
+
+  ngOnInit() {}
+
+  setTabIndex(ind: number): void {
+    this.selectedIndex = ind;
+  }
 }

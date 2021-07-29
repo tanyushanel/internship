@@ -3,10 +3,9 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from
 import { Observable } from 'rxjs';
 import { map, skip } from 'rxjs/operators';
 import { AuthStoreService } from '../services/store/auth-store.service';
-import { parseJwt } from '../helpers/perserJWT';
 import { Route } from '../../constants/route-constant';
 import { LocalStorageService } from '../services/local-storage.service';
-import { UserResponseType, UserToken } from '../../interfaces/user.interfaces';
+import { UserResponseType } from '../../interfaces/user.interfaces';
 import { isRoleExist } from '../helpers/check-role';
 
 @Injectable({
@@ -18,15 +17,6 @@ export class AuthGuard implements CanActivate {
     public readonly authService: AuthStoreService,
     private router: Router,
   ) {}
-
-  checkValidToken(token: string): boolean {
-    try {
-      const savedUser = parseJwt<UserToken>(token);
-      return savedUser.exp > Date.now();
-    } catch (e) {
-      return false;
-    }
-  }
 
   canActivate(
     route: ActivatedRouteSnapshot,
