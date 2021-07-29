@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserRoutesType, usersRoute } from '../../../constants/mock-user-data';
 import { UserResponseType } from '../../../interfaces/user.interfaces';
 import { AuthStoreService } from '../../services/store/auth-store.service';
@@ -19,6 +20,7 @@ export class SidebarComponent implements OnInit {
   usersRoute: UserRoutesType = usersRoute;
 
   constructor(
+    private _snackBar: MatSnackBar,
     private readonly userService: AuthStoreService,
     public readonly authService: AuthStoreService,
   ) {}
@@ -27,5 +29,10 @@ export class SidebarComponent implements OnInit {
 
   handleSidebar() {
     this.isOpen = !this.isOpen;
+  }
+
+  openSnackBar() {
+    // @ts-ignore error for check
+    a = b;
   }
 }

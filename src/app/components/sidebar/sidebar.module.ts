@@ -11,6 +11,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
 import { SidebarComponent } from './sidebar.component';
 import { NotificationComponent } from './notification/notification.component';
 
@@ -28,6 +29,7 @@ import { NotificationComponent } from './notification/notification.component';
     MatSelectModule,
     FormsModule,
     RouterModule,
+    MatButtonModule,
   ],
   exports: [SidebarComponent, NotificationComponent],
 })

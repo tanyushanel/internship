@@ -16,6 +16,7 @@
           <mat-list-item (click)="authService.signOut()" class="sidebar__list_item">
             <span>Exit</span>
           </mat-list-item>
+          <button mat-stroked-button (click)="openSnackBar()" color="warn">Show ERROR</button>
         </nav>
       </ng-container>
     </mat-nav-list>
