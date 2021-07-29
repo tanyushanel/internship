@@ -10,8 +10,6 @@ import { Question } from '../../interfaces/question-answer';
 export class GrammarTestComponent implements OnInit {
   questions: Question[] = [];
 
-  @Output() selectedIndexOut = new EventEmitter();
-
   ngOnInit(): void {
     this.questions = [...MOCK_QUESTION_LIST];
   }
