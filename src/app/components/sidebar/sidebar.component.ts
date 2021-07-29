@@ -30,9 +30,4 @@ export class SidebarComponent implements OnInit {
   handleSidebar() {
     this.isOpen = !this.isOpen;
   }
-
-  openSnackBar() {
-    // @ts-ignore error for check
-    a = b;
-  }
 }
