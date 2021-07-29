@@ -8,5 +8,15 @@ export interface UserResponseType {
   lastName: string;
   email: string;
   roles: UserRole[];
-  token: string;
+  token?: string;
+}
+export interface UserToken {
+  aud: string;
+  email: string;
+  exp: number;
+  iss: string;
+  jti: string;
+  roles: string;
+  sub: string;
+  uid: string;
 }

@@ -1,32 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { Question } from '../../interfaces/question-answer';
 
 @Component({
   selector: 'app-stepper',
   templateUrl: './stepper.component.html',
   styleUrls: ['./stepper.component.scss'],
+  providers: [
+    {
+      provide: STEPPER_GLOBAL_OPTIONS,
+      useValue: { showError: true },
+    },
+  ],
 })
-export class StepperComponent implements OnInit {
-  firstFormGroup: FormGroup;
+export class StepperComponent implements OnInit, OnChanges {
+  @Input() questionList!: Question[];
 
-  secondFormGroup: FormGroup;
+  stepperFormGroups: FormGroup[] = [];
 
-  lastFormGroup: FormGroup;
+  constructor(private formBuilder: FormBuilder) {}
 
-  currentRoute: string | undefined;
+  ngOnInit() {}
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {
-    this.firstFormGroup = this.formBuilder.group({
-      firstCtrl: ['', Validators.required],
-    });
-    this.secondFormGroup = this.formBuilder.group({
-      secondCtrl: ['', Validators.required],
-    });
-    this.lastFormGroup = this.formBuilder.group({
-      lastCtrl: ['', Validators.required],
-    });
+  ngOnChanges() {
+    this.stepperFormGroups = this.questionList.map(() =>
+      this.formBuilder.group({
+        stepCtrl: ['', Validators.required],
+      }),
+    );
   }
-
-  ngOnInit(): void {}
 }
