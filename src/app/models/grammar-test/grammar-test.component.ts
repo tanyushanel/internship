@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MOCK_QUESTION_LIST } from '../../../constants/mock-grammar-test';
 import { Question } from '../../interfaces/question-answer';
 

@@ -1,5 +1,4 @@
-import { Component, ViewChild, OnInit, Input } from '@angular/core';
-import { MatTabGroup } from '@angular/material/tabs';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-common-test',
