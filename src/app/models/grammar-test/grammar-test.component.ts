@@ -8,7 +8,7 @@ import { Question } from '../../interfaces/question-answer';
   styleUrls: ['./grammar-test.component.scss'],
 })
 export class GrammarTestComponent implements OnInit {
-  questions!: Question[];
+  questions: Question[] = [];
 
   @Output() selectedIndexOut = new EventEmitter();
 

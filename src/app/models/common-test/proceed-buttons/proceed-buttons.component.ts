@@ -6,13 +6,21 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
   styleUrls: ['./proceed-buttons.component.scss'],
 })
 export class ProceedButtonsComponent implements OnInit {
-  @Input() number: any;
+  @Input() currentIndex = 0;
 
-  @Output() moveClicked: EventEmitter<number> = new EventEmitter<number>();
+  @Output() changedIndex: EventEmitter<number> = new EventEmitter<number>();
+
+  maxIndex = 3;
 
   ngOnInit(): void {}
 
-  onClick(i: number) {
-    this.moveClicked.emit(i);
+  onPrevClick(): void {
+    this.currentIndex -= 1;
+    this.changedIndex.emit(this.currentIndex);
+  }
+
+  onNextClick(): void {
+    this.currentIndex += 1;
+    this.changedIndex.emit(this.currentIndex);
   }
 }
