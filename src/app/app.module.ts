@@ -2,7 +2,6 @@ import { NgModule, Provider } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidebarModule } from './components/sidebar/sidebar.module';
@@ -15,6 +14,8 @@ import { StatisticsComponent } from './components/mock-component/statistics/stat
 import { NotFoundComponent } from './models/not-found/not-found.component';
 import { LoadingIndicatorInterceptor } from './shared/loading-indicator.interceptor';
 import { AuthInterceptor } from './shared/auth.interceptor';
+import { AngularMaterialCommonModule } from './models/angular-material-common.module';
+import { ErrorHandlerModule } from './core/errors/error-handler.module';
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -44,7 +45,8 @@ const INTERCEPTOR_LOADING_INDICATOR: Provider = {
     BrowserAnimationsModule,
     SidebarModule,
     HttpClientModule,
-    MatProgressBarModule,
+    ErrorHandlerModule,
+    AngularMaterialCommonModule,
   ],
   providers: [INTERCEPTOR_PROVIDER, INTERCEPTOR_LOADING_INDICATOR],
   bootstrap: [AppComponent],
