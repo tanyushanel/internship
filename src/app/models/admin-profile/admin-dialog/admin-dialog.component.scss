@@ -1,10 +1,41 @@
 .container {
   display: flex;
   flex-direction: column;
-  width: 20em;
-  height: 15em;
+  width: 37em;
+  height: 27em;
+}
+
+h4 {
+  text-align: center;
+}
+
+.modal-dialog-screen {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.img {
+  width: 10em;
+  height: 10em;
+  margin: 20px;
+  background-color: gray;
+  border-radius: 5em;
+}
+
+.coach_info {
+  align-self: center;
+}
+
+p {
+  padding-bottom: 20px;
 }
 
 button {
-  margin: 16px;
+  margin: 30px;
+  font-size: 21px;
+}
+
+.btn {
+  padding-left: 130px;
 }

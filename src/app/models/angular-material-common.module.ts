@@ -13,6 +13,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule, MAT_TABS_CONFIG } from '@angular/material/tabs';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule } from '@angular/material/radio';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   imports: [
@@ -31,6 +38,8 @@ import { MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule } from '@angular/material/rad
     MatDialogModule,
     MatTabsModule,
     ReactiveFormsModule,
+    MatIconModule,
+    MatProgressBarModule,
   ],
   declarations: [],
   exports: [
@@ -49,6 +58,15 @@ import { MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule } from '@angular/material/rad
     MatIconModule,
     MatDialogModule,
     ReactiveFormsModule,
+    MatIconModule,
+    MatProgressBarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatToolbarModule,
+    MatCardModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatSnackBarModule,
   ],
   providers: [
     {

@@ -1,0 +1,26 @@
+@import '../../../../theme/variables';
+
+h1 {
+  text-align: center;
+}
+
+mat-radio-button {
+  padding: 15px;
+}
+
+.mat-raised-button {
+  margin: 15px;
+}
+
+.mat-dialog-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: auto;
+  min-height: auto;
+}
+
+.dialog-button {
+  display: flex;
+  flex-direction: row-reverse;
+}

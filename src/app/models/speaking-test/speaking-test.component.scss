@@ -1,7 +1,7 @@
 .speaking-module-position {
   display: flex;
+  align-items: center;
   justify-content: center;
-  margin-bottom: 20%;
 }
 
 .button-position {
@@ -20,4 +20,62 @@
   width: 15em;
   height: 8em;
   margin: 0 auto;
+  margin-top: 50px;
+}
+
+.countdown-position {
+  box-sizing: border-box;
+  background-color: thistle;
+  border-radius: 4px;
+  box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%),
+    0px 1px 5px 0px rgb(0 0 0 / 12%);
+}
+
+.countdown {
+  margin-bottom: 0;
+  padding: 17px;
+  color: whitesmoke;
+  font-size: 20px;
+}
+
+p {
+  margin: 0px;
+}
+
+.paragraph-position {
+  justify-content: left;
+  box-sizing: border-box;
+  max-width: 215px;
+  padding: 7px;
+  color: whitesmoke;
+  text-align: center;
+  background-color: thistle;
+  border-radius: 10px;
+  border-radius: 4px;
+  box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%),
+    0px 1px 5px 0px rgb(0 0 0 / 12%);
+}
+
+.number-of-attempt {
+  font-size: 20px;
+}
+
+.audio-reserv-place {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.audio-position {
+  max-width: 350px;
+  margin: 0 auto;
+}
+
+.audio {
+  width: 100%;
+}
+
+.text-of-theme-warning {
+  margin: 1% 30%;
+  padding: 20px;
+  text-align: center;
 }

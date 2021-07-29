@@ -12,6 +12,16 @@ export interface TestData {
   date: Date;
 }
 
+export interface CoachEditorTest {
+  id: string;
+  level: string;
+}
+
+export interface DialogData {
+  id: number;
+  level: string;
+}
+
 const MOCK_LASTNAMES: string[] = [
   'Walker',
   'Lee',
@@ -45,11 +55,10 @@ const MOCK_FIRSTNAMES: string[] = [
 ];
 
 const MOCK_LEVELS: string[] = [
-  'Starter',
   'Elementary',
-  'Pre-intermediate',
+  'Pre-Intermediate',
   'Intermediate',
-  'Upper-intermediate',
+  'Upper-Intermediate',
   'Advanced',
 ];
 
@@ -83,5 +92,35 @@ export function createNewCoachProfileTest(id: number): TestData {
   };
 }
 
+export function createNewGrammarQuestionTest(id: number): CoachEditorTest {
+  return {
+    id: id.toString(),
+    level: MOCK_LEVELS[Math.round(Math.random() * (MOCK_LEVELS.length - 1))],
+  };
+}
+
+export function createNewAuditionQuestionTest(id: number): CoachEditorTest {
+  return {
+    id: id.toString(),
+    level: MOCK_LEVELS[Math.round(Math.random() * (MOCK_LEVELS.length - 1))],
+  };
+}
+
+export function createNewWritingAndSpeakingQuestionTest(id: number): CoachEditorTest {
+  return {
+    id: id.toString(),
+    level: MOCK_LEVELS[Math.round(Math.random() * (MOCK_LEVELS.length - 1))],
+  };
+}
+
 export const MOCK_USERS = Array.from({ length: 100 }, (_, k) => createNewUser(k + 1));
 export const MOCK_TESTS = Array.from({ length: 100 }, (_, k) => createNewCoachProfileTest(k + 1));
+export const MOCK_GRAMMAR_QUESTIONS = Array.from({ length: 60 }, (_, k) =>
+  createNewGrammarQuestionTest(k + 1),
+);
+export const MOCK_AUDITION_QUESTIONS = Array.from({ length: 80 }, (_, k) =>
+  createNewAuditionQuestionTest(k + 1),
+);
+export const MOCK_WRITING_AND_SPEAKING_QUESTIONS = Array.from({ length: 100 }, (_, k) =>
+  createNewWritingAndSpeakingQuestionTest(k + 1),
+);

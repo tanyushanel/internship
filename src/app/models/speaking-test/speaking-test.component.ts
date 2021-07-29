@@ -18,9 +18,19 @@ export class SpeakingTestComponent implements OnInit {
 
   isRecording = false;
 
-  audioFiles: { src: SafeUrl }[] = [];
+  audioFile: { src: SafeUrl } | null = null;
 
   counter = 0;
+
+  intervalId = 0;
+
+  message = '';
+
+  minutes = 5;
+
+  seconds = 0;
+
+  numberAttempt = 0;
 
   constructor(
     private cd: ChangeDetectorRef,
@@ -41,7 +51,7 @@ export class SpeakingTestComponent implements OnInit {
         const audio = {
           src: this.dom.bypassSecurityTrustUrl(audioURL),
         };
-        this.audioFiles.push(audio);
+        this.audioFile = audio;
         this.cd.detectChanges();
       };
       this.mediaRecorder.ondataavailable = (e: { data: Blob }) => {
@@ -55,6 +65,41 @@ export class SpeakingTestComponent implements OnInit {
     }
   }
 
+  ngOnDestroy() {
+    this.clearTimer();
+  }
+
+  startTimer() {
+    this.countDown();
+  }
+
+  stopTimer() {
+    this.clearTimer();
+  }
+
+  private clearTimer() {
+    clearInterval(this.intervalId);
+  }
+
+  private countDown() {
+    this.clearTimer();
+    this.intervalId = window.setInterval(() => {
+      if (this.minutes === 0 && this.seconds === 0) {
+        this.toggleRecording();
+      } else if (this.seconds === 0) {
+        this.minutes -= 1;
+        this.seconds = 59;
+        return;
+      }
+      this.seconds -= 1;
+    }, 1000);
+  }
+
+  resetTimer() {
+    this.minutes = 5;
+    this.seconds = 0;
+  }
+
   toggleRecording() {
     this.isRecording = !this.isRecording;
     if (this.isRecording) {
@@ -65,16 +110,28 @@ export class SpeakingTestComponent implements OnInit {
     }
   }
 
+  getSeconds() {
+    return this.seconds >= 10 ? this.seconds : `0${this.seconds}`;
+  }
+
   getColor() {
     return !this.isRecording ? 'primary' : 'warn';
   }
 
+  counterOfAttempt() {
+    this.numberAttempt += 1;
+  }
+
   startRecording() {
     this.mediaRecorder.start();
+    this.startTimer();
+    this.counterOfAttempt();
+    this.resetTimer();
   }
 
   stopRecording() {
     this.mediaRecorder.stop();
+    this.stopTimer();
   }
 
   finishTest() {

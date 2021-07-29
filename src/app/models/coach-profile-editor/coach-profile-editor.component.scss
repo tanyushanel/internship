@@ -1,0 +1,17 @@
+@import '../../../theme/variables';
+
+.mat-elevation-z8 {
+  margin: 10% 100px;
+}
+
+.mat-card {
+  margin-top: 10px;
+}
+
+button {
+  margin: 10px 30px;
+}
+
+button:hover {
+  background-color: $secondary-grey2;
+}

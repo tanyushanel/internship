@@ -8,6 +8,7 @@ export enum Route {
   result = 'result',
   test = 'test',
   error = 'error',
+  login = '/',
 }
 
 export enum SidebarMenu {
@@ -22,3 +23,4 @@ export enum SidebarMenu {
 export const BASE_API_URL = 'http://elevel-001-site1.btempurl.com';
 
 export const LoginApiUrl = 'http://elevel-001-site1.btempurl.com/api/User/token';
+export const RefreshUserDataUrl = 'http://elevel-001-site1.btempurl.com/api/User/info';
