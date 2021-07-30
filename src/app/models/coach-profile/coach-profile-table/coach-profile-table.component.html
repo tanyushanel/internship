@@ -8,7 +8,7 @@
       <th class="header" mat-header-cell *matHeaderCellDef>
         <mat-form-field class="filter" floatLabel="never">
           <mat-label>Enter Test Number</mat-label>
-          <input matInput [formControl]="idFilter" (keyup)="onKey($event)" />
+          <input matInput [formControl]="idFilter" />
         </mat-form-field>
         <div mat-sort-header>Test Number</div>
       </th>
@@ -20,7 +20,7 @@
       <th class="header" mat-header-cell *matHeaderCellDef>
         <mat-form-field class="filter" floatLabel="never">
           <mat-label>Enter English Level</mat-label>
-          <input matInput [formControl]="levelFilter" (keyup)="onKey($event)" />
+          <input matInput [formControl]="levelFilter" />
         </mat-form-field>
         <div mat-sort-header>English Level</div>
       </th>
@@ -31,7 +31,7 @@
       <th class="header" mat-header-cell *matHeaderCellDef>
         <mat-form-field class="filter" floatLabel="never">
           <mat-label>Enter Test Date</mat-label>
-          <input matInput [formControl]="dateFilter" (keyup)="onKey($event)" />
+          <input matInput [formControl]="dateFilter" />
         </mat-form-field>
         <div mat-sort-header>Test Date</div>
       </th>
@@ -54,7 +54,17 @@
     ></tr>
 
     <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell" colspan="4">No data matching the filter "{{ searchQuery }}"</td>
+      <td class="mat-cell" colspan="4">
+        <div *ngIf="filterValues.id">
+          No data matching the number filter "{{ filterValues.id }}"
+        </div>
+        <div *ngIf="filterValues.level">
+          No data matching the level filter "{{ filterValues.level }}"
+        </div>
+        <div *ngIf="filterValues.date">
+          No data matching the date filter "{{ filterValues.date }}"
+        </div>
+      </td>
     </tr>
   </table>
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 50, 100]" showFirstLastButtons></mat-paginator>

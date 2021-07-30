@@ -90,22 +90,14 @@ export class CoachProfileTableComponent implements AfterViewInit, OnChanges, OnI
     });
   }
 
-  createFilter(): (data: any, filter: string) => boolean {
-    const filterFunction = function (
-      data: { id: { toString: () => string }; level: string; date: { toString: () => string } },
-      filter: string,
-    ): boolean {
+  createFilter(): (filterValues: any, filter: string) => boolean {
+    return function filterFunction(filterValues, filter): boolean {
       const searchTerms = JSON.parse(filter);
       return (
-        data.id.toString().toLowerCase().indexOf(searchTerms.id) !== -1 &&
-        data.level.toLowerCase().indexOf(searchTerms.level) !== -1 &&
-        data.date.toString().toLowerCase().indexOf(searchTerms.date) !== -1
+        filterValues.id.toString().toLowerCase().includes(searchTerms.id) &&
+        filterValues.level.toLowerCase().includes(searchTerms.level) &&
+        filterValues.date.toString().toLowerCase().includes(searchTerms.id)
       );
     };
-    return filterFunction;
-  }
-
-  onKey(event: any) {
-    this.searchQuery = event.target.value;
   }
 }

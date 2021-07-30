@@ -62,27 +62,15 @@ export class HrProfileComponent implements AfterViewInit, OnInit {
     });
   }
 
-  createFilter(): (data: any, filter: string) => boolean {
-    const filterFunction = function (
-      data: {
-        id: { toString: () => string };
-        firstName: string;
-        lastName: { toString: () => string };
-      },
-      filter: string,
-    ): boolean {
+  createFilter(): (filterValues: any, filter: string) => boolean {
+    return function filterFunction(filterValues: any, filter: string): boolean {
       const searchTerms = JSON.parse(filter);
       return (
-        data.id.toString().toLowerCase().indexOf(searchTerms.id) !== -1 &&
-        data.firstName.toLowerCase().indexOf(searchTerms.firstName) !== -1 &&
-        data.lastName.toString().toLowerCase().indexOf(searchTerms.lastName) !== -1
+        filterValues.id.toString().toLowerCase().includes(searchTerms.id) &&
+        filterValues.firstName.toLowerCase().includes(searchTerms.firstName) &&
+        filterValues.lastName.toString().toLowerCase().includes(searchTerms.lastName)
       );
     };
-    return filterFunction;
-  }
-
-  onKey(event: any) {
-    this.searchQuery = event.target.value;
   }
 
   onOpenInfoDialog(row: User): void {

@@ -84,18 +84,14 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
     });
   }
 
-  createFilter(): (data: any, filter: string) => boolean {
-    const filterFunction = function (
-      data: { id: { toString: () => string }; level: string },
-      filter: string,
-    ): boolean {
+  createFilter(): (filterValues: any, filter: string) => boolean {
+    return function filterFunction(filterValues, filter): boolean {
       const searchTerms = JSON.parse(filter);
       return (
-        data.id.toString().toLowerCase().indexOf(searchTerms.id) !== -1 &&
-        data.level.toLowerCase().indexOf(searchTerms.level) !== -1
+        filterValues.id.toString().toLowerCase().includes(searchTerms.id) &&
+        filterValues.level.toLowerCase().includes(searchTerms.level)
       );
     };
-    return filterFunction;
   }
 
   openEditor(row: CoachEditorTest) {
@@ -134,9 +130,5 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
       this.dialog.open(TopicAddingEditingDialogComponent, {
         data: { id: row.id, level: row.level, question: 'Question', isEdit: true },
       });
-  }
-
-  onKey(event: any) {
-    this.searchQuery = event.target.value;
   }
 }

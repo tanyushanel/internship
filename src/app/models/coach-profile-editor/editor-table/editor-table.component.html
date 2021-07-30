@@ -4,7 +4,7 @@
       <th mat-header-cell *matHeaderCellDef class="header">
         <mat-form-field class="filter" floatLabel="never">
           <mat-label>Enter Number</mat-label>
-          <input matInput [formControl]="idFilter" (keyup)="onKey($event)" />
+          <input matInput [formControl]="idFilter" />
         </mat-form-field>
         <div mat-sort-header>Number</div>
       </th>
@@ -15,7 +15,7 @@
       <th mat-header-cell *matHeaderCellDef class="header">
         <mat-form-field class="filter" floatLabel="never">
           <mat-label>Enter English Level </mat-label>
-          <input matInput [formControl]="levelFilter" (keyup)="onKey($event)" />
+          <input matInput [formControl]="levelFilter" />
         </mat-form-field>
         <div mat-sort-header>English Level</div>
       </th>
@@ -33,7 +33,14 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
     <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell" colspan="4">No data matching the filter "{{ searchQuery }}"</td>
+      <td class="mat-cell" colspan="4">
+        <div *ngIf="filterValues.id">
+          No data matching the number filter "{{ filterValues.id }}"
+        </div>
+        <div *ngIf="filterValues.level">
+          No data matching the level filter "{{ filterValues.level }}"
+        </div>
+      </td>
     </tr>
   </table>
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 50, 100]" showFirstLastButtons></mat-paginator>

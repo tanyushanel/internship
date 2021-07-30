@@ -5,7 +5,7 @@
       <th class="header" mat-header-cell *matHeaderCellDef>
         <mat-form-field class="filter" floatLabel="never">
           <mat-label>Enter Number</mat-label>
-          <input matInput [formControl]="idFilter" (keyup)="onKey($event)" />
+          <input matInput [formControl]="idFilter" />
         </mat-form-field>
         <div mat-sort-header>ID</div>
       </th>
@@ -17,7 +17,7 @@
       <th class="header" mat-header-cell *matHeaderCellDef>
         <mat-form-field class="filter" floatLabel="never">
           <mat-label>Enter First Name</mat-label>
-          <input matInput [formControl]="firstNameFilter" (keyup)="onKey($event)" />
+          <input matInput [formControl]="firstNameFilter" />
         </mat-form-field>
         <div mat-sort-header>First Name</div>
       </th>
@@ -29,7 +29,7 @@
       <th class="header" mat-header-cell *matHeaderCellDef>
         <mat-form-field class="filter" floatLabel="never">
           <mat-label>Enter Last Name</mat-label>
-          <input matInput [formControl]="lastNameFilter" (keyup)="onKey($event)" />
+          <input matInput [formControl]="lastNameFilter" />
         </mat-form-field>
         <div mat-sort-header>Last Name</div>
       </th>
@@ -54,9 +54,18 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
-    <!-- Row shown when there is no matching data. -->
     <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell" colspan="4">No data matching the filter "{{ searchQuery }}"</td>
+      <td class="mat-cell" colspan="4">
+        <div *ngIf="filterValues.id">
+          No data matching the number filter "{{ filterValues.id }}"
+        </div>
+        <div *ngIf="filterValues.firstName">
+          No data matching the first name filter "{{ filterValues.firstName }}"
+        </div>
+        <div *ngIf="filterValues.lastName">
+          No data matching the last name filter "{{ filterValues.lastName }}"
+        </div>
+      </td>
     </tr>
   </table>
 
