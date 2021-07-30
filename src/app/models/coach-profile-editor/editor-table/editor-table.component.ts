@@ -3,6 +3,7 @@ import {
   Component,
   Input,
   OnChanges,
+  OnInit,
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
@@ -11,6 +12,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 
 import { MatDialog } from '@angular/material/dialog';
+import { FormControl } from '@angular/forms';
 import { CoachEditorTest } from '../../../../mocks/users-utils.mock';
 import { CoachEditorTabs } from '../../../../constants/data-constants';
 import { GrammarAddingEditingDialogComponent } from '../grammar-adding-editing-dialog/grammar-adding-editing-dialog.component';
@@ -22,8 +24,19 @@ import { EditListeningDialogComponent } from '../edit-listening-dialog/edit-list
   templateUrl: './editor-table.component.html',
   styleUrls: ['./editor-table.component.scss'],
 })
-export class EditorTableComponent implements AfterViewInit, OnChanges {
+export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
   displayedColumns: string[] = ['id', 'level', 'edit'];
+
+  public searchQuery = '';
+
+  idFilter = new FormControl('');
+
+  levelFilter = new FormControl('');
+
+  filterValues = {
+    id: '',
+    level: '',
+  };
 
   dataSource: MatTableDataSource<CoachEditorTest>;
 
@@ -39,6 +52,7 @@ export class EditorTableComponent implements AfterViewInit, OnChanges {
 
   constructor(public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource(this.table);
+    this.dataSource.filterPredicate = this.createFilter();
   }
 
   ngAfterViewInit() {
@@ -59,13 +73,29 @@ export class EditorTableComponent implements AfterViewInit, OnChanges {
     }
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  ngOnInit() {
+    this.idFilter.valueChanges.subscribe((id) => {
+      this.filterValues.id = id;
+      this.dataSource.filter = JSON.stringify(this.filterValues);
+    });
+    this.levelFilter.valueChanges.subscribe((level) => {
+      this.filterValues.level = level;
+      this.dataSource.filter = JSON.stringify(this.filterValues);
+    });
+  }
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+  createFilter(): (data: any, filter: string) => boolean {
+    const filterFunction = function (
+      data: { id: { toString: () => string }; level: string },
+      filter: string,
+    ): boolean {
+      const searchTerms = JSON.parse(filter);
+      return (
+        data.id.toString().toLowerCase().indexOf(searchTerms.id) !== -1 &&
+        data.level.toLowerCase().indexOf(searchTerms.level) !== -1
+      );
+    };
+    return filterFunction;
   }
 
   openEditor(row: CoachEditorTest) {
@@ -97,10 +127,16 @@ export class EditorTableComponent implements AfterViewInit, OnChanges {
         },
       });
     else if (this.selectTab === CoachEditorTabs.audition) {
-      this.dialog.open(EditListeningDialogComponent);
+      this.dialog.open(EditListeningDialogComponent, {
+        autoFocus: false,
+      });
     } else if (this.selectTab === CoachEditorTabs.writingAndSpeaking)
       this.dialog.open(TopicAddingEditingDialogComponent, {
         data: { id: row.id, level: row.level, question: 'Question', isEdit: true },
       });
+  }
+
+  onKey(event: any) {
+    this.searchQuery = event.target.value;
   }
 }

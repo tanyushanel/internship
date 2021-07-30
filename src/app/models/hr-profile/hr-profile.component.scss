@@ -16,14 +16,15 @@ table {
   background-color: gray;
 }
 
-.mat-form-field {
-  box-sizing: border-box;
-  width: 100%;
-  padding: 0 1rem;
-  font-size: 14px;
-}
-
 td,
 th {
   width: 10%;
+}
+
+.header {
+  padding: 5px;
+}
+
+.filter {
+  display: block;
 }
