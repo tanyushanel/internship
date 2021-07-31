@@ -1,4 +1,5 @@
 <mat-card class="listening-description">Listen audio and answer the questions</mat-card>
+
 <ngx-audio-player
   class="ngx-audio"
   class="audio-player-position"
@@ -18,4 +19,4 @@
   [disablePositionSlider]="msaapDisablePositionSlider"
 >
 </ngx-audio-player>
-<app-stepper></app-stepper>
+<app-stepper [questionList]="questions"></app-stepper>

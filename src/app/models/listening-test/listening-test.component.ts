@@ -1,14 +1,20 @@
+
 import { hostViewClassName } from '@angular/compiler';
 import { Component, ElementRef, Input, AfterViewInit, OnInit } from '@angular/core';
 import { Track } from 'ngx-audio-player';
+import { Component, OnInit } from '@angular/core';
+import { MOCK_QUESTION_LIST_AUDITION, Question } from '../../../constants/mock-grammar-test';
+
 
 @Component({
   selector: 'app-listening',
   templateUrl: './listening-test.component.html',
   styleUrls: ['./listening-test.component.scss'],
 })
+
 export class ListeningTestComponent implements OnInit, AfterViewInit {
   constructor(private elementRef: ElementRef) {}
+  questions: Question[] = [];
 
   counter = 0;
 
@@ -41,7 +47,9 @@ export class ListeningTestComponent implements OnInit, AfterViewInit {
     },
   ];
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.questions = [...MOCK_QUESTION_LIST_AUDITION];
+  }
 
   ngAfterViewInit() {
     this.elementRef.nativeElement
@@ -81,5 +89,4 @@ export class ListeningTestComponent implements OnInit, AfterViewInit {
         .querySelector('.play-pause')
         .classList.add('play-pause-disable');
     }
-  }
-}
+

@@ -1,0 +1,12 @@
+<div class="container">
+  <h1>Writing Test</h1>
+  <mat-form-field appearance="fill">
+    <mat-label>Writing Topic</mat-label>
+    <textarea matInput>{{ data.isEdit ? 'Topic ' + data.id : '' }}</textarea>
+  </mat-form-field>
+  <h3>Select level</h3>
+  <app-choose-level [currentLevel]="data.level"></app-choose-level>
+  <p>
+    <button mat-raised-button color="primary">{{ data.isEdit ? 'UPDATE' : 'SAVE' }}</button>
+  </p>
+</div>

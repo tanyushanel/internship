@@ -21,7 +21,7 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
 
-    expect(app.title).toEqual('exadel-trainee-app');
+    expect(app.title).toEqual('internship');
   });
 
   it('should render title', () => {
@@ -30,7 +30,7 @@ describe('AppComponent', () => {
     const compiled = fixture.nativeElement;
 
     expect(compiled.querySelector('.content span').textContent).toContain(
-      'exadel-trainee-app app is running!',
+      'internship app is running!',
     );
   });
 });
