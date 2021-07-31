@@ -17,13 +17,14 @@ th {
   width: 33.333%;
 }
 
-mat-form-field {
-  box-sizing: border-box;
-  width: 100%;
-  padding: 0 1rem;
-  font-size: 14px;
-}
-
 .priority.high {
   background-color: $light-cyan;
+}
+
+.header {
+  padding: 5px;
+}
+
+.filter {
+  display: block;
 }
