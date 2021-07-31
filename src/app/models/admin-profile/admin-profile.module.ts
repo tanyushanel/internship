@@ -11,12 +11,14 @@ import { TableVirtualScrollModule } from 'ng-cdk-table-virtual-scroll';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
 import { AdminProfileRouting } from './admin-profile-routing';
 import { AdminProfileComponent } from './admin-profile.component';
 import { AdminDialogComponent } from './admin-dialog/admin-dialog.component';
+import { TableComponent } from './admin-table/table.component';
 
 @NgModule({
-  declarations: [AdminProfileComponent, AdminDialogComponent],
+  declarations: [AdminProfileComponent, AdminDialogComponent, TableComponent],
   imports: [
     CommonModule,
     AdminProfileRouting,
@@ -31,6 +33,7 @@ import { AdminDialogComponent } from './admin-dialog/admin-dialog.component';
     ReactiveFormsModule,
     MatSelectModule,
     FormsModule,
+    MatCardModule,
   ],
   providers: [DatePipe, ScrollDispatcher],
 })
