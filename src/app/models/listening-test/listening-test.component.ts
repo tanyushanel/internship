@@ -16,8 +16,6 @@ export class ListeningTestComponent implements OnInit, AfterViewInit {
 
   msaapDisplayTitle = false;
 
-  button = document.querySelector('.play-pause');
-
   msaapDisplayPlayList = false;
 
   msaapPageSizeOptions = [2, 4, 6];
@@ -50,36 +48,26 @@ export class ListeningTestComponent implements OnInit, AfterViewInit {
   }
 
   onClick() {
-    this.elementRef.nativeElement.querySelector('.play-pause').classList.add('play-pause-disable');
+    const repeatButton = this.elementRef.nativeElement.querySelector(
+      '#mat-tab-content-0-1 > div > app-listening > ngx-audio-player > mat-card > button.mat-focus-indicator.ngx-p-1.volume.justify-content-center.mat-button.mat-button-base.ng-star-inserted',
+    );
+    const playButton = this.elementRef.nativeElement.querySelector('.play-pause');
+    playButton.classList.add('play-pause-disable');
+    repeatButton.classList.add('play-repeat-disable');
     this.counter += 1;
     if (this.counter === 1) {
-      this.elementRef.nativeElement
-        .querySelector(
-          '#mat-tab-content-0-1 > div > app-listening > ngx-audio-player > mat-card > button.mat-focus-indicator.ngx-p-1.volume.justify-content-center.mat-button.mat-button-base.ng-star-inserted',
-        )
-        .click();
-      this.elementRef.nativeElement
-        .querySelector(
-          '#mat-tab-content-0-1 > div > app-listening > ngx-audio-player > mat-card > button.mat-focus-indicator.ngx-p-1.volume.justify-content-center.mat-button.mat-button-base.ng-star-inserted',
-        )
-        .classList.add('play-repeat-disable');
-    } else {
-      this.elementRef.nativeElement
-        .querySelector('.play-pause')
-        .classList.remove('play-pause-disable');
+      playButton.classList.add('play-pause-disable');
+      repeatButton.click();
     }
   }
 
   onEnded() {
+    const playButton = this.elementRef.nativeElement.querySelector('.play-pause');
     this.counter += 1;
     if (this.counter <= 4) {
-      this.elementRef.nativeElement
-        .querySelector('.play-pause')
-        .classList.remove('play-pause-disable');
+      playButton.classList.remove('play-pause-disable');
     } else {
-      this.elementRef.nativeElement
-        .querySelector('.play-pause')
-        .classList.add('play-pause-disable');
+      playButton.classList.add('play-pause-disable');
     }
   }
 }
