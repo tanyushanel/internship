@@ -1,240 +1,52 @@
 import { Test } from 'src/app/interfaces/test';
-import { Level, Priority } from 'src/constants/data-constants';
+import { Level } from 'src/constants/data-constants';
+import { Priority } from './data-constants';
 
-export const results: Test[] = [
-  {
-    id: 1,
-    date: { creationDate: new Date().toDateString() },
-    level: Level.UpperIntermediate,
-    priority: Priority.High,
-    userId: 3,
-    content: {
-      grammar: {
-        id: 1,
-        mark: 10,
-      },
-      audition: {
-        id: 1,
-        mark: 20,
-      },
-      essay: {
-        id: 1,
-        mark: 20,
-      },
-      speaking: {
-        id: 1,
-        mark: 10,
-      },
-    },
-    feedback: '',
-  },
-  {
-    id: 2,
-    date: { creationDate: new Date().toDateString() },
-    level: Level.Intermediate,
-    priority: Priority.High,
-    userId: 3,
-    content: {
-      grammar: {
-        id: 1,
-        mark: 10,
-      },
-      audition: {
-        id: 1,
-        mark: 20,
-      },
-      essay: {
-        id: 1,
-        mark: 20,
-      },
-      speaking: {
-        id: 1,
-        mark: 10,
-      },
-    },
-    feedback: '',
-  },
-  {
-    id: 3,
-    date: { creationDate: new Date().toDateString() },
-    level: Level.Elementary,
-    priority: Priority.Low,
-    userId: 3,
-    content: {
-      grammar: {
-        id: 1,
-        mark: 10,
-      },
-      audition: {
-        id: 1,
-        mark: 20,
-      },
-      essay: {
-        id: 1,
-        mark: 20,
-      },
-      speaking: {
-        id: 1,
-        mark: 10,
-      },
-    },
-    feedback: '',
-  },
-  {
-    id: 4,
-    date: { creationDate: new Date().toDateString() },
-    level: Level.Advanced,
-    priority: Priority.Low,
-    userId: 3,
-    content: {
-      grammar: {
-        id: 1,
-        mark: 10,
-      },
-      audition: {
-        id: 1,
-        mark: 20,
-      },
-      essay: {
-        id: 1,
-        mark: 20,
-      },
-      speaking: {
-        id: 1,
-        mark: 10,
-      },
-    },
-    feedback: '',
-  },
-  {
-    id: 5,
-    date: { creationDate: new Date().toDateString() },
-    level: Level.UpperIntermediate,
-    priority: Priority.Low,
-    userId: 3,
-    content: {
-      grammar: {
-        id: 1,
-        mark: 10,
-      },
-      audition: {
-        id: 1,
-        mark: 20,
-      },
-      essay: {
-        id: 1,
-        mark: 20,
-      },
-      speaking: {
-        id: 1,
-        mark: 10,
-      },
-    },
-    feedback: '',
-  },
-  {
-    id: 6,
-    date: { creationDate: new Date().toDateString() },
-    level: Level.Advanced,
-    priority: Priority.High,
-    userId: 3,
-    content: {
-      grammar: {
-        id: 1,
-        mark: 10,
-      },
-      audition: {
-        id: 1,
-        mark: 20,
-      },
-      essay: {
-        id: 1,
-        mark: 20,
-      },
-      speaking: {
-        id: 1,
-        mark: 10,
-      },
-    },
-    feedback: '',
-  },
+const feedback: string[] = ['Well done', 'According to the level', '', 'Ok', 'Normally'];
 
-  {
-    id: 7,
-    date: { creationDate: new Date().toDateString() },
-    level: Level.Intermediate,
-    priority: Priority.High,
-    userId: 3,
+export function getRandomDate(from: Date, to: Date) {
+  const fromTime = from.getTime();
+  const toTime = to.getTime();
+  return new Date(fromTime + Math.random() * (toTime - fromTime));
+}
+
+const generateRandomDate = (): Date => {
+  return getRandomDate(new Date('2020-10-12'), new Date('2021-07-12'));
+};
+
+export function generateRandomMark() {
+  const from = 10;
+  const to = 25;
+  return Math.floor(from + Math.random() * (to + 1 - from));
+}
+
+export function createNewTestResult(id: number): Test {
+  return {
+    id,
+    date: { creationDate: generateRandomDate().toDateString() },
+    level: [...Object.values(Level)][Math.floor(Math.random() * 5)],
+    userId: 1,
+    priority: [...Object.values(Priority)][Math.floor(Math.random() * 2)],
     content: {
       grammar: {
-        id: 1,
-        mark: 30,
+        id,
+        mark: generateRandomMark(),
       },
       audition: {
-        id: 1,
-        mark: 20,
+        id,
+        mark: generateRandomMark(),
       },
       essay: {
-        id: 1,
-        mark: 70,
+        id,
+        mark: generateRandomMark(),
       },
       speaking: {
-        id: 1,
-        mark: 0,
+        id,
+        mark: generateRandomMark(),
       },
     },
-    feedback: '',
-  },
-  {
-    id: 8,
-    date: { creationDate: new Date().toDateString() },
-    level: Level.Advanced,
-    priority: Priority.Low,
-    userId: 3,
-    content: {
-      grammar: {
-        id: 1,
-        mark: 30,
-      },
-      audition: {
-        id: 1,
-        mark: 20,
-      },
-      essay: {
-        id: 1,
-        mark: 10,
-      },
-      speaking: {
-        id: 1,
-        mark: 10,
-      },
-    },
-    feedback: '',
-  },
-  {
-    id: 9,
-    date: { creationDate: new Date().toDateString() },
-    level: Level.Elementary,
-    userId: 3,
-    priority: Priority.High,
-    content: {
-      grammar: {
-        id: 1,
-        mark: 30,
-      },
-      audition: {
-        id: 1,
-        mark: 20,
-      },
-      essay: {
-        id: 1,
-        mark: 20,
-      },
-      speaking: {
-        id: 1,
-        mark: 10,
-      },
-    },
-    feedback: 'OK',
-  },
-];
+    feedback: feedback[Math.floor(Math.random() * 5)],
+  };
+}
+
+export const MOCK_TEST_RESULTS = Array.from({ length: 100 }, (_, k) => createNewTestResult(k + 1));

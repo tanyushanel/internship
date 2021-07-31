@@ -1,6 +1,6 @@
 @import 'src/theme/variables';
 
-.mat-form-field {
+.mat-radio-group {
   margin-top: 16px;
 }
 
@@ -9,6 +9,11 @@
   margin: 10% auto 5%;
   border-radius: 10px;
   box-shadow: 0 5px 10px 5px rgba(117, 56, 141, 0.2);
+}
+
+.answer-radio-button {
+  display: block;
+  margin: 1rem auto;
 }
 
 .button__color {

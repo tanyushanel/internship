@@ -1,38 +1,33 @@
-<mat-tab-group #tabGroup>
+<mat-tab-group mat-stretch-tabs mat-align-tabs="center" [(selectedIndex)]="selectedIndex">
   <mat-tab label="GRAMMAR">
     <app-grammar-test></app-grammar-test>
-    <button
-      mat-raised-button
-      color="primary"
-      class="button-submit"
-      (click)="tabGroup.selectedIndex = 1"
-    >
-      Submit & Go Next
-    </button>
+    <app-proceed-buttons
+      [currentIndex]="selectedIndex"
+      (changedIndex)="setTabIndex($event)"
+    ></app-proceed-buttons>
   </mat-tab>
-  <mat-tab label="AUDITION">
+
+  <mat-tab label="LISTENING">
     <app-listening></app-listening>
-    <button
-      mat-raised-button
-      color="primary"
-      class="button-submit"
-      (click)="tabGroup.selectedIndex = 2"
-    >
-      Submit & Go Next
-    </button>
+    <app-proceed-buttons
+      [currentIndex]="selectedIndex"
+      (changedIndex)="setTabIndex($event)"
+    ></app-proceed-buttons>
   </mat-tab>
+
   <mat-tab label="ESSAY">
     <app-writing-test></app-writing-test>
-    <button
-      mat-raised-button
-      color="primary"
-      class="button-submit"
-      (click)="tabGroup.selectedIndex = 3"
-    >
-      Submit & Go Next
-    </button>
+    <app-proceed-buttons
+      [currentIndex]="selectedIndex"
+      (changedIndex)="setTabIndex($event)"
+    ></app-proceed-buttons>
   </mat-tab>
+
   <mat-tab label="SPEAKING">
     <app-speaking></app-speaking>
+    <app-proceed-buttons
+      [currentIndex]="selectedIndex"
+      (changedIndex)="setTabIndex($event)"
+    ></app-proceed-buttons>
   </mat-tab>
 </mat-tab-group>

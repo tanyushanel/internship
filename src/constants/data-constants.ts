@@ -1,8 +1,8 @@
 export enum Level {
   Elementary = 'Elementary',
-  PreIntermediate = 'PreIntermediate',
+  PreIntermediate = 'Pre-Intermediate',
   Intermediate = 'Intermediate',
-  UpperIntermediate = 'UpperIntermediate',
+  UpperIntermediate = 'Upper-Intermediate',
   Advanced = 'Advanced',
 }
 
@@ -20,6 +20,19 @@ export enum UserRole {
 }
 
 export enum Priority {
-  High = 1,
-  Low = 2,
+  High = 'High',
+  Low = 'Low',
+}
+
+export enum CoachEditorTabs {
+  grammar = 'Grammar',
+  audition = 'Audition',
+  writingAndSpeaking = 'Writing & Speaking',
+}
+
+export enum GrammarAnswers {
+  first = 'A)',
+  second = 'B)',
+  third = 'C)',
+  fourth = 'D)',
 }
