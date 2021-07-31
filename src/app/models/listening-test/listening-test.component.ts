@@ -31,7 +31,7 @@ export class ListeningTestComponent implements OnInit, AfterViewInit {
 
   msaapDisplayDuration = false;
 
-  msaapDisablePositionSlider = false;
+  msaapDisablePositionSlider = true;
 
   msaapPlaylist: Track[] = [
     {
