@@ -23,8 +23,13 @@ th {
 
 .header {
   padding: 5px;
+  vertical-align: bottom;
 }
 
 .filter {
   display: block;
+}
+
+.no-filter-header {
+  margin-top: 50px;
 }
