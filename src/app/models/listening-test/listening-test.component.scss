@@ -1,9 +1,22 @@
-.audio-listening-position {
-  display: block;
-  margin: 0 auto;
-  padding-top: 40px;
+.listening-description {
+  margin-bottom: 50px;
+  text-align: center;
 }
 
-.listening-description {
-  text-align: center;
+button {
+  opacity: 0;
+}
+
+.audio-player-position {
+  display: block;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+:host ::ng-deep .play-pause-disable {
+  display: none;
+}
+
+:host ::ng-deep .play-repeat-disable {
+  display: none;
 }
