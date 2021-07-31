@@ -8,7 +8,7 @@ import { UserResultsDialogComponent } from '../dialog-module/user-results-dialog
 import { MOCK_USERS, UserData } from '../../../mocks/users-utils.mock';
 import { User } from '../../interfaces/user';
 import { HrProfileDialogComponent } from './hr-profile-dialog/hr-profile-dialog.component';
-import { isSubstring } from '../coach-profile-editor/editor-table/editor-table.component';
+import { isSubstring } from '../../helpers/filter-check';
 
 @Component({
   selector: 'app-hr-profile',

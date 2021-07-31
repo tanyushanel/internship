@@ -18,10 +18,7 @@ import { CoachEditorTabs } from '../../../../constants/data-constants';
 import { GrammarAddingEditingDialogComponent } from '../grammar-adding-editing-dialog/grammar-adding-editing-dialog.component';
 import { TopicAddingEditingDialogComponent } from '../topic-adding-editing-dialog/topic-adding-editing-dialog.component';
 import { EditListeningDialogComponent } from '../edit-listening-dialog/edit-listening-dialog.component';
-
-export function isSubstring(str: string | number, substr: string): boolean {
-  return str.toString().toLowerCase().includes(substr);
-}
+import { isSubstring } from '../../../helpers/filter-check';
 
 @Component({
   selector: 'app-coach-profile-editor-table',
