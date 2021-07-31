@@ -8,6 +8,7 @@ import { UserResultsDialogComponent } from '../dialog-module/user-results-dialog
 import { MOCK_USERS, UserData } from '../../../mocks/users-utils.mock';
 import { User } from '../../interfaces/user';
 import { HrProfileDialogComponent } from './hr-profile-dialog/hr-profile-dialog.component';
+import { isSubstring } from '../coach-profile-editor/editor-table/editor-table.component';
 
 @Component({
   selector: 'app-hr-profile',
@@ -62,13 +63,13 @@ export class HrProfileComponent implements AfterViewInit, OnInit {
     });
   }
 
-  createFilter(): (filterValues: any, filter: string) => boolean {
-    return function filterFunction(filterValues: any, filter: string): boolean {
+  createFilter(): (filterValues: UserData, filter: string) => boolean {
+    return (filterValues, filter): boolean => {
       const searchTerms = JSON.parse(filter);
       return (
-        filterValues.id.toString().toLowerCase().includes(searchTerms.id) &&
-        filterValues.firstName.toLowerCase().includes(searchTerms.firstName) &&
-        filterValues.lastName.toString().toLowerCase().includes(searchTerms.lastName)
+        isSubstring(filterValues.id, searchTerms.id) &&
+        isSubstring(filterValues.firstName, searchTerms.firstName) &&
+        isSubstring(filterValues.lastName, searchTerms.lastName)
       );
     };
   }

@@ -14,6 +14,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { FormControl } from '@angular/forms';
 import { TestData } from '../../../../mocks/users-utils.mock';
 import { CoachProfileDialogComponent } from '../coach-profile-dialog/coach-profile-dialog.component';
+import { isSubstring } from '../../coach-profile-editor/editor-table/editor-table.component';
 
 @Component({
   selector: 'app-coach-profile-table',
@@ -90,13 +91,13 @@ export class CoachProfileTableComponent implements AfterViewInit, OnChanges, OnI
     });
   }
 
-  createFilter(): (filterValues: any, filter: string) => boolean {
+  createFilter(): (filterValues: TestData, filter: string) => boolean {
     return function filterFunction(filterValues, filter): boolean {
       const searchTerms = JSON.parse(filter);
       return (
-        filterValues.id.toString().toLowerCase().includes(searchTerms.id) &&
-        filterValues.level.toLowerCase().includes(searchTerms.level) &&
-        filterValues.date.toString().toLowerCase().includes(searchTerms.id)
+        isSubstring(filterValues.id, searchTerms.id) &&
+        isSubstring(filterValues.level, searchTerms.level) &&
+        isSubstring(filterValues.date.toDateString(), searchTerms.date)
       );
     };
   }

@@ -19,6 +19,10 @@ import { GrammarAddingEditingDialogComponent } from '../grammar-adding-editing-d
 import { TopicAddingEditingDialogComponent } from '../topic-adding-editing-dialog/topic-adding-editing-dialog.component';
 import { EditListeningDialogComponent } from '../edit-listening-dialog/edit-listening-dialog.component';
 
+export function isSubstring(str: string | number, substr: string): boolean {
+  return str.toString().toLowerCase().includes(substr);
+}
+
 @Component({
   selector: 'app-coach-profile-editor-table',
   templateUrl: './editor-table.component.html',
@@ -84,12 +88,12 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
     });
   }
 
-  createFilter(): (filterValues: any, filter: string) => boolean {
+  createFilter(): (filterValues: CoachEditorTest, filter: string) => boolean {
     return function filterFunction(filterValues, filter): boolean {
       const searchTerms = JSON.parse(filter);
       return (
-        filterValues.id.toString().toLowerCase().includes(searchTerms.id) &&
-        filterValues.level.toLowerCase().includes(searchTerms.level)
+        isSubstring(filterValues.id, searchTerms.id) &&
+        isSubstring(filterValues.level, searchTerms.level)
       );
     };
   }
