@@ -1,5 +1,5 @@
 <div class="profile-container">
-  <h3 class="table-caption">Please, choose your level of language before you start a TEST:</h3>
+  <h3 class="table-caption">Please, choose your language level before starting a test:</h3>
 
   <mat-radio-group name="levels" class="radio" [(ngModel)]="selectedLevel">
     <mat-radio-button class="radio-btn" *ngFor="let level of levels" [value]="level">
@@ -21,7 +21,11 @@
     START TEST
   </button>
 
-  <app-user-results-table class="user-results-table" *ngIf="testsCount > 0; else noResults">
+  <app-user-results-table
+    class="user-results-table"
+    [results$]="results$"
+    *ngIf="testsCount; else noResults"
+  >
   </app-user-results-table>
 
   <ng-template #noResults>

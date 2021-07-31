@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, Input } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Test } from 'src/app/interfaces/test';
+
 import { MOCK_TEST_RESULTS } from '../../../constants/mock-test-results';
 
 @Component({
@@ -18,7 +19,7 @@ import { MOCK_TEST_RESULTS } from '../../../constants/mock-test-results';
   ],
 })
 export class UserResultsTableComponent implements OnInit, AfterViewInit {
-  results: Test[] = [];
+  @Input() results$!: Test[];
 
   columnsToDisplay: string[] = ['id', 'date', 'level', 'result'];
 
@@ -33,7 +34,7 @@ export class UserResultsTableComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.results = [...MOCK_TEST_RESULTS];
-    this.dataSource = new MatTableDataSource(this.results);
+    // this.results$ = [...MOCK_TEST_RESULTS];
+    this.dataSource = new MatTableDataSource(this.results$);
   }
 }

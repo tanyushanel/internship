@@ -10,7 +10,7 @@ import { Question } from '../../interfaces/question-answer';
   providers: [
     {
       provide: STEPPER_GLOBAL_OPTIONS,
-      useValue: { showError: true },
+      useValue: { showError: true, displayDefaultIndicatorType: false },
     },
   ],
 })

@@ -10,7 +10,7 @@ import { BASE_API_URL } from '../../../../constants/route-constant';
 export class TestHttpService {
   constructor(private http: HttpClient) {}
 
-  getTestResults(userId: number): Observable<Test[]> {
-    return this.http.get<Test[]>(`${BASE_API_URL}/user/${userId}/results`);
+  getTests(userId: number): Observable<Test[]> {
+    return this.http.get<Test[]>(`${BASE_API_URL}/api/Test/${userId}`);
   }
 }
