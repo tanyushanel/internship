@@ -16,8 +16,8 @@ export class TestStoreService {
 
   getTestResults(): Observable<Test[]> {
     return this.authStoreService.activeUser$.pipe(
-      filter((user) => user !== undefined),
-      concatMap((user) => this.testHttpService.getTests(user !== undefined ? user.id : 0)),
+      filter((user) => user !== null),
+      concatMap((user) => this.testHttpService.getTests(user !== null ? user.id : 0)),
     );
   }
 }
