@@ -3,20 +3,22 @@
   text-align: center;
 }
 
-button {
-  opacity: 0;
-}
-
 .audio-player-position {
   display: block;
   max-width: 600px;
   margin: 0 auto;
 }
 
-:host ::ng-deep .play-pause-disable {
-  display: none;
-}
-
-:host ::ng-deep .play-repeat-disable {
-  display: none;
+:host ::ng-deep {
+  .play-pause-disable,
+  .play-repeat-disable {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    overflow: hidden;
+    border: 0 !important;
+    clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    clip: rect(1px, 1px, 1px, 1px);
+  }
 }
