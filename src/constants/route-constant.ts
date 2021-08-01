@@ -19,6 +19,6 @@ export enum SidebarMenu {
   manage = 'Manage',
   statistics = 'Statistics',
 }
-
+export const PostAssignTest = 'http://elevel-001-site1.btempurl.com/api/Test/assign';
 export const LoginApiUrl = 'http://elevel-001-site1.btempurl.com/api/User/token';
 export const RefreshUserDataUrl = 'http://elevel-001-site1.btempurl.com/api/User/info';

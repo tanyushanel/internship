@@ -20,3 +20,10 @@ export interface UserToken {
   sub: string;
   uid: string;
 }
+
+export interface ApiAssignTest {
+  level: number;
+  assignmentEndDate: string;
+  uid: string;
+  priority: boolean;
+}
