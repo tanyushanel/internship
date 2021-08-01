@@ -11,6 +11,6 @@ export class TestHttpService {
   constructor(private http: HttpClient) {}
 
   getTests(userId: number): Observable<Test[]> {
-    return this.http.get<Test[]>(`${BASE_API_URL}/api/Test/${userId}`);
+    return this.http.get<Test[]>(`${BASE_API_URL}/api/ApplicationUser/${userId}`);
   }
 }
