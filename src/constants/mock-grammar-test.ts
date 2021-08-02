@@ -80,7 +80,7 @@ export function createNewTestQuestion(id: number): Question {
   return {
     id,
     text: sentense.charAt(0).toUpperCase() + sentense.slice(1),
-    level: [...Object.values(Level)][Math.floor(Math.random() * 5)],
+    level: Object.values(Level)[Math.floor(Math.random() * 5)],
     auditionId: id,
     answerId: id,
     answers: [...MOCK_ANSWER_LIST],

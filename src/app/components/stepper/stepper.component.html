@@ -22,8 +22,8 @@
       </mat-radio-group>
 
       <div>
-        <button class="button__color" mat-button matStepperPrevious *ngIf="!first">Back</button>
-        <button class="button__color" mat-button matStepperNext *ngIf="!last">Next</button>
+        <button class="button__color" mat-button matStepperPrevious [disabled]="first">Back</button>
+        <button class="button__color" mat-button matStepperNext [disabled]="last">Next</button>
       </div>
     </form>
   </mat-step>

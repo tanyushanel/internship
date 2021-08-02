@@ -1,4 +1,4 @@
-import { concatMap, filter, withLatestFrom } from 'rxjs/operators';
+import { concatMap, filter } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TestHttpService } from './test-http.service';

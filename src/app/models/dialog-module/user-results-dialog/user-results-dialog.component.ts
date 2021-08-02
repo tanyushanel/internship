@@ -1,10 +1,9 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { User } from '../../../interfaces/user';
 import { user } from '../../../../constants/mock-user-data';
-import { UserRole } from '../../../../constants/data-constants';
 import { Test } from '../../../interfaces/test';
-import { MOCK_TEST_RESULTS } from '../../../../constants/mock-test-results';
+// import { MOCK_TEST_RESULTS } from '../../../../constants/mock-test-results';
 
 @Component({
   selector: 'app-user-results-dialog',
@@ -12,14 +11,7 @@ import { MOCK_TEST_RESULTS } from '../../../../constants/mock-test-results';
   styleUrls: ['./user-results-dialog.component.scss'],
 })
 export class UserResultsDialogComponent implements OnInit {
-  user: User = {
-    id: 1,
-    firstName: 'Сальвадор',
-    lastName: 'Бананович',
-    email: 'salsa@mail.com',
-    role: UserRole.Coach,
-    userPhoto: '',
-  };
+  @Input() user!: User;
 
   isClicked = false;
 
@@ -35,7 +27,7 @@ export class UserResultsDialogComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.results = [...MOCK_TEST_RESULTS];
+    // this.results = [...MOCK_TEST_RESULTS];
     this.user = { ...user, ...this.data };
   }
 
