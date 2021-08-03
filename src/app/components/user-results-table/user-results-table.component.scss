@@ -93,10 +93,11 @@ tr.element-row:not(.expanded-row):active {
 }
 
 .element-description-attribution {
-  width: 15rem;
+  width: 100%;
   cursor: pointer;
 
   &.ellipsed {
+    width: 15rem;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
