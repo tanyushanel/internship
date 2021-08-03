@@ -9,9 +9,15 @@ th {
   width: 50%;
 }
 
-mat-form-field {
-  box-sizing: border-box;
-  width: 100%;
-  padding: 0 1rem;
-  font-size: 14px;
+.header {
+  padding: 5px;
+  vertical-align: bottom;
+}
+
+.mat-form-field {
+  margin: 1.5em 0;
+}
+
+.filter {
+  display: block;
 }

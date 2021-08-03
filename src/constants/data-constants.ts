@@ -21,7 +21,7 @@ export enum UserRole {
 
 export enum CoachEditorTabs {
   grammar = 'Grammar',
-  audition = 'Audition',
+  audition = 'Listening',
   writingAndSpeaking = 'Writing & Speaking',
 }
 
@@ -30,4 +30,10 @@ export enum GrammarAnswers {
   second = 'B)',
   third = 'C)',
   fourth = 'D)',
+}
+
+export enum FilterFields {
+  id = 'id',
+  level = 'level',
+  date = 'date',
 }

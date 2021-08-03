@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ErrorStoreService } from '../../services/store/error-store.service';
@@ -11,7 +11,7 @@ declare let MediaRecorder: any;
   templateUrl: './speaking-test.component.html',
   styleUrls: ['./speaking-test.component.scss'],
 })
-export class SpeakingTestComponent implements OnInit {
+export class SpeakingTestComponent implements OnInit, OnDestroy {
   mediaRecorder: any;
 
   chunks: Blob[] = [];
