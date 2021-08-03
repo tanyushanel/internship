@@ -5,8 +5,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Test } from 'src/app/interfaces/test';
 import { Level } from '../../../constants/data-constants';
 
-// import { MOCK_TEST_RESULTS } from '../../../constants/mock-test-results';
-
 @Component({
   selector: 'app-user-results-table',
   templateUrl: './user-results-table.component.html',
@@ -43,7 +41,6 @@ export class UserResultsTableComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    // this.results$ = [...MOCK_TEST_RESULTS];
     this.dataSource = new MatTableDataSource(this.results);
   }
 

@@ -27,9 +27,9 @@
 
   <app-user-results-table
     class="user-results-table"
-    [results]="results"
+    [results]="(results$ | async)!"
     [levels]="levels"
-    *ngIf="testsCount; else noResults"
+    *ngIf="results$ | async; else noResults"
   >
   </app-user-results-table>
 

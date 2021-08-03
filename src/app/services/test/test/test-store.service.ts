@@ -1,4 +1,4 @@
-import { concatMap, filter } from 'rxjs/operators';
+import { concatMap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TestHttpService } from './test-http.service';
@@ -16,7 +16,6 @@ export class TestStoreService {
 
   getTestResults(): Observable<Test[]> {
     return this.authStoreService.activeUser$.pipe(
-      filter((user) => user !== null),
       concatMap((user) => this.testHttpService.getTests(user !== null ? user.id : 0)),
     );
   }

@@ -3,7 +3,6 @@ import { Component, Inject, Input, OnInit } from '@angular/core';
 import { User } from '../../../interfaces/user';
 import { user } from '../../../../constants/mock-user-data';
 import { Test } from '../../../interfaces/test';
-// import { MOCK_TEST_RESULTS } from '../../../../constants/mock-test-results';
 
 @Component({
   selector: 'app-user-results-dialog',
@@ -27,7 +26,6 @@ export class UserResultsDialogComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.results = [...MOCK_TEST_RESULTS];
     this.user = { ...user, ...this.data };
   }
 

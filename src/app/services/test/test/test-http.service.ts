@@ -20,7 +20,7 @@ export class TestHttpService {
       this.http
         // .get<GetTestsResult>(`${BASE_API_URL}/api/Test?userId=${userId}`)
         .get<GetTestsResult>(`${BASE_API_URL}/api/Test?userId=9d71d2fb-d63e-4fd6-8acf-08d955831c7b`)
-        .pipe(map((res) => res.tests))
+        .pipe(map((res) => res.tests.filter((r) => r.testPassingDate !== null)))
     );
   }
 }
