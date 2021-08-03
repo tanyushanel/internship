@@ -8,6 +8,7 @@ export interface UsersPermission {
 export interface UserRoutType {
   route: string[];
   menuItem: string[];
+  menuIcon: string[];
 }
 export interface UserRoutesType {
   [key: string]: UserRoutType;
@@ -17,19 +18,23 @@ export const usersRoute: UserRoutesType = {
   [UserRole.User]: {
     route: [Route.home],
     menuItem: [SidebarMenu.home],
+    menuIcon: [SidebarMenu.homeicon],
   },
 
   [UserRole.HumanResourceManager]: {
     route: [Route.home, Route.users],
     menuItem: [SidebarMenu.home, SidebarMenu.users],
+    menuIcon: [SidebarMenu.homeicon, SidebarMenu.usersicon],
   },
   [UserRole.Coach]: {
     route: [Route.home, Route.check, Route.editor],
     menuItem: [SidebarMenu.home, SidebarMenu.check, SidebarMenu.editor],
+    menuIcon: [SidebarMenu.homeicon, SidebarMenu.checkicon, SidebarMenu.editoricon],
   },
   [UserRole.Administrator]: {
     route: [Route.home, Route.manage, Route.statistics],
     menuItem: [SidebarMenu.home, SidebarMenu.manage, SidebarMenu.statistics],
+    menuIcon: [SidebarMenu.homeicon, SidebarMenu.manageicon, SidebarMenu.statisticsicon],
   },
 };
 
