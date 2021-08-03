@@ -24,3 +24,4 @@ export const BASE_API_URL = 'http://elevel-001-site1.btempurl.com';
 
 export const LoginApiUrl = `${BASE_API_URL}/api/User/token`;
 export const RefreshUserDataUrl = `${BASE_API_URL}/api/User/info`;
+export const PostAssignTest = `${BASE_API_URL}/api/Test/assign`;
