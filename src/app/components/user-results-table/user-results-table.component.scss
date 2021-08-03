@@ -24,14 +24,17 @@ table {
   border-radius: 0.25rem;
 
   & span {
-    padding: 0.5rem 1rem;
+    display: inline-block;
+    min-height: 1rem;
+    padding: 0.5rem 1.5rem;
     color: white;
+    text-align: center;
   }
 }
 
 .desc {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 
   span {
     color: black;
@@ -82,10 +85,23 @@ tr.element-row:not(.expanded-row):active {
 }
 
 .element-description {
+  display: inline-flex;
   max-width: 50%;
   margin: 0.5rem;
   white-space: normal;
   text-align: justify;
+}
+
+.element-description-attribution {
+  width: 100%;
+  cursor: pointer;
+
+  &.ellipsed {
+    width: 15rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 }
 
 .element-description-attribution {

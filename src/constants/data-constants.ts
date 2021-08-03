@@ -1,8 +1,8 @@
 export enum Level {
   Elementary = 'Elementary',
-  PreIntermediate = 'Pre-Intermediate',
+  PreIntermediate = 'Pre-intermediate',
   Intermediate = 'Intermediate',
-  UpperIntermediate = 'Upper-Intermediate',
+  UpperIntermediate = 'Upper-intermediate',
   Advanced = 'Advanced',
 }
 
@@ -17,11 +17,6 @@ export enum UserRole {
   HumanResourceManager = 'HumanResourceManager',
   Coach = 'Coach',
   Administrator = 'Administrator',
-}
-
-export enum Priority {
-  High = 'High',
-  Low = 'Low',
 }
 
 export enum CoachEditorTabs {

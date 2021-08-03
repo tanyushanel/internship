@@ -1,34 +1,19 @@
-import { Priority, Level } from '../../constants/data-constants';
-import { Audition } from './audition';
-import { Question } from './question-answer';
-import { TestModule } from './test-module';
-import { User } from './user';
+import { Level } from '../../constants/data-constants';
 
 export interface Test {
   id: number;
   level: Level;
-  userId: User['id'];
-  hrId?: User['id'];
-  coachId?: User['id'];
-  priority?: Priority;
-  date: {
-    creationDate?: string;
-    assignmentStartDate?: string;
-    assignmentEndDate?: string;
-  };
-  content: {
-    grammar: TestModule;
-    audition: TestModule;
-    essay: TestModule;
-    speaking: TestModule;
-  };
-  feedback?: string;
-}
-
-export interface FullTestToPass {
-  id: number;
-  auditionId: Audition['id'];
-  essayId: number;
-  speakingId: number;
-  testQuestions: Question[];
+  testNumber: number;
+  creationDate: string;
+  testPassingDate: string;
+  assignmentEndDate: string;
+  grammarMark: number | null;
+  auditionMark: number | null;
+  essayMark: number | null;
+  speakingMark: number | null;
+  comment: number | null;
+  userId: number | null;
+  hrId: number | null;
+  coachId: number | null;
+  priority: boolean;
 }
