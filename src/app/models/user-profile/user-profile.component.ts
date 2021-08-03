@@ -13,7 +13,7 @@ import { TestStoreService } from '../../services/test/test/test-store.service';
   styleUrls: ['./user-profile.component.scss'],
 })
 export class UserProfileComponent implements OnInit {
-  results$!: Observable<Test[]>;
+  results$: Observable<Test[] | null> = this.testStoreService.testResults$;
 
   levels = [...Object.values(Level)];
 
@@ -22,7 +22,7 @@ export class UserProfileComponent implements OnInit {
   constructor(private router: Router, private testStoreService: TestStoreService) {}
 
   ngOnInit() {
-    this.results$ = this.testStoreService.getTestResults();
+    this.testStoreService.setTestResults();
   }
 
   onStartButtonClick(): void {
