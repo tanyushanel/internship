@@ -22,7 +22,7 @@ export class TestStoreService {
     private authStoreService: AuthStoreService,
   ) {}
 
-  setTestResults(): void {
+  getTestResults(): void {
     this.authStoreService.activeUser$
       .pipe(concatMap((user) => this.testHttpService.getTests(user !== null ? user.id : 0)))
       .subscribe({

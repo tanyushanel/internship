@@ -22,7 +22,7 @@ export class UserProfileComponent implements OnInit {
   constructor(private router: Router, private testStoreService: TestStoreService) {}
 
   ngOnInit() {
-    this.testStoreService.setTestResults();
+    this.testStoreService.getTestResults();
   }
 
   onStartButtonClick(): void {
