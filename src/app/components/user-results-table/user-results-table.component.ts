@@ -28,6 +28,8 @@ export class UserResultsTableComponent implements OnInit, AfterViewInit {
 
   isOpen = false;
 
+  hasResult = true;
+
   get columnsCount() {
     return this.columnsToDisplay.length;
   }

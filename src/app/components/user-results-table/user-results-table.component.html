@@ -52,11 +52,15 @@
               <span>Essay</span>
               <span>Speach</span>
             </div>
+
             <div class="scale">
-              <span>{{ element.grammarMark }}</span>
-              <span>{{ element.auditionMark }}</span>
-              <span>{{ element.essayMark }}</span>
-              <span>{{ element.speakingMark }}</span>
+              <span *ngIf="element.grammarMark; else noResult">{{ element.grammarMark }}</span>
+              <span *ngIf="element.auditionMark; else noResult">{{ element.auditionMark }}</span>
+              <span *ngIf="element.essayMark; else noResult">{{ element.essayMark }}</span>
+              <span *ngIf="element.speakingMark; else noResult">{{ element.speakingMark }}</span>
+              <ng-template #noResult>
+                <span class="material-icons"> hourglass_empty </span>
+              </ng-template>
             </div>
           </div>
         </div>
