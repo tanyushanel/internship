@@ -1,7 +1,6 @@
 export interface CoachData {
   name: string | null;
   email: string | null;
-  phoneNumber: string | null;
 }
 
 export interface TestData {
@@ -16,44 +15,36 @@ export interface TestData {
 const MOCK_EMPTY_COACH: CoachData = {
   name: null,
   email: null,
-  phoneNumber: null,
 };
 
 export const MOCK_COACH: CoachData[] = [
   {
     name: 'Elizabeth',
     email: 'Elizabeth@email.net',
-    phoneNumber: '1234567',
   },
   {
     name: 'Thomas',
     email: 'Thomas@email.net',
-    phoneNumber: '1234567',
   },
   {
     name: 'Mia',
     email: 'Mia@email.net',
-    phoneNumber: '1234567',
   },
   {
     name: 'Arthur',
     email: 'Arthur@email.net',
-    phoneNumber: '1234567',
   },
   {
     name: 'Violet',
     email: 'Violet@email.net',
-    phoneNumber: '1234567',
   },
   {
     name: 'Levi',
     email: 'Levi@email.net',
-    phoneNumber: '1234567',
   },
   {
     name: 'Atticus',
     email: 'Atticus@email.net',
-    phoneNumber: '1234567',
   },
 ];
 

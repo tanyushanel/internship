@@ -1,6 +1,7 @@
 button {
   position: relative;
   left: 50%;
+  margin-bottom: 40px;
   transform: translate(-50%, 0);
 }
 
@@ -16,7 +17,7 @@ button {
 
 .container {
   min-width: 500px;
-  max-height: 800px;
+  max-height: 500px;
   padding: 20px;
 }
 
