@@ -1,6 +1,9 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatRadioChange } from '@angular/material/radio';
 import { GrammarAnswers, Level } from '../../../../constants/data-constants';
+import { QuestionList } from '../../../services/coach-edit-http.service';
+import { CoachEditStoreService } from '../coach-edit-store.service';
 
 export interface CreateDialogData {
   id: string;
@@ -22,44 +25,50 @@ interface Grammar {
   }[];
 }
 
-const emptyGrammar: Grammar = {
-  question: '',
-  answers: [
-    {
-      title: '',
-      isRight: false,
-    },
-    {
-      title: '',
-      isRight: false,
-    },
-    {
-      title: '',
-      isRight: false,
-    },
-    {
-      title: '',
-      isRight: false,
-    },
-  ],
-};
-
 @Component({
   selector: 'app-coach-profile-editor-grammar-edit-dialog',
   templateUrl: './grammar-adding-editing-dialog.component.html',
   styleUrls: ['./grammar-adding-editing-dialog.component.scss'],
 })
 export class GrammarAddingEditingDialogComponent {
-  grammar: Grammar = emptyGrammar;
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: QuestionList,
+    private coachEditor: CoachEditStoreService,
+  ) {}
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: CreateDialogData | EditDialogData) {
-    if (data.isEdit) {
-      this.grammar = {
-        answers: data.answers,
-        question: data.question,
-      };
+  nameQuestion = this.data.nameQuestion;
+
+  englishLevel: Level | undefined;
+
+  answerOption = this.data.answers;
+
+  QuestionList = Object.values(GrammarAnswers);
+
+  updateData() {
+    this.coachEditor.setQuestions({
+      id: this.data.id,
+      nameQuestion: this.nameQuestion,
+      level: this.englishLevel,
+      answers: { ...this.answerOption },
+    });
+  }
+
+  changeEnglishLevel($event: Level) {
+    this.englishLevel = $event;
+  }
+
+  radioChangeHandler($event: MatRadioChange, i: number): void {
+    console.table(this.answerOption);
+    this.answerOption = this.answerOption?.map((question) => {
+      return { ...question, isRight: false };
+    });
+    if (this.answerOption) {
+      this.answerOption[i].isRight = true;
     }
   }
 
-  QuestionList = Object.values(GrammarAnswers);
+  setAnswerTitle($event: Event, i: number) {
+    // @ts-ignore
+    this.answerOption[i]?.title = $event;
+  }
 }

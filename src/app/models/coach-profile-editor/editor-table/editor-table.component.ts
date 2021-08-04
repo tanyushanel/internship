@@ -16,6 +16,8 @@ import { CoachEditorTabs } from '../../../../constants/data-constants';
 import { GrammarAddingEditingDialogComponent } from '../grammar-adding-editing-dialog/grammar-adding-editing-dialog.component';
 import { TopicAddingEditingDialogComponent } from '../topic-adding-editing-dialog/topic-adding-editing-dialog.component';
 import { EditListeningDialogComponent } from '../edit-listening-dialog/edit-listening-dialog.component';
+import { QuestionList } from '../../../services/coach-edit-http.service';
+import { CoachEditStoreService } from '../coach-edit-store.service';
 
 @Component({
   selector: 'app-coach-profile-editor-table',
@@ -25,11 +27,13 @@ import { EditListeningDialogComponent } from '../edit-listening-dialog/edit-list
 export class EditorTableComponent implements AfterViewInit, OnChanges {
   displayedColumns: string[] = ['id', 'level', 'edit'];
 
-  dataSource: MatTableDataSource<CoachEditorTest>;
+  dataSource: MatTableDataSource<QuestionList>;
+
+  question: QuestionList | undefined;
 
   @Input() selectTab = '';
 
-  @Input() table: CoachEditorTest[] = [];
+  @Input() table: QuestionList[] = [];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -37,7 +41,7 @@ export class EditorTableComponent implements AfterViewInit, OnChanges {
 
   @ViewChild(MatTable) tableView!: MatTable<CoachEditorTest>;
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog, private coachEdit: CoachEditStoreService) {
     this.dataSource = new MatTableDataSource(this.table);
   }
 
@@ -68,39 +72,26 @@ export class EditorTableComponent implements AfterViewInit, OnChanges {
     }
   }
 
-  openEditor(row: CoachEditorTest) {
-    if (this.selectTab === CoachEditorTabs.grammar)
-      this.dialog.open(GrammarAddingEditingDialogComponent, {
-        data: {
-          id: row.id,
-          level: row.level,
-          answers: [
-            {
-              title: '1',
-              isRight: true,
+  openEditor(row: QuestionList) {
+    this.coachEdit.getQuestion(row.id);
+
+    this.coachEdit.activeQuestion$.subscribe((question) => {
+      if (question !== null) {
+        console.log(question);
+
+        if (this.selectTab === CoachEditorTabs.grammar)
+          this.dialog.open(GrammarAddingEditingDialogComponent, {
+            data: {
+              ...question,
             },
-            {
-              title: '2',
-              isRight: false,
-            },
-            {
-              title: '3',
-              isRight: false,
-            },
-            {
-              title: '4',
-              isRight: false,
-            },
-          ],
-          question: 'Question',
-          isEdit: true,
-        },
-      });
-    else if (this.selectTab === CoachEditorTabs.audition) {
-      this.dialog.open(EditListeningDialogComponent);
-    } else if (this.selectTab === CoachEditorTabs.writingAndSpeaking)
-      this.dialog.open(TopicAddingEditingDialogComponent, {
-        data: { id: row.id, level: row.level, question: 'Question', isEdit: true },
-      });
+          });
+        else if (this.selectTab === CoachEditorTabs.audition) {
+          this.dialog.open(EditListeningDialogComponent);
+        } else if (this.selectTab === CoachEditorTabs.writingAndSpeaking)
+          this.dialog.open(TopicAddingEditingDialogComponent, {
+            data: { id: row.id, level: row.level, question: 'Question', isEdit: true },
+          });
+      }
+    });
   }
 }

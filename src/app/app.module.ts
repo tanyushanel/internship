@@ -45,7 +45,7 @@ const INTERCEPTOR_LOADING_INDICATOR: Provider = {
     BrowserAnimationsModule,
     SidebarModule,
     HttpClientModule,
-    ErrorHandlerModule,
+    // ErrorHandlerModule,
     AngularMaterialCommonModule,
   ],
   providers: [INTERCEPTOR_PROVIDER, INTERCEPTOR_LOADING_INDICATOR],
