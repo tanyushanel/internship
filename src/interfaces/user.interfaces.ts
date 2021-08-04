@@ -22,8 +22,7 @@ export interface UserToken {
 }
 
 export interface ApiAssignTest {
-  level: number;
   assignmentEndDate: string;
-  uid: string;
+  userId: string;
   priority: boolean;
 }
