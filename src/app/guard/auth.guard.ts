@@ -7,6 +7,18 @@ import { Route } from '../../constants/route-constant';
 import { LocalStorageService } from '../services/local-storage.service';
 import { UserResponseType } from '../../interfaces/user.interfaces';
 import { isRoleExist } from '../helpers/check-role';
+import { parseJwt } from '../helpers/perserJWT';
+
+export interface Token {
+  aud: string;
+  email: string;
+  exp: number;
+  iss: string;
+  jti: string;
+  roles: string;
+  sub: string;
+  uid: string;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -27,8 +39,10 @@ export class AuthGuard implements CanActivate {
       return isRoleExist(route, activeUser.roles[0]);
     }
     const token = this.localStorageService.getAccessToken();
+
     if (token) {
-      if (true) {
+      const expireToken: Token = parseJwt(token);
+      if (expireToken.exp * 1000 > Date.now()) {
         this.authService.getUser();
         return this.authService.activeUser$.pipe(
           skip(1),

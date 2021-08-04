@@ -1,6 +1,6 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { tap } from 'rxjs/operators';
+import { finalize, tap } from 'rxjs/operators';
 import { Observable, PartialObserver } from 'rxjs';
 import { LoadingIndicatorService } from '../services/loading-indicator.service';
 
@@ -17,6 +17,9 @@ export class LoadingIndicatorInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<string>, next: HttpHandler): Observable<HttpEvent<string>> {
     this.loadingIndicatorService.start();
-    return next.handle(req).pipe(tap(this.observer));
+    return next.handle(req).pipe(
+      tap(this.observer),
+      finalize(() => this.loadingIndicatorService.stop()),
+    );
   }
 }
