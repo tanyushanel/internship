@@ -5,20 +5,9 @@ import { map, skip } from 'rxjs/operators';
 import { AuthStoreService } from '../services/store/auth-store.service';
 import { Route } from '../../constants/route-constant';
 import { LocalStorageService } from '../services/local-storage.service';
-import { UserResponseType } from '../../interfaces/user.interfaces';
+import { UserResponseType, UserToken } from '../../interfaces/user.interfaces';
 import { isRoleExist } from '../helpers/check-role';
 import { parseJwt } from '../helpers/perserJWT';
-
-export interface Token {
-  aud: string;
-  email: string;
-  exp: number;
-  iss: string;
-  jti: string;
-  roles: string;
-  sub: string;
-  uid: string;
-}
 
 @Injectable({
   providedIn: 'root',
@@ -41,7 +30,7 @@ export class AuthGuard implements CanActivate {
     const token = this.localStorageService.getAccessToken();
 
     if (token) {
-      const expireToken: Token = parseJwt(token);
+      const expireToken: UserToken = parseJwt(token);
       if (expireToken.exp * 1000 > Date.now()) {
         this.authService.getUser();
         return this.authService.activeUser$.pipe(
