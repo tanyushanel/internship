@@ -11,7 +11,6 @@ import {
 import { GrammarAddingEditingDialogComponent } from './grammar-adding-editing-dialog/grammar-adding-editing-dialog.component';
 import { TopicAddingEditingDialogComponent } from './topic-adding-editing-dialog/topic-adding-editing-dialog.component';
 import { AddListeningDialogComponent } from './add-listening-dialog/add-listening-dialog.component';
-import { EditListeningDialogComponent } from './edit-listening-dialog/edit-listening-dialog.component';
 
 @Component({
   selector: 'app-coach-profile-editor',
@@ -50,7 +49,9 @@ export class CoachProfileEditorComponent implements OnInit {
   ngOnInit(): void {}
 
   onAddAudioClick(): void {
-    this.dialog.open(AddListeningDialogComponent);
+    this.dialog.open(AddListeningDialogComponent, {
+      autoFocus: false,
+    });
   }
 
   openGrammarModal() {
