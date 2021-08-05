@@ -27,8 +27,9 @@ export class AuthGuard implements CanActivate {
       return isRoleExist(route, activeUser.roles[0]);
     }
     const token = this.localStorageService.getAccessToken();
+
     if (token) {
-      if (true) {
+      if (this.authService.checkValidToken(token)) {
         this.authService.getUser();
         return this.authService.activeUser$.pipe(
           skip(1),

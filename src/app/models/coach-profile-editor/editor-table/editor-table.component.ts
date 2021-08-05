@@ -3,6 +3,7 @@ import {
   Component,
   Input,
   OnChanges,
+  OnInit,
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
@@ -11,6 +12,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 
 import { MatDialog } from '@angular/material/dialog';
+import { FormControl } from '@angular/forms';
 import { CoachEditorTest } from '../../../../mocks/users-utils.mock';
 import { CoachEditorTabs, EnglishLevel } from '../../../../constants/data-constants';
 import { GrammarAddingEditingDialogComponent } from '../grammar-adding-editing-dialog/grammar-adding-editing-dialog.component';
@@ -18,20 +20,32 @@ import { CoachEditStoreService } from '../coach-edit-store.service';
 import { QuestionList } from '../../../interfaces/question.interfaces';
 import { EditListeningDialogComponent } from '../edit-listening-dialog/edit-listening-dialog.component';
 import { TopicAddingEditingDialogComponent } from '../topic-adding-editing-dialog/topic-adding-editing-dialog.component';
+import { isSubstring } from '../../../helpers/filter-check';
 
 @Component({
   selector: 'app-coach-profile-editor-table',
   templateUrl: './editor-table.component.html',
   styleUrls: ['./editor-table.component.scss'],
 })
-export class EditorTableComponent implements AfterViewInit, OnChanges {
+export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
   displayedColumns: string[] = ['id', 'level', 'edit'];
+
+  public searchQuery = '';
 
   languageLevel = EnglishLevel;
 
   dataSource: MatTableDataSource<QuestionList>;
 
   question: QuestionList | undefined;
+
+  idFilter = new FormControl('');
+
+  levelFilter = new FormControl('');
+
+  filterValues = {
+    id: '',
+    level: '',
+  };
 
   @Input() selectTab = '';
 
@@ -45,6 +59,7 @@ export class EditorTableComponent implements AfterViewInit, OnChanges {
 
   constructor(public dialog: MatDialog, private coachEdit: CoachEditStoreService) {
     this.dataSource = new MatTableDataSource(this.table);
+    this.dataSource.filterPredicate = this.createFilter();
   }
 
   ngAfterViewInit() {
@@ -65,13 +80,25 @@ export class EditorTableComponent implements AfterViewInit, OnChanges {
     }
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  ngOnInit() {
+    this.idFilter.valueChanges.subscribe((id) => {
+      this.filterValues.id = id;
+      this.dataSource.filter = JSON.stringify(this.filterValues);
+    });
+    this.levelFilter.valueChanges.subscribe((level) => {
+      this.filterValues.level = level;
+      this.dataSource.filter = JSON.stringify(this.filterValues);
+    });
+  }
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+  createFilter(): (filterValues: QuestionList, filter: string) => boolean {
+    return function filterFunction(filterValues, filter): boolean {
+      const searchTerms = JSON.parse(filter);
+      return (
+        isSubstring(filterValues.id, searchTerms.id) &&
+        isSubstring(filterValues.level, searchTerms.level)
+      );
+    };
   }
 
   openEditor(row: QuestionList) {
@@ -86,7 +113,9 @@ export class EditorTableComponent implements AfterViewInit, OnChanges {
 
           dialogRef.afterClosed().subscribe((data) => stream.unsubscribe());
         } else if (this.selectTab === CoachEditorTabs.audition) {
-          this.dialog.open(EditListeningDialogComponent);
+          this.dialog.open(EditListeningDialogComponent, {
+            autoFocus: false,
+          });
         } else if (this.selectTab === CoachEditorTabs.writingAndSpeaking)
           this.dialog.open(TopicAddingEditingDialogComponent, {
             data: { id: row.id, level: row.level, question: 'Question', isEdit: true },

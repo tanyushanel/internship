@@ -39,7 +39,9 @@ export class CoachProfileEditorComponent implements OnInit {
   ngOnInit(): void {}
 
   onAddAudioClick(): void {
-    this.dialog.open(AddListeningDialogComponent);
+    this.dialog.open(AddListeningDialogComponent, {
+      autoFocus: false,
+    });
   }
 
   openGrammarModal() {

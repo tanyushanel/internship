@@ -1,6 +1,7 @@
 <h1>Assign test setup</h1>
 <div mat-dialog-content>
-  <p><mat-checkbox formControlName="highpoint">High priority</mat-checkbox></p>
+  <p><mat-checkbox>High priority</mat-checkbox></p>
+  <h2>Select deadline</h2>
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Choose a date</mat-label>
     <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker" />
@@ -10,6 +11,6 @@
 
   <div class="dialog-button">
     <button mat-raised-button mat-dialog-close cdkFocusInitial>Close</button>
-    <button mat-raised-button color="primary">Assign Test</button>
+    <button mat-raised-button color="primary" (click)="assignTest()">Assign Test</button>
   </div>
 </div>

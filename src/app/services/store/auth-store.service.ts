@@ -80,7 +80,7 @@ export class AuthStoreService {
   checkValidToken(token: string): boolean {
     try {
       const savedUser = parseJwt<UserToken>(token);
-      return savedUser.exp > Date.now();
+      return savedUser.exp * 1000 > Date.now();
     } catch (e) {
       return false;
     }

@@ -1,8 +1,8 @@
 export enum Level {
   Elementary = 'Elementary',
-  PreIntermediate = 'Pre-Intermediate',
+  PreIntermediate = 'Pre-intermediate',
   Intermediate = 'Intermediate',
-  UpperIntermediate = 'Upper-Intermediate',
+  UpperIntermediate = 'Upper-intermediate',
   Advanced = 'Advanced',
 }
 export const EnglishLevel = [
@@ -27,14 +27,9 @@ export enum UserRole {
   Administrator = 'Administrator',
 }
 
-export enum Priority {
-  High = 'High',
-  Low = 'Low',
-}
-
 export enum CoachEditorTabs {
   grammar = 'Grammar',
-  audition = 'Audition',
+  audition = 'Listening',
   writingAndSpeaking = 'Writing & Speaking',
 }
 
@@ -43,4 +38,10 @@ export enum GrammarAnswers {
   second = 'B)',
   third = 'C)',
   fourth = 'D)',
+}
+
+export enum FilterFields {
+  id = 'id',
+  level = 'level',
+  date = 'date',
 }
