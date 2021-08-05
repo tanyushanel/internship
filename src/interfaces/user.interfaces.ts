@@ -1,5 +1,16 @@
 import { UserRole } from '../constants/data-constants';
 
+export interface User {
+  id: number;
+  message: null;
+  isAuthenticated: boolean;
+  firstName: string;
+  lastName: string;
+  email: string;
+  roles: UserRole[];
+  token?: string;
+}
+
 export interface UserResponseType {
   id: number;
   message: null;
@@ -20,6 +31,11 @@ export interface UserToken {
   roles: string;
   sub: string;
   uid: string;
+}
+
+export interface SignIn {
+  email: string;
+  password: string;
 }
 
 export interface ApiAssignTest {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ErrorModel } from '../../interfaces/error';
+import { ErrorModel } from '../../../interfaces/error';
 import { ErrorDialogComponent } from '../../shared/errors/error-dialog/error-dialog.component';
 
 @Injectable({

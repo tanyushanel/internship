@@ -1,4 +1,4 @@
-import { Level } from '../../constants/data-constants';
+import { Level } from '../constants/data-constants';
 
 export interface Topic {
   id: number;

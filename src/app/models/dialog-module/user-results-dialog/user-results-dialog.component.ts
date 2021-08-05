@@ -1,8 +1,8 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Component, Inject, Input, OnInit } from '@angular/core';
-import { User } from '../../../interfaces/user';
+import { Test } from '../../../../interfaces/test';
+import { User } from '../../../../interfaces/user.interfaces';
 import { user } from '../../../../constants/mock-user-data';
-import { Test } from '../../../interfaces/test';
 
 @Component({
   selector: 'app-user-results-dialog',

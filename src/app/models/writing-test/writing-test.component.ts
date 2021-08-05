@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Test } from '../../interfaces/test';
+import { Test } from '../../../interfaces/test';
 import { Route } from '../../../constants/route-constant';
 
 @Component({

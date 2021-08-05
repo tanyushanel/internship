@@ -3,13 +3,12 @@ import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthHttpService } from '../auth-http.service';
-import { UserResponseType, UserToken } from '../../../interfaces/user.interfaces';
+import { SignIn, UserResponseType, UserToken } from '../../../interfaces/user.interfaces';
 import { ErrorStoreService } from './error-store.service';
-import { SignIn } from '../../interfaces/user';
+import { ErrorType } from '../../../interfaces/error';
 import { Route } from '../../../constants/route-constant';
 import { LocalStorageService } from '../local-storage.service';
 import { parseJwt } from '../../helpers/perserJWT';
-import { ErrorType } from '../../interfaces/error';
 
 @Injectable({
   providedIn: 'root',

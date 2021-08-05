@@ -6,7 +6,7 @@ import { AuthStoreService } from '../../services/store/auth-store.service';
 import { usersMockDataResponse } from '../../../constants/mock-user-data';
 import { UserResponseType } from '../../../interfaces/user.interfaces';
 import { ErrorStoreService } from '../../services/store/error-store.service';
-import { ErrorModel, ErrorType } from '../../interfaces/error';
+import { ErrorModel, ErrorType } from '../../../interfaces/error';
 
 @Component({
   selector: 'app-login',

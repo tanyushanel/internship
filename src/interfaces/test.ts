@@ -1,4 +1,4 @@
-import { Level } from '../../constants/data-constants';
+import { Level } from '../constants/data-constants';
 
 export interface Test {
   id: number;
@@ -17,3 +17,5 @@ export interface Test {
   coachId: number | null;
   priority: boolean;
 }
+
+export interface TestContent {}
