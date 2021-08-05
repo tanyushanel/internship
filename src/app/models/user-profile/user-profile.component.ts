@@ -29,7 +29,7 @@ export class UserProfileComponent implements OnInit {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate([Route.test]);
     });
-
-    this.testStoreService.createTest(this.selectedLevel);
+    this.testStoreService.selectedLevel = this.selectedLevel;
+    this.testStoreService.createTestContent();
   }
 }

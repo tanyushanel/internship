@@ -18,6 +18,8 @@ export class TestStoreService {
 
   test$ = this.testSubject$.asObservable();
 
+  selectedLevel!: Level;
+
   private set test(test: TestContent) {
     this.testSubject$.next(test);
   }
@@ -44,8 +46,8 @@ export class TestStoreService {
       });
   }
 
-  createTest(selectedLevel: Level): void {
-    this.testHttpService.createTest(selectedLevel).subscribe({
+  createTestContent(): void {
+    this.testHttpService.createTest(this.selectedLevel).subscribe({
       next: (test) => {
         this.test = { ...test };
       },

@@ -1,6 +1,6 @@
 <mat-tab-group mat-stretch-tabs mat-align-tabs="center" [(selectedIndex)]="selectedIndex">
   <mat-tab label="GRAMMAR">
-    <app-grammar-test [questions$]="grammar$"></app-grammar-test>
+    <app-grammar-test [questions]="grammar$ | async"></app-grammar-test>
     <app-proceed-buttons
       [currentIndex]="selectedIndex"
       (changedIndex)="setTabIndex($event)"

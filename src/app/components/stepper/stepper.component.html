@@ -1,17 +1,12 @@
 <mat-stepper class="stepper" labelPosition="bottom">
   <mat-step
     class="step"
-    [stepControl]="stepperFormGroups[ind]"
-    *ngFor="
-      let question of grammarQuestionList;
-      let ind = index;
-      let first = first;
-      let last = last
-    "
+    [stepControl]="stepperFormGroups![ind]"
+    *ngFor="let question of questionList; let ind = index; let first = first; let last = last"
     label="Question {{ ind + 1 }}"
     errorMessage="Not Answered"
   >
-    <form class="form__color" [formGroup]="stepperFormGroups[ind]">
+    <form class="form__color" [formGroup]="stepperFormGroups![ind]">
       <p class="text__center">{{ question.text }}</p>
 
       <p></p>

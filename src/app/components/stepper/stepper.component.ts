@@ -17,18 +17,20 @@ import { Question } from '../../interfaces/question-answer';
   ],
 })
 export class StepperComponent implements OnInit, OnChanges {
-  questionList!: Question[];
+  questionList!: Question[] | null | undefined;
 
-  @Input() grammarQuestionList!: Question[];
+  @Input() grammarQuestionList!: Question[] | null | undefined;
 
-  stepperFormGroups: FormGroup[] = [];
+  stepperFormGroups: FormGroup[] | undefined = [];
 
   constructor(private formBuilder: FormBuilder) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.questionList = this.grammarQuestionList;
+  }
 
   ngOnChanges() {
-    this.stepperFormGroups = this.grammarQuestionList.map(() =>
+    this.stepperFormGroups = this.questionList?.map(() =>
       this.formBuilder.group({
         stepCtrl: ['', Validators.required],
       }),
