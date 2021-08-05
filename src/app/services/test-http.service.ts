@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Test } from '../../../interfaces/test';
-import { BASE_API_URL } from '../../../../constants/route-constant';
+import { Test } from '../interfaces/test';
+import { BASE_API_URL } from '../../constants/route-constant';
 
 interface GetTestsResults {
   results: Test[];

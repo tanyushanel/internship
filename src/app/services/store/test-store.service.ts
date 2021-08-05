@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { concatMap, filter } from 'rxjs/operators';
-import { TestHttpService } from './test-http.service';
-import { Test } from '../../../interfaces/test';
-import { AuthStoreService } from '../../store/auth-store.service';
-import { Level } from '../../../../constants/data-constants';
+import { concatMap } from 'rxjs/operators';
+import { Test } from '../../interfaces/test';
+import { TestHttpService } from '../test-http.service';
+import { AuthStoreService } from './auth-store.service';
+import { Level } from '../../../constants/data-constants';
 
 @Injectable({
   providedIn: 'root',

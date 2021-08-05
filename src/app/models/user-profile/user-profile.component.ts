@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { Test } from 'src/app/interfaces/test';
 import { Level } from 'src/constants/data-constants';
 import { Route } from 'src/constants/route-constant';
-import { TestStoreService } from '../../services/test/test/test-store.service';
+import { TestStoreService } from '../../services/store/test-store.service';
 
 @Component({
   selector: 'app-user-profile',
