@@ -1,21 +1,32 @@
-import { concatMap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import { concatMap, filter } from 'rxjs/operators';
 import { TestHttpService } from './test-http.service';
 import { Test } from '../../../interfaces/test';
 import { AuthStoreService } from '../../store/auth-store.service';
+import { Level } from '../../../../constants/data-constants';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TestStoreService {
-  testSubject$ = new BehaviorSubject<Test[] | null>(null);
+  resultsSubject$ = new BehaviorSubject<Test[] | null>(null);
 
-  testResults$ = this.testSubject$.asObservable();
+  testSubject$ = new BehaviorSubject<Test | null>(null);
+
+  testResults$ = this.resultsSubject$.asObservable();
+
+  test$ = this.testSubject$.asObservable();
+
+  private set test(test: Test) {
+    this.testSubject$.next(test);
+  }
 
   private set testResults(testResults: Test[]) {
-    this.testSubject$.next(testResults);
+    this.resultsSubject$.next(testResults);
   }
+
+  selectedLevel!: Level;
 
   constructor(
     private testHttpService: TestHttpService,
@@ -24,11 +35,21 @@ export class TestStoreService {
 
   getTestResults(): void {
     this.authStoreService.activeUser$
-      .pipe(concatMap((user) => this.testHttpService.getTests(user !== null ? user.id : 0)))
+      .pipe(
+        concatMap((user) => this.testHttpService.getTestsObservable(user !== null ? user.id : 0)),
+      )
       .subscribe({
         next: (res) => {
           this.testResults = [...res];
         },
       });
+  }
+
+  getTest(): void {
+    this.testHttpService.createTestObservable(this.selectedLevel).subscribe({
+      next: (test) => {
+        this.test = { ...test };
+      },
+    });
   }
 }

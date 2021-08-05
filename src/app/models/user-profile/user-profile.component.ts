@@ -17,11 +17,11 @@ export class UserProfileComponent implements OnInit {
 
   levels = [...Object.values(Level)];
 
-  selectedLevel: Level | undefined;
+  selectedLevel!: Level;
 
   constructor(private router: Router, private testStoreService: TestStoreService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.testStoreService.getTestResults();
   }
 
@@ -29,5 +29,8 @@ export class UserProfileComponent implements OnInit {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate([Route.test]);
     });
+
+    this.testStoreService.selectedLevel = this.selectedLevel;
+    this.testStoreService.getTest();
   }
 }
