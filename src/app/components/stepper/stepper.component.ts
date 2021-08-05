@@ -1,6 +1,8 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Question } from '../../interfaces/question-answer';
 
 @Component({
@@ -15,7 +17,9 @@ import { Question } from '../../interfaces/question-answer';
   ],
 })
 export class StepperComponent implements OnInit, OnChanges {
-  @Input() questionList!: Question[];
+  questionList!: Question[];
+
+  @Input() grammarQuestionList!: Question[];
 
   stepperFormGroups: FormGroup[] = [];
 
@@ -24,7 +28,7 @@ export class StepperComponent implements OnInit, OnChanges {
   ngOnInit() {}
 
   ngOnChanges() {
-    this.stepperFormGroups = this.questionList.map(() =>
+    this.stepperFormGroups = this.grammarQuestionList.map(() =>
       this.formBuilder.group({
         stepCtrl: ['', Validators.required],
       }),

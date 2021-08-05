@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
+import { Question } from '../../interfaces/question-answer';
 import { TestStoreService } from '../../services/store/test-store.service';
-import { Test } from '../../interfaces/test';
+import { TestContent } from '../../interfaces/test';
 
 @Component({
   selector: 'app-common-test',
@@ -10,11 +11,9 @@ import { Test } from '../../interfaces/test';
   styleUrls: ['./common-test.component.scss'],
 })
 export class CommonTestComponent implements OnInit {
-  test$!: Observable<Test | null>;
+  test$!: Observable<TestContent | null>;
 
-  testGrammar$!: Partial<Observable<Test | null>>;
-
-  testListening$!: Partial<Observable<Test | null>>;
+  grammar$!: Observable<Question[] | undefined>;
 
   selectedIndex = 0;
 
@@ -22,7 +21,7 @@ export class CommonTestComponent implements OnInit {
 
   ngOnInit() {
     this.test$ = this.testStoreService.test$;
-    // this.testGrammar$ = this.test$.pipe(map((test) => test.grammarQuestions));
+    this.grammar$ = this.test$.pipe(map((test) => test?.grammarQuestions));
   }
 
   setTabIndex(ind: number): void {

@@ -2,7 +2,12 @@
   <mat-step
     class="step"
     [stepControl]="stepperFormGroups[ind]"
-    *ngFor="let question of questionList; let ind = index; let first = first; let last = last"
+    *ngFor="
+      let question of grammarQuestionList;
+      let ind = index;
+      let first = first;
+      let last = last
+    "
     label="Question {{ ind + 1 }}"
     errorMessage="Not Answered"
   >
