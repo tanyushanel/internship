@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Test } from '../../interfaces/test';
 import { Route } from '../../../constants/route-constant';
 
 @Component({
@@ -9,6 +11,8 @@ import { Route } from '../../../constants/route-constant';
   styleUrls: ['./writing-test.component.scss'],
 })
 export class WritingTestComponent implements OnInit {
+  @Input() test$!: Observable<Test | null>;
+
   form!: FormGroup;
 
   disabled = false;

@@ -11,10 +11,6 @@
     </mat-radio-button>
   </mat-radio-group>
 
-  <p *ngIf="selectedLevel" class="for-delete">
-    Your choice is <b>{{ selectedLevel }}</b>
-  </p>
-
   <button
     [disabled]="!selectedLevel"
     mat-raised-button
