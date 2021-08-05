@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { CoachData, MOCK_TEST, TestData } from '../../../../mocks/admin-profile-utils.mock';
+import { HttpClient } from '@angular/common/http';
+import { MOCK_TEST, TestData } from '../../../../mocks/admin-profile-utils.mock';
 import { AdminDialogComponent } from '../admin-dialog/admin-dialog.component';
+import { ServiceComponent } from '../service/service.component';
 
 @Component({
   selector: 'app-table',
@@ -10,18 +12,29 @@ import { AdminDialogComponent } from '../admin-dialog/admin-dialog.component';
   styleUrls: ['./table.component.scss'],
 })
 export class TableComponent implements OnInit {
-  AssignSelector = false;
+  AssignSelector = true;
+
+  index = 0;
 
   data: TestData[] = [];
+
+  dataPrototype: TestData[] = [];
 
   assignedTests: TestData[] = [];
 
   notAssignedTests: TestData[] = [];
 
-  constructor(public dialog: MatDialog) {
+  constructor(
+    public dialog: MatDialog,
+    private readonly http: HttpClient,
+    private service: ServiceComponent,
+  ) {
     this.dataSource = new MatTableDataSource<TestData>(MOCK_TEST);
-    this.sortByIsAssign(this.dataSource.data);
-    this.data = this.notAssignedTests;
+    this.service.getData().subscribe((data) => {
+      this.data = data;
+      this.sortByIsAssign(this.data);
+      this.onTabChange();
+    });
   }
 
   displayedColumns: string[] = ['ID', 'Position', 'Level', 'Date', 'Button'];
@@ -32,22 +45,24 @@ export class TableComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  openDialog(positionValue: number, coachData: CoachData, Assign: boolean) {
+  openDialog(element: TestData) {
     const dialogRef = this.dialog.open(AdminDialogComponent, {
       data: {
-        position: positionValue - 1,
-        coach: coachData,
-        isAssign: Assign,
+        position: element.position,
+        coach: element.coach,
+        isAssign: element.isAssign,
       },
     });
+    this.index = this.data.indexOf(element);
     dialogRef.afterClosed().subscribe((result) => {
       if (result.coach === undefined) return;
-      const assignedTest = this.dataSource.data[result.position];
+      const assignedTest = this.data[this.index];
       assignedTest.coach = result.coach;
       if (!assignedTest.isAssign) {
         this.assignedTests.unshift(assignedTest);
         this.notAssignedTests.splice(this.notAssignedTests.indexOf(assignedTest), 1);
         assignedTest.isAssign = true;
+        this.service.postData(assignedTest);
         this.table.renderRows();
       }
     });
@@ -65,10 +80,10 @@ export class TableComponent implements OnInit {
     this.AssignSelector = !this.AssignSelector;
     if (this.AssignSelector) {
       this.displayedColumns = ['ID', 'Position', 'Level', 'Date', 'Coach', 'Button'];
-      this.data = this.assignedTests;
+      this.dataPrototype = this.assignedTests;
     } else {
       this.displayedColumns = ['ID', 'Position', 'Level', 'Date', 'Button'];
-      this.data = this.notAssignedTests;
+      this.dataPrototype = this.notAssignedTests;
     }
   }
 }

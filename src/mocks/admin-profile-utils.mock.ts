@@ -8,7 +8,6 @@ export interface TestData {
   date: number;
   level: string;
   coach: CoachData;
-  grammarGrade: string;
   isAssign: boolean;
 }
 
@@ -57,7 +56,6 @@ export function createNewTest(position: number): TestData {
     isAssign: isTestAssigned,
     level: ['beginner', 'intermediate', 'advanced'][Math.floor(Math.random() * 3)],
     coach: isTestAssigned ? coachData : MOCK_EMPTY_COACH,
-    grammarGrade: Math.floor(Math.random() * 100).toString(),
   };
 }
 export const MOCK_TEST = Array.from({ length: 100 }, (_, k) => createNewTest(k + 1));
