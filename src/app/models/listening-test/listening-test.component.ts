@@ -8,7 +8,9 @@ import {
   AfterViewChecked,
 } from '@angular/core';
 import { Track } from 'ngx-audio-player';
+import { Observable } from 'rxjs';
 import { repeat } from 'rxjs/operators';
+import { Test } from '../../interfaces/test';
 import { MOCK_QUESTION_LIST_AUDITION, Question } from '../../../constants/mock-grammar-test';
 
 @Component({
@@ -17,7 +19,7 @@ import { MOCK_QUESTION_LIST_AUDITION, Question } from '../../../constants/mock-g
   styleUrls: ['./listening-test.component.scss'],
 })
 export class ListeningTestComponent implements OnInit, AfterViewInit, AfterViewChecked {
-  constructor(private elementRef: ElementRef) {}
+  @Input() test$!: Observable<Test | null>;
 
   questions: Question[] = [];
 
@@ -49,6 +51,8 @@ export class ListeningTestComponent implements OnInit, AfterViewInit, AfterViewC
       duration: 5,
     },
   ];
+
+  constructor(private elementRef: ElementRef) {}
 
   ngOnInit(): void {
     this.questions = [...MOCK_QUESTION_LIST_AUDITION];
