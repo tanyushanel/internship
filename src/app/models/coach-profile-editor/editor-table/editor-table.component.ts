@@ -14,7 +14,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { FormControl } from '@angular/forms';
 import { CoachEditorTest } from '../../../../mocks/users-utils.mock';
-import { CoachEditorTabs } from '../../../../constants/data-constants';
+import { CoachEditorTabs } from '../../../constants/data-constants';
 import { GrammarAddingEditingDialogComponent } from '../grammar-adding-editing-dialog/grammar-adding-editing-dialog.component';
 import { TopicAddingEditingDialogComponent } from '../topic-adding-editing-dialog/topic-adding-editing-dialog.component';
 import { EditListeningDialogComponent } from '../edit-listening-dialog/edit-listening-dialog.component';

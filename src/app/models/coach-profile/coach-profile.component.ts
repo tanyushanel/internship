@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MOCK_TESTS, TestData } from '../../../mocks/users-utils.mock';
-import { CoachTestTabs } from '../../../constants/data-constants';
+import { CoachTestTabs } from '../../constants/data-constants';
 
 @Component({
   selector: 'app-coach-profile',

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { TestStoreService } from '../../services/store/test-store.service';
-import { Test } from '../../../interfaces/test';
+import { Test } from '../../interfaces/test';
 
 @Component({
   selector: 'app-common-test',

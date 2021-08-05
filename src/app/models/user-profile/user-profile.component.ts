@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { Level } from 'src/constants/data-constants';
-import { Route } from 'src/constants/route-constant';
-import { Test } from '../../../interfaces/test';
+import { Level } from 'src/app/constants/data-constants';
+import { Route } from 'src/app/constants/route-constant';
+import { Test } from '../../interfaces/test';
 import { TestStoreService } from '../../services/store/test-store.service';
 
 @Component({

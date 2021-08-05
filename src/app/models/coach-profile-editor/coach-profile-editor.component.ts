@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { MatDialog } from '@angular/material/dialog';
-import { CoachEditorTabs } from '../../../constants/data-constants';
+import { CoachEditorTabs } from '../../constants/data-constants';
 import {
   CoachEditorTest,
   MOCK_AUDITION_QUESTIONS,

@@ -10,8 +10,8 @@ import {
 import { Track } from 'ngx-audio-player';
 import { Observable } from 'rxjs';
 import { repeat } from 'rxjs/operators';
-import { Test } from '../../../interfaces/test';
-import { MOCK_QUESTION_LIST_AUDITION, Question } from '../../../constants/mock-grammar-test';
+import { Test } from '../../interfaces/test';
+import { MOCK_QUESTION_LIST_AUDITION, Question } from '../../constants/mock-grammar-test';
 
 @Component({
   selector: 'app-listening',

@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthStoreService } from '../services/store/auth-store.service';
-import { Route } from '../../constants/route-constant';
+import { Route } from '../constants/route-constant';
 import { LocalStorageService } from '../services/local-storage.service';
-import { UserResponseType } from '../../interfaces/user.interfaces';
+import { UserResponseType } from '../interfaces/user.interfaces';
 
 @Injectable({
   providedIn: 'root',

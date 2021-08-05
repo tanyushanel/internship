@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs';
 import { Component, Input, OnInit } from '@angular/core';
-import { Test } from '../../../interfaces/test';
+import { Test } from '../../interfaces/test';
 // import { MOCK_QUESTION_LIST } from '../../../constants/mock-grammar-test';
-import { Question } from '../../../interfaces/question-answer';
+import { Question } from '../../interfaces/question-answer';
 
 @Component({
   selector: 'app-grammar-test',
