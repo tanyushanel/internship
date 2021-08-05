@@ -1,4 +1,9 @@
+import { Audition } from './audition';
+import { Question } from '../constants/mock-grammar-test';
 import { Level } from '../constants/data-constants';
+import { Topic } from './topic';
+
+import { Essay } from './essay';
 
 export interface Test {
   id: number;
@@ -18,4 +23,13 @@ export interface Test {
   priority: boolean;
 }
 
-export interface TestContent {}
+export interface TestContent {
+  id: number;
+  userId: number;
+  level: Level;
+  testPassingDate: string;
+  grammarQuestions: Question[];
+  audition: Audition;
+  essay: Essay;
+  speaking: Topic[];
+}
