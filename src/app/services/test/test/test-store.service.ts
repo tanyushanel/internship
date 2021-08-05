@@ -36,7 +36,7 @@ export class TestStoreService {
   getTestResults(): void {
     this.authStoreService.activeUser$
       .pipe(
-        concatMap((user) => this.testHttpService.getTestsObservable(user !== null ? user.id : 0)),
+        concatMap((user) => this.testHttpService.getResultsObservable(user !== null ? user.id : 0)),
       )
       .subscribe({
         next: (res) => {
