@@ -30,7 +30,6 @@ export class UserProfileComponent implements OnInit {
       this.router.navigate([Route.test]);
     });
 
-    this.testStoreService.selectedLevel = this.selectedLevel;
-    this.testStoreService.getTest();
+    this.testStoreService.createTest(this.selectedLevel);
   }
 }

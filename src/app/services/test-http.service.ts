@@ -16,13 +16,13 @@ interface GetTestsResults {
 export class TestHttpService {
   constructor(private http: HttpClient) {}
 
-  getResultsObservable(userId: number): Observable<Test[]> {
+  getResults(userId: number): Observable<Test[]> {
     return this.http
       .get<GetTestsResults>(`${BASE_API_URL}/api/Test?userId=${userId}`)
       .pipe(map((res) => res.results.filter((r) => r.testPassingDate !== null)));
   }
 
-  createTestObservable(level: Level): Observable<Test> {
+  createTest(level: Level): Observable<Test> {
     return this.http.post<Test>(`${BASE_API_URL}/api/Test`, { level });
   }
 }

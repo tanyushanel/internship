@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { concatMap } from 'rxjs/operators';
+import { concatMap, take } from 'rxjs/operators';
 import { Test } from '../../interfaces/test';
 import { TestHttpService } from '../test-http.service';
 import { AuthStoreService } from './auth-store.service';
@@ -26,8 +26,6 @@ export class TestStoreService {
     this.resultsSubject$.next(testResults);
   }
 
-  selectedLevel!: Level;
-
   constructor(
     private testHttpService: TestHttpService,
     private authStoreService: AuthStoreService,
@@ -36,7 +34,8 @@ export class TestStoreService {
   getTestResults(): void {
     this.authStoreService.activeUser$
       .pipe(
-        concatMap((user) => this.testHttpService.getResultsObservable(user !== null ? user.id : 0)),
+        take(1),
+        concatMap((user) => this.testHttpService.getResults(user !== null ? user.id : 0)),
       )
       .subscribe({
         next: (res) => {
@@ -45,8 +44,8 @@ export class TestStoreService {
       });
   }
 
-  getTest(): void {
-    this.testHttpService.createTestObservable(this.selectedLevel).subscribe({
+  createTest(selectedLevel: Level): void {
+    this.testHttpService.createTest(selectedLevel).subscribe({
       next: (test) => {
         this.test = { ...test };
       },
