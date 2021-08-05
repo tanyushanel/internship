@@ -22,3 +22,4 @@ export enum SidebarMenu {
 
 export const LoginApiUrl = 'http://elevel-001-site1.btempurl.com/api/User/token';
 export const RefreshUserDataUrl = 'http://elevel-001-site1.btempurl.com/api/User/info';
+export const QuestionApiUrl = 'http://elevel-001-site1.btempurl.com/api/Question/';

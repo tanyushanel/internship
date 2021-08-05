@@ -5,8 +5,10 @@
     <textarea matInput [(ngModel)]="nameQuestion">{{ nameQuestion }}</textarea>
   </mat-form-field>
   <h3>Select level</h3>
-  <!--  <app-choose-level (changeLevel)="changeEnglishLevel($event)" [currentLevel]="data.level"></app-choose-level>-->
-  <app-choose-level (changeLevel)="changeEnglishLevel($event)"></app-choose-level>
+  <app-choose-level
+    (changeLevel)="changeEnglishLevel($event)"
+    [currentLevel]="languageLevel[data.level]"
+  ></app-choose-level>
   <mat-radio-group class="radio-group">
     <div *ngFor="let answer of answerOption; let i = index">
       <mat-radio-button

@@ -12,12 +12,12 @@ import { MatSort, Sort } from '@angular/material/sort';
 
 import { MatDialog } from '@angular/material/dialog';
 import { CoachEditorTest } from '../../../../mocks/users-utils.mock';
-import { CoachEditorTabs } from '../../../../constants/data-constants';
+import { CoachEditorTabs, EnglishLevel } from '../../../../constants/data-constants';
 import { GrammarAddingEditingDialogComponent } from '../grammar-adding-editing-dialog/grammar-adding-editing-dialog.component';
-import { TopicAddingEditingDialogComponent } from '../topic-adding-editing-dialog/topic-adding-editing-dialog.component';
-import { EditListeningDialogComponent } from '../edit-listening-dialog/edit-listening-dialog.component';
-import { QuestionList } from '../../../services/coach-edit-http.service';
 import { CoachEditStoreService } from '../coach-edit-store.service';
+import { QuestionList } from '../../../interfaces/question.interfaces';
+import { EditListeningDialogComponent } from '../edit-listening-dialog/edit-listening-dialog.component';
+import { TopicAddingEditingDialogComponent } from '../topic-adding-editing-dialog/topic-adding-editing-dialog.component';
 
 @Component({
   selector: 'app-coach-profile-editor-table',
@@ -26,6 +26,8 @@ import { CoachEditStoreService } from '../coach-edit-store.service';
 })
 export class EditorTableComponent implements AfterViewInit, OnChanges {
   displayedColumns: string[] = ['id', 'level', 'edit'];
+
+  languageLevel = EnglishLevel;
 
   dataSource: MatTableDataSource<QuestionList>;
 
@@ -75,17 +77,15 @@ export class EditorTableComponent implements AfterViewInit, OnChanges {
   openEditor(row: QuestionList) {
     this.coachEdit.getQuestion(row.id);
 
-    this.coachEdit.activeQuestion$.subscribe((question) => {
+    const stream = this.coachEdit.question$.subscribe((question) => {
       if (question !== null) {
-        console.log(question);
-
-        if (this.selectTab === CoachEditorTabs.grammar)
-          this.dialog.open(GrammarAddingEditingDialogComponent, {
-            data: {
-              ...question,
-            },
+        if (this.selectTab === CoachEditorTabs.grammar) {
+          const dialogRef = this.dialog.open(GrammarAddingEditingDialogComponent, {
+            data: question,
           });
-        else if (this.selectTab === CoachEditorTabs.audition) {
+
+          dialogRef.afterClosed().subscribe((data) => stream.unsubscribe());
+        } else if (this.selectTab === CoachEditorTabs.audition) {
           this.dialog.open(EditListeningDialogComponent);
         } else if (this.selectTab === CoachEditorTabs.writingAndSpeaking)
           this.dialog.open(TopicAddingEditingDialogComponent, {

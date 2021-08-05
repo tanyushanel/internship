@@ -5,6 +5,14 @@ export enum Level {
   UpperIntermediate = 'Upper-Intermediate',
   Advanced = 'Advanced',
 }
+export const EnglishLevel = [
+  '',
+  'Elementary',
+  'Pre-Intermediate',
+  'Intermediate',
+  'Upper-Intermediate',
+  'Advanced',
+];
 
 export enum CoachTestTabs {
   unchecked = 'In review',

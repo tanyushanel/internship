@@ -11,7 +11,7 @@
 
     <ng-container matColumnDef="level">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>English level</th>
-      <td mat-cell *matCellDef="let row">Level: {{ row.level }}</td>
+      <td mat-cell *matCellDef="let row">Level: {{ languageLevel[row.level] }}</td>
     </ng-container>
 
     <ng-container matColumnDef="edit">

@@ -1,25 +1,14 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { CoachEditHttpService, QuestionList } from '../../services/coach-edit-http.service';
+import { CoachEditHttpService } from '../../services/coach-edit-http.service';
+import { QuestionList, UpdateQuestionList } from '../../interfaces/question.interfaces';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CoachEditStoreService {
-  initialQuestion = null;
-
-  private readonly question$ = new BehaviorSubject<QuestionList | null>(this.initialQuestion);
-
-  readonly activeQuestion$ = this.question$.asObservable();
-
-  private get question() {
-    return this.question$.getValue();
-  }
-
-  private set question(question) {
-    this.question$.next(question);
-  }
+  readonly question$ = new Subject();
 
   constructor(private readonly couchHttpService: CoachEditHttpService) {}
 
@@ -30,12 +19,12 @@ export class CoachEditStoreService {
   getQuestion(id: string) {
     this.couchHttpService.getQuestion(id).subscribe({
       next: (question) => {
-        this.question = { ...question };
+        this.question$.next(question);
       },
     });
   }
 
-  setQuestions(question: any) {
+  setQuestions(question: UpdateQuestionList) {
     this.couchHttpService.updateQuestion(question).subscribe();
   }
 }

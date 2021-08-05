@@ -1,9 +1,9 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatRadioChange } from '@angular/material/radio';
-import { GrammarAnswers, Level } from '../../../../constants/data-constants';
-import { QuestionList } from '../../../services/coach-edit-http.service';
+import { GrammarAnswers, Level, EnglishLevel } from '../../../../constants/data-constants';
 import { CoachEditStoreService } from '../coach-edit-store.service';
+import { QuestionList } from '../../../interfaces/question.interfaces';
 
 export interface CreateDialogData {
   id: string;
@@ -32,33 +32,36 @@ interface Grammar {
 })
 export class GrammarAddingEditingDialogComponent {
   constructor(
+    public dialogRef: MatDialogRef<GrammarAddingEditingDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: QuestionList,
     private coachEditor: CoachEditStoreService,
   ) {}
 
+  languageLevel = EnglishLevel;
+
   nameQuestion = this.data.nameQuestion;
 
-  englishLevel: Level | undefined;
+  englishLevel: number | undefined;
 
   answerOption = this.data.answers;
 
   QuestionList = Object.values(GrammarAnswers);
 
-  updateData() {
+  updateData(): void {
     this.coachEditor.setQuestions({
       id: this.data.id,
       nameQuestion: this.nameQuestion,
       level: this.englishLevel,
-      answers: { ...this.answerOption },
+      answers: this.answerOption,
     });
+    this.dialogRef.close();
   }
 
-  changeEnglishLevel($event: Level) {
-    this.englishLevel = $event;
+  changeEnglishLevel($event: Level): void {
+    this.englishLevel = this.languageLevel.indexOf($event);
   }
 
   radioChangeHandler($event: MatRadioChange, i: number): void {
-    console.table(this.answerOption);
     this.answerOption = this.answerOption?.map((question) => {
       return { ...question, isRight: false };
     });
@@ -67,8 +70,9 @@ export class GrammarAddingEditingDialogComponent {
     }
   }
 
-  setAnswerTitle($event: Event, i: number) {
-    // @ts-ignore
-    this.answerOption[i]?.title = $event;
+  setAnswerTitle($event: Event, i: number): void {
+    if (this.answerOption) {
+      this.answerOption[i].nameAnswer = ($event.target as HTMLInputElement).value;
+    }
   }
 }
