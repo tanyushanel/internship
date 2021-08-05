@@ -1,23 +1,29 @@
 @import 'src/theme/variables';
 
+.material-icons.md-30 {
+  font-size: 30px;
+}
+
 .sidebar-text {
-  margin-top: 3px;
-  margin-left: 25px;
+  margin-left: 22px;
 }
 
+.icon-position,
 .exit-position {
-  display: flex;
-  align-items: center;
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  margin-left: 1px;
 }
 
-.icon-exit-sidebar {
-  width: 30px;
-  height: 30px;
-  fill: rgb(184, 180, 180);
-}
+.sidebar__list_item:hover,
+.sidebar__list_item:focus,
+.is-active {
+  background-color: whitesmoke;
 
-.sidebar__list_item:hover .icon-sidebar {
-  fill: rgb(170, 213, 228);
+  .material-icons.md-dark.md-inactive {
+    color: rgb(170, 213, 228);
+  }
 }
 
 .sidebar__list_item:hover .sidebar-text {
@@ -25,14 +31,20 @@
   font-weight: 500;
 }
 
-.icon-sidebar {
-  width: 30px;
-  height: 30px;
-  fill: rgb(184, 180, 180);
+.material-icons.md-dark {
+  color: rgba(0, 0, 0, 0.54);
+}
 
-  .sidebar__list_item:hover & {
-    fill: rgb(156, 207, 224);
-  }
+.material-icons.md-dark.md-inactive {
+  color: rgba(0, 0, 0, 0.26);
+}
+
+.sidebar__container_width {
+  width: 7%;
+  padding-top: 8px;
+  overflow-y: hidden;
+  background-color: $white;
+  visibility: visible;
 }
 
 .sidebar {
@@ -42,10 +54,11 @@
   background-color: $others-grey6;
 
   &__container {
-    width: 14%;
+    width: 15%;
     padding-top: 8px;
     overflow-y: hidden;
     background-color: $white;
+    visibility: visible;
   }
 
   &__username {

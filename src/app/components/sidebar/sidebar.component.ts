@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { UserRoutesType, usersRoute } from '../../../constants/mock-user-data';
 import { UserResponseType } from '../../../interfaces/user.interfaces';
@@ -12,11 +13,19 @@ import { AuthStoreService } from '../../services/store/auth-store.service';
 export class SidebarComponent implements OnInit {
   isOpen = true;
 
+  isShown = true;
+
+  isSmaller = false;
+
+  isBigger = false;
+
   readonly user$: Observable<UserResponseType | null> = this.userService.activeUser$;
 
   readonly isSingIn$: Observable<boolean> = this.userService.isSignIn$;
 
   usersRoute: UserRoutesType = usersRoute;
+
+  mode = new FormControl('over');
 
   constructor(
     private readonly userService: AuthStoreService,
@@ -26,6 +35,14 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {}
 
   handleSidebar() {
-    this.isOpen = !this.isOpen;
+    this.isSmaller = !this.isSmaller;
+  }
+
+  getWidth() {
+    return !this.isSmaller ? 'width:14%;' : 'width:4%;';
+  }
+
+  toggleShow() {
+    this.isShown = !this.isShown;
   }
 }

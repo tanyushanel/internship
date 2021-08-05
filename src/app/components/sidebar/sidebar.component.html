@@ -1,28 +1,42 @@
 <mat-sidenav-container class="sidebar" autosize *ngIf="{ isSingIn: isSingIn$ | async } as $">
-  <mat-sidenav *ngIf="$.isSingIn" class="sidebar__container" mode="side" [opened]="isOpen">
+  <mat-sidenav
+    *ngIf="$.isSingIn"
+    class="sidebar__container"
+    [style]="getWidth()"
+    mode="side"
+    ng-show="toggleSideBar"
+    [opened]="isOpen"
+    [formControl]="mode"
+  >
     <mat-nav-list>
       <ng-container *ngIf="{ user: user$ | async } as $">
-        <div mat-card-avatar class="sidebar__logo"></div>
+        <div *ngIf="isShown" mat-card-avatar class="sidebar__logo"></div>
         <p class="sidebar__username">{{ $.user!.firstName }}</p>
         <app-notification class="notifications"> </app-notification>
         <nav class="sidebar__nav">
           <div class="sidebar__list">
             <div *ngFor="let route of usersRoute[$.user!.roles[0]].route; let i = index">
-              <mat-list-item [routerLink]="'/' + route" class="sidebar__list_item">
-                <svg class="icon-sidebar">
-                  <use [attr.href]="usersRoute[$.user!.roles[0]].menuIcon[i]"></use>
-                </svg>
-                <span class="sidebar-text">{{ usersRoute[$.user!.roles[0]].menuItem[i] }} </span>
+              <mat-list-item
+                [routerLinkActive]="['is-active']"
+                [routerLink]="'/' + route"
+                class="sidebar__list_item"
+              >
+                <div [routerLinkActive]="['is-active']" class="icon-position">
+                  <mat-icon class="material-icons-round md-30 md-dark md-inactive">
+                    {{ usersRoute[$.user!.roles[0]].menuIcon[i] }}
+                  </mat-icon>
+                </div>
+                <span *ngIf="isShown" class="sidebar-text"
+                  >{{ usersRoute[$.user!.roles[0]].menuItem[i] }}
+                </span>
               </mat-list-item>
             </div>
           </div>
           <mat-list-item (click)="authService.signOut()" class="sidebar__list_item exit-position">
             <div class="exit-position">
-              <svg class="icon-sidebar">
-                <use href="../../assets/icons.svg#icon-exit"></use>
-              </svg>
-              <span class="sidebar-text">Exit</span>
+              <mat-icon class="material-icons-round md-30 md-dark md-inactive"> logout </mat-icon>
             </div>
+            <span class="sidebar-text">Exit</span>
           </mat-list-item>
         </nav>
       </ng-container>
@@ -30,11 +44,13 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-icon
+      ng-click="toggleSideBar=!toggleSideBar"
       *ngIf="$.isSingIn"
       mat-icon-button
       class="sidebar__button"
       (click)="handleSidebar()"
-      [ngClass]="{ sidebar__button_close: isOpen }"
+      (click)="toggleShow()"
+      [ngClass]="{ sidebar__button_close: isSmaller }"
     >
       chevron_right
     </mat-icon>
