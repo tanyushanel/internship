@@ -10,10 +10,10 @@
   >
     <mat-nav-list>
       <ng-container *ngIf="{ user: user$ | async } as $">
-        <div style="height: 104px">
+        <div style="height: 120px">
           <div *ngIf="isShown" mat-card-avatar class="sidebar__logo" height="104px"></div>
+          <p *ngIf="isShown" class="sidebar__username">{{ $.user!.firstName }}</p>
         </div>
-        <p *ngIf="isShown" class="sidebar__username">{{ $.user!.firstName }}</p>
         <app-notification class="notifications"> </app-notification>
         <nav class="sidebar__nav">
           <div class="sidebar__list">
