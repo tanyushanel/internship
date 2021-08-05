@@ -1,15 +1,9 @@
+import { CoachTest } from '../app/models/coach-profile/service/get-coach-tests-http.service';
+
 export interface UserData {
   id: number;
   firstName: string;
   lastName: string;
-}
-
-export interface TestData {
-  id: string;
-  level: string;
-  isChecked: boolean;
-  isHigh: boolean;
-  date: Date;
 }
 
 export interface CoachEditorTest {
@@ -82,7 +76,7 @@ const generateRandomDate = (): Date => {
   return getRandomDate(new Date('2020-10-12'), new Date('2021-07-12'));
 };
 
-export function createNewCoachProfileTest(id: number): TestData {
+export function createNewCoachProfileTest(id: number): CoachTest {
   return {
     id: id.toString(),
     level: MOCK_LEVELS[Math.round(Math.random() * (MOCK_LEVELS.length - 1))],

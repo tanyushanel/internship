@@ -12,9 +12,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { FormControl } from '@angular/forms';
-import { TestData } from '../../../../mocks/users-utils.mock';
 import { CoachProfileDialogComponent } from '../coach-profile-dialog/coach-profile-dialog.component';
 import { isSubstring } from '../../../helpers/filter-check';
+import { CoachTest } from '../service/get-coach-tests-http.service';
 
 @Component({
   selector: 'app-coach-profile-table',
@@ -22,6 +22,8 @@ import { isSubstring } from '../../../helpers/filter-check';
   styleUrls: ['./coach-profile-table.component.scss'],
 })
 export class CoachProfileTableComponent implements AfterViewInit, OnChanges, OnInit {
+  @Input() results: CoachTest[] = [];
+
   displayedColumns: string[] = ['id', 'level', 'date', 'button'];
 
   idFilter = new FormControl('');
@@ -36,21 +38,19 @@ export class CoachProfileTableComponent implements AfterViewInit, OnChanges, OnI
     date: '',
   };
 
-  dataSource: MatTableDataSource<TestData>;
+  dataSource!: MatTableDataSource<CoachTest>;
 
-  @Input() table: TestData[] = [];
+  @Input() table: CoachTest[] = [];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   @ViewChild(MatSort) sort!: MatSort;
 
-  @ViewChild(MatTable) tableView!: MatTable<TestData>;
+  @ViewChild(MatTable) tableView!: MatTable<CoachTest>;
 
   public searchQuery = '';
 
   constructor(public dialog: MatDialog) {
-    this.dataSource = new MatTableDataSource(this.table);
-    this.dataSource.data = this.table;
     this.dataSource.filterPredicate = this.createFilter();
   }
 
@@ -77,6 +77,7 @@ export class CoachProfileTableComponent implements AfterViewInit, OnChanges, OnI
   }
 
   ngOnInit(): void {
+    this.dataSource = new MatTableDataSource(this.results);
     this.idFilter.valueChanges.subscribe((id) => {
       this.filterValues.id = id;
       this.dataSource.filter = JSON.stringify(this.filterValues);
@@ -91,7 +92,7 @@ export class CoachProfileTableComponent implements AfterViewInit, OnChanges, OnI
     });
   }
 
-  createFilter(): (filterValues: TestData, filter: string) => boolean {
+  createFilter(): (filterValues: CoachTest, filter: string) => boolean {
     return function filterFunction(filterValues, filter): boolean {
       const searchTerms = JSON.parse(filter);
       return (
