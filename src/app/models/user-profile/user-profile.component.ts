@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { Test } from 'src/app/interfaces/test';
 import { Level } from 'src/constants/data-constants';
 import { Route } from 'src/constants/route-constant';
-import { TestStoreService } from '../../services/test/test/test-store.service';
+import { TestStoreService } from '../../services/store/test-store.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -17,11 +17,11 @@ export class UserProfileComponent implements OnInit {
 
   levels = [...Object.values(Level)];
 
-  selectedLevel: Level | undefined;
+  selectedLevel!: Level;
 
   constructor(private router: Router, private testStoreService: TestStoreService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.testStoreService.getTestResults();
   }
 
@@ -29,5 +29,7 @@ export class UserProfileComponent implements OnInit {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate([Route.test]);
     });
+
+    this.testStoreService.createTest(this.selectedLevel);
   }
 }
