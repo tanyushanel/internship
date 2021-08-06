@@ -33,6 +33,10 @@ export class TestStoreService {
     private authStoreService: AuthStoreService,
   ) {}
 
+  selectLevel(selected: Level): void {
+    this.selectedLevel = selected;
+  }
+
   getTestResults(): void {
     this.authStoreService.activeUser$
       .pipe(
