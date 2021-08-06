@@ -1,25 +1,14 @@
-import { hostViewClassName } from '@angular/compiler';
-import {
-  Component,
-  ElementRef,
-  Input,
-  AfterViewInit,
-  OnInit,
-  AfterViewChecked,
-} from '@angular/core';
+import { Component, ElementRef, Input, AfterViewInit, AfterViewChecked } from '@angular/core';
 import { Track } from 'ngx-audio-player';
-import { repeat } from 'rxjs/operators';
-import { MOCK_QUESTION_LIST_AUDITION, Question } from '../../../constants/mock-grammar-test';
+import { Question } from '../../interfaces/question-answer';
 
 @Component({
   selector: 'app-listening',
   templateUrl: './listening-test.component.html',
   styleUrls: ['./listening-test.component.scss'],
 })
-export class ListeningTestComponent implements OnInit, AfterViewInit, AfterViewChecked {
-  constructor(private elementRef: ElementRef) {}
-
-  questions: Question[] = [];
+export class ListeningTestComponent implements AfterViewInit, AfterViewChecked {
+  @Input() questions!: Question[] | null;
 
   counter = 0;
 
@@ -50,9 +39,7 @@ export class ListeningTestComponent implements OnInit, AfterViewInit, AfterViewC
     },
   ];
 
-  ngOnInit(): void {
-    this.questions = [...MOCK_QUESTION_LIST_AUDITION];
-  }
+  constructor(private elementRef: ElementRef) {}
 
   ngAfterViewInit() {
     this.elementRef.nativeElement

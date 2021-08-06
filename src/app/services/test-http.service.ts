@@ -1,10 +1,10 @@
-import { Level } from 'src/constants/data-constants';
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Test } from '../interfaces/test';
-import { BASE_API_URL } from '../../constants/route-constant';
+import { Level } from '../constants/data-constants';
+import { Test, TestContent } from '../interfaces/test';
+import { BASE_API_URL } from '../constants/route-constant';
 
 interface GetTestsResults {
   results: Test[];
@@ -22,7 +22,7 @@ export class TestHttpService {
       .pipe(map((res) => res.results.filter((r) => r.testPassingDate !== null)));
   }
 
-  createTest(level: Level): Observable<Test> {
-    return this.http.post<Test>(`${BASE_API_URL}/api/Test`, { level });
+  createTest(level: Level): Observable<TestContent> {
+    return this.http.post<TestContent>(`${BASE_API_URL}/api/Test`, { level });
   }
 }

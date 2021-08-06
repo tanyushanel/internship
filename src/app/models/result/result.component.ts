@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Route } from '../../../constants/route-constant';
+import { Route } from '../../constants/route-constant';
 
 @Component({
   selector: 'app-result',

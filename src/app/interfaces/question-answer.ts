@@ -1,8 +1,8 @@
-import { Level } from '../../constants/data-constants';
+import { Level } from '../constants/data-constants';
 
 export interface Question {
   id: number;
-  text: string;
+  nameQuestion: string;
   level: Level;
   auditionId: number;
   answerId: number;
@@ -11,7 +11,7 @@ export interface Question {
 
 export interface Answer {
   id: number;
-  text: string;
+  nameAnswer: string;
   questionId: Question['id'];
   isRight: boolean;
 }
