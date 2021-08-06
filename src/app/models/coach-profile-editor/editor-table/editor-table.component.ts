@@ -13,6 +13,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 
 import { MatDialog } from '@angular/material/dialog';
 import { FormControl } from '@angular/forms';
+import { take } from 'rxjs/operators';
 import { CoachEditorTest } from '../../../../mocks/users-utils.mock';
 import { CoachEditorTabs, EnglishLevel } from '../../../../constants/data-constants';
 import { GrammarAddingEditingDialogComponent } from '../grammar-adding-editing-dialog/grammar-adding-editing-dialog.component';
@@ -65,7 +66,6 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-
     setTimeout(() => {
       const sortState: Sort = { active: 'level', direction: 'asc' };
       this.sort.active = sortState.active;
@@ -103,24 +103,21 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
 
   openEditor(row: QuestionList) {
     this.coachEdit.getQuestion(row.id);
-
-    const stream = this.coachEdit.question$.subscribe((question) => {
-      if (question !== null) {
-        if (this.selectTab === CoachEditorTabs.grammar) {
-          const dialogRef = this.dialog.open(GrammarAddingEditingDialogComponent, {
-            data: question,
+    if (this.selectTab === CoachEditorTabs.grammar) {
+      this.coachEdit.question$.pipe(take(1)).subscribe((question) => {
+        if (question !== null) {
+          this.dialog.open(GrammarAddingEditingDialogComponent, {
+            data: { ...question, isEdit: true },
           });
-
-          dialogRef.afterClosed().subscribe((data) => stream.unsubscribe());
-        } else if (this.selectTab === CoachEditorTabs.audition) {
-          this.dialog.open(EditListeningDialogComponent, {
-            autoFocus: false,
-          });
-        } else if (this.selectTab === CoachEditorTabs.writingAndSpeaking)
-          this.dialog.open(TopicAddingEditingDialogComponent, {
-            data: { id: row.id, level: row.level, question: 'Question', isEdit: true },
-          });
-      }
-    });
+        }
+      });
+    } else if (this.selectTab === CoachEditorTabs.audition) {
+      this.dialog.open(EditListeningDialogComponent, {
+        autoFocus: false,
+      });
+    } else if (this.selectTab === CoachEditorTabs.writingAndSpeaking)
+      this.dialog.open(TopicAddingEditingDialogComponent, {
+        data: { id: row.id, level: row.level, question: 'Question', isEdit: true },
+      });
   }
 }

@@ -1,3 +1,5 @@
+import { EnglishLevel } from '../constants/data-constants';
+
 export interface UserData {
   id: number;
   firstName: string;
@@ -95,21 +97,29 @@ export function createNewCoachProfileTest(id: number): TestData {
 export function createNewGrammarQuestionTest(id: number): CoachEditorTest {
   return {
     id: id.toString(),
-    level: MOCK_LEVELS[Math.round(Math.random() * (MOCK_LEVELS.length - 1))],
+    level: EnglishLevel[Math.round(Math.random() * MOCK_LEVELS.length)],
   };
 }
 
-export function createNewAuditionQuestionTest(id: number): CoachEditorTest {
+export function createNewAuditionQuestionTest(id: number) {
   return {
     id: id.toString(),
-    level: MOCK_LEVELS[Math.round(Math.random() * (MOCK_LEVELS.length - 1))],
+    level: 5,
+    creationDate: '2021-08-04T05:37:12.2158831-07:00',
+    creatorId: '2cfaa429-e45c-415c-27cf-08d9574493b2',
+    nameQuestion: `Audition ${id}`,
+    questionNumber: 284,
   };
 }
 
-export function createNewWritingAndSpeakingQuestionTest(id: number): CoachEditorTest {
+export function createNewWritingAndSpeakingQuestionTest(id: number) {
   return {
     id: id.toString(),
-    level: MOCK_LEVELS[Math.round(Math.random() * (MOCK_LEVELS.length - 1))],
+    level: 4,
+    creationDate: '2021-08-04T05:37:12.2158831-07:00',
+    creatorId: '2cfaa429-e45c-415c-27cf-08d9574493b2',
+    nameQuestion: `WritingAndSpeaking ${id}`,
+    questionNumber: 284,
   };
 }
 

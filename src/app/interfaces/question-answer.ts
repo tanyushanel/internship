@@ -29,6 +29,7 @@ export interface QuestionList {
   nameQuestion: string;
   creatorId: string;
   answers?: AnswerQuestion[];
+  isEdit?: boolean;
 }
 
 export interface UpdateQuestionList {

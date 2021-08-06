@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>{{ 'Edit Grammar' }}</h1>
+  <h1>{{ data.isEdit ? 'Edit Grammar' : 'Add Grammar' }}</h1>
   <mat-form-field appearance="fill">
     <mat-label>Grammar Question</mat-label>
     <textarea matInput [(ngModel)]="nameQuestion">{{ nameQuestion }}</textarea>
@@ -7,7 +7,7 @@
   <h3>Select level</h3>
   <app-choose-level
     (changeLevel)="changeEnglishLevel($event)"
-    [currentLevel]="languageLevel[data.level]"
+    [currentLevel]="languageLevel[data.level.toString()]"
   ></app-choose-level>
   <mat-radio-group class="radio-group">
     <div *ngFor="let answer of answerOption; let i = index">
@@ -20,11 +20,11 @@
         {{ QuestionList[i] }}
       </mat-radio-button>
       <span>
-        <mat-form-field
-          ><input matInput [(ngModel)]="answer" [value]="answer.nameAnswer"
-        /></mat-form-field>
+        <mat-form-field><input matInput [(ngModel)]="answer.nameAnswer" /></mat-form-field>
       </span>
     </div>
   </mat-radio-group>
-  <button mat-raised-button color="primary" (click)="updateData()">{{ 'UPDATE' }}</button>
+  <button mat-raised-button color="primary" (click)="updateData()">
+    {{ data.isEdit ? 'UPDATE' : 'SAVE' }}
+  </button>
 </div>

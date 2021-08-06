@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatRadioChange } from '@angular/material/radio';
-import { GrammarAnswers, Level, EnglishLevel } from '../../../../constants/data-constants';
+import { EnglishLevel, GrammarAnswers, Level } from '../../../../constants/data-constants';
 import { CoachEditStoreService } from '../coach-edit-store.service';
 import { QuestionList } from '../../../interfaces/question-answer';
 
@@ -48,7 +48,7 @@ export class GrammarAddingEditingDialogComponent {
   QuestionList = Object.values(GrammarAnswers);
 
   updateData(): void {
-    this.coachEditor.setQuestions({
+    this.coachEditor.updateQuestions({
       id: this.data.id,
       nameQuestion: this.nameQuestion,
       level: this.englishLevel,
@@ -57,8 +57,9 @@ export class GrammarAddingEditingDialogComponent {
     this.dialogRef.close();
   }
 
-  changeEnglishLevel($event: Level): void {
-    this.englishLevel = this.languageLevel.indexOf($event);
+  changeEnglishLevel($event: Level | any): void {
+    const level = Object.keys(this.languageLevel).find((key) => this.languageLevel[key] === $event);
+    this.englishLevel = Number(level);
   }
 
   radioChangeHandler($event: MatRadioChange, i: number): void {

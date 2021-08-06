@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CoachEditHttpService } from '../../services/coach-edit-http.service';
 import { QuestionList, UpdateQuestionList } from '../../interfaces/question-answer';
@@ -8,14 +8,21 @@ import { QuestionList, UpdateQuestionList } from '../../interfaces/question-answ
   providedIn: 'root',
 })
 export class CoachEditStoreService {
-  readonly question$ = new Subject();
+  readonly question$ = new Subject<QuestionList>();
 
-  readonly questions$ = this.getAllQuestion();
+  readonly questions$ = new Subject<QuestionList[]>();
 
   constructor(private readonly couchHttpService: CoachEditHttpService) {}
 
-  getAllQuestion(): Observable<QuestionList[]> {
-    return this.couchHttpService.getQuestionLists().pipe(map((res) => res.results));
+  getAllQuestion(): void {
+    this.couchHttpService
+      .getQuestionLists()
+      .pipe(map((res) => res.results))
+      .subscribe({
+        next: (questions) => {
+          this.questions$.next(questions);
+        },
+      });
   }
 
   getQuestion(id: string) {
@@ -26,7 +33,7 @@ export class CoachEditStoreService {
     });
   }
 
-  setQuestions(question: UpdateQuestionList) {
+  updateQuestions(question: UpdateQuestionList) {
     this.couchHttpService.updateQuestion(question).subscribe();
   }
 }
