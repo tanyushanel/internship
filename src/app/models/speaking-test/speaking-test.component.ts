@@ -14,7 +14,7 @@ declare let MediaRecorder: any;
   styleUrls: ['./speaking-test.component.scss'],
 })
 export class SpeakingTestComponent implements OnInit, OnDestroy {
-  @Input() speaking!: TopicModule | null | undefined;
+  @Input() speaking!: TopicModule | null;
 
   mediaRecorder: any;
 

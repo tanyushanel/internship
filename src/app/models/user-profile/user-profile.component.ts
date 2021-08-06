@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-
 import { Level } from 'src/app/constants/data-constants';
 import { Route } from 'src/app/constants/route-constant';
 import { Test } from '../../interfaces/test';
@@ -17,7 +16,7 @@ export class UserProfileComponent implements OnInit {
 
   levels = [...Object.values(Level)];
 
-  isClicked = false;
+  isStarted = false;
 
   selectedLevel!: Level;
 
@@ -27,11 +26,13 @@ export class UserProfileComponent implements OnInit {
     this.testStoreService.getTestResults();
   }
 
+  selectLevel(selected: Level): void {
+    this.testStoreService.selectedLevel = selected;
+  }
+
   onStartButtonClick(level: Level): void {
-    this.isClicked = true;
-
-    this.testStoreService.selectedLevel = level;
-
+    this.isStarted = true;
+    this.selectLevel(level);
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate([Route.test]);
     });

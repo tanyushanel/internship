@@ -12,15 +12,15 @@ import { TestContent } from '../../interfaces/test';
   styleUrls: ['./common-test.component.scss'],
 })
 export class CommonTestComponent implements OnInit {
-  test$: Observable<TestContent | null | undefined> = this.testStoreService.test$;
+  test$: Observable<TestContent | null> = this.testStoreService.test$;
 
-  grammar$!: Observable<Question[] | null | undefined>;
+  grammar$!: Observable<Question[] | null>;
 
-  listening$!: Observable<Question[] | null | undefined>;
+  listening$!: Observable<Question[] | null>;
 
-  essay$!: Observable<TopicModule | null | undefined>;
+  essay$!: Observable<TopicModule | null>;
 
-  speaking$!: Observable<TopicModule | null | undefined>;
+  speaking$!: Observable<TopicModule | null>;
 
   selectedIndex = 0;
 
@@ -29,10 +29,10 @@ export class CommonTestComponent implements OnInit {
   ngOnInit() {
     this.testStoreService.createTestContent();
 
-    this.grammar$ = this.test$.pipe(map((test) => test?.grammarQuestions));
-    this.listening$ = this.test$.pipe(map((test) => test?.audition.questions));
-    this.essay$ = this.test$.pipe(map((test) => test?.essay));
-    this.speaking$ = this.test$.pipe(map((test) => test?.speaking));
+    this.grammar$ = this.test$.pipe(map((test) => test?.grammarQuestions || null));
+    this.listening$ = this.test$.pipe(map((test) => test?.audition.questions || null));
+    this.essay$ = this.test$.pipe(map((test) => test?.essay || null));
+    this.speaking$ = this.test$.pipe(map((test) => test?.speaking || null));
   }
 
   setTabIndex(ind: number): void {

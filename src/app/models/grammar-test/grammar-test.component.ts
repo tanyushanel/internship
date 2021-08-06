@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Question } from '../../interfaces/question-answer';
 
 @Component({
@@ -6,10 +6,6 @@ import { Question } from '../../interfaces/question-answer';
   templateUrl: './grammar-test.component.html',
   styleUrls: ['./grammar-test.component.scss'],
 })
-export class GrammarTestComponent implements OnInit, OnChanges {
-  @Input() questions!: Question[] | undefined | null;
-
-  ngOnInit(): void {}
-
-  ngOnChanges(): void {}
+export class GrammarTestComponent {
+  @Input() questions!: Question[] | null;
 }

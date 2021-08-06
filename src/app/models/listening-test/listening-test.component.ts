@@ -1,12 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  Input,
-  AfterViewInit,
-  OnInit,
-  AfterViewChecked,
-  OnChanges,
-} from '@angular/core';
+import { Component, ElementRef, Input, AfterViewInit, AfterViewChecked } from '@angular/core';
 import { Track } from 'ngx-audio-player';
 import { Question } from '../../interfaces/question-answer';
 
@@ -15,8 +7,8 @@ import { Question } from '../../interfaces/question-answer';
   templateUrl: './listening-test.component.html',
   styleUrls: ['./listening-test.component.scss'],
 })
-export class ListeningTestComponent implements OnInit, AfterViewInit, AfterViewChecked, OnChanges {
-  @Input() questions!: Question[] | undefined | null;
+export class ListeningTestComponent implements AfterViewInit, AfterViewChecked {
+  @Input() questions!: Question[] | null;
 
   counter = 0;
 
@@ -48,10 +40,6 @@ export class ListeningTestComponent implements OnInit, AfterViewInit, AfterViewC
   ];
 
   constructor(private elementRef: ElementRef) {}
-
-  ngOnChanges(): void {}
-
-  ngOnInit(): void {}
 
   ngAfterViewInit() {
     this.elementRef.nativeElement
