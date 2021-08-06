@@ -1,12 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-  ViewChild,
-} from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
@@ -21,7 +13,7 @@ import { CoachTest } from '../service/get-coach-tests-http.service';
   templateUrl: './coach-profile-table.component.html',
   styleUrls: ['./coach-profile-table.component.scss'],
 })
-export class CoachProfileTableComponent implements AfterViewInit, OnChanges, OnInit {
+export class CoachProfileTableComponent implements AfterViewInit, OnInit {
   @Input() results: CoachTest[] = [];
 
   displayedColumns: string[] = ['id', 'level', 'date', 'button'];
@@ -50,9 +42,7 @@ export class CoachProfileTableComponent implements AfterViewInit, OnChanges, OnI
 
   public searchQuery = '';
 
-  constructor(public dialog: MatDialog) {
-    this.dataSource.filterPredicate = this.createFilter();
-  }
+  constructor(public dialog: MatDialog) {}
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -64,12 +54,6 @@ export class CoachProfileTableComponent implements AfterViewInit, OnChanges, OnI
       this.sort.direction = sortState.direction;
       this.sort.sortChange.emit(sortState);
     }, 10);
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes.table.currentValue) {
-      this.dataSource.data = changes.table.currentValue;
-    }
   }
 
   onClick(id: number) {

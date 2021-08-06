@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CoachProfileComponent } from './coach-profile.component';
 import { CoachProfileRoutingModule } from './coach-profile-routing.module';
 import { AngularMaterialCommonModule } from '../angular-material-common.module';
@@ -15,6 +16,7 @@ import { CoachProfileEditorModule } from '../coach-profile-editor/coach-profile-
     CoachProfileRoutingModule,
     CoachProfileDialog,
     CoachProfileEditorModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class CoachProfileModule {}

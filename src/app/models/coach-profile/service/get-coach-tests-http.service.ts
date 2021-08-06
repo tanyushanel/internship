@@ -13,7 +13,7 @@ export interface CoachTest {
 }
 
 interface GetCoachTests {
-  tests: CoachTest[];
+  results: CoachTest[];
 }
 
 @Injectable({
@@ -22,9 +22,21 @@ interface GetCoachTests {
 export class GetCoachTestsHttpService {
   constructor(private http: HttpClient) {}
 
-  getCoachTests(userID: number): Observable<CoachTest[]> {
+  getHighPriorityCoachTests(): Observable<CoachTest[]> {
     return this.http
-      .get<GetCoachTests>(`${BASE_API_URL}/api/Test/forCoach`)
-      .pipe(map((res) => res.tests.filter((r) => r.id !== null)));
+      .get<GetCoachTests>(`${BASE_API_URL}/api/Test/forCoach?IsChecked=false&Priority=true`)
+      .pipe(map((res) => res.results.filter((r) => r.id !== null)));
+  }
+
+  getCheckedCoachTests(): Observable<CoachTest[]> {
+    return this.http
+      .get<GetCoachTests>(`${BASE_API_URL}/api/Test/forCoach?IsChecked=true`)
+      .pipe(map((res) => res.results.filter((r) => r.id !== null)));
+  }
+
+  getUncheckedCoachTests(): Observable<CoachTest[]> {
+    return this.http
+      .get<GetCoachTests>(`${BASE_API_URL}/api/Test/forCoach?IsChecked=false`)
+      .pipe(map((res) => res.results.filter((r) => r.id !== null)));
   }
 }
