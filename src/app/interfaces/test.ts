@@ -1,7 +1,7 @@
 import { Audition } from './audition';
 import { Level } from '../constants/data-constants';
-import { Topic } from './topic';
-import { Essay } from './essay';
+import { TopicModule } from './essay-speaking';
+
 import { Question } from './question-answer';
 
 export interface Test {
@@ -29,6 +29,6 @@ export interface TestContent {
   testPassingDate: string;
   grammarQuestions: Question[];
   audition: Audition;
-  essay: Essay;
-  speaking: Topic[];
+  essay: TopicModule;
+  speaking: TopicModule;
 }

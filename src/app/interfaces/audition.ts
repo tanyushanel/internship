@@ -1,5 +1,4 @@
 import { Question } from './question-answer';
-
 import { Level } from '../constants/data-constants';
 
 export interface Audition {

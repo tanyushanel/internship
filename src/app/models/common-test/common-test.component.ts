@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { TopicModule } from '../../interfaces/essay-speaking';
 import { Question } from '../../interfaces/question-answer';
-import { TestHttpService } from '../../services/test-http.service';
 import { TestStoreService } from '../../services/store/test-store.service';
 import { TestContent } from '../../interfaces/test';
 
@@ -18,14 +18,21 @@ export class CommonTestComponent implements OnInit {
 
   listening$!: Observable<Question[] | null | undefined>;
 
+  essay$!: Observable<TopicModule | null | undefined>;
+
+  speaking$!: Observable<TopicModule | null | undefined>;
+
   selectedIndex = 0;
 
   constructor(private testStoreService: TestStoreService) {}
 
   ngOnInit() {
     this.testStoreService.createTestContent();
+
     this.grammar$ = this.test$.pipe(map((test) => test?.grammarQuestions));
     this.listening$ = this.test$.pipe(map((test) => test?.audition.questions));
+    this.essay$ = this.test$.pipe(map((test) => test?.essay));
+    this.speaking$ = this.test$.pipe(map((test) => test?.speaking));
   }
 
   setTabIndex(ind: number): void {

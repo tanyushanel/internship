@@ -16,7 +16,7 @@
   </mat-tab>
 
   <mat-tab label="ESSAY">
-    <app-writing-test></app-writing-test>
+    <app-writing-test [essay]="essay$ | async"></app-writing-test>
     <app-proceed-buttons
       [currentIndex]="selectedIndex"
       (changedIndex)="setTabIndex($event)"
@@ -24,7 +24,7 @@
   </mat-tab>
 
   <mat-tab label="SPEAKING">
-    <app-speaking></app-speaking>
+    <app-speaking [speaking]="speaking$ | async"></app-speaking>
     <app-proceed-buttons
       [currentIndex]="selectedIndex"
       (changedIndex)="setTabIndex($event)"

@@ -27,9 +27,11 @@ export class UserProfileComponent implements OnInit {
     this.testStoreService.getTestResults();
   }
 
-  onStartButtonClick(): void {
+  onStartButtonClick(level: Level): void {
     this.isClicked = true;
-    this.testStoreService.selectedLevel = this.selectedLevel;
+
+    this.testStoreService.selectedLevel = level;
+
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate([Route.test]);
     });
