@@ -1,9 +1,8 @@
 import { Audition } from './audition';
-import { Question } from '../constants/mock-grammar-test';
 import { Level } from '../constants/data-constants';
 import { Topic } from './topic';
-
 import { Essay } from './essay';
+import { Question } from './question-answer';
 
 export interface Test {
   id: number;

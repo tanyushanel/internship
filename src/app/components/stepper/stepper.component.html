@@ -7,7 +7,7 @@
     errorMessage="Not Answered"
   >
     <form class="form__color" [formGroup]="stepperFormGroups![ind]">
-      <p class="text__center">{{ question.text }}</p>
+      <p class="text__center">{{ question.nameQuestion }}</p>
 
       <p></p>
 
@@ -17,7 +17,7 @@
           *ngFor="let answerCase of question.answers"
           [value]="answerCase"
         >
-          {{ answerCase.text }}
+          {{ answerCase.nameAnswer }}
         </mat-radio-button>
       </mat-radio-group>
 
