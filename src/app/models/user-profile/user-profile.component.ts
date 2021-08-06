@@ -17,6 +17,8 @@ export class UserProfileComponent implements OnInit {
 
   levels = [...Object.values(Level)];
 
+  isClicked = false;
+
   selectedLevel!: Level;
 
   constructor(private router: Router, private testStoreService: TestStoreService) {}
@@ -26,9 +28,10 @@ export class UserProfileComponent implements OnInit {
   }
 
   onStartButtonClick(): void {
+    this.isClicked = true;
+    this.testStoreService.selectedLevel = this.selectedLevel;
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate([Route.test]);
     });
-    this.testStoreService.selectedLevel = this.selectedLevel;
   }
 }

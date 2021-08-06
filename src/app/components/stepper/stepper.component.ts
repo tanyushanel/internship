@@ -15,11 +15,7 @@ import { Question } from '../../interfaces/question-answer';
   ],
 })
 export class StepperComponent implements OnInit, OnChanges {
-  questionList!: Question[] | null | undefined;
-
-  @Input() grammarQuestionList!: Question[] | null | undefined;
-
-  @Input() listeningQuestionList!: Question[] | null | undefined;
+  @Input() questionList!: Question[] | null | undefined;
 
   stepperFormGroups: FormGroup[] | undefined = [];
 
@@ -28,7 +24,6 @@ export class StepperComponent implements OnInit, OnChanges {
   ngOnInit() {}
 
   ngOnChanges() {
-    this.questionList = this.grammarQuestionList;
     this.stepperFormGroups = this.questionList?.map(() =>
       this.formBuilder.group({
         stepCtrl: ['', Validators.required],

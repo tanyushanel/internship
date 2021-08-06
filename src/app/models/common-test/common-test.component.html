@@ -8,7 +8,7 @@
   </mat-tab>
 
   <mat-tab label="LISTENING">
-    <app-listening></app-listening>
+    <app-listening [questions]="listening$ | async"></app-listening>
     <app-proceed-buttons
       [currentIndex]="selectedIndex"
       (changedIndex)="setTabIndex($event)"

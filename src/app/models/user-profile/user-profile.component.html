@@ -12,7 +12,7 @@
   </mat-radio-group>
 
   <button
-    [disabled]="!selectedLevel"
+    [disabled]="!selectedLevel || isClicked"
     mat-raised-button
     color="primary"
     class="start-btn"
