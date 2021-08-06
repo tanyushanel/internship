@@ -17,7 +17,7 @@ export class CoachProfileEditorComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private coachEdit: CoachEditStoreService) {}
 
-  tables$ = this.coachEdit.getAllQuestion();
+  tables$ = this.coachEdit.questions$;
 
   tabsTitle: CoachEditorTabs[] = [
     CoachEditorTabs.grammar,
@@ -28,7 +28,7 @@ export class CoachProfileEditorComponent implements OnInit {
   tabChanged(tabChangeEvent: MatTabChangeEvent): void {
     if (tabChangeEvent.index === 0) {
       this.selectedTab = CoachEditorTabs.grammar;
-      this.tables$ = this.coachEdit.getAllQuestion();
+      this.tables$ = this.coachEdit.questions$;
     } else if (tabChangeEvent.index === 1) {
       this.selectedTab = CoachEditorTabs.audition;
     } else if (tabChangeEvent.index === 2) {

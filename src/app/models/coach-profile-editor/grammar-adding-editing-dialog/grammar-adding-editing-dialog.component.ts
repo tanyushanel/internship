@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatRadioChange } from '@angular/material/radio';
 import { GrammarAnswers, Level, EnglishLevel } from '../../../../constants/data-constants';
 import { CoachEditStoreService } from '../coach-edit-store.service';
-import { QuestionList } from '../../../interfaces/question.interfaces';
+import { QuestionList } from '../../../interfaces/question-answer';
 
 export interface CreateDialogData {
   id: string;
@@ -67,12 +67,6 @@ export class GrammarAddingEditingDialogComponent {
     });
     if (this.answerOption) {
       this.answerOption[i].isRight = true;
-    }
-  }
-
-  setAnswerTitle($event: Event, i: number): void {
-    if (this.answerOption) {
-      this.answerOption[i].nameAnswer = ($event.target as HTMLInputElement).value;
     }
   }
 }

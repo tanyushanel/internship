@@ -21,7 +21,7 @@
       </mat-radio-button>
       <span>
         <mat-form-field
-          ><input matInput [value]="answer.nameAnswer" (change)="setAnswerTitle($event, i)"
+          ><input matInput [(ngModel)]="answer" [value]="answer.nameAnswer"
         /></mat-form-field>
       </span>
     </div>

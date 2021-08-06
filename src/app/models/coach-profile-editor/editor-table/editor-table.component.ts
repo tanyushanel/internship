@@ -17,7 +17,7 @@ import { CoachEditorTest } from '../../../../mocks/users-utils.mock';
 import { CoachEditorTabs, EnglishLevel } from '../../../../constants/data-constants';
 import { GrammarAddingEditingDialogComponent } from '../grammar-adding-editing-dialog/grammar-adding-editing-dialog.component';
 import { CoachEditStoreService } from '../coach-edit-store.service';
-import { QuestionList } from '../../../interfaces/question.interfaces';
+import { QuestionList } from '../../../interfaces/question-answer';
 import { EditListeningDialogComponent } from '../edit-listening-dialog/edit-listening-dialog.component';
 import { TopicAddingEditingDialogComponent } from '../topic-adding-editing-dialog/topic-adding-editing-dialog.component';
 import { isSubstring } from '../../../helpers/filter-check';

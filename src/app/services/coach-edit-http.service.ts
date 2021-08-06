@@ -5,7 +5,7 @@ import {
   QuestionList,
   ResponseGetAllQuestion,
   UpdateQuestionList,
-} from '../interfaces/question.interfaces';
+} from '../interfaces/question-answer';
 
 @Injectable({
   providedIn: 'root',
