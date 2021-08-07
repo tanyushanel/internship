@@ -1,6 +1,8 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { GrammarAnswers, Level } from '../../../../constants/data-constants';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { languageLevel, GrammarAnswers, Level } from '../../../constants/data-constants';
+import { CoachEditStoreService } from '../../../services/store/coach-edit-store.service';
+import { QuestionList } from '../../../interfaces/question-answer';
 
 export interface CreateDialogData {
   id: string;
@@ -22,44 +24,49 @@ interface Grammar {
   }[];
 }
 
-const emptyGrammar: Grammar = {
-  question: '',
-  answers: [
-    {
-      title: '',
-      isRight: false,
-    },
-    {
-      title: '',
-      isRight: false,
-    },
-    {
-      title: '',
-      isRight: false,
-    },
-    {
-      title: '',
-      isRight: false,
-    },
-  ],
-};
-
 @Component({
   selector: 'app-coach-profile-editor-grammar-edit-dialog',
   templateUrl: './grammar-adding-editing-dialog.component.html',
   styleUrls: ['./grammar-adding-editing-dialog.component.scss'],
 })
 export class GrammarAddingEditingDialogComponent {
-  grammar: Grammar = emptyGrammar;
+  constructor(
+    public dialogRef: MatDialogRef<GrammarAddingEditingDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: QuestionList,
+    private coachEditor: CoachEditStoreService,
+  ) {}
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: CreateDialogData | EditDialogData) {
-    if (data.isEdit) {
-      this.grammar = {
-        answers: data.answers,
-        question: data.question,
-      };
-    }
-  }
+  languageLevel = languageLevel;
+
+  nameQuestion = this.data.nameQuestion;
+
+  englishLevel: number | undefined;
+
+  answerOption = this.data.answers;
 
   QuestionList = Object.values(GrammarAnswers);
+
+  updateData(): void {
+    this.coachEditor.updateQuestion({
+      id: this.data.id,
+      nameQuestion: this.nameQuestion,
+      level: this.englishLevel,
+      answers: this.answerOption,
+    });
+    this.dialogRef.close();
+  }
+
+  levelChangeHandler($event: Level): void {
+    const level = Object.keys(this.languageLevel).find((key) => this.languageLevel[key] === $event);
+    this.englishLevel = Number(level);
+  }
+
+  radioChangeHandler(i: number): void {
+    this.answerOption = this.answerOption?.map((question) => {
+      return { ...question, isRight: false };
+    });
+    if (this.answerOption) {
+      this.answerOption[i].isRight = true;
+    }
+  }
 }

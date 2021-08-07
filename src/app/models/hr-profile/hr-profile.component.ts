@@ -4,9 +4,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { FormControl } from '@angular/forms';
+import { User } from '../../interfaces/user.interfaces';
 import { UserResultsDialogComponent } from '../dialog-module/user-results-dialog/user-results-dialog.component';
 import { MOCK_USERS, UserData } from '../../../mocks/users-utils.mock';
-import { User } from '../../interfaces/user';
 import { HrProfileDialogComponent } from './hr-profile-dialog/hr-profile-dialog.component';
 import { isSubstring } from '../../helpers/filter-check';
 

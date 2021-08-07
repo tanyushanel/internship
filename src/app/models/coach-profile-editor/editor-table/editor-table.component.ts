@@ -13,11 +13,14 @@ import { MatSort, Sort } from '@angular/material/sort';
 
 import { MatDialog } from '@angular/material/dialog';
 import { FormControl } from '@angular/forms';
+import { take } from 'rxjs/operators';
 import { CoachEditorTest } from '../../../../mocks/users-utils.mock';
-import { CoachEditorTabs } from '../../../../constants/data-constants';
+import { CoachEditorTabs, languageLevel } from '../../../constants/data-constants';
 import { GrammarAddingEditingDialogComponent } from '../grammar-adding-editing-dialog/grammar-adding-editing-dialog.component';
-import { TopicAddingEditingDialogComponent } from '../topic-adding-editing-dialog/topic-adding-editing-dialog.component';
+import { CoachEditStoreService } from '../../../services/store/coach-edit-store.service';
+import { QuestionList } from '../../../interfaces/question-answer';
 import { EditListeningDialogComponent } from '../edit-listening-dialog/edit-listening-dialog.component';
+import { TopicAddingEditingDialogComponent } from '../topic-adding-editing-dialog/topic-adding-editing-dialog.component';
 import { isSubstring } from '../../../helpers/filter-check';
 
 @Component({
@@ -30,6 +33,12 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
 
   public searchQuery = '';
 
+  languageLevel = languageLevel;
+
+  dataSource: MatTableDataSource<QuestionList>;
+
+  question: QuestionList | undefined;
+
   idFilter = new FormControl('');
 
   levelFilter = new FormControl('');
@@ -39,11 +48,9 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
     level: '',
   };
 
-  dataSource: MatTableDataSource<CoachEditorTest>;
-
   @Input() selectTab = '';
 
-  @Input() table: CoachEditorTest[] = [];
+  @Input() table: QuestionList[] = [];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -51,7 +58,7 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
 
   @ViewChild(MatTable) tableView!: MatTable<CoachEditorTest>;
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog, private coachEdit: CoachEditStoreService) {
     this.dataSource = new MatTableDataSource(this.table);
     this.dataSource.filterPredicate = this.createFilter();
   }
@@ -59,7 +66,6 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-
     setTimeout(() => {
       const sortState: Sort = { active: 'level', direction: 'asc' };
       this.sort.active = sortState.active;
@@ -85,7 +91,7 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
     });
   }
 
-  createFilter(): (filterValues: CoachEditorTest, filter: string) => boolean {
+  createFilter(): (filterValues: QuestionList, filter: string) => boolean {
     return function filterFunction(filterValues, filter): boolean {
       const searchTerms = JSON.parse(filter);
       return (
@@ -95,35 +101,17 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
     };
   }
 
-  openEditor(row: CoachEditorTest) {
-    if (this.selectTab === CoachEditorTabs.grammar)
-      this.dialog.open(GrammarAddingEditingDialogComponent, {
-        data: {
-          id: row.id,
-          level: row.level,
-          answers: [
-            {
-              title: '1',
-              isRight: true,
-            },
-            {
-              title: '2',
-              isRight: false,
-            },
-            {
-              title: '3',
-              isRight: false,
-            },
-            {
-              title: '4',
-              isRight: false,
-            },
-          ],
-          question: 'Question',
-          isEdit: true,
-        },
+  openEditor(row: QuestionList) {
+    if (this.selectTab === CoachEditorTabs.grammar) {
+      this.coachEdit.getQuestion(row.id);
+      this.coachEdit.question$.pipe(take(1)).subscribe((question) => {
+        if (question !== null) {
+          this.dialog.open(GrammarAddingEditingDialogComponent, {
+            data: { ...question, isEdit: true },
+          });
+        }
       });
-    else if (this.selectTab === CoachEditorTabs.audition) {
+    } else if (this.selectTab === CoachEditorTabs.audition) {
       this.dialog.open(EditListeningDialogComponent, {
         autoFocus: false,
       });

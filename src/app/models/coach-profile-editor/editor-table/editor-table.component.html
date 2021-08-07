@@ -8,7 +8,7 @@
         </mat-form-field>
         <div mat-sort-header>Number</div>
       </th>
-      <td mat-cell *matCellDef="let row">{{ selectTab }} № {{ row.id }}</td>
+      <td mat-cell *matCellDef="let row">№ {{ row.nameQuestion }}</td>
     </ng-container>
 
     <ng-container matColumnDef="level">
@@ -19,7 +19,7 @@
         </mat-form-field>
         <div mat-sort-header>English Level</div>
       </th>
-      <td mat-cell *matCellDef="let row">Level: {{ row.level }}</td>
+      <td mat-cell *matCellDef="let row">Level: {{ languageLevel[row.level] }}</td>
     </ng-container>
 
     <ng-container matColumnDef="edit">

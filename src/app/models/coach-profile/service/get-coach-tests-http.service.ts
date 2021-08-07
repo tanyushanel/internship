@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { BASE_API_URL } from '../../../../constants/route-constant';
+import { BASE_API_URL } from '../../../constants/route-constant';
 
 export interface CoachTest {
   id: string;
