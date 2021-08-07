@@ -20,8 +20,8 @@ export enum SidebarMenu {
   statistics = 'Statistics',
 }
 
-export const BASE_API_URL = 'http://elevel-001-site1.btempurl.com';
-
-export const LoginApiUrl = `${BASE_API_URL}/api/User/token`;
-export const RefreshUserDataUrl = `${BASE_API_URL}/api/User/info`;
-export const PostAssignTest = `${BASE_API_URL}/api/Test/assign`;
+export const BASE_API_URL = 'http://elevel-001-site1.btempurl.com/api';
+export const LoginApiUrl = `${BASE_API_URL}/User/token`;
+export const QuestionApiUrl = `${BASE_API_URL}/Question`;
+export const PostAssignTest = `${BASE_API_URL}/Test/assign`;
+export const RefreshUserDataUrl = `${BASE_API_URL}/User/info`;
