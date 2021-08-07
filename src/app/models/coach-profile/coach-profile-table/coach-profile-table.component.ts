@@ -79,7 +79,6 @@ export class CoachProfileTableComponent implements AfterViewInit, OnInit, OnChan
   }
 
   ngOnInit(): void {
-    // this.dataSource = new MatTableDataSource(this.results);
     this.idFilter.valueChanges.subscribe((id) => {
       this.filterValues.id = id;
       this.dataSource.filter = JSON.stringify(this.filterValues);
@@ -100,7 +99,7 @@ export class CoachProfileTableComponent implements AfterViewInit, OnInit, OnChan
       return (
         isSubstring(filterValues.id, searchTerms.id) &&
         isSubstring(filterValues.level, searchTerms.level) &&
-        isSubstring(filterValues.date.toDateString(), searchTerms.date)
+        isSubstring(filterValues.date, searchTerms.date)
       );
     };
   }

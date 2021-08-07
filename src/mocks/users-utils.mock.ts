@@ -80,7 +80,7 @@ export function createNewCoachProfileTest(id: number): CoachTest {
   return {
     id: id.toString(),
     level: MOCK_LEVELS[Math.round(Math.random() * (MOCK_LEVELS.length - 1))],
-    date: generateRandomDate(),
+    date: generateRandomDate().toString(),
     isChecked: id % 2 === 1,
     isHigh: id % 2 !== 1 && id % 10 === 0,
   };

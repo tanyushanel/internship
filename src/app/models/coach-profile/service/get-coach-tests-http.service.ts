@@ -9,7 +9,7 @@ export interface CoachTest {
   level: string;
   isChecked: boolean;
   isHigh: boolean;
-  date: Date;
+  date: string;
 }
 
 interface GetCoachTests {

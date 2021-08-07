@@ -34,18 +34,14 @@ export class CoachProfileComponent implements OnInit {
   tabChanged(tabChangeEvent: MatTabChangeEvent): void {
     if (tabChangeEvent.index === 0) {
       this.coachTestStoreService.getCoachHighPriorityTestResults();
-      this.results$ = of(MOCK_TESTS.filter((test) => test.isHigh));
     } else if (tabChangeEvent.index === 1) {
       this.coachTestStoreService.getCoachUncheckedTestResults();
-      this.results$ = of(MOCK_TESTS.filter((test) => !test.isChecked));
     } else if (tabChangeEvent.index === 2) {
       this.coachTestStoreService.getCoachCheckedTestResults();
-      this.results$ = of(MOCK_TESTS.filter((test) => test.isChecked));
     }
   }
 
   ngOnInit() {
     this.coachTestStoreService.getCoachHighPriorityTestResults();
-    this.results$ = of(MOCK_TESTS.filter((test) => test.isHigh));
   }
 }
