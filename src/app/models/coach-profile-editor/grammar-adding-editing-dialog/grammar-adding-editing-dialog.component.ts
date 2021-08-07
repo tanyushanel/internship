@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { languageLevel, GrammarAnswers, Level } from '../../../constants/data-constants';
 import { CoachQuestionStoreService } from '../../../services/store/coach-question-store.service';
-import { CoachQuestion } from '../../../interfaces/question-answer';
+import { Question } from '../../../interfaces/question-answer';
 
 export interface CreateDialogData {
   id: string;
@@ -32,7 +32,7 @@ interface Grammar {
 export class GrammarAddingEditingDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<GrammarAddingEditingDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: CoachQuestion,
+    @Inject(MAT_DIALOG_DATA) public data: Question,
     private coachEditor: CoachQuestionStoreService,
   ) {}
 
