@@ -10,7 +10,7 @@ import { QuestionApiUrl } from '../constants/route-constant';
 @Injectable({
   providedIn: 'root',
 })
-export class CoachEditHttpService {
+export class CoachQuestionHttpService {
   constructor(private readonly http: HttpClient) {}
 
   getQuestionLists() {
@@ -23,5 +23,9 @@ export class CoachEditHttpService {
 
   updateQuestion(question: UpdateQuestionList) {
     return this.http.put(`${QuestionApiUrl}/${question.id}`, question);
+  }
+
+  setNewQuestion(question: UpdateQuestionList) {
+    return this.http.post(QuestionApiUrl, question);
   }
 }

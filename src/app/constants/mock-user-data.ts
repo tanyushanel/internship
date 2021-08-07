@@ -88,3 +88,25 @@ export const user = {
   role: UserRole.Coach,
   userPhoto: '',
 };
+export const emptyQuestion = {
+  level: 1,
+  nameQuestion: '',
+  answers: [
+    {
+      nameAnswer: '',
+      isRight: false,
+    },
+    {
+      nameAnswer: '',
+      isRight: false,
+    },
+    {
+      nameAnswer: '',
+      isRight: false,
+    },
+    {
+      nameAnswer: '',
+      isRight: false,
+    },
+  ],
+};

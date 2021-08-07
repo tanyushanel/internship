@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Observable, of, Subject } from 'rxjs';
 import { TopicAddingEditingDialogComponent } from './topic-adding-editing-dialog/topic-adding-editing-dialog.component';
 import { AddListeningDialogComponent } from './add-listening-dialog/add-listening-dialog.component';
-import { CoachEditStoreService } from '../../services/store/coach-edit-store.service';
+import { CoachQuestionStoreService } from '../../services/store/coach-question-store.service';
 import { GrammarAddingEditingDialogComponent } from './grammar-adding-editing-dialog/grammar-adding-editing-dialog.component';
 import {
   MOCK_AUDITION_QUESTIONS,
@@ -12,6 +12,7 @@ import {
 } from '../../../mocks/users-utils.mock';
 import { QuestionList } from '../../interfaces/question-answer';
 import { CoachEditorTabs } from '../../constants/data-constants';
+import { emptyQuestion } from '../../constants/mock-user-data';
 
 @Component({
   selector: 'app-coach-profile-editor',
@@ -21,7 +22,7 @@ import { CoachEditorTabs } from '../../constants/data-constants';
 export class CoachProfileEditorComponent implements OnInit {
   public selectedTab = CoachEditorTabs.grammar;
 
-  constructor(public dialog: MatDialog, private coachEdit: CoachEditStoreService) {}
+  constructor(public dialog: MatDialog, private coachEdit: CoachQuestionStoreService) {}
 
   tables$: Observable<QuestionList[]> | Subject<QuestionList[]> = this.coachEdit.questions$;
 
@@ -56,7 +57,9 @@ export class CoachProfileEditorComponent implements OnInit {
   }
 
   openGrammarModal() {
-    this.dialog.open(GrammarAddingEditingDialogComponent, { data: { isEdit: false } });
+    this.dialog.open(GrammarAddingEditingDialogComponent, {
+      data: { ...emptyQuestion, isEdit: false },
+    });
   }
 
   openTopicModal() {

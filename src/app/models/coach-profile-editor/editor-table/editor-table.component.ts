@@ -17,7 +17,7 @@ import { take } from 'rxjs/operators';
 import { CoachEditorTest } from '../../../../mocks/users-utils.mock';
 import { CoachEditorTabs, languageLevel } from '../../../constants/data-constants';
 import { GrammarAddingEditingDialogComponent } from '../grammar-adding-editing-dialog/grammar-adding-editing-dialog.component';
-import { CoachEditStoreService } from '../../../services/store/coach-edit-store.service';
+import { CoachQuestionStoreService } from '../../../services/store/coach-question-store.service';
 import { QuestionList } from '../../../interfaces/question-answer';
 import { EditListeningDialogComponent } from '../edit-listening-dialog/edit-listening-dialog.component';
 import { TopicAddingEditingDialogComponent } from '../topic-adding-editing-dialog/topic-adding-editing-dialog.component';
@@ -58,7 +58,7 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
 
   @ViewChild(MatTable) tableView!: MatTable<CoachEditorTest>;
 
-  constructor(public dialog: MatDialog, private coachEdit: CoachEditStoreService) {
+  constructor(public dialog: MatDialog, private coachEdit: CoachQuestionStoreService) {
     this.dataSource = new MatTableDataSource(this.table);
     this.dataSource.filterPredicate = this.createFilter();
   }

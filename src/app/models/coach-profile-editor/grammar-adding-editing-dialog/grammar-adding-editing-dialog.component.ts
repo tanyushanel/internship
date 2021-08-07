@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { languageLevel, GrammarAnswers, Level } from '../../../constants/data-constants';
-import { CoachEditStoreService } from '../../../services/store/coach-edit-store.service';
+import { CoachQuestionStoreService } from '../../../services/store/coach-question-store.service';
 import { QuestionList } from '../../../interfaces/question-answer';
 
 export interface CreateDialogData {
@@ -33,7 +33,7 @@ export class GrammarAddingEditingDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<GrammarAddingEditingDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: QuestionList,
-    private coachEditor: CoachEditStoreService,
+    private coachEditor: CoachQuestionStoreService,
   ) {}
 
   languageLevel = languageLevel;
@@ -47,12 +47,17 @@ export class GrammarAddingEditingDialogComponent {
   QuestionList = Object.values(GrammarAnswers);
 
   updateData(): void {
-    this.coachEditor.updateQuestion({
+    const question = {
       id: this.data.id,
       nameQuestion: this.nameQuestion,
       level: this.englishLevel,
       answers: this.answerOption,
-    });
+    };
+    if (this.data.isEdit) {
+      this.coachEditor.updateQuestion(question);
+    } else {
+      this.coachEditor.setNewQuestion(question);
+    }
     this.dialogRef.close();
   }
 
