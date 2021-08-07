@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { englishLevel, GrammarAnswers, Level } from '../../../constants/data-constants';
+import { languageLevel, GrammarAnswers, Level } from '../../../constants/data-constants';
 import { CoachEditStoreService } from '../../../services/store/coach-edit-store.service';
 import { QuestionList } from '../../../interfaces/question-answer';
 
@@ -36,7 +36,7 @@ export class GrammarAddingEditingDialogComponent {
     private coachEditor: CoachEditStoreService,
   ) {}
 
-  languageLevel = englishLevel;
+  languageLevel = languageLevel;
 
   nameQuestion = this.data.nameQuestion;
 
@@ -56,7 +56,7 @@ export class GrammarAddingEditingDialogComponent {
     this.dialogRef.close();
   }
 
-  changeEnglishLevel($event: Level | any): void {
+  levelChangeHandler($event: Level): void {
     const level = Object.keys(this.languageLevel).find((key) => this.languageLevel[key] === $event);
     this.englishLevel = Number(level);
   }

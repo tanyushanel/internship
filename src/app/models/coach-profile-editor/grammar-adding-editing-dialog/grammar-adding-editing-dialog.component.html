@@ -6,7 +6,7 @@
   </mat-form-field>
   <h3>Select level</h3>
   <app-choose-level
-    (changeLevel)="changeEnglishLevel($event)"
+    (changeLevel)="levelChangeHandler($event)"
     [currentLevel]="languageLevel[data.level.toString()]"
   ></app-choose-level>
   <mat-radio-group class="radio-group">

@@ -21,11 +21,11 @@
         (selectedTabChange)="tabChanged($event)"
         backgroundColor="primary"
       >
-        <ng-container *ngIf="{ tabs: tables$ | async } as $">
+        <ng-container *ngIf="{ table: tables$ | async } as $">
           <mat-tab *ngFor="let tab of tabsTitle" [label]="tab">
             <app-coach-profile-editor-table
-              *ngIf="$.tabs"
-              [table]="$.tabs"
+              *ngIf="$.table"
+              [table]="$.table"
               [selectTab]="selectedTab"
             ></app-coach-profile-editor-table>
           </mat-tab>

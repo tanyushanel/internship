@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { MatDialog } from '@angular/material/dialog';
-import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { TopicAddingEditingDialogComponent } from './topic-adding-editing-dialog/topic-adding-editing-dialog.component';
 import { AddListeningDialogComponent } from './add-listening-dialog/add-listening-dialog.component';
 import { CoachEditStoreService } from '../../services/store/coach-edit-store.service';
@@ -38,7 +38,7 @@ export class CoachProfileEditorComponent implements OnInit {
       this.tables$ = this.coachEdit.questions$;
     } else if (tabChangeEvent.index === 1) {
       this.selectedTab = CoachEditorTabs.audition;
-      this.tables$ = new BehaviorSubject(MOCK_AUDITION_QUESTIONS as any as QuestionList[]);
+      this.tables$ = of(MOCK_AUDITION_QUESTIONS as any as QuestionList[]);
     } else if (tabChangeEvent.index === 2) {
       this.selectedTab = CoachEditorTabs.writingAndSpeaking;
       this.tables$ = of(MOCK_WRITING_AND_SPEAKING_QUESTIONS as any as QuestionList[]);
