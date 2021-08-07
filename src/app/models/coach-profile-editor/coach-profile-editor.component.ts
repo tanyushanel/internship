@@ -10,7 +10,7 @@ import {
   MOCK_AUDITION_QUESTIONS,
   MOCK_WRITING_AND_SPEAKING_QUESTIONS,
 } from '../../../mocks/users-utils.mock';
-import { QuestionList } from '../../interfaces/question-answer';
+import { CoachQuestion } from '../../interfaces/question-answer';
 import { CoachEditorTabs, emptyQuestion } from '../../constants/data-constants';
 
 @Component({
@@ -23,7 +23,7 @@ export class CoachProfileEditorComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private coachEdit: CoachQuestionStoreService) {}
 
-  tables$: Observable<QuestionList[]> | Subject<QuestionList[]> = this.coachEdit.questions$;
+  tables$: Observable<CoachQuestion[]> | Subject<CoachQuestion[]> = this.coachEdit.questions$;
 
   tabsTitle: CoachEditorTabs[] = [
     CoachEditorTabs.grammar,
@@ -38,10 +38,10 @@ export class CoachProfileEditorComponent implements OnInit {
       this.tables$ = this.coachEdit.questions$;
     } else if (tabChangeEvent.index === 1) {
       this.selectedTab = CoachEditorTabs.audition;
-      this.tables$ = of(MOCK_AUDITION_QUESTIONS as any as QuestionList[]);
+      this.tables$ = of(MOCK_AUDITION_QUESTIONS as any as CoachQuestion[]);
     } else if (tabChangeEvent.index === 2) {
       this.selectedTab = CoachEditorTabs.writingAndSpeaking;
-      this.tables$ = of(MOCK_WRITING_AND_SPEAKING_QUESTIONS as any as QuestionList[]);
+      this.tables$ = of(MOCK_WRITING_AND_SPEAKING_QUESTIONS as any as CoachQuestion[]);
     }
   }
 

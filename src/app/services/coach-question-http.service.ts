@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
-  QuestionList,
+  CoachQuestion,
   ResponseGetAllQuestion,
   UpdateQuestionList,
 } from '../interfaces/question-answer';
@@ -18,7 +18,7 @@ export class CoachQuestionHttpService {
   }
 
   getQuestion(id: string) {
-    return this.http.get<QuestionList>(`${QuestionApiUrl}/${id}`);
+    return this.http.get<CoachQuestion>(`${QuestionApiUrl}/${id}`);
   }
 
   updateQuestion(question: UpdateQuestionList) {

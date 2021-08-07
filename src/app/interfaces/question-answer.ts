@@ -9,7 +9,7 @@ export interface Question {
   answerId: number;
   answers: Answer[];
 }
-export interface QuestionList {
+export interface CoachQuestion {
   id: string;
   questionNumber: string;
   numberTest: string;
@@ -46,7 +46,7 @@ export interface ResponseGetAllQuestion {
   lastRowOnPage: number;
   pageCount: number;
   pageSize: number;
-  results: QuestionList[];
+  results: CoachQuestion[];
   rowCount: number;
 }
 interface EmptyAnswer {
