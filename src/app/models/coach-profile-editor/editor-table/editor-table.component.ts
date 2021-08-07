@@ -15,9 +15,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { FormControl } from '@angular/forms';
 import { take } from 'rxjs/operators';
 import { CoachEditorTest } from '../../../../mocks/users-utils.mock';
-import { CoachEditorTabs, EnglishLevel } from '../../../../constants/data-constants';
+import { CoachEditorTabs, englishLevel } from '../../../../constants/data-constants';
 import { GrammarAddingEditingDialogComponent } from '../grammar-adding-editing-dialog/grammar-adding-editing-dialog.component';
-import { CoachEditStoreService } from '../coach-edit-store.service';
+import { CoachEditStoreService } from '../../../services/store/coach-edit-store.service';
 import { QuestionList } from '../../../interfaces/question-answer';
 import { EditListeningDialogComponent } from '../edit-listening-dialog/edit-listening-dialog.component';
 import { TopicAddingEditingDialogComponent } from '../topic-adding-editing-dialog/topic-adding-editing-dialog.component';
@@ -33,7 +33,7 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
 
   public searchQuery = '';
 
-  languageLevel = EnglishLevel;
+  languageLevel = englishLevel;
 
   dataSource: MatTableDataSource<QuestionList>;
 
@@ -102,8 +102,8 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
   }
 
   openEditor(row: QuestionList) {
-    this.coachEdit.getQuestion(row.id);
     if (this.selectTab === CoachEditorTabs.grammar) {
+      this.coachEdit.getQuestion(row.id);
       this.coachEdit.question$.pipe(take(1)).subscribe((question) => {
         if (question !== null) {
           this.dialog.open(GrammarAddingEditingDialogComponent, {

@@ -8,7 +8,7 @@ import { Level } from '../../../constants/data-constants';
   styleUrls: ['./choose-level.component.scss'],
 })
 export class ChooseLevelComponent {
-  @Input() currentLevel: string | undefined;
+  @Input() currentLevel: Level | undefined;
 
   @Output() changeLevel = new EventEmitter<Level>();
 

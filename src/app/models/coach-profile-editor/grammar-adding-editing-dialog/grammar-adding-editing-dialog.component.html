@@ -13,8 +13,7 @@
     <div *ngFor="let answer of answerOption; let i = index">
       <mat-radio-button
         [checked]="answer.isRight"
-        [value]="QuestionList[i]"
-        (change)="radioChangeHandler($event, i)"
+        (change)="radioChangeHandler(i)"
         class="radio-button"
       >
         {{ QuestionList[i] }}

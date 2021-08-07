@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { CoachEditHttpService } from '../../services/coach-edit-http.service';
+import { CoachEditHttpService } from '../coach-edit-http.service';
 import { QuestionList, UpdateQuestionList } from '../../interfaces/question-answer';
 
 @Injectable({
@@ -33,7 +33,7 @@ export class CoachEditStoreService {
     });
   }
 
-  updateQuestions(question: UpdateQuestionList) {
+  updateQuestion(question: UpdateQuestionList) {
     this.couchHttpService.updateQuestion(question).subscribe();
   }
 }

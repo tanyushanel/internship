@@ -2,7 +2,7 @@
   <mat-label>Choose level:</mat-label>
   <mat-select [(ngModel)]="currentLevel">
     <mat-option
-      *ngFor="let level of LevelList; let i = index"
+      *ngFor="let level of LevelList"
       [value]="level"
       (onSelectionChange)="onLevelChange($event)"
     >

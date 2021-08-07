@@ -1,5 +1,3 @@
-import { EnglishLevel } from '../constants/data-constants';
-
 export interface UserData {
   id: number;
   firstName: string;
@@ -94,13 +92,6 @@ export function createNewCoachProfileTest(id: number): TestData {
   };
 }
 
-export function createNewGrammarQuestionTest(id: number): CoachEditorTest {
-  return {
-    id: id.toString(),
-    level: EnglishLevel[Math.round(Math.random() * MOCK_LEVELS.length)],
-  };
-}
-
 export function createNewAuditionQuestionTest(id: number) {
   return {
     id: id.toString(),
@@ -125,9 +116,6 @@ export function createNewWritingAndSpeakingQuestionTest(id: number) {
 
 export const MOCK_USERS = Array.from({ length: 100 }, (_, k) => createNewUser(k + 1));
 export const MOCK_TESTS = Array.from({ length: 100 }, (_, k) => createNewCoachProfileTest(k + 1));
-export const MOCK_GRAMMAR_QUESTIONS = Array.from({ length: 60 }, (_, k) =>
-  createNewGrammarQuestionTest(k + 1),
-);
 export const MOCK_AUDITION_QUESTIONS = Array.from({ length: 80 }, (_, k) =>
   createNewAuditionQuestionTest(k + 1),
 );

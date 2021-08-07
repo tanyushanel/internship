@@ -18,10 +18,10 @@ export class CoachEditHttpService {
   }
 
   getQuestion(id: string) {
-    return this.http.get<QuestionList>(`${QuestionApiUrl}${id}`);
+    return this.http.get<QuestionList>(`${QuestionApiUrl}/${id}`);
   }
 
   updateQuestion(question: UpdateQuestionList) {
-    return this.http.put(`${QuestionApiUrl}${question.id}`, question);
+    return this.http.put(`${QuestionApiUrl}/${question.id}`, question);
   }
 }

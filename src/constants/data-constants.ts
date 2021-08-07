@@ -6,7 +6,7 @@ export enum Level {
   Advanced = 'Advanced',
 }
 
-export const EnglishLevel: { [key: string]: Level } = {
+export const englishLevel: { [key: string]: Level } = {
   1: Level.Elementary,
   2: Level.PreIntermediate,
   3: Level.Intermediate,

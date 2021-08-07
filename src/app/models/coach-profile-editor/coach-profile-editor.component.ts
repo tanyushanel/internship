@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { CoachEditorTabs } from '../../../constants/data-constants';
 import { TopicAddingEditingDialogComponent } from './topic-adding-editing-dialog/topic-adding-editing-dialog.component';
 import { AddListeningDialogComponent } from './add-listening-dialog/add-listening-dialog.component';
-import { CoachEditStoreService } from './coach-edit-store.service';
+import { CoachEditStoreService } from '../../services/store/coach-edit-store.service';
 import { GrammarAddingEditingDialogComponent } from './grammar-adding-editing-dialog/grammar-adding-editing-dialog.component';
 import {
   MOCK_AUDITION_QUESTIONS,
