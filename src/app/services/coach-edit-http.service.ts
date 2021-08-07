@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { QuestionApiUrl } from '../../constants/route-constant';
 import {
   QuestionList,
   ResponseGetAllQuestion,
   UpdateQuestionList,
 } from '../interfaces/question-answer';
+import { QuestionApiUrl } from '../constants/route-constant';
 
 @Injectable({
   providedIn: 'root',

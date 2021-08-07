@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MatOptionSelectionChange } from '@angular/material/core';
-import { Level } from '../../../constants/data-constants';
+import { Level } from '../../constants/data-constants';
 
 @Component({
   selector: 'app-choose-level',

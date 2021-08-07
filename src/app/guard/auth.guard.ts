@@ -3,9 +3,9 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from
 import { Observable } from 'rxjs';
 import { map, skip } from 'rxjs/operators';
 import { AuthStoreService } from '../services/store/auth-store.service';
-import { Route } from '../../constants/route-constant';
+import { Route } from '../constants/route-constant';
 import { LocalStorageService } from '../services/local-storage.service';
-import { UserResponseType } from '../../interfaces/user.interfaces';
+import { UserResponseType } from '../interfaces/user.interfaces';
 import { isRoleExist } from '../helpers/check-role';
 
 @Injectable({

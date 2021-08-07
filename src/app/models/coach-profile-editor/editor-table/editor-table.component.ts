@@ -15,7 +15,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { FormControl } from '@angular/forms';
 import { take } from 'rxjs/operators';
 import { CoachEditorTest } from '../../../../mocks/users-utils.mock';
-import { CoachEditorTabs, englishLevel } from '../../../../constants/data-constants';
+import { CoachEditorTabs, englishLevel } from '../../../constants/data-constants';
 import { GrammarAddingEditingDialogComponent } from '../grammar-adding-editing-dialog/grammar-adding-editing-dialog.component';
 import { CoachEditStoreService } from '../../../services/store/coach-edit-store.service';
 import { QuestionList } from '../../../interfaces/question-answer';

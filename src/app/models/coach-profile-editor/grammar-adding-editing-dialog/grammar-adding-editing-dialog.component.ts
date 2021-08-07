@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { englishLevel, GrammarAnswers, Level } from '../../../../constants/data-constants';
+import { englishLevel, GrammarAnswers, Level } from '../../../constants/data-constants';
 import { CoachEditStoreService } from '../../../services/store/coach-edit-store.service';
 import { QuestionList } from '../../../interfaces/question-answer';
 
