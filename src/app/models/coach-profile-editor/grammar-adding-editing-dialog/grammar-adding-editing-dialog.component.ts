@@ -4,26 +4,6 @@ import { languageLevel, GrammarAnswers, Level } from '../../../constants/data-co
 import { CoachQuestionStoreService } from '../../../services/store/coach-question-store.service';
 import { Question } from '../../../interfaces/question-answer';
 
-export interface CreateDialogData {
-  id: string;
-  level: Level;
-  isEdit: false;
-}
-
-export interface EditDialogData extends Grammar {
-  id: string;
-  level: Level;
-  isEdit: true;
-}
-
-interface Grammar {
-  question: string;
-  answers: {
-    title: string;
-    isRight: boolean;
-  }[];
-}
-
 @Component({
   selector: 'app-coach-profile-editor-grammar-edit-dialog',
   templateUrl: './grammar-adding-editing-dialog.component.html',
