@@ -1,4 +1,12 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
@@ -13,7 +21,7 @@ import { CoachTest } from '../service/get-coach-tests-http.service';
   templateUrl: './coach-profile-table.component.html',
   styleUrls: ['./coach-profile-table.component.scss'],
 })
-export class CoachProfileTableComponent implements AfterViewInit, OnInit {
+export class CoachProfileTableComponent implements AfterViewInit, OnInit, OnChanges {
   @Input() results: CoachTest[] = [];
 
   displayedColumns: string[] = ['id', 'level', 'date', 'button'];
@@ -30,7 +38,7 @@ export class CoachProfileTableComponent implements AfterViewInit, OnInit {
     date: '',
   };
 
-  dataSource!: MatTableDataSource<CoachTest>;
+  dataSource: MatTableDataSource<CoachTest>;
 
   @Input() table: CoachTest[] = [];
 
@@ -42,7 +50,17 @@ export class CoachProfileTableComponent implements AfterViewInit, OnInit {
 
   public searchQuery = '';
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog) {
+    this.dataSource = new MatTableDataSource(this.table);
+    this.dataSource.data = this.table;
+    this.dataSource.filterPredicate = this.createFilter();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.table.currentValue) {
+      this.dataSource.data = changes.table.currentValue;
+    }
+  }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -61,7 +79,7 @@ export class CoachProfileTableComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource(this.results);
+    // this.dataSource = new MatTableDataSource(this.results);
     this.idFilter.valueChanges.subscribe((id) => {
       this.filterValues.id = id;
       this.dataSource.filter = JSON.stringify(this.filterValues);

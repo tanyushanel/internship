@@ -1,11 +1,7 @@
 <div class="mat-elevation-z8">
   <mat-tab-group mat-align-tabs="start" (selectedTabChange)="tabChanged($event)">
     <mat-tab *ngFor="let tab of tabs" [label]="tab">
-      <app-coach-profile-table
-        [table]="tables[tab]"
-        [results]="(results$ | async)!"
-        *ngIf="results$ | async; else noResults"
-      >
+      <app-coach-profile-table [table]="tables[tab]" *ngIf="results$ | async; else noResults">
       </app-coach-profile-table>
     </mat-tab>
   </mat-tab-group>

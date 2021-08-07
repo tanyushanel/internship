@@ -7,7 +7,7 @@ export enum Level {
 }
 
 export enum CoachTestTabs {
-  unchecked = 'In review',
+  unchecked = 'In Review',
   highPriority = 'High Priority',
   checked = 'Reviewed',
 }
