@@ -25,7 +25,7 @@ export class CoachQuestionHttpService {
     return this.http.put(`${QuestionApiUrl}/${question.id}`, question);
   }
 
-  setNewQuestion(question: UpdateQuestionList) {
+  createQuestion(question: UpdateQuestionList) {
     return this.http.post(QuestionApiUrl, question);
   }
 }

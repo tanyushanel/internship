@@ -56,7 +56,7 @@ export class GrammarAddingEditingDialogComponent {
     if (this.data.isEdit) {
       this.coachEditor.updateQuestion(question);
     } else {
-      this.coachEditor.setNewQuestion(question);
+      this.coachEditor.createQuestion(question);
     }
     this.dialogRef.close();
   }

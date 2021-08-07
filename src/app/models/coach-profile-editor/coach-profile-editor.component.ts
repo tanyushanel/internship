@@ -11,8 +11,7 @@ import {
   MOCK_WRITING_AND_SPEAKING_QUESTIONS,
 } from '../../../mocks/users-utils.mock';
 import { QuestionList } from '../../interfaces/question-answer';
-import { CoachEditorTabs } from '../../constants/data-constants';
-import { emptyQuestion } from '../../constants/mock-user-data';
+import { CoachEditorTabs, emptyQuestion } from '../../constants/data-constants';
 
 @Component({
   selector: 'app-coach-profile-editor',
