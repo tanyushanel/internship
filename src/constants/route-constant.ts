@@ -17,7 +17,6 @@ export enum SidebarMenu {
   check = 'Check',
   editor = 'Editor',
   manage = 'Manage',
-  statistics = 'Statistics',
 }
 
 export const BASE_API_URL = 'http://elevel-001-site1.btempurl.com';

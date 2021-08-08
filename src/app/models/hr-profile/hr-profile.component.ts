@@ -39,7 +39,7 @@ export class HrProfileComponent implements OnInit {
 
   public usersTestarg!: UserTable[];
 
-  @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   @ViewChild(MatSort) sort: MatSort | null = null;
 
@@ -49,11 +49,11 @@ export class HrProfileComponent implements OnInit {
     this.userTableStoreService.usersSubject$.subscribe((value) => {
       if (value) {
         this.dataSource = new MatTableDataSource(value.results);
+        this.dataSource.filterPredicate = this.createFilter();
       }
     });
 
     this.userTableStoreService.getUsersResults();
-
     this.firstNameFilter.valueChanges.subscribe((firstName) => {
       this.filterValues.firstName = firstName;
       this.dataSource.filter = JSON.stringify(this.filterValues);
@@ -62,9 +62,10 @@ export class HrProfileComponent implements OnInit {
       this.filterValues.lastName = lastName;
       this.dataSource.filter = JSON.stringify(this.filterValues);
     });
-
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    if (this.paginator && this.sort) {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
   }
 
   createFilter(): (filterValues: UserTable, filter: string) => boolean {
