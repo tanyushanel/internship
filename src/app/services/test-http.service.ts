@@ -18,11 +18,11 @@ export class TestHttpService {
 
   getResults(userId: number): Observable<Test[]> {
     return this.http
-      .get<GetTestsResults>(`${BASE_API_URL}/api/Test?userId=${userId}`)
+      .get<GetTestsResults>(`${BASE_API_URL}/Test?userId=${userId}`)
       .pipe(map((res) => res.results.filter((r) => r.testPassingDate !== null)));
   }
 
   createTest(level: Level): Observable<TestContent> {
-    return this.http.post<TestContent>(`${BASE_API_URL}/api/Test`, { level });
+    return this.http.post<TestContent>(`${BASE_API_URL}/Test`, { level });
   }
 }

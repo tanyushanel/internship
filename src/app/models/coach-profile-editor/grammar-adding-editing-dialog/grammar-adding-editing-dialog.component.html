@@ -12,6 +12,7 @@
   <mat-radio-group class="radio-group">
     <div *ngFor="let answer of answerOption; let i = index">
       <mat-radio-button
+        [value]="QuestionList[i]"
         [checked]="answer.isRight"
         (change)="radioChangeHandler(i)"
         class="radio-button"

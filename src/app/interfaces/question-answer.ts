@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-cycle
 import { Level } from '../constants/data-constants';
 
 export interface Question {
@@ -8,20 +9,7 @@ export interface Question {
   answerId: number;
   answers: Answer[];
 }
-
-export interface Answer {
-  id: number;
-  nameAnswer: string;
-  questionId: Question['id'];
-  isRight: boolean;
-}
-export interface AnswerQuestion {
-  id: string;
-  questionId: string;
-  nameAnswer: string;
-  isRight: boolean;
-}
-export interface QuestionList {
+export interface CoachQuestion {
   id: string;
   questionNumber: string;
   numberTest: string;
@@ -32,7 +20,21 @@ export interface QuestionList {
   isEdit?: boolean;
 }
 
-export interface UpdateQuestionList {
+export interface Answer {
+  id: number;
+  nameAnswer: string;
+  questionId: Question['id'];
+  isRight: boolean;
+}
+
+export interface AnswerQuestion {
+  id: string;
+  questionId: string;
+  nameAnswer: string;
+  isRight: boolean;
+}
+
+export interface UpdateCoachQuestion {
   id: string;
   nameQuestion: string;
   level: number | undefined;
@@ -45,6 +47,15 @@ export interface ResponseGetAllQuestion {
   lastRowOnPage: number;
   pageCount: number;
   pageSize: number;
-  results: QuestionList[];
+  results: CoachQuestion[];
   rowCount: number;
+}
+interface EmptyAnswer {
+  nameAnswer: string;
+  isRight: boolean;
+}
+export interface EmptyQuestion {
+  level: number;
+  nameQuestion: string;
+  answers: EmptyAnswer[];
 }

@@ -8,7 +8,7 @@
         </mat-form-field>
         <div mat-sort-header>Number</div>
       </th>
-      <td mat-cell *matCellDef="let row">№ {{ row.nameQuestion }}</td>
+      <td mat-cell *matCellDef="let row">{{ row.nameQuestion }} № {{ row.questionNumber }}</td>
     </ng-container>
 
     <ng-container matColumnDef="level">
@@ -34,8 +34,8 @@
 
     <tr class="mat-row" *matNoDataRow>
       <td class="mat-cell" colspan="4">
-        <div *ngIf="filterValues.id">
-          No data matching the number filter "{{ filterValues.id }}"
+        <div *ngIf="filterValues.questionNumber">
+          No data matching the number filter "{{ filterValues.questionNumber }}"
         </div>
         <div *ngIf="filterValues.level">
           No data matching the level filter "{{ filterValues.level }}"
