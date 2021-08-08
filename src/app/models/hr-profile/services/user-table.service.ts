@@ -5,10 +5,6 @@ import { map } from 'rxjs/operators';
 import { UsersList, UserTable } from 'src/app/interfaces/test';
 import { UserTableUrl } from 'src/constants/route-constant';
 
-interface GetUserTable {
-  results: UserTable[];
-}
-
 @Injectable({
   providedIn: 'root',
 })

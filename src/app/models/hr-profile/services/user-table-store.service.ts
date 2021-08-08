@@ -17,10 +17,7 @@ export class UserTableStoreService {
     this.usersSubject$.next(usersResults);
   }
 
-  constructor(
-    private userTableService: UserTableService,
-    private authStoreService: AuthStoreService,
-  ) {}
+  constructor(private userTableService: UserTableService) {}
 
   getUsersResults(): void {
     this.userTableService.getUsers().subscribe((res) => {
