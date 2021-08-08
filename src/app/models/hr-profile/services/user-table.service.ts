@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { UserTableUrl } from 'src/app/constants/route-constant';
 import { UsersList, UserTable } from 'src/app/interfaces/test';
-import { UserTableUrl } from 'src/constants/route-constant';
 
 @Injectable({
   providedIn: 'root',

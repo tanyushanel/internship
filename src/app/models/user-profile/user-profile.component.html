@@ -11,16 +11,12 @@
     </mat-radio-button>
   </mat-radio-group>
 
-  <p *ngIf="selectedLevel" class="for-delete">
-    Your choice is <b>{{ selectedLevel }}</b>
-  </p>
-
   <button
-    [disabled]="!selectedLevel"
+    [disabled]="!selectedLevel || isStarted"
     mat-raised-button
     color="primary"
     class="start-btn"
-    (click)="onStartButtonClick()"
+    (click)="onStartButtonClick(selectedLevel)"
   >
     START TEST
   </button>

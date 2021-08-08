@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { MatDialog } from '@angular/material/dialog';
-import { CoachEditorTabs } from '../../../constants/data-constants';
-import {
-  CoachEditorTest,
-  MOCK_AUDITION_QUESTIONS,
-  MOCK_GRAMMAR_QUESTIONS,
-  MOCK_WRITING_AND_SPEAKING_QUESTIONS,
-} from '../../../mocks/users-utils.mock';
-import { GrammarAddingEditingDialogComponent } from './grammar-adding-editing-dialog/grammar-adding-editing-dialog.component';
+import { Observable, of, Subject } from 'rxjs';
 import { TopicAddingEditingDialogComponent } from './topic-adding-editing-dialog/topic-adding-editing-dialog.component';
 import { AddListeningDialogComponent } from './add-listening-dialog/add-listening-dialog.component';
+import { CoachQuestionStoreService } from '../../services/store/coach-question-store.service';
+import { GrammarAddingEditingDialogComponent } from './grammar-adding-editing-dialog/grammar-adding-editing-dialog.component';
+import {
+  MOCK_AUDITION_QUESTIONS,
+  MOCK_WRITING_AND_SPEAKING_QUESTIONS,
+} from '../../../mocks/users-utils.mock';
+import { CoachQuestion } from '../../interfaces/question-answer';
+import { CoachEditorTabs, emptyQuestion } from '../../constants/data-constants';
 
 @Component({
   selector: 'app-coach-profile-editor',
@@ -20,17 +21,11 @@ import { AddListeningDialogComponent } from './add-listening-dialog/add-listenin
 export class CoachProfileEditorComponent implements OnInit {
   public selectedTab = CoachEditorTabs.grammar;
 
-  constructor(public dialog: MatDialog) {
-    this.tables = {
-      [CoachEditorTabs.grammar]: MOCK_GRAMMAR_QUESTIONS,
-      [CoachEditorTabs.audition]: MOCK_AUDITION_QUESTIONS,
-      [CoachEditorTabs.writingAndSpeaking]: MOCK_WRITING_AND_SPEAKING_QUESTIONS,
-    };
-  }
+  constructor(public dialog: MatDialog, private coachEdit: CoachQuestionStoreService) {}
 
-  tables: { [key: string]: CoachEditorTest[] } = {};
+  tables$: Observable<CoachQuestion[]> | Subject<CoachQuestion[]> = this.coachEdit.questions$;
 
-  tabs: CoachEditorTabs[] = [
+  tabsTitle: CoachEditorTabs[] = [
     CoachEditorTabs.grammar,
     CoachEditorTabs.audition,
     CoachEditorTabs.writingAndSpeaking,
@@ -38,15 +33,21 @@ export class CoachProfileEditorComponent implements OnInit {
 
   tabChanged(tabChangeEvent: MatTabChangeEvent): void {
     if (tabChangeEvent.index === 0) {
+      this.coachEdit.getAllQuestion();
       this.selectedTab = CoachEditorTabs.grammar;
+      this.tables$ = this.coachEdit.questions$;
     } else if (tabChangeEvent.index === 1) {
       this.selectedTab = CoachEditorTabs.audition;
+      this.tables$ = of(MOCK_AUDITION_QUESTIONS as any as CoachQuestion[]);
     } else if (tabChangeEvent.index === 2) {
       this.selectedTab = CoachEditorTabs.writingAndSpeaking;
+      this.tables$ = of(MOCK_WRITING_AND_SPEAKING_QUESTIONS as any as CoachQuestion[]);
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.coachEdit.getAllQuestion();
+  }
 
   onAddAudioClick(): void {
     this.dialog.open(AddListeningDialogComponent, {
@@ -55,7 +56,9 @@ export class CoachProfileEditorComponent implements OnInit {
   }
 
   openGrammarModal() {
-    this.dialog.open(GrammarAddingEditingDialogComponent, { data: { isEdit: false } });
+    this.dialog.open(GrammarAddingEditingDialogComponent, {
+      data: { ...emptyQuestion, isEdit: false },
+    });
   }
 
   openTopicModal() {

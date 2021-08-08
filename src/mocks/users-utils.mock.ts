@@ -1,9 +1,17 @@
+import { CoachTest } from '../app/interfaces/coach-edit';
+
 export interface TestData {
   id: string;
   level: string;
   isChecked: boolean;
   isHigh: boolean;
   date: Date;
+}
+
+export interface UserData {
+  id: number;
+  firstName: string;
+  lastName: string;
 }
 
 export interface CoachEditorTest {
@@ -34,41 +42,39 @@ const generateRandomDate = (): Date => {
   return getRandomDate(new Date('2020-10-12'), new Date('2021-07-12'));
 };
 
-export function createNewCoachProfileTest(id: number): TestData {
+export function createNewCoachProfileTest(id: number): CoachTest {
   return {
     id: id.toString(),
     level: MOCK_LEVELS[Math.round(Math.random() * (MOCK_LEVELS.length - 1))],
-    date: generateRandomDate(),
+    date: generateRandomDate().toString(),
     isChecked: id % 2 === 1,
     isHigh: id % 2 !== 1 && id % 10 === 0,
   };
 }
 
-export function createNewGrammarQuestionTest(id: number): CoachEditorTest {
+export function createNewAuditionQuestionTest(id: number) {
   return {
     id: id.toString(),
-    level: MOCK_LEVELS[Math.round(Math.random() * (MOCK_LEVELS.length - 1))],
+    level: 5,
+    creationDate: '2021-08-04T05:37:12.2158831-07:00',
+    creatorId: '2cfaa429-e45c-415c-27cf-08d9574493b2',
+    nameQuestion: `Audition ${id}`,
+    questionNumber: 284,
   };
 }
 
-export function createNewAuditionQuestionTest(id: number): CoachEditorTest {
+export function createNewWritingAndSpeakingQuestionTest(id: number) {
   return {
     id: id.toString(),
-    level: MOCK_LEVELS[Math.round(Math.random() * (MOCK_LEVELS.length - 1))],
-  };
-}
-
-export function createNewWritingAndSpeakingQuestionTest(id: number): CoachEditorTest {
-  return {
-    id: id.toString(),
-    level: MOCK_LEVELS[Math.round(Math.random() * (MOCK_LEVELS.length - 1))],
+    level: 4,
+    creationDate: '2021-08-04T05:37:12.2158831-07:00',
+    creatorId: '2cfaa429-e45c-415c-27cf-08d9574493b2',
+    nameQuestion: `WritingAndSpeaking ${id}`,
+    questionNumber: 284,
   };
 }
 
 export const MOCK_TESTS = Array.from({ length: 100 }, (_, k) => createNewCoachProfileTest(k + 1));
-export const MOCK_GRAMMAR_QUESTIONS = Array.from({ length: 60 }, (_, k) =>
-  createNewGrammarQuestionTest(k + 1),
-);
 export const MOCK_AUDITION_QUESTIONS = Array.from({ length: 80 }, (_, k) =>
   createNewAuditionQuestionTest(k + 1),
 );

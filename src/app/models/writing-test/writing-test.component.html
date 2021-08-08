@@ -1,5 +1,7 @@
 <div class="container">
-  <p>Write about <span>some theme</span></p>
+  <p>
+    Please, write something about <b>{{ essay!.topicName }}</b>
+  </p>
 
   <form class="essay-area" [formGroup]="form" (ngSubmit)="submit()">
     <mat-form-field appearance="fill">

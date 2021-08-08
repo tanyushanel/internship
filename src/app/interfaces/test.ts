@@ -1,4 +1,8 @@
-import { Level } from '../../constants/data-constants';
+import { Audition } from './audition';
+import { Level } from '../constants/data-constants';
+import { TopicModule } from './essay-speaking';
+
+import { Question } from './question-answer';
 
 export interface Test {
   id: number;
@@ -34,4 +38,15 @@ export interface UsersList {
   pageSize: number;
   results: UserTable[];
   rowCount: number;
+}
+
+export interface TestContent {
+  id: number;
+  userId: number;
+  level: Level;
+  testPassingDate: string;
+  grammarQuestions: Question[];
+  audition: Audition;
+  essay: TopicModule;
+  speaking: TopicModule;
 }

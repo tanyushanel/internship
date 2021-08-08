@@ -6,8 +6,8 @@ import { MatSort } from '@angular/material/sort';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { UsersList, UserTable } from 'src/app/interfaces/test';
+import { User } from 'src/app/interfaces/user.interfaces';
 import { UserResultsDialogComponent } from '../dialog-module/user-results-dialog/user-results-dialog.component';
-import { User } from '../../interfaces/user';
 import { HrProfileDialogComponent } from './hr-profile-dialog/hr-profile-dialog.component';
 import { isSubstring } from '../../helpers/filter-check';
 import { UserTableStoreService } from './services/user-table-store.service';
@@ -72,6 +72,7 @@ export class HrProfileComponent implements OnInit {
     return (filterValues, filter): boolean => {
       const searchTerms = JSON.parse(filter);
       return (
+        isSubstring(filterValues.id, searchTerms.id) &&
         isSubstring(filterValues.firstName, searchTerms.firstName) &&
         isSubstring(filterValues.lastName, searchTerms.lastName)
       );
