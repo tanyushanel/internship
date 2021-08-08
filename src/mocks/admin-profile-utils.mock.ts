@@ -19,7 +19,7 @@ const MOCK_EMPTY_COACH: CoachData = {
 
 export enum AdminTestTabs {
   notAssigned = 'Not Assigned',
-  assigned = 'Assign',
+  assigned = 'Assigned',
 }
 
 export const MOCK_COACH: CoachData[] = [
