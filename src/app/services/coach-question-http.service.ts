@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
-  CoachQuestion,
+  Question,
   ResponseGetAllQuestion,
-  UpdateQuestionList,
+  UpdateCoachQuestion,
 } from '../interfaces/question-answer';
 import { QuestionApiUrl } from '../constants/route-constant';
 
@@ -18,14 +18,14 @@ export class CoachQuestionHttpService {
   }
 
   getQuestion(id: string) {
-    return this.http.get<CoachQuestion>(`${QuestionApiUrl}/${id}`);
+    return this.http.get<Question>(`${QuestionApiUrl}/${id}`);
   }
 
-  updateQuestion(question: UpdateQuestionList) {
+  updateQuestion(question: UpdateCoachQuestion) {
     return this.http.put(`${QuestionApiUrl}/${question.id}`, question);
   }
 
-  createQuestion(question: UpdateQuestionList) {
+  createQuestion(question: UpdateCoachQuestion) {
     return this.http.post(QuestionApiUrl, question);
   }
 }

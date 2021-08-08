@@ -2,15 +2,15 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CoachQuestionHttpService } from '../coach-question-http.service';
-import { CoachQuestion, UpdateQuestionList } from '../../interfaces/question-answer';
+import { Question, UpdateCoachQuestion } from '../../interfaces/question-answer';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CoachQuestionStoreService {
-  readonly question$ = new Subject<CoachQuestion>();
+  readonly question$ = new Subject<Question>();
 
-  readonly questions$ = new Subject<CoachQuestion[]>();
+  readonly questions$ = new Subject<Question[]>();
 
   constructor(private readonly couchHttpService: CoachQuestionHttpService) {}
 
@@ -33,11 +33,11 @@ export class CoachQuestionStoreService {
     });
   }
 
-  updateQuestion(question: UpdateQuestionList) {
+  updateQuestion(question: UpdateCoachQuestion) {
     this.couchHttpService.updateQuestion(question).subscribe();
   }
 
-  createQuestion(question: UpdateQuestionList) {
+  createQuestion(question: UpdateCoachQuestion) {
     this.couchHttpService.createQuestion(question).subscribe();
   }
 }

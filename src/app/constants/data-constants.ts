@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-cycle
 import { EmptyQuestion } from '../interfaces/question-answer';
 
 export enum Level {
