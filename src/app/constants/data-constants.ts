@@ -17,7 +17,7 @@ export const languageLevel: { [key: string]: Level } = {
   5: Level.Advanced,
 };
 export enum CoachTestTabs {
-  unchecked = 'In review',
+  unchecked = 'In Review',
   highPriority = 'High Priority',
   checked = 'Reviewed',
 }

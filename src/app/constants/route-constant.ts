@@ -14,8 +14,8 @@ export enum Route {
 export enum SidebarMenu {
   home = 'Home',
   users = 'Users',
-  check = 'Check',
-  editor = 'Editor',
+  check = 'Test Checking',
+  editor = 'Test Editor',
   manage = 'Manage',
   statistics = 'Statistics',
 }
