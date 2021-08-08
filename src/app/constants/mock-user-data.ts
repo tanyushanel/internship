@@ -28,8 +28,8 @@ export const usersRoute: UserRoutesType = {
     menuItem: [SidebarMenu.home, SidebarMenu.check, SidebarMenu.editor],
   },
   [UserRole.Administrator]: {
-    route: [Route.home, Route.manage, Route.statistics],
-    menuItem: [SidebarMenu.home, SidebarMenu.manage, SidebarMenu.statistics],
+    route: [Route.home, Route.manage],
+    menuItem: [SidebarMenu.home, SidebarMenu.manage],
   },
 };
 

@@ -10,7 +10,6 @@ import { HomeComponent } from './components/mock-component/home/home.component';
 import { CheckComponent } from './components/mock-component/check/check.component';
 import { EditorComponent } from './components/mock-component/editor/editor.component';
 import { ManageComponent } from './components/mock-component/manage/manage.component';
-import { StatisticsComponent } from './components/mock-component/statistics/statistics.component';
 import { NotFoundComponent } from './models/not-found/not-found.component';
 import { LoadingIndicatorInterceptor } from './shared/loading-indicator.interceptor';
 import { AuthInterceptor } from './shared/auth.interceptor';
@@ -36,7 +35,6 @@ const INTERCEPTOR_LOADING_INDICATOR: Provider = {
     CheckComponent,
     EditorComponent,
     ManageComponent,
-    StatisticsComponent,
     NotFoundComponent,
   ],
   imports: [
