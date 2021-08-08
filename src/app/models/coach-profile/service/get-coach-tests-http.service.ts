@@ -24,19 +24,27 @@ export class GetCoachTestsHttpService {
 
   getHighPriorityCoachTests(): Observable<CoachTest[]> {
     return this.http
-      .get<GetCoachTests>(`${BASE_API_URL}/api/Test/forCoach?IsChecked=false&Priority=true`)
-      .pipe(map((res) => res.results.filter((r) => r.id !== null)));
+      .get<GetCoachTests>(`${BASE_API_URL}/Test/forCoach?IsChecked=false&Priority=true`)
+      .pipe(
+        map((res) => {
+          return res.results.filter((r) => r.id !== null);
+        }),
+      );
   }
 
   getCheckedCoachTests(): Observable<CoachTest[]> {
-    return this.http
-      .get<GetCoachTests>(`${BASE_API_URL}/api/Test/forCoach?IsChecked=true`)
-      .pipe(map((res) => res.results.filter((r) => r.id !== null)));
+    return this.http.get<GetCoachTests>(`${BASE_API_URL}/Test/forCoach?IsChecked=true`).pipe(
+      map((res) => {
+        return res.results.filter((r) => r.id !== null);
+      }),
+    );
   }
 
   getUncheckedCoachTests(): Observable<CoachTest[]> {
-    return this.http
-      .get<GetCoachTests>(`${BASE_API_URL}/api/Test/forCoach?IsChecked=false`)
-      .pipe(map((res) => res.results.filter((r) => r.id !== null)));
+    return this.http.get<GetCoachTests>(`${BASE_API_URL}/Test/forCoach?IsChecked=false`).pipe(
+      map((res) => {
+        return res.results.filter((r) => r.id !== null);
+      }),
+    );
   }
 }

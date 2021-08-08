@@ -13,7 +13,7 @@ import { CoachTestsStoreService } from './service/coach-tests-store.service';
   styleUrls: ['./coach-profile.component.scss'],
 })
 export class CoachProfileComponent implements OnInit {
-  results$: Observable<CoachTest[] | null> = this.coachTestStoreService.coachTestResults$;
+  tables$: Observable<CoachTest[] | null> = this.coachTestStoreService.coachTestResults$;
 
   tabs: CoachTestTabs[] = [
     CoachTestTabs.highPriority,
@@ -21,27 +21,23 @@ export class CoachProfileComponent implements OnInit {
     CoachTestTabs.checked,
   ];
 
-  tables: { [key: string]: CoachTest[] } = {};
-
-  constructor(public dialog: MatDialog, private coachTestStoreService: CoachTestsStoreService) {
-    this.tables = {
-      [CoachTestTabs.unchecked]: MOCK_TESTS.filter((test) => !test.isChecked),
-      [CoachTestTabs.highPriority]: MOCK_TESTS.filter((test) => test.isHigh),
-      [CoachTestTabs.checked]: MOCK_TESTS.filter((test) => test.isChecked),
-    };
-  }
+  constructor(public dialog: MatDialog, private coachTestStoreService: CoachTestsStoreService) {}
 
   tabChanged(tabChangeEvent: MatTabChangeEvent): void {
     if (tabChangeEvent.index === 0) {
       this.coachTestStoreService.getCoachHighPriorityTestResults();
+      this.tables$ = of(MOCK_TESTS.filter((test) => test.isHigh));
     } else if (tabChangeEvent.index === 1) {
       this.coachTestStoreService.getCoachUncheckedTestResults();
+      this.tables$ = of(MOCK_TESTS.filter((test) => !test.isChecked));
     } else if (tabChangeEvent.index === 2) {
       this.coachTestStoreService.getCoachCheckedTestResults();
+      this.tables$ = of(MOCK_TESTS.filter((test) => test.isChecked));
     }
   }
 
   ngOnInit() {
+    this.tables$ = of(MOCK_TESTS.filter((test) => test.isHigh));
     this.coachTestStoreService.getCoachHighPriorityTestResults();
   }
 }

@@ -48,16 +48,13 @@ export class CoachProfileTableComponent implements AfterViewInit, OnInit, OnChan
 
   @ViewChild(MatTable) tableView!: MatTable<CoachTest>;
 
-  public searchQuery = '';
-
   constructor(public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource(this.table);
-    this.dataSource.data = this.table;
     this.dataSource.filterPredicate = this.createFilter();
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.table.currentValue) {
+    if (changes.table?.currentValue) {
       this.dataSource.data = changes.table.currentValue;
     }
   }
