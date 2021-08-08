@@ -18,7 +18,7 @@ import { CoachEditorTest } from '../../../../mocks/users-utils.mock';
 import { CoachEditorTabs, languageLevel } from '../../../constants/data-constants';
 import { GrammarAddingEditingDialogComponent } from '../grammar-adding-editing-dialog/grammar-adding-editing-dialog.component';
 import { CoachQuestionStoreService } from '../../../services/store/coach-question-store.service';
-import { Question } from '../../../interfaces/question-answer';
+import { CoachQuestion } from '../../../interfaces/question-answer';
 import { EditListeningDialogComponent } from '../edit-listening-dialog/edit-listening-dialog.component';
 import { TopicAddingEditingDialogComponent } from '../topic-adding-editing-dialog/topic-adding-editing-dialog.component';
 import { isSubstring } from '../../../helpers/filter-check';
@@ -35,9 +35,9 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
 
   languageLevel = languageLevel;
 
-  dataSource: MatTableDataSource<Question>;
+  dataSource: MatTableDataSource<CoachQuestion>;
 
-  question: Question | undefined;
+  question: CoachQuestion | undefined;
 
   idFilter = new FormControl('');
 
@@ -50,7 +50,7 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
 
   @Input() selectTab = '';
 
-  @Input() table: Question[] = [];
+  @Input() table: CoachQuestion[] = [];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -91,7 +91,7 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
     });
   }
 
-  createFilter(): (filterValues: Question, filter: string) => boolean {
+  createFilter(): (filterValues: CoachQuestion, filter: string) => boolean {
     return function filterFunction(filterValues, filter): boolean {
       const searchTerms = JSON.parse(filter);
       return (
@@ -101,7 +101,7 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
     };
   }
 
-  openEditor(row: Question) {
+  openEditor(row: CoachQuestion) {
     if (this.selectTab === CoachEditorTabs.grammar) {
       this.coachEdit.getQuestion(row.id);
       this.coachEdit.question$.pipe(take(1)).subscribe((question) => {

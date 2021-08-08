@@ -2,15 +2,15 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CoachQuestionHttpService } from '../coach-question-http.service';
-import { Question, UpdateCoachQuestion } from '../../interfaces/question-answer';
+import { CoachQuestion, UpdateCoachQuestion } from '../../interfaces/question-answer';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CoachQuestionStoreService {
-  readonly question$ = new Subject<Question>();
+  readonly question$ = new Subject<CoachQuestion>();
 
-  readonly questions$ = new Subject<Question[]>();
+  readonly questions$ = new Subject<CoachQuestion[]>();
 
   constructor(private readonly couchHttpService: CoachQuestionHttpService) {}
 
