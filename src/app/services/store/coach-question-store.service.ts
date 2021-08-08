@@ -34,7 +34,7 @@ export class CoachQuestionStoreService {
   }
 
   updateQuestion(question: UpdateCoachQuestion) {
-    this.couchHttpService.updateQuestion(question).subscribe();
+    this.couchHttpService.updateQuestion(question).subscribe(() => this.getAllQuestion());
   }
 
   createQuestion(question: UpdateCoachQuestion) {

@@ -30,7 +30,7 @@ export class GrammarAddingEditingDialogComponent {
     const question = {
       id: this.data.id,
       nameQuestion: this.nameQuestion,
-      level: this.englishLevel,
+      level: this.englishLevel ?? this.data.level,
       answers: this.answerOption,
     };
     if (this.data.isEdit) {
