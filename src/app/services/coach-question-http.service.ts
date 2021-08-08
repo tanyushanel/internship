@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
-  QuestionList,
+  CoachQuestion,
   ResponseGetAllQuestion,
-  UpdateQuestionList,
+  UpdateCoachQuestion,
 } from '../interfaces/question-answer';
 import { QuestionApiUrl } from '../constants/route-constant';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CoachEditHttpService {
+export class CoachQuestionHttpService {
   constructor(private readonly http: HttpClient) {}
 
   getQuestionLists() {
@@ -18,10 +18,14 @@ export class CoachEditHttpService {
   }
 
   getQuestion(id: string) {
-    return this.http.get<QuestionList>(`${QuestionApiUrl}/${id}`);
+    return this.http.get<CoachQuestion>(`${QuestionApiUrl}/${id}`);
   }
 
-  updateQuestion(question: UpdateQuestionList) {
+  updateQuestion(question: UpdateCoachQuestion) {
     return this.http.put(`${QuestionApiUrl}/${question.id}`, question);
+  }
+
+  createQuestion(question: UpdateCoachQuestion) {
+    return this.http.post(QuestionApiUrl, question);
   }
 }

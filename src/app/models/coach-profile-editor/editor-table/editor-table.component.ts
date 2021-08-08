@@ -17,8 +17,8 @@ import { take } from 'rxjs/operators';
 import { CoachEditorTest } from '../../../../mocks/users-utils.mock';
 import { CoachEditorTabs, languageLevel } from '../../../constants/data-constants';
 import { GrammarAddingEditingDialogComponent } from '../grammar-adding-editing-dialog/grammar-adding-editing-dialog.component';
-import { CoachEditStoreService } from '../../../services/store/coach-edit-store.service';
-import { QuestionList } from '../../../interfaces/question-answer';
+import { CoachQuestionStoreService } from '../../../services/store/coach-question-store.service';
+import { CoachQuestion } from '../../../interfaces/question-answer';
 import { EditListeningDialogComponent } from '../edit-listening-dialog/edit-listening-dialog.component';
 import { TopicAddingEditingDialogComponent } from '../topic-adding-editing-dialog/topic-adding-editing-dialog.component';
 import { isSubstring } from '../../../helpers/filter-check';
@@ -35,22 +35,22 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
 
   languageLevel = languageLevel;
 
-  dataSource: MatTableDataSource<QuestionList>;
+  dataSource: MatTableDataSource<CoachQuestion>;
 
-  question: QuestionList | undefined;
+  question: CoachQuestion | undefined;
 
   idFilter = new FormControl('');
 
   levelFilter = new FormControl('');
 
   filterValues = {
-    id: '',
+    questionNumber: '',
     level: '',
   };
 
   @Input() selectTab = '';
 
-  @Input() table: QuestionList[] = [];
+  @Input() table: CoachQuestion[] = [];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -58,7 +58,7 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
 
   @ViewChild(MatTable) tableView!: MatTable<CoachEditorTest>;
 
-  constructor(public dialog: MatDialog, private coachEdit: CoachEditStoreService) {
+  constructor(public dialog: MatDialog, private coachEdit: CoachQuestionStoreService) {
     this.dataSource = new MatTableDataSource(this.table);
     this.dataSource.filterPredicate = this.createFilter();
   }
@@ -81,8 +81,8 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
   }
 
   ngOnInit() {
-    this.idFilter.valueChanges.subscribe((id) => {
-      this.filterValues.id = id;
+    this.idFilter.valueChanges.subscribe((questionNumber) => {
+      this.filterValues.questionNumber = questionNumber;
       this.dataSource.filter = JSON.stringify(this.filterValues);
     });
     this.levelFilter.valueChanges.subscribe((level) => {
@@ -91,17 +91,17 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
     });
   }
 
-  createFilter(): (filterValues: QuestionList, filter: string) => boolean {
+  createFilter(): (filterValues: CoachQuestion, filter: string) => boolean {
     return function filterFunction(filterValues, filter): boolean {
       const searchTerms = JSON.parse(filter);
       return (
-        isSubstring(filterValues.id, searchTerms.id) &&
-        isSubstring(filterValues.level, searchTerms.level)
+        isSubstring(filterValues.questionNumber, searchTerms.questionNumber) &&
+        isSubstring(languageLevel[filterValues.level], searchTerms.level)
       );
     };
   }
 
-  openEditor(row: QuestionList) {
+  openEditor(row: CoachQuestion) {
     if (this.selectTab === CoachEditorTabs.grammar) {
       this.coachEdit.getQuestion(row.id);
       this.coachEdit.question$.pipe(take(1)).subscribe((question) => {

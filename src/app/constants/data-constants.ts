@@ -1,3 +1,6 @@
+// eslint-disable-next-line import/no-cycle
+import { EmptyQuestion } from '../interfaces/question-answer';
+
 export enum Level {
   Elementary = 'Elementary',
   PreIntermediate = 'Pre-intermediate',
@@ -44,3 +47,26 @@ export enum FilterFields {
   level = 'level',
   date = 'date',
 }
+
+export const emptyQuestion: EmptyQuestion = {
+  level: 1,
+  nameQuestion: '',
+  answers: [
+    {
+      nameAnswer: '',
+      isRight: false,
+    },
+    {
+      nameAnswer: '',
+      isRight: false,
+    },
+    {
+      nameAnswer: '',
+      isRight: false,
+    },
+    {
+      nameAnswer: '',
+      isRight: false,
+    },
+  ],
+};
