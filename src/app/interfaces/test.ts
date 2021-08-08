@@ -17,3 +17,21 @@ export interface Test {
   coachId: number | null;
   priority: boolean;
 }
+
+export interface UserTable {
+  id: string;
+  firstName: string;
+  lastName: string;
+  creationDate: string;
+  avatar: string;
+  email: string;
+}
+export interface UsersList {
+  currentPage: number;
+  firstRowOnPage: number;
+  lastRowOnPage: number;
+  pageCount: number;
+  pageSize: number;
+  results: UserTable[];
+  rowCount: number;
+}
