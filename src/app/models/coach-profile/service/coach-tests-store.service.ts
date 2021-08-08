@@ -14,14 +14,20 @@ export class CoachTestsStoreService {
   constructor(private coachTestHttpService: GetCoachTestsHttpService) {}
 
   getCoachHighPriorityTestResults(): void {
-    this.coachTestHttpService.getHighPriorityCoachTests().subscribe();
+    this.coachTestHttpService
+      .getHighPriorityCoachTests()
+      .subscribe({ next: (value) => this.coachTestSubject$.next(value) });
   }
 
   getCoachCheckedTestResults(): void {
-    this.coachTestHttpService.getCheckedCoachTests().subscribe();
+    this.coachTestHttpService
+      .getCheckedCoachTests()
+      .subscribe({ next: (value) => this.coachTestSubject$.next(value) });
   }
 
   getCoachUncheckedTestResults(): void {
-    this.coachTestHttpService.getUncheckedCoachTests().subscribe();
+    this.coachTestHttpService
+      .getUncheckedCoachTests()
+      .subscribe({ next: (value) => this.coachTestSubject$.next(value) });
   }
 }

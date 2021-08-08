@@ -1,7 +1,8 @@
 export interface CoachTest {
   id: string;
+  testNumber: number;
   level: string;
   isChecked: boolean;
-  isHigh: boolean;
-  date: string;
+  priority: boolean;
+  testPassingDate: string;
 }
