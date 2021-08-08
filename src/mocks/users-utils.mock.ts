@@ -1,4 +1,4 @@
-import { CoachTest } from '../app/models/coach-profile/service/get-coach-tests-http.service';
+import { CoachTest } from '../app/interfaces/coach-edit';
 
 export interface UserData {
   id: number;

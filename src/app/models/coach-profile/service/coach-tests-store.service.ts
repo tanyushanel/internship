@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { CoachTest, GetCoachTestsHttpService } from './get-coach-tests-http.service';
+import { GetCoachTestsHttpService } from './get-coach-tests-http.service';
+import { CoachTest } from '../../../interfaces/coach-edit';
 
 @Injectable({
   providedIn: 'root',

@@ -4,8 +4,8 @@ import { Observable, of } from 'rxjs';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { MOCK_TESTS } from '../../../mocks/users-utils.mock';
 import { CoachTestTabs } from '../../constants/data-constants';
-import { CoachTest } from './service/get-coach-tests-http.service';
 import { CoachTestsStoreService } from './service/coach-tests-store.service';
+import { CoachTest } from '../../interfaces/coach-edit';
 
 @Component({
   selector: 'app-coach-profile',

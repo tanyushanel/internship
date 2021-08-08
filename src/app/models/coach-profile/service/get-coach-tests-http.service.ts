@@ -3,14 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BASE_API_URL } from '../../../constants/route-constant';
-
-export interface CoachTest {
-  id: string;
-  level: string;
-  isChecked: boolean;
-  isHigh: boolean;
-  date: string;
-}
+import { CoachTest } from '../../../interfaces/coach-edit';
 
 interface GetCoachTests {
   results: CoachTest[];

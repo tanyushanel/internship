@@ -14,7 +14,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { FormControl } from '@angular/forms';
 import { CoachProfileDialogComponent } from '../coach-profile-dialog/coach-profile-dialog.component';
 import { isSubstring } from '../../../helpers/filter-check';
-import { CoachTest } from '../service/get-coach-tests-http.service';
+import { CoachTest } from '../../../interfaces/coach-edit';
 
 @Component({
   selector: 'app-coach-profile-table',
