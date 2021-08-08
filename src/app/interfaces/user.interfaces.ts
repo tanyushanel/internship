@@ -12,7 +12,7 @@ export interface User {
 }
 
 export interface UserResponseType {
-  id: number;
+  userId: string;
   message: null;
   isAuthenticated: boolean;
   firstName: string;
