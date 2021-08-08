@@ -44,7 +44,7 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
   levelFilter = new FormControl('');
 
   filterValues = {
-    id: '',
+    questionNumber: '',
     level: '',
   };
 
@@ -81,8 +81,8 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
   }
 
   ngOnInit() {
-    this.idFilter.valueChanges.subscribe((id) => {
-      this.filterValues.id = id;
+    this.idFilter.valueChanges.subscribe((questionNumber) => {
+      this.filterValues.questionNumber = questionNumber;
       this.dataSource.filter = JSON.stringify(this.filterValues);
     });
     this.levelFilter.valueChanges.subscribe((level) => {
@@ -95,8 +95,8 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
     return function filterFunction(filterValues, filter): boolean {
       const searchTerms = JSON.parse(filter);
       return (
-        isSubstring(filterValues.id, searchTerms.id) &&
-        isSubstring(filterValues.level, searchTerms.level)
+        isSubstring(filterValues.questionNumber, searchTerms.questionNumber) &&
+        isSubstring(languageLevel[filterValues.level], searchTerms.level)
       );
     };
   }
