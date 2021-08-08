@@ -1,3 +1,13 @@
+import { CoachTest } from '../app/interfaces/coach-edit';
+
+export interface TestData {
+  id: string;
+  level: string;
+  isChecked: boolean;
+  isHigh: boolean;
+  date: Date;
+}
+
 export interface UserData {
   id: number;
   firstName: string;
@@ -55,11 +65,6 @@ export function createNewUser(id: number): UserData {
   };
 }
 
-export function getRandomDate(from: Date, to: Date) {
-  const fromTime = from.getTime();
-  const toTime = to.getTime();
-  return new Date(fromTime + Math.random() * (toTime - fromTime));
-}
 export function createNewAuditionQuestionTest(id: number) {
   return {
     id: id.toString(),
@@ -82,7 +87,9 @@ export function createNewWritingAndSpeakingQuestionTest(id: number) {
   };
 }
 
+
 export const MOCK_USERS = Array.from({ length: 100 }, (_, k) => createNewUser(k + 1));
+
 export const MOCK_AUDITION_QUESTIONS = Array.from({ length: 80 }, (_, k) =>
   createNewAuditionQuestionTest(k + 1),
 );

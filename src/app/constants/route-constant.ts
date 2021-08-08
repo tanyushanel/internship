@@ -17,10 +17,11 @@ export enum SidebarMenu {
   check = 'Test Checking',
   editor = 'Test Editor',
   manage = 'Manage',
-  statistics = 'Statistics',
 }
 
 export const BASE_API_URL = 'http://elevel-001-site1.btempurl.com/api';
+
+export const UserTableUrl = `${BASE_API_URL}/User`;
 export const LoginApiUrl = `${BASE_API_URL}/User/token`;
 export const QuestionApiUrl = `${BASE_API_URL}/Question`;
 export const PostAssignTest = `${BASE_API_URL}/Test/assign`;

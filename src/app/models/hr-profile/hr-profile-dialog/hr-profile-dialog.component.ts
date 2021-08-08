@@ -27,8 +27,8 @@ export class HrProfileDialogComponent {
   assignTest() {
     this.postHttpService
       .assignTest({
-        assignmentEndDate: '2021-08-04T19:13:45.895Z',
-        userId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+        assignmentEndDate: '2021-08-20T12:47:10.089Z',
+        userId: 'b9408d77-d447-44b6-27cc-08d9574493b2',
         priority: true,
       })
       .subscribe();

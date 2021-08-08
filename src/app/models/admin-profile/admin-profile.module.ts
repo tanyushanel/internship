@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ScrollDispatcher, ScrollingModule } from '@angular/cdk/scrolling';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 import { TableVirtualScrollModule } from 'ng-cdk-table-virtual-scroll';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -34,6 +35,7 @@ import { TableComponent } from './admin-table/table.component';
     MatSelectModule,
     FormsModule,
     MatCardModule,
+    MatButtonToggleModule,
   ],
   providers: [DatePipe, ScrollDispatcher],
 })
