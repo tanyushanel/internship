@@ -41,13 +41,13 @@ export interface UpdateCoachQuestion {
   answers: AnswerQuestion[] | undefined;
 }
 
-export interface ResponseGetAllQuestion {
+export interface ResponseGetAll<T> {
   currentPage: number;
   firstRowOnPage: number;
   lastRowOnPage: number;
   pageCount: number;
   pageSize: number;
-  results: CoachQuestion[];
+  results: T[];
   rowCount: number;
 }
 interface EmptyAnswer {

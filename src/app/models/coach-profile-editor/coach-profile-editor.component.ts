@@ -1,17 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable, of, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { TopicAddingEditingDialogComponent } from './topic-adding-editing-dialog/topic-adding-editing-dialog.component';
 import { AddListeningDialogComponent } from './add-listening-dialog/add-listening-dialog.component';
 import { CoachQuestionStoreService } from '../../services/store/coach-question-store.service';
 import { GrammarAddingEditingDialogComponent } from './grammar-adding-editing-dialog/grammar-adding-editing-dialog.component';
-import {
-  MOCK_AUDITION_QUESTIONS,
-  MOCK_WRITING_AND_SPEAKING_QUESTIONS,
-} from '../../../mocks/users-utils.mock';
-import { CoachQuestion } from '../../interfaces/question-answer';
 import { CoachEditorTabs, emptyQuestion } from '../../constants/data-constants';
+import { CoachTopicStoreService } from '../../services/store/coach-topic-store.service';
 
 @Component({
   selector: 'app-coach-profile-editor',
@@ -21,9 +17,13 @@ import { CoachEditorTabs, emptyQuestion } from '../../constants/data-constants';
 export class CoachProfileEditorComponent implements OnInit {
   public selectedTab = CoachEditorTabs.grammar;
 
-  constructor(public dialog: MatDialog, private coachEdit: CoachQuestionStoreService) {}
+  constructor(
+    public dialog: MatDialog,
+    private coachEdit: CoachQuestionStoreService,
+    private coachTopic: CoachTopicStoreService,
+  ) {}
 
-  tables$: Observable<CoachQuestion[]> | Subject<CoachQuestion[]> = this.coachEdit.questions$;
+  tables$: Subject<any[]> = this.coachEdit.questions$;
 
   tabsTitle: CoachEditorTabs[] = [
     CoachEditorTabs.grammar,
@@ -38,10 +38,12 @@ export class CoachProfileEditorComponent implements OnInit {
       this.tables$ = this.coachEdit.questions$;
     } else if (tabChangeEvent.index === 1) {
       this.selectedTab = CoachEditorTabs.audition;
-      this.tables$ = of(MOCK_AUDITION_QUESTIONS as any as CoachQuestion[]);
+      // this.tables$ = of(MOCK_AUDITION_QUESTIONS as any as CoachQuestion[]);
     } else if (tabChangeEvent.index === 2) {
       this.selectedTab = CoachEditorTabs.writingAndSpeaking;
-      this.tables$ = of(MOCK_WRITING_AND_SPEAKING_QUESTIONS as any as CoachQuestion[]);
+      this.coachTopic.getAllTopic();
+      this.tables$ = this.coachTopic.topics$;
+      // this.tables$ = of(MOCK_WRITING_AND_SPEAKING_QUESTIONS as any as CoachQuestion[]);
     }
   }
 

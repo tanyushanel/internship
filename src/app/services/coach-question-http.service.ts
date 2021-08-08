@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {
-  CoachQuestion,
-  ResponseGetAllQuestion,
-  UpdateCoachQuestion,
-} from '../interfaces/question-answer';
+import { CoachQuestion, ResponseGetAll, UpdateCoachQuestion } from '../interfaces/question-answer';
 import { QuestionApiUrl } from '../constants/route-constant';
 
 @Injectable({
@@ -14,7 +10,7 @@ export class CoachQuestionHttpService {
   constructor(private readonly http: HttpClient) {}
 
   getQuestionLists() {
-    return this.http.get<ResponseGetAllQuestion>(QuestionApiUrl);
+    return this.http.get<ResponseGetAll<CoachQuestion>>(QuestionApiUrl);
   }
 
   getQuestion(id: string) {
