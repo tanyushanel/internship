@@ -22,8 +22,6 @@ import { CoachTest } from '../service/get-coach-tests-http.service';
   styleUrls: ['./coach-profile-table.component.scss'],
 })
 export class CoachProfileTableComponent implements AfterViewInit, OnInit, OnChanges {
-  @Input() results: CoachTest[] = [];
-
   displayedColumns: string[] = ['id', 'level', 'date', 'button'];
 
   idFilter = new FormControl('');

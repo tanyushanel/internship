@@ -7,7 +7,7 @@
   <h3>Select level</h3>
   <app-choose-level
     (changeLevel)="levelChangeHandler($event)"
-    [currentLevel]="languageLevel[data.level]"
+    [currentLevel]="languageLevel[data.level.toString()]"
   ></app-choose-level>
   <mat-radio-group class="radio-group">
     <div *ngFor="let answer of answerOption; let i = index">
