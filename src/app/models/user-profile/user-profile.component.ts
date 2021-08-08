@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-
-import { Test } from 'src/app/interfaces/test';
-import { Level } from 'src/constants/data-constants';
-import { Route } from 'src/constants/route-constant';
-import { TestStoreService } from '../../services/test/test/test-store.service';
+import { Level } from 'src/app/constants/data-constants';
+import { Route } from 'src/app/constants/route-constant';
+import { Test } from '../../interfaces/test';
+import { TestStoreService } from '../../services/store/test-store.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -17,15 +16,23 @@ export class UserProfileComponent implements OnInit {
 
   levels = [...Object.values(Level)];
 
-  selectedLevel: Level | undefined;
+  isStarted = false;
+
+  selectedLevel!: Level;
 
   constructor(private router: Router, private testStoreService: TestStoreService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.testStoreService.getTestResults();
   }
 
-  onStartButtonClick(): void {
+  selectLevel(selected: Level): void {
+    this.testStoreService.selectedLevel = selected;
+  }
+
+  onStartButtonClick(level: Level): void {
+    this.isStarted = true;
+    this.selectLevel(level);
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate([Route.test]);
     });

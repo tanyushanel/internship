@@ -12,16 +12,16 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { FormControl } from '@angular/forms';
-import { TestData } from '../../../../mocks/users-utils.mock';
 import { CoachProfileDialogComponent } from '../coach-profile-dialog/coach-profile-dialog.component';
 import { isSubstring } from '../../../helpers/filter-check';
+import { CoachTest } from '../../../interfaces/coach-edit';
 
 @Component({
   selector: 'app-coach-profile-table',
   templateUrl: './coach-profile-table.component.html',
   styleUrls: ['./coach-profile-table.component.scss'],
 })
-export class CoachProfileTableComponent implements AfterViewInit, OnChanges, OnInit {
+export class CoachProfileTableComponent implements AfterViewInit, OnInit, OnChanges {
   displayedColumns: string[] = ['id', 'level', 'date', 'button'];
 
   idFilter = new FormControl('');
@@ -36,22 +36,25 @@ export class CoachProfileTableComponent implements AfterViewInit, OnChanges, OnI
     date: '',
   };
 
-  dataSource: MatTableDataSource<TestData>;
+  dataSource: MatTableDataSource<CoachTest>;
 
-  @Input() table: TestData[] = [];
+  @Input() table: CoachTest[] = [];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   @ViewChild(MatSort) sort!: MatSort;
 
-  @ViewChild(MatTable) tableView!: MatTable<TestData>;
-
-  public searchQuery = '';
+  @ViewChild(MatTable) tableView!: MatTable<CoachTest>;
 
   constructor(public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource(this.table);
-    this.dataSource.data = this.table;
     this.dataSource.filterPredicate = this.createFilter();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.table?.currentValue) {
+      this.dataSource.data = changes.table.currentValue;
+    }
   }
 
   ngAfterViewInit() {
@@ -64,12 +67,6 @@ export class CoachProfileTableComponent implements AfterViewInit, OnChanges, OnI
       this.sort.direction = sortState.direction;
       this.sort.sortChange.emit(sortState);
     }, 10);
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes.table.currentValue) {
-      this.dataSource.data = changes.table.currentValue;
-    }
   }
 
   onClick(id: number) {
@@ -91,13 +88,13 @@ export class CoachProfileTableComponent implements AfterViewInit, OnChanges, OnI
     });
   }
 
-  createFilter(): (filterValues: TestData, filter: string) => boolean {
+  createFilter(): (filterValues: CoachTest, filter: string) => boolean {
     return function filterFunction(filterValues, filter): boolean {
       const searchTerms = JSON.parse(filter);
       return (
         isSubstring(filterValues.id, searchTerms.id) &&
         isSubstring(filterValues.level, searchTerms.level) &&
-        isSubstring(filterValues.date.toDateString(), searchTerms.date)
+        isSubstring(filterValues.date, searchTerms.date)
       );
     };
   }

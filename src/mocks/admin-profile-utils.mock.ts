@@ -4,11 +4,11 @@ export interface CoachData {
 }
 
 export interface TestData {
+  isHighPriority: boolean;
   position: number;
   date: number;
   level: string;
   coach: CoachData;
-  grammarGrade: string;
   isAssign: boolean;
 }
 
@@ -16,6 +16,11 @@ const MOCK_EMPTY_COACH: CoachData = {
   name: null,
   email: null,
 };
+
+export enum AdminTestTabs {
+  notAssigned = 'Not Assigned',
+  assigned = 'Assigned',
+}
 
 export const MOCK_COACH: CoachData[] = [
   {
@@ -55,9 +60,9 @@ export function createNewTest(position: number): TestData {
     position,
     date: Date.now(),
     isAssign: isTestAssigned,
+    isHighPriority: isTestAssigned,
     level: ['beginner', 'intermediate', 'advanced'][Math.floor(Math.random() * 3)],
     coach: isTestAssigned ? coachData : MOCK_EMPTY_COACH,
-    grammarGrade: Math.floor(Math.random() * 100).toString(),
   };
 }
 export const MOCK_TEST = Array.from({ length: 100 }, (_, k) => createNewTest(k + 1));

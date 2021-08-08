@@ -11,16 +11,12 @@
     </mat-radio-button>
   </mat-radio-group>
 
-  <p *ngIf="selectedLevel" class="for-delete">
-    Your choice is <b>{{ selectedLevel }}</b>
-  </p>
-
   <button
-    [disabled]="!selectedLevel"
+    [disabled]="!selectedLevel || isStarted"
     mat-raised-button
     color="primary"
     class="start-btn"
-    (click)="onStartButtonClick()"
+    (click)="onStartButtonClick(selectedLevel)"
   >
     START TEST
   </button>
@@ -29,7 +25,7 @@
     class="user-results-table"
     [results]="(results$ | async)!"
     [levels]="levels"
-    *ngIf="results$ | async; else noResults"
+    *ngIf="(results$ | async)?.length; else noResults"
   >
   </app-user-results-table>
 
