@@ -4,6 +4,7 @@ export interface CoachData {
 }
 
 export interface TestData {
+  isHighPriority: boolean;
   position: number;
   date: number;
   level: string;
@@ -15,6 +16,11 @@ const MOCK_EMPTY_COACH: CoachData = {
   name: null,
   email: null,
 };
+
+export enum AdminTestTabs {
+  notAssigned = 'Not Assigned',
+  assigned = 'Assign',
+}
 
 export const MOCK_COACH: CoachData[] = [
   {
@@ -54,6 +60,7 @@ export function createNewTest(position: number): TestData {
     position,
     date: Date.now(),
     isAssign: isTestAssigned,
+    isHighPriority: isTestAssigned,
     level: ['beginner', 'intermediate', 'advanced'][Math.floor(Math.random() * 3)],
     coach: isTestAssigned ? coachData : MOCK_EMPTY_COACH,
   };

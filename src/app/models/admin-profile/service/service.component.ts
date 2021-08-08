@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { TestData } from '../../../../mocks/admin-profile-utils.mock';
 
-const URL = '../../../assets/adminLocalStorage.json';
+const URL = '../../../assets/admin.json';
 
 @Injectable({
   providedIn: 'root',

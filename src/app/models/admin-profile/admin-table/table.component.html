@@ -1,18 +1,7 @@
-<div class="btn-container">
-  <button mat-button (click)="onTabChange()">
-    {{ AssignSelector ? 'Assigned' : 'Not Assigned' }}
-  </button>
-</div>
-
 <cdk-virtual-scroll-viewport itemSize="1" style="height: 80%">
-  <table mat-table [dataSource]="dataPrototype" class="mat-elevation-z8 data-table">
-    <ng-container matColumnDef="ID">
-      <th mat-header-cell *matHeaderCellDef>ID</th>
-      <td mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</td>
-    </ng-container>
-
+  <table mat-table [dataSource]="tableData" class="mat-elevation-z8 data-table">
     <ng-container matColumnDef="Position">
-      <th mat-header-cell *matHeaderCellDef>No.</th>
+      <th mat-header-cell *matHeaderCellDef>Test Number</th>
       <td mat-cell *matCellDef="let element">{{ element.position }}</td>
     </ng-container>
 
@@ -28,16 +17,25 @@
 
     <ng-container matColumnDef="Coach">
       <th mat-header-cell *matHeaderCellDef>Coach</th>
-      <td mat-cell *matCellDef="let element">{{ element.coach.name }}</td>
+      <td mat-cell *matCellDef="let element">
+        {{ element.coach.name === null ? 'Not Assign' : element.coach.name }}
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="Button">
-      <th mat-header-cell *matHeaderCellDef>Assigned</th>
+      <th mat-header-cell *matHeaderCellDef>Test Assignment</th>
       <td mat-cell *matCellDef="let element">
-        <button mat-raised-button color="primary" (click)="openDialog(element)">Ressign</button>
+        <button mat-raised-button color="primary" (click)="openDialog(element)">
+          {{ element.isAssign ? 'Reassign' : 'Assign' }}
+        </button>
       </td>
     </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr mat-header-row *matHeaderRowDef="displaedColums; sticky: true"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displaedColums"
+      class="priority"
+      [ngClass]="{ high: row.isHighPriority === true }"
+    ></tr>
   </table>
 </cdk-virtual-scroll-viewport>
