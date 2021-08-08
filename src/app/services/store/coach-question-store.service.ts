@@ -38,6 +38,6 @@ export class CoachQuestionStoreService {
   }
 
   createQuestion(question: UpdateCoachQuestion) {
-    this.couchHttpService.createQuestion(question).subscribe();
+    this.couchHttpService.createQuestion(question).subscribe(() => this.getAllQuestion());
   }
 }
