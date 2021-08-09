@@ -8,7 +8,7 @@ import { TopicModule } from '../../interfaces/essay-speaking';
   styleUrls: ['./writing-test.component.scss'],
 })
 export class WritingTestComponent implements OnInit {
-  @Input() essay!: TopicModule | null;
+  @Input() essay: TopicModule | null = null;
 
   form!: FormGroup;
 
