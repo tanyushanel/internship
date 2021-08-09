@@ -72,7 +72,6 @@ export class HrProfileComponent implements OnInit {
     return (filterValues, filter): boolean => {
       const searchTerms = JSON.parse(filter);
       return (
-        isSubstring(filterValues.id, searchTerms.id) &&
         isSubstring(filterValues.firstName, searchTerms.firstName) &&
         isSubstring(filterValues.lastName, searchTerms.lastName)
       );
