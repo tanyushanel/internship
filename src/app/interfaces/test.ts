@@ -2,10 +2,10 @@ import { Audition } from './audition';
 import { Level } from '../constants/data-constants';
 import { TopicModule } from './essay-speaking';
 
-import { Question } from './question-answer';
+import { Question, AnswerQuestion } from './question-answer';
 
-export interface Test {
-  id: number;
+export interface TestResult {
+  id: string;
   level: Level;
   testNumber: number;
   creationDate: string;
@@ -41,7 +41,7 @@ export interface UsersList {
 }
 
 export interface TestContent {
-  id: number;
+  id: string;
   userId: number;
   level: Level;
   testPassingDate: string;
@@ -49,4 +49,12 @@ export interface TestContent {
   audition: Audition;
   essay: TopicModule;
   speaking: TopicModule;
+}
+
+export interface TestSubmit {
+  id: string;
+  grammarAnswers: AnswerQuestion[];
+  auditionAnswers: AnswerQuestion[];
+  essayAnswer: string;
+  speakingAnswerReference: string;
 }

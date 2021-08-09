@@ -45,7 +45,7 @@ export class SpeakingTestComponent implements OnInit, OnDestroy {
 
   async ngOnInit() {
     this.speaking = {
-      id: 0,
+      id: '',
       topicName: '',
     };
     let stream = null;

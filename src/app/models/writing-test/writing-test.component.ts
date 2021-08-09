@@ -16,7 +16,7 @@ export class WritingTestComponent implements OnInit {
 
   ngOnInit() {
     this.essay = {
-      id: 0,
+      id: '',
       topicName: '',
     };
     this.form = new FormGroup({

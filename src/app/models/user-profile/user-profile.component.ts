@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Level } from 'src/app/constants/data-constants';
 import { Route } from 'src/app/constants/route-constant';
-import { Test } from '../../interfaces/test';
+import { TestResult } from '../../interfaces/test';
 import { TestStoreService } from '../../services/store/test-store.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { TestStoreService } from '../../services/store/test-store.service';
   styleUrls: ['./user-profile.component.scss'],
 })
 export class UserProfileComponent implements OnInit {
-  results$: Observable<Test[] | null> = this.testStoreService.testResults$;
+  results$: Observable<TestResult[] | null> = this.testStoreService.testResults$;
 
   levels = [...Object.values(Level)];
 

@@ -1,7 +1,7 @@
 import { UserRole } from '../constants/data-constants';
 
 export interface User {
-  id: number;
+  id: string;
   message: null;
   isAuthenticated: boolean;
   firstName: string;

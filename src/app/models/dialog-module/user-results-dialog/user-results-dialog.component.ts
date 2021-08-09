@@ -1,6 +1,6 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Component, Inject, Input, OnInit } from '@angular/core';
-import { Test } from '../../../interfaces/test';
+import { TestResult } from '../../../interfaces/test';
 import { User } from '../../../interfaces/user.interfaces';
 import { user } from '../../../constants/mock-user-data';
 
@@ -14,7 +14,7 @@ export class UserResultsDialogComponent implements OnInit {
 
   isClicked = false;
 
-  results: Test[] = [];
+  results: TestResult[] = [];
 
   get testsCount() {
     return this.results.length;
