@@ -55,4 +55,8 @@ export class CoachTopicStoreService {
   createTopic(topic: CoachTopicUpdate) {
     this.couchHttpService.createTopic(topic).subscribe(() => this.getAllTopic());
   }
+
+  deleteTopic(id: string) {
+    this.couchHttpService.deleteTopic(id).subscribe(() => this.getAllTopic());
+  }
 }

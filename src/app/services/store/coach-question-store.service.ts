@@ -53,4 +53,8 @@ export class CoachQuestionStoreService {
   createQuestion(question: UpdateCoachQuestion) {
     this.couchHttpService.createQuestion(question).subscribe(() => this.getAllQuestion());
   }
+
+  deleteQuestion(id: string) {
+    this.couchHttpService.deleteQuestion(id).subscribe(() => this.getAllQuestion());
+  }
 }

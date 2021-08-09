@@ -24,4 +24,8 @@ export class CoachQuestionHttpService {
   createQuestion(question: UpdateCoachQuestion) {
     return this.http.post(QuestionApiUrl, question);
   }
+
+  deleteQuestion(id: string) {
+    return this.http.delete(`${QuestionApiUrl}/${id}`);
+  }
 }

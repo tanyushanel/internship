@@ -128,4 +128,12 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
       }
     });
   }
+
+  delete(id: string) {
+    if (this.selectTab === CoachEditorTabs.grammar) {
+      this.coachEditQuestion.deleteQuestion(id);
+    } else if (this.selectTab === CoachEditorTabs.writingAndSpeaking) {
+      this.coachEditTopic.deleteTopic(id);
+    }
+  }
 }

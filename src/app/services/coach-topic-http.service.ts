@@ -26,7 +26,7 @@ export class CoachTopicHttpService {
     return this.http.post(TopicApiUrl, topic);
   }
 
-  //   deleteTopic(id:string){
-  // return this.http.delete(TopicApiUrl, {id})
-  //   }
+  deleteTopic(id: string) {
+    return this.http.delete(`${TopicApiUrl}/${id}`);
+  }
 }
