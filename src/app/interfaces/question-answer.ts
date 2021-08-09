@@ -11,13 +11,22 @@ export interface Question {
 }
 export interface CoachQuestion {
   id: string;
-  questionNumber: string;
-  numberTest: string;
   level: number;
-  nameQuestion: string;
   creatorId: string;
-  answers?: AnswerQuestion[];
+  numberTest: string;
+  creationDate: string;
+  questionNumber: number;
+  nameQuestion: string;
   isEdit?: boolean;
+  answers?: AnswerQuestion[];
+}
+export interface TableData {
+  id: string;
+  creationDate: string;
+  creatorId: string;
+  level: number;
+  name: string;
+  number: number;
 }
 
 export interface Answer {
@@ -41,13 +50,13 @@ export interface UpdateCoachQuestion {
   answers: AnswerQuestion[] | undefined;
 }
 
-export interface ResponseGetAllQuestion {
+export interface ResponseGetAll<T> {
   currentPage: number;
   firstRowOnPage: number;
   lastRowOnPage: number;
   pageCount: number;
   pageSize: number;
-  results: CoachQuestion[];
+  results: T[];
   rowCount: number;
 }
 interface EmptyAnswer {

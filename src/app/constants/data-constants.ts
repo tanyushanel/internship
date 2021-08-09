@@ -1,5 +1,7 @@
 // eslint-disable-next-line import/no-cycle
 import { EmptyQuestion } from '../interfaces/question-answer';
+// eslint-disable-next-line import/no-cycle
+import { CoachEmptyTopic } from '../interfaces/coach-edit';
 
 export enum Level {
   Elementary = 'Elementary',
@@ -69,4 +71,9 @@ export const emptyQuestion: EmptyQuestion = {
       isRight: false,
     },
   ],
+};
+
+export const emptyTopic: CoachEmptyTopic = {
+  level: 1,
+  topicName: '',
 };

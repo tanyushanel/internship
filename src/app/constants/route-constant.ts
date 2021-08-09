@@ -26,3 +26,4 @@ export const LoginApiUrl = `${BASE_API_URL}/User/token`;
 export const QuestionApiUrl = `${BASE_API_URL}/Question`;
 export const PostAssignTest = `${BASE_API_URL}/Test/assign`;
 export const RefreshUserDataUrl = `${BASE_API_URL}/User/info`;
+export const TopicApiUrl = `${BASE_API_URL}/Topic`;
