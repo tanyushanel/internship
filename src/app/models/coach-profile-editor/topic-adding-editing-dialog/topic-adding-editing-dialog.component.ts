@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { languageLevel, Level } from '../../../constants/data-constants';
 import { CoachTopicStoreService } from '../../../services/store/coach-topic-store.service';
 import { CoachTopicUpdate } from '../../../interfaces/coach-edit';
+import { englishLevelNumber } from '../../../helpers/checks';
 
 export interface TopicEditDialogData {
   id: string;
@@ -36,8 +37,7 @@ export class TopicAddingEditingDialogComponent {
   }
 
   levelChangeHandler($event: Level): void {
-    const level = Object.keys(this.languageLevel).find((key) => this.languageLevel[key] === $event);
-    this.englishLevel = Number(level);
+    this.englishLevel = englishLevelNumber($event);
   }
 
   updateData(): void {
@@ -47,9 +47,9 @@ export class TopicAddingEditingDialogComponent {
       level: this.englishLevel ?? this.data.level,
     };
     if (this.data.isEdit) {
-      this.coachEditorTopic.updateQuestion(topic);
+      this.coachEditorTopic.updateTopic(topic);
     } else {
-      this.coachEditorTopic.createQuestion(topic);
+      this.coachEditorTopic.createTopic(topic);
     }
     this.dialogRef.close();
   }

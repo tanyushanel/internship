@@ -1,8 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { TopicAddingEditingDialogComponent } from './topic-adding-editing-dialog/topic-adding-editing-dialog.component';
 import { AddListeningDialogComponent } from './add-listening-dialog/add-listening-dialog.component';
 import { CoachQuestionStoreService } from '../../services/store/coach-question-store.service';
@@ -16,7 +15,7 @@ import { TableData } from '../../interfaces/question-answer';
   templateUrl: './coach-profile-editor.component.html',
   styleUrls: ['./coach-profile-editor.component.scss'],
 })
-export class CoachProfileEditorComponent implements OnInit, OnDestroy {
+export class CoachProfileEditorComponent implements OnInit {
   public selectedTab = CoachEditorTabs.grammar;
 
   constructor(
@@ -25,7 +24,7 @@ export class CoachProfileEditorComponent implements OnInit, OnDestroy {
     private coachTopic: CoachTopicStoreService,
   ) {}
 
-  tables$: Observable<TableData[]> | undefined;
+  tables$: Observable<TableData[]> = this.coachEdit.questions$;
 
   tabsTitle: CoachEditorTabs[] = [
     CoachEditorTabs.grammar,
@@ -34,52 +33,19 @@ export class CoachProfileEditorComponent implements OnInit, OnDestroy {
   ];
 
   ngOnInit(): void {
-    this.questionsSubscribe();
-  }
-
-  questionsSubscribe() {
-    this.coachEdit.questions$
-      .pipe(
-        map((questions) => {
-          const table = questions.map((question) => ({
-            id: question.id,
-            creationDate: question.creationDate,
-            creatorId: question.creatorId,
-            level: question.level,
-            name: question.nameQuestion,
-            number: question.questionNumber,
-          }));
-          this.tables$ = of(table);
-        }),
-      )
-      .subscribe();
+    this.coachEdit.getAllQuestion();
   }
 
   tabChanged(tabChangeEvent: MatTabChangeEvent): void {
     if (tabChangeEvent.index === 0) {
       this.coachEdit.getAllQuestion();
       this.selectedTab = CoachEditorTabs.grammar;
-      this.questionsSubscribe();
     } else if (tabChangeEvent.index === 1) {
       this.selectedTab = CoachEditorTabs.audition;
     } else if (tabChangeEvent.index === 2) {
       this.selectedTab = CoachEditorTabs.writingAndSpeaking;
       this.coachTopic.getAllTopic();
-      this.coachTopic.topics$
-        .pipe(
-          map((topics) => {
-            const table = topics.map((topic, i) => ({
-              id: topic.id,
-              creationDate: topic.creationDate,
-              creatorId: topic.creatorId,
-              level: topic.level,
-              name: topic.topicName,
-              number: i + 1,
-            }));
-            this.tables$ = of(table);
-          }),
-        )
-        .subscribe();
+      this.tables$ = this.coachTopic.topics$;
     }
   }
 
@@ -97,10 +63,5 @@ export class CoachProfileEditorComponent implements OnInit, OnDestroy {
 
   openTopicModal() {
     this.dialog.open(TopicAddingEditingDialogComponent, { data: { ...emptyTopic, isEdit: false } });
-  }
-
-  ngOnDestroy(): void {
-    this.coachTopic.topics$.unsubscribe();
-    this.coachEdit.questions$.unsubscribe();
   }
 }
