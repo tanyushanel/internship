@@ -20,6 +20,8 @@ export class UserProfileComponent implements OnInit {
 
   selectedLevel!: Level;
 
+  isAssigned = true;
+
   constructor(private router: Router, private testStoreService: TestStoreService) {}
 
   ngOnInit(): void {
