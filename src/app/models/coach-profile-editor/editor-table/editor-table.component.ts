@@ -29,7 +29,7 @@ import { isSubstring } from '../../../helpers/filter-check';
   styleUrls: ['./editor-table.component.scss'],
 })
 export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
-  displayedColumns: string[] = ['id', 'level', 'edit'];
+  displayedColumns: string[] = ['id', 'level', 'actions'];
 
   public searchQuery = '';
 
