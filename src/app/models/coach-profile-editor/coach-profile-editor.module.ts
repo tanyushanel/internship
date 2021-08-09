@@ -4,6 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatMenuModule } from '@angular/material/menu';
 import { AngularMaterialCommonModule } from '../angular-material-common.module';
 import { CoachProfileEditorRoutingModule } from './coach-profile-editor-routing.module';
 import { EditorTableComponent } from './editor-table/editor-table.component';
@@ -32,6 +33,7 @@ import { AddListeningDialogModule } from './add-listening-dialog/add-listening-d
     MatSelectModule,
     MatCheckboxModule,
     ChooseLevelModule,
+    MatMenuModule,
   ],
   exports: [EditorTableComponent],
 })

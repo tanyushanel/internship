@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { MatTabChangeEvent } from '@angular/material/tabs';
-import { MOCK_TESTS } from '../../../mocks/users-utils.mock';
 import { CoachTestTabs } from '../../constants/data-constants';
 import { CoachTestsStoreService } from './service/coach-tests-store.service';
 import { CoachTest } from '../../interfaces/coach-edit';
@@ -26,18 +25,18 @@ export class CoachProfileComponent implements OnInit {
   tabChanged(tabChangeEvent: MatTabChangeEvent): void {
     if (tabChangeEvent.index === 0) {
       this.coachTestStoreService.getCoachHighPriorityTestResults();
-      this.tables$ = of(MOCK_TESTS.filter((test) => test.isHigh));
+      this.tables$ = this.coachTestStoreService.coachTestResults$;
     } else if (tabChangeEvent.index === 1) {
       this.coachTestStoreService.getCoachUncheckedTestResults();
-      this.tables$ = of(MOCK_TESTS.filter((test) => !test.isChecked));
+      this.tables$ = this.coachTestStoreService.coachTestResults$;
     } else if (tabChangeEvent.index === 2) {
       this.coachTestStoreService.getCoachCheckedTestResults();
-      this.tables$ = of(MOCK_TESTS.filter((test) => test.isChecked));
+      this.tables$ = this.coachTestStoreService.coachTestResults$;
     }
   }
 
   ngOnInit() {
-    this.tables$ = of(MOCK_TESTS.filter((test) => test.isHigh));
+    this.tables$ = this.coachTestStoreService.coachTestResults$;
     this.coachTestStoreService.getCoachHighPriorityTestResults();
   }
 }
