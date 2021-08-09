@@ -11,7 +11,13 @@
 
       <p></p>
 
-      <mat-radio-group id="answer-label-group" class="mat-radio-group" formControlName="stepCtrl">
+      <mat-radio-group
+        id="answer-label-group"
+        class="mat-radio-group"
+        formControlName="stepCtrl"
+        [(ngModel)]="selectedAnswer"
+        (change)="onAnswerSelect()"
+      >
         <mat-radio-button
           class="answer-radio-button"
           *ngFor="let answerCase of question.answers"

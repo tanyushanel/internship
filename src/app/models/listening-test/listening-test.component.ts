@@ -1,6 +1,14 @@
-import { Component, ElementRef, Input, AfterViewInit, AfterViewChecked } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  AfterViewInit,
+  AfterViewChecked,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { Track } from 'ngx-audio-player';
-import { Question } from '../../interfaces/question-answer';
+import { AnswerQuestion, Question } from '../../interfaces/question-answer';
 
 @Component({
   selector: 'app-listening',
@@ -9,6 +17,10 @@ import { Question } from '../../interfaces/question-answer';
 })
 export class ListeningTestComponent implements AfterViewInit, AfterViewChecked {
   @Input() questions: Question[] | null = null;
+
+  @Input() answerChosen: AnswerQuestion | null = null;
+
+  @Output() answerGrammar = new EventEmitter<AnswerQuestion>();
 
   counter = 0;
 
@@ -77,4 +89,6 @@ export class ListeningTestComponent implements AfterViewInit, AfterViewChecked {
       playButton.classList.add('play-pause-disable');
     }
   }
+
+  onAnswerSelect(): void {}
 }

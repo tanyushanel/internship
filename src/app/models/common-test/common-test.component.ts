@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { AnswerQuestion, Question } from '../../interfaces/question-answer';
 import { TopicModule } from '../../interfaces/essay-speaking';
-import { Question } from '../../interfaces/question-answer';
 import { TestStoreService } from '../../services/store/test-store.service';
 import { TestContent } from '../../interfaces/test';
 
@@ -12,6 +12,10 @@ import { TestContent } from '../../interfaces/test';
   styleUrls: ['./common-test.component.scss'],
 })
 export class CommonTestComponent implements OnInit {
+  @Input() grammar!: AnswerQuestion[] | null;
+
+  @Input() listening!: AnswerQuestion[] | null;
+
   test$: Observable<TestContent | null> = this.testStoreService.test$;
 
   grammar$!: Observable<Question[] | null>;

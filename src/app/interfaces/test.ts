@@ -1,13 +1,12 @@
 import { Audition } from './audition';
 import { Level } from '../constants/data-constants';
 import { TopicModule } from './essay-speaking';
-
 import { Question, AnswerQuestion } from './question-answer';
 
 export interface TestResult {
   id: string;
   level: Level;
-  testNumber: number;
+  testNumber: string;
   creationDate: string;
   testPassingDate: string;
   assignmentEndDate: string;
@@ -15,10 +14,10 @@ export interface TestResult {
   auditionMark: number | null;
   essayMark: number | null;
   speakingMark: number | null;
-  comment: number | null;
-  userId: number | null;
-  hrId: number | null;
-  coachId: number | null;
+  comment: string | null;
+  userId: string | null;
+  hrId: string | null;
+  coachId: string | null;
   priority: boolean;
 }
 

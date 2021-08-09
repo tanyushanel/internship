@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { Question } from '../../interfaces/question-answer';
-import { Answer } from '../../constants/mock-grammar-test';
+import { AnswerQuestion, Question } from '../../interfaces/question-answer';
 
 @Component({
   selector: 'app-stepper',
@@ -18,7 +17,9 @@ import { Answer } from '../../constants/mock-grammar-test';
 export class StepperComponent implements OnInit, OnChanges {
   @Input() questionList!: Question[] | null | undefined;
 
-  @Output() answerChosen = new EventEmitter<Answer>();
+  @Output() answerChosen = new EventEmitter<AnswerQuestion>();
+
+  selectedAnswer: AnswerQuestion | undefined;
 
   stepperFormGroups: FormGroup[] | undefined = [];
 
@@ -32,5 +33,9 @@ export class StepperComponent implements OnInit, OnChanges {
         stepCtrl: ['', Validators.required],
       }),
     );
+  }
+
+  onAnswerSelect(): void {
+    this.answerChosen.emit(this.selectedAnswer);
   }
 }

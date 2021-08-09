@@ -1,1 +1,2 @@
-<app-stepper [questionList]="questions"></app-stepper>
+<mat-card class="description">Answer the questions</mat-card>
+<app-stepper [questionList]="questions" (answerChosen)="onAnswerSelect()"></app-stepper>
