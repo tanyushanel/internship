@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { concatMap, take } from 'rxjs/operators';
-import { Test, TestContent } from '../../interfaces/test';
+import { TestResult, TestContent } from '../../interfaces/test';
 import { TestHttpService } from '../test-http.service';
 import { AuthStoreService } from './auth-store.service';
 import { Level } from '../../constants/data-constants';
@@ -10,7 +10,7 @@ import { Level } from '../../constants/data-constants';
   providedIn: 'root',
 })
 export class TestStoreService {
-  resultsSubject$ = new BehaviorSubject<Test[] | null>(null);
+  resultsSubject$ = new BehaviorSubject<TestResult[] | null>(null);
 
   testSubject$ = new BehaviorSubject<TestContent | null>(null);
 
@@ -24,7 +24,7 @@ export class TestStoreService {
     this.testSubject$.next(test);
   }
 
-  private set testResults(testResults: Test[]) {
+  private set testResults(testResults: TestResult[]) {
     this.resultsSubject$.next(testResults);
   }
 
