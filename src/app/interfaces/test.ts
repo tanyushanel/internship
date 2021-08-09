@@ -4,7 +4,7 @@ import { TopicModule } from './essay-speaking';
 
 import { Question } from './question-answer';
 
-export interface Test {
+export interface TestResult {
   id: number;
   level: Level;
   testNumber: number;

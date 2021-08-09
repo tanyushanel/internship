@@ -35,4 +35,8 @@ export class WritingTestComponent implements OnInit {
   }
 
   nextTest() {}
+
+  onSpeakingSubmit(): void {
+    // this.speachRecorded.emit(this.topic);
+  }
 }

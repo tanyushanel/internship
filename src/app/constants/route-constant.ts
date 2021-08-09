@@ -7,6 +7,7 @@ export enum Route {
   statistics = 'statistics',
   result = 'result',
   test = 'test',
+  assigned = 'testAssigned',
   error = 'error',
   login = '/',
 }
