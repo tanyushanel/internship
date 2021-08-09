@@ -18,7 +18,7 @@ import { CoachEditorTest } from '../../../../mocks/users-utils.mock';
 import { CoachEditorTabs, languageLevel } from '../../../constants/data-constants';
 import { GrammarAddingEditingDialogComponent } from '../grammar-adding-editing-dialog/grammar-adding-editing-dialog.component';
 import { CoachQuestionStoreService } from '../../../services/store/coach-question-store.service';
-import { CoachQuestion } from '../../../interfaces/question-answer';
+import { TableData } from '../../../interfaces/question-answer';
 import { EditListeningDialogComponent } from '../edit-listening-dialog/edit-listening-dialog.component';
 import { TopicAddingEditingDialogComponent } from '../topic-adding-editing-dialog/topic-adding-editing-dialog.component';
 import { isSubstring } from '../../../helpers/filter-check';
@@ -35,22 +35,22 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
 
   languageLevel = languageLevel;
 
-  dataSource: MatTableDataSource<CoachQuestion>;
+  dataSource: MatTableDataSource<TableData>;
 
-  question: CoachQuestion | undefined;
+  question: TableData | undefined;
 
   idFilter = new FormControl('');
 
   levelFilter = new FormControl('');
 
   filterValues = {
-    questionNumber: '',
+    number: '',
     level: '',
   };
 
   @Input() selectTab = '';
 
-  @Input() table: CoachQuestion[] = [];
+  @Input() table: TableData[] = [];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -81,8 +81,8 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
   }
 
   ngOnInit() {
-    this.idFilter.valueChanges.subscribe((questionNumber) => {
-      this.filterValues.questionNumber = questionNumber;
+    this.idFilter.valueChanges.subscribe((number) => {
+      this.filterValues.number = number;
       this.dataSource.filter = JSON.stringify(this.filterValues);
     });
     this.levelFilter.valueChanges.subscribe((level) => {
@@ -91,17 +91,17 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
     });
   }
 
-  createFilter(): (filterValues: CoachQuestion, filter: string) => boolean {
+  createFilter(): (filterValues: TableData, filter: string) => boolean {
     return function filterFunction(filterValues, filter): boolean {
       const searchTerms = JSON.parse(filter);
       return (
-        isSubstring(filterValues.questionNumber, searchTerms.questionNumber) &&
+        isSubstring(filterValues.number, searchTerms.number) &&
         isSubstring(languageLevel[filterValues.level], searchTerms.level)
       );
     };
   }
 
-  openEditor(row: CoachQuestion) {
+  openEditor(row: TableData) {
     if (this.selectTab === CoachEditorTabs.grammar) {
       this.coachEdit.getQuestion(row.id);
       this.coachEdit.question$.pipe(take(1)).subscribe((question) => {

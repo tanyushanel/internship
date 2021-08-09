@@ -11,13 +11,22 @@ export interface Question {
 }
 export interface CoachQuestion {
   id: string;
-  questionNumber: string;
-  numberTest: string;
   level: number;
-  nameQuestion: string;
   creatorId: string;
-  answers?: AnswerQuestion[];
+  numberTest: string;
+  creationDate: string;
+  questionNumber: number;
+  nameQuestion: string;
   isEdit?: boolean;
+  answers?: AnswerQuestion[];
+}
+export interface TableData {
+  id: string;
+  creationDate: string;
+  creatorId: string;
+  level: number;
+  name: string;
+  number: number;
 }
 
 export interface Answer {
