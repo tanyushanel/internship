@@ -16,7 +16,7 @@ interface GetTestsResults {
 export class TestHttpService {
   constructor(private http: HttpClient) {}
 
-  getResults(userId: number): Observable<Test[]> {
+  getResults(userId: string): Observable<Test[]> {
     return this.http
       .get<GetTestsResults>(`${BASE_API_URL}/Test?userId=${userId}`)
       .pipe(map((res) => res.results.filter((r) => r.testPassingDate !== null)));
