@@ -1,17 +1,3 @@
-export interface TestData {
-  id: string;
-  level: string;
-  isChecked: boolean;
-  isHigh: boolean;
-  date: Date;
-}
-
-export interface UserData {
-  id: number;
-  firstName: string;
-  lastName: string;
-}
-
 export interface CoachEditorTest {
   id: string;
   level: string;
@@ -21,48 +7,6 @@ export interface DialogData {
   id: number;
   level: string;
 }
-
-const MOCK_LASTNAMES: string[] = [
-  'Walker',
-  'Lee',
-  'Young',
-  'Johnson',
-  'Parker',
-  'Jones',
-  'Davis',
-  'Rodriguez',
-];
-const MOCK_FIRSTNAMES: string[] = [
-  'Maia',
-  'Asher',
-  'Olivia',
-  'Atticus',
-  'Amelia',
-  'Jack',
-  'Charlotte',
-  'Theodore',
-  'Isla',
-  'Oliver',
-  'Isabella',
-  'Jasper',
-  'Cora',
-  'Levi',
-  'Violet',
-  'Arthur',
-  'Mia',
-  'Thomas',
-  'Elizabeth',
-];
-export function createNewUser(id: number): UserData {
-  const name = `${MOCK_FIRSTNAMES[Math.round(Math.random() * (MOCK_FIRSTNAMES.length - 1))]}`;
-
-  return {
-    id,
-    firstName: name,
-    lastName: MOCK_LASTNAMES[Math.round(Math.random() * (MOCK_LASTNAMES.length - 1))],
-  };
-}
-
 export function createNewAuditionQuestionTest(id: number) {
   return {
     id: id.toString(),
