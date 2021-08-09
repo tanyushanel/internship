@@ -59,7 +59,7 @@
               <span *ngIf="element.essayMark; else noResult">{{ element.essayMark }}</span>
               <span *ngIf="element.speakingMark; else noResult">{{ element.speakingMark }}</span>
               <ng-template #noResult>
-                <span class="material-icons"> query_builder </span>
+                <span class="material-icons" matTooltip="Pending..."> query_builder </span>
               </ng-template>
             </div>
           </div>

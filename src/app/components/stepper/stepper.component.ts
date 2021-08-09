@@ -15,11 +15,11 @@ import { AnswerQuestion, Question } from '../../interfaces/question-answer';
   ],
 })
 export class StepperComponent implements OnInit, OnChanges {
-  @Input() questionList!: Question[] | null | undefined;
+  @Input() questionList: Question[] | null = null;
 
-  @Output() answerChosen = new EventEmitter<AnswerQuestion>();
+  @Output() answerChosen = new EventEmitter<AnswerQuestion | null>();
 
-  selectedAnswer: AnswerQuestion | undefined;
+  selectedAnswer: AnswerQuestion | null = null;
 
   stepperFormGroups: FormGroup[] | undefined = [];
 

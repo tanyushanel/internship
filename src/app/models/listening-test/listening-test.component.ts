@@ -20,7 +20,7 @@ export class ListeningTestComponent implements AfterViewInit, AfterViewChecked {
 
   @Input() answerChosen: AnswerQuestion | null = null;
 
-  @Output() answerGrammar = new EventEmitter<AnswerQuestion>();
+  @Output() answerListening = new EventEmitter<AnswerQuestion | null>();
 
   counter = 0;
 
@@ -90,5 +90,7 @@ export class ListeningTestComponent implements AfterViewInit, AfterViewChecked {
     }
   }
 
-  onAnswerSelect(): void {}
+  onAnswerSubmit(): void {
+    this.answerListening.emit(this.answerChosen);
+  }
 }

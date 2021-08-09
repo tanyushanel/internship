@@ -14,7 +14,7 @@
         #text
         (paste)="$event.preventDefault()"
       ></textarea>
-      <mat-hint align="end">Max 512 characters</mat-hint>
+      <mat-hint align="start">Max 512 characters</mat-hint>
 
       <div *ngIf="form.get('text')?.invalid && form.get('text')?.touched" class="validation">
         <small class="error" *ngIf="form.get('text')?.errors?.required"
