@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ResponseGetAll } from '../interfaces/question-answer';
 import { TopicApiUrl } from '../constants/route-constant';
-import { CoachTopic } from '../interfaces/essay-speaking';
+import { CoachTopic, CoachTopicUpdate } from '../interfaces/coach-edit';
 
 @Injectable({
   providedIn: 'root',
@@ -18,11 +18,11 @@ export class CoachTopicHttpService {
     return this.http.get<CoachTopic>(`${TopicApiUrl}/${id}`);
   }
 
-  updateTopic(topic: CoachTopic) {
+  updateTopic(topic: CoachTopicUpdate) {
     return this.http.put(`${TopicApiUrl}/${topic.id}`, topic);
   }
 
-  createTopic(topic: CoachTopic) {
+  createTopic(topic: CoachTopicUpdate) {
     return this.http.post(TopicApiUrl, topic);
   }
 

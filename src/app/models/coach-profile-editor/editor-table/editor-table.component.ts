@@ -22,6 +22,7 @@ import { TableData } from '../../../interfaces/question-answer';
 import { EditListeningDialogComponent } from '../edit-listening-dialog/edit-listening-dialog.component';
 import { TopicAddingEditingDialogComponent } from '../topic-adding-editing-dialog/topic-adding-editing-dialog.component';
 import { isSubstring } from '../../../helpers/filter-check';
+import { CoachTopicStoreService } from '../../../services/store/coach-topic-store.service';
 
 @Component({
   selector: 'app-coach-profile-editor-table',
@@ -36,8 +37,6 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
   languageLevel = languageLevel;
 
   dataSource: MatTableDataSource<TableData>;
-
-  question: TableData | undefined;
 
   idFilter = new FormControl('');
 
@@ -58,7 +57,11 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
 
   @ViewChild(MatTable) tableView!: MatTable<CoachEditorTest>;
 
-  constructor(public dialog: MatDialog, private coachEdit: CoachQuestionStoreService) {
+  constructor(
+    public dialog: MatDialog,
+    private coachEditQuestion: CoachQuestionStoreService,
+    private coachEditTopic: CoachTopicStoreService,
+  ) {
     this.dataSource = new MatTableDataSource(this.table);
     this.dataSource.filterPredicate = this.createFilter();
   }
@@ -103,8 +106,8 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
 
   openEditor(row: TableData) {
     if (this.selectTab === CoachEditorTabs.grammar) {
-      this.coachEdit.getQuestion(row.id);
-      this.coachEdit.question$.pipe(take(1)).subscribe((question) => {
+      this.coachEditQuestion.getQuestion(row.id);
+      this.coachEditQuestion.question$.pipe(take(1)).subscribe((question) => {
         if (question !== null) {
           this.dialog.open(GrammarAddingEditingDialogComponent, {
             data: { ...question, isEdit: true },
@@ -116,8 +119,13 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
         autoFocus: false,
       });
     } else if (this.selectTab === CoachEditorTabs.writingAndSpeaking)
-      this.dialog.open(TopicAddingEditingDialogComponent, {
-        data: { id: row.id, level: row.level, question: 'Question', isEdit: true },
-      });
+      this.coachEditTopic.getTopic(row.id);
+    this.coachEditTopic.topic$.pipe(take(1)).subscribe((topic) => {
+      if (topic !== null) {
+        this.dialog.open(TopicAddingEditingDialogComponent, {
+          data: { ...topic, isEdit: true },
+        });
+      }
+    });
   }
 }

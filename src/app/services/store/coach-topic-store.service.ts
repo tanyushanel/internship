@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CoachTopicHttpService } from '../coach-topic-http.service';
-import { CoachTopic } from '../../interfaces/essay-speaking';
+import { CoachTopic, CoachTopicUpdate } from '../../interfaces/coach-edit';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CoachTopicStoreService {
-  // readonly question$ = new Subject<CoachQuestion>();
-  //
+  readonly topic$ = new Subject<CoachTopic>();
+
   readonly topics$ = new Subject<CoachTopic[]>();
 
   constructor(private readonly couchHttpService: CoachTopicHttpService) {}
@@ -24,20 +24,20 @@ export class CoachTopicStoreService {
         },
       });
   }
-  //
-  // getQuestion(id: string) {
-  //   this.couchHttpService.getQuestion(id).subscribe({
-  //     next: (question) => {
-  //       this.question$.next(question);
-  //     },
-  //   });
-  // }
-  //
-  // updateQuestion(question: UpdateCoachQuestion) {
-  //   this.couchHttpService.updateQuestion(question).subscribe(() => this.getAllQuestion());
-  // }
-  //
-  // createQuestion(question: UpdateCoachQuestion) {
-  //   this.couchHttpService.createQuestion(question).subscribe(() => this.getAllQuestion());
-  // }
+
+  getTopic(id: string) {
+    this.couchHttpService.getTopic(id).subscribe({
+      next: (topic) => {
+        this.topic$.next(topic);
+      },
+    });
+  }
+
+  updateQuestion(topic: CoachTopicUpdate) {
+    this.couchHttpService.updateTopic(topic).subscribe(() => this.getAllTopic());
+  }
+
+  createQuestion(topic: CoachTopicUpdate) {
+    this.couchHttpService.createTopic(topic).subscribe(() => this.getAllTopic());
+  }
 }
