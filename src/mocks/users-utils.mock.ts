@@ -87,7 +87,6 @@ export function createNewWritingAndSpeakingQuestionTest(id: number) {
   };
 }
 
-
 export const MOCK_USERS = Array.from({ length: 100 }, (_, k) => createNewUser(k + 1));
 
 export const MOCK_AUDITION_QUESTIONS = Array.from({ length: 80 }, (_, k) =>
