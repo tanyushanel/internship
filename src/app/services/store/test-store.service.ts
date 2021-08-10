@@ -70,4 +70,12 @@ export class TestStoreService {
       },
     });
   }
+
+  createAssignedTestContent(testId: string): void {
+    this.testHttpService.createAssignedTest(this.selectedLevel, testId).subscribe({
+      next: (test) => {
+        this.test = { ...test };
+      },
+    });
+  }
 }

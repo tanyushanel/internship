@@ -15,9 +15,9 @@ import { TestStoreService } from '../../services/store/test-store.service';
 export class UserProfileComponent implements OnInit {
   allTests$: Observable<TestResult[] | null> = this.testStoreService.allTests$;
 
-  results$!: Observable<TestResult[] | null | undefined>;
+  results$!: Observable<TestResult[] | undefined>;
 
-  assignedTests$!: Observable<TestResult[] | null | undefined>;
+  assignedTests$!: Observable<TestResult[] | undefined>;
 
   levels = [...Object.values(Level)];
 
@@ -27,17 +27,22 @@ export class UserProfileComponent implements OnInit {
 
   now = new Date();
 
+  testId: string | null = '';
+
   constructor(private router: Router, private testStoreService: TestStoreService) {}
 
   ngOnInit(): void {
     this.testStoreService.getAll();
 
-    this.results$ = this.allTests$.pipe(map((arr) => arr?.filter((i) => i.testPassingDate)));
+    this.results$ = this.allTests$.pipe(
+      map((arr) => arr?.filter((i) => i.testPassingDate || null)),
+    );
 
     this.assignedTests$ = this.allTests$.pipe(
       map((arr) =>
         arr?.filter(
-          (i) => !i.testPassingDate && !i.level && new Date(i.assignmentEndDate) <= this.now,
+          // (i) => !i.testPassingDate && !i.level && new Date(i.assignmentEndDate) <= this.now,
+          (i) => !i.testPassingDate && !i.level,
         ),
       ),
     );
@@ -51,11 +56,20 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
-  onStartAssignedButtonClick(level: Level): void {
+  onStartAssignedButtonClick(level: Level, tests?: Observable<TestResult[] | undefined>): void {
     this.isStarted = true;
     this.testStoreService.selectLevel(level);
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate([Route.assigned]);
+
+    tests?.pipe(map((arr) => (arr ? arr[0].id : null))).subscribe({
+      next: (str) => (this.testId = str),
     });
+
+    if (this.testId) {
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        this.router.navigate([Route.test, { id: this.testId }]);
+      });
+    } else {
+      console.error('TestId is null and navigation is unavailable');
+    }
   }
 }

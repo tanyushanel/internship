@@ -29,13 +29,26 @@
       mat-raised-button
       color="primary"
       class="start-btn"
-      (click)="onStartAssignedButtonClick(selectedLevel)"
+      (click)="onStartAssignedButtonClick(selectedLevel, assignedTests$)"
     >
       START ASSIGNED TEST
     </button>
   </div>
 
   <mat-tab-group mat-stretch-tabs mat-align-tabs="center">
+    <mat-tab label="ASSIGNED TESTS">
+      <app-user-results-table
+        *ngIf="(assignedTests$ | async)?.length; else noTests"
+        class="user-results-table"
+        [results]="(assignedTests$ | async)!"
+        [levels]="levels"
+      >
+      </app-user-results-table>
+    </mat-tab>
+    <ng-template #noTests>
+      <p class="table-caption">You have no assigned tests yet</p>
+    </ng-template>
+
     <mat-tab label="TEST RESULTS">
       <app-user-results-table
         *ngIf="(results$ | async)?.length; else noResults"
@@ -48,19 +61,6 @@
 
     <ng-template #noResults>
       <p class="table-caption">You have no test results yet</p>
-    </ng-template>
-
-    <mat-tab label="ASSIGNED TESTS">
-      <app-user-results-table
-        *ngIf="(assignedTests$ | async)?.length; else noTests"
-        class="user-results-table"
-        [results]="(assignedTests$ | async)!"
-        [levels]="levels"
-      >
-      </app-user-results-table>
-    </mat-tab>
-    <ng-template #noTests>
-      <p class="table-caption">You have no assigned tests yet</p>
     </ng-template>
   </mat-tab-group>
 </div>

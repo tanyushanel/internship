@@ -33,9 +33,9 @@ export class TestHttpService {
     return this.http.post<TestContent>(`${BASE_API_URL}/Test`, { level });
   }
 
-  // createAssignedTest(level: Level): Observable<TestContent> {
-  //   // return this.http.post<TestContent>(`${BASE_API_URL}/Test/${testId}/start`, { level });
-  // }
+  createAssignedTest(level: Level, testId: string): Observable<TestContent> {
+    return this.http.put<TestContent>(`${BASE_API_URL}/Test/${testId}/start`, { level });
+  }
 
   // finishTest(testId: string) {
   //   return this.http.put<TestSubmit>(`${BASE_API_URL}/Test/{testId}/submit`, {
