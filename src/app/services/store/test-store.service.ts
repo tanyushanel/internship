@@ -10,11 +10,11 @@ import { Level } from '../../constants/data-constants';
   providedIn: 'root',
 })
 export class TestStoreService {
-  resultsSubject$ = new BehaviorSubject<TestResult[] | null>(null);
+  allTestsSubject$ = new BehaviorSubject<TestResult[] | null>(null);
 
   testSubject$ = new BehaviorSubject<TestContent | null>(null);
 
-  testResults$ = this.resultsSubject$.asObservable();
+  allTests$ = this.allTestsSubject$.asObservable();
 
   test$ = this.testSubject$.asObservable();
 
@@ -24,8 +24,8 @@ export class TestStoreService {
     this.testSubject$.next(test);
   }
 
-  private set testResults(testResults: TestResult[]) {
-    this.resultsSubject$.next(testResults);
+  private set allTests(allTests: TestResult[]) {
+    this.allTestsSubject$.next(allTests);
   }
 
   constructor(
@@ -37,18 +37,46 @@ export class TestStoreService {
     this.selectedLevel = selected;
   }
 
-  getTestResults(): void {
+  getAll(): void {
     this.authStoreService.activeUser$
       .pipe(
         take(1),
-        concatMap((user) => this.testHttpService.getResults(user !== null ? user.userId : '')),
+        concatMap((user) => this.testHttpService.getAllTests(user !== null ? user.userId : '')),
       )
       .subscribe({
         next: (res) => {
-          this.testResults = [...res];
+          this.allTests = [...res];
         },
       });
   }
+
+  // getTestResults(): void {
+  //   this.authStoreService.activeUser$
+  //     .pipe(
+  //       take(1),
+  //       concatMap((user) => this.testHttpService.getResults(user !== null ? user.userId : '')),
+  //     )
+  //     .subscribe({
+  //       next: (res) => {
+  //         this.allTests = [...res];
+  //       },
+  //     });
+  // }
+
+  // getTestsAssigned(): void {
+  //   this.authStoreService.activeUser$
+  //     .pipe(
+  //       take(1),
+  //       concatMap((user) =>
+  //         this.testHttpService.getTestsAssigned(user !== null ? user.userId : ''),
+  //       ),
+  //     )
+  //     .subscribe({
+  //       next: (res) => {
+  //         this.allTests = [...res];
+  //       },
+  //     });
+  // }
 
   createTestContent(): void {
     this.testHttpService.createTest(this.selectedLevel).subscribe({
