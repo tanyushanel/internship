@@ -86,12 +86,12 @@
     position: absolute;
     bottom: 50%;
     z-index: 10;
-    transform: rotate(0deg);
+    transform: rotate(180deg);
     cursor: pointer;
     transition: 300ms ease-in-out;
 
     &_close {
-      transform: rotate(180deg);
+      transform: rotate(360deg);
     }
   }
 }

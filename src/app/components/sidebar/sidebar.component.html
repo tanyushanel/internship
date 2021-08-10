@@ -11,8 +11,8 @@
     <mat-nav-list>
       <ng-container *ngIf="{ user: user$ | async } as $">
         <div style="height: 120px">
-          <div *ngIf="isShown" mat-card-avatar class="sidebar__logo" height="104px"></div>
-          <p *ngIf="isShown" class="sidebar__username">{{ $.user!.firstName }}</p>
+          <div *ngIf="isOpen" mat-card-avatar class="sidebar__logo" height="104px"></div>
+          <p *ngIf="isOpen" class="sidebar__username">{{ $.user!.firstName }}</p>
         </div>
         <app-notification class="notifications"> </app-notification>
         <nav class="sidebar__nav">
@@ -28,7 +28,7 @@
                     {{ usersRoute[$.user!.roles[0]].menuIcon[i] }}
                   </mat-icon>
                 </div>
-                <span *ngIf="isShown" class="sidebar-text"
+                <span *ngIf="isOpen" class="sidebar-text"
                   >{{ usersRoute[$.user!.roles[0]].menuItem[i] }}
                 </span>
               </mat-list-item>

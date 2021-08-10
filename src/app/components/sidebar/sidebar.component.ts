@@ -13,8 +13,6 @@ import { AuthStoreService } from '../../services/store/auth-store.service';
 export class SidebarComponent implements OnInit {
   isOpen = true;
 
-  isShown = true;
-
   isSmaller = false;
 
   isBigger = false;
@@ -43,6 +41,6 @@ export class SidebarComponent implements OnInit {
   }
 
   toggleShow() {
-    this.isShown = !this.isShown;
+    this.isOpen = !this.isOpen;
   }
 }

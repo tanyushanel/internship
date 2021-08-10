@@ -1,4 +1,4 @@
-import { Route, SidebarMenu } from './route-constant';
+import { Route, SidebarMenu, SidebarIcon } from './route-constant';
 import { UserRole } from './data-constants';
 
 export interface UsersPermission {
@@ -18,23 +18,23 @@ export const usersRoute: UserRoutesType = {
   [UserRole.User]: {
     route: [Route.home],
     menuItem: [SidebarMenu.home],
-    menuIcon: [SidebarMenu.homeicon],
+    menuIcon: [SidebarIcon.homeicon],
   },
 
   [UserRole.HumanResourceManager]: {
     route: [Route.home, Route.users],
     menuItem: [SidebarMenu.home, SidebarMenu.users],
-    menuIcon: [SidebarMenu.homeicon, SidebarMenu.usersicon],
+    menuIcon: [SidebarIcon.homeicon, SidebarIcon.usersicon],
   },
   [UserRole.Coach]: {
     route: [Route.home, Route.check, Route.editor],
     menuItem: [SidebarMenu.home, SidebarMenu.check, SidebarMenu.editor],
-    menuIcon: [SidebarMenu.homeicon, SidebarMenu.checkicon, SidebarMenu.editoricon],
+    menuIcon: [SidebarIcon.homeicon, SidebarIcon.checkicon, SidebarIcon.editoricon],
   },
   [UserRole.Administrator]: {
     route: [Route.home, Route.manage, Route.statistics],
     menuItem: [SidebarMenu.home, SidebarMenu.manage, SidebarMenu.statistics],
-    menuIcon: [SidebarMenu.homeicon, SidebarMenu.manageicon, SidebarMenu.statisticsicon],
+    menuIcon: [SidebarIcon.homeicon, SidebarIcon.manageicon, SidebarIcon.statisticsicon],
   },
 };
 

@@ -18,6 +18,9 @@ export enum SidebarMenu {
   editor = 'Editor',
   manage = 'Manage',
   statistics = 'Statistics',
+}
+
+export enum SidebarIcon {
   homeicon = 'home',
   usersicon = 'group',
   checkicon = 'fact_check',
