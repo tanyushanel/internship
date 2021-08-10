@@ -41,7 +41,7 @@ export class UserProfileComponent implements OnInit {
     this.assignedTests$ = this.allTests$.pipe(
       map((arr) =>
         arr?.filter(
-          // (i) => !i.testPassingDate && !i.level && new Date(i.assignmentEndDate) <= this.now,
+          // (i) => !i.testPassingDate && !i.level && new Date(i.assignmentEndDate) >= this.now,
           (i) => !i.testPassingDate && !i.level,
         ),
       ),
