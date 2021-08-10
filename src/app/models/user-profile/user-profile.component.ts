@@ -25,7 +25,7 @@ export class UserProfileComponent implements OnInit {
 
   selectedLevel!: Level;
 
-  isAssigned = false;
+  now = new Date();
 
   constructor(private router: Router, private testStoreService: TestStoreService) {}
 
@@ -35,7 +35,11 @@ export class UserProfileComponent implements OnInit {
     this.results$ = this.allTests$.pipe(map((arr) => arr?.filter((i) => i.testPassingDate)));
 
     this.assignedTests$ = this.allTests$.pipe(
-      map((arr) => arr?.filter((i) => !i.testPassingDate && !i.level)),
+      map((arr) =>
+        arr?.filter(
+          (i) => !i.testPassingDate && !i.level && new Date(i.assignmentEndDate) <= this.now,
+        ),
+      ),
     );
   }
 

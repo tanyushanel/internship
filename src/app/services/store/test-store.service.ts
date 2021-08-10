@@ -50,33 +50,18 @@ export class TestStoreService {
       });
   }
 
-  // getTestResults(): void {
-  //   this.authStoreService.activeUser$
-  //     .pipe(
-  //       take(1),
-  //       concatMap((user) => this.testHttpService.getResults(user !== null ? user.userId : '')),
-  //     )
-  //     .subscribe({
-  //       next: (res) => {
-  //         this.allTests = [...res];
-  //       },
-  //     });
-  // }
-
-  // getTestsAssigned(): void {
-  //   this.authStoreService.activeUser$
-  //     .pipe(
-  //       take(1),
-  //       concatMap((user) =>
-  //         this.testHttpService.getTestsAssigned(user !== null ? user.userId : ''),
-  //       ),
-  //     )
-  //     .subscribe({
-  //       next: (res) => {
-  //         this.allTests = [...res];
-  //       },
-  //     });
-  // }
+  getTestResults(): void {
+    this.authStoreService.activeUser$
+      .pipe(
+        take(1),
+        concatMap((user) => this.testHttpService.getResults(user !== null ? user.userId : '')),
+      )
+      .subscribe({
+        next: (res) => {
+          this.allTests = [...res];
+        },
+      });
+  }
 
   createTestContent(): void {
     this.testHttpService.createTest(this.selectedLevel).subscribe({

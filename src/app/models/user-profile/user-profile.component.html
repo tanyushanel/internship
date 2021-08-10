@@ -12,7 +12,7 @@
   </mat-radio-group>
 
   <button
-    *ngIf="!isAssigned"
+    *ngIf="!(assignedTests$ | async)?.length"
     [disabled]="!selectedLevel || isStarted"
     mat-raised-button
     color="primary"
@@ -22,7 +22,7 @@
     START TEST
   </button>
 
-  <div *ngIf="isAssigned">
+  <div *ngIf="(assignedTests$ | async)?.length">
     <h3 class="table-caption red">You have a test assigned on!</h3>
     <button
       [disabled]="!selectedLevel || isStarted"
