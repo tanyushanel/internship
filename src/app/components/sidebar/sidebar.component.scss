@@ -8,6 +8,11 @@
   margin-left: 22px;
 }
 
+.sidebar-container {
+  height: 120px;
+  margin-bottom: 15%;
+}
+
 .icon-position,
 .exit-position {
   display: inline-block;
@@ -53,6 +58,10 @@
   color: $black;
   background-color: $others-grey6;
 
+  .exit__position {
+    margin-top: 90%;
+  }
+
   &__container {
     width: 15%;
     padding-top: 8px;
@@ -79,19 +88,20 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-top: 30px;
+    height: 67vh;
+    margin-top: 5em;
   }
 
   &__button {
     position: absolute;
     bottom: 50%;
     z-index: 10;
-    transform: rotate(180deg);
+    transform: rotate(0deg);
     cursor: pointer;
     transition: 300ms ease-in-out;
 
     &_close {
-      transform: rotate(360deg);
+      transform: rotate(180deg);
     }
   }
 }

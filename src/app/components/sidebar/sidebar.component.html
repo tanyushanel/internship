@@ -5,14 +5,15 @@
     [style]="getWidth()"
     mode="side"
     ng-show="toggleSideBar"
-    [opened]="isOpen"
-    [formControl]="mode"
+    [opened]="true"
   >
     <mat-nav-list>
       <ng-container *ngIf="{ user: user$ | async } as $">
-        <div style="height: 120px">
-          <div *ngIf="isOpen" mat-card-avatar class="sidebar__logo" height="104px"></div>
-          <p *ngIf="isOpen" class="sidebar__username">{{ $.user!.firstName }}</p>
+        <div class="sidebar-container">
+          <ng-container *ngIf="isOpen">
+            <div mat-card-avatar class="sidebar__logo"></div>
+            <p class="sidebar__username">{{ $.user!.firstName }}</p>
+          </ng-container>
         </div>
         <app-notification class="notifications"> </app-notification>
         <nav class="sidebar__nav">
@@ -23,7 +24,7 @@
                 [routerLink]="'/' + route"
                 class="sidebar__list_item"
               >
-                <div [routerLinkActive]="['is-active']" class="icon-position">
+                <div class="icon-position">
                   <mat-icon class="material-icons-round md-30 md-dark md-inactive">
                     {{ usersRoute[$.user!.roles[0]].menuIcon[i] }}
                   </mat-icon>
@@ -34,7 +35,7 @@
               </mat-list-item>
             </div>
           </div>
-          <mat-list-item (click)="authService.signOut()" class="sidebar__list_item exit-position">
+          <mat-list-item (click)="authService.signOut()" class="sidebar__list_item exit__position">
             <div class="exit-position">
               <mat-icon class="material-icons-round md-30 md-dark md-inactive"> logout </mat-icon>
             </div>
@@ -50,9 +51,8 @@
       *ngIf="$.isSingIn"
       mat-icon-button
       class="sidebar__button"
-      (click)="handleSidebar()"
       (click)="toggleShow()"
-      [ngClass]="{ sidebar__button_close: isSmaller }"
+      [ngClass]="{ sidebar__button_close: isOpen }"
     >
       chevron_right
     </mat-icon>

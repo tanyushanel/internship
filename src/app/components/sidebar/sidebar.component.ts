@@ -13,10 +13,6 @@ import { AuthStoreService } from '../../services/store/auth-store.service';
 export class SidebarComponent implements OnInit {
   isOpen = true;
 
-  isSmaller = false;
-
-  isBigger = false;
-
   readonly user$: Observable<UserResponseType | null> = this.userService.activeUser$;
 
   readonly isSingIn$: Observable<boolean> = this.userService.isSignIn$;
@@ -32,12 +28,8 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  handleSidebar() {
-    this.isSmaller = !this.isSmaller;
-  }
-
   getWidth() {
-    return !this.isSmaller ? 'width:14%;' : 'width:4%;';
+    return this.isOpen ? 'width:14%;' : 'width:4%;';
   }
 
   toggleShow() {
