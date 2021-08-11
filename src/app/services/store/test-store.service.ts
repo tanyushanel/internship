@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { concatMap, take } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { concatMap, map, take } from 'rxjs/operators';
 import { TestResult, TestContent } from '../../interfaces/test';
 import { TestHttpService } from '../test-http.service';
 import { AuthStoreService } from './auth-store.service';
@@ -17,6 +17,18 @@ export class TestStoreService {
   allTests$ = this.allTestsSubject$.asObservable();
 
   test$ = this.testSubject$.asObservable();
+
+  results$: Observable<TestResult[] | undefined> = this.allTests$.pipe(
+    map((arr) => arr?.filter((i) => i.testPassingDate || null)),
+  );
+
+  assignedTests$: Observable<TestResult[] | undefined> = this.allTests$.pipe(
+    map((arr) =>
+      arr?.filter(
+        (i) => !i.testPassingDate && !i.level && new Date(i.assignmentEndDate) >= new Date(),
+      ),
+    ),
+  );
 
   selectedLevel!: Level;
 

@@ -15,17 +15,15 @@ import { TestStoreService } from '../../services/store/test-store.service';
 export class UserProfileComponent implements OnInit {
   allTests$: Observable<TestResult[] | null> = this.testStoreService.allTests$;
 
-  results$!: Observable<TestResult[] | undefined>;
+  results$: Observable<TestResult[] | undefined> = this.testStoreService.results$;
 
-  assignedTests$!: Observable<TestResult[] | undefined>;
+  assignedTests$: Observable<TestResult[] | undefined> = this.testStoreService.assignedTests$;
 
   levels = [...Object.values(Level)];
 
   isStarted = false;
 
   selectedLevel!: Level;
-
-  now = new Date();
 
   deadLine: string | null = '';
 
@@ -35,18 +33,6 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.testStoreService.getAll();
-
-    this.results$ = this.allTests$.pipe(
-      map((arr) => arr?.filter((i) => i.testPassingDate || null)),
-    );
-
-    this.assignedTests$ = this.allTests$.pipe(
-      map((arr) =>
-        arr?.filter(
-          (i) => !i.testPassingDate && !i.level && new Date(i.assignmentEndDate) >= this.now,
-        ),
-      ),
-    );
 
     this.assignedTests$.pipe(map((arr) => (arr ? arr[0].assignmentEndDate : null))).subscribe({
       next: (date) => (this.deadLine = date),
