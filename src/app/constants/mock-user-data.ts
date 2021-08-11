@@ -35,7 +35,7 @@ export const usersRoute: UserRoutesType = {
   [UserRole.Administrator]: {
     route: [Route.home, Route.manage, Route.statistics],
     menuItem: [SidebarMenu.home, SidebarMenu.manage, SidebarIcon.statisticsicon],
-    menuIcon: [SidebarIcon.homeicon, SidebarIcon.manageicon, SidebarIcon.statisticsicon],
+    menuIcon: [SidebarIcon.homeicon, SidebarIcon.manageicon],
   },
 };
 
