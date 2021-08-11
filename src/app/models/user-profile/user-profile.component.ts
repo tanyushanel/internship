@@ -20,7 +20,7 @@ export class UserProfileComponent implements OnInit {
 
   selectedLevel!: Level;
 
-  isAssigned = true;
+  isAssigned = false;
 
   constructor(private router: Router, private testStoreService: TestStoreService) {}
 
@@ -33,6 +33,14 @@ export class UserProfileComponent implements OnInit {
     this.testStoreService.selectLevel(level);
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate([Route.test]);
+    });
+  }
+
+  onStartAssignedButtonClick(level: Level): void {
+    this.isStarted = true;
+    this.testStoreService.selectLevel(level);
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([Route.assigned]);
     });
   }
 }

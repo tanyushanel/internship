@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+
 import { TopicModule } from '../../interfaces/essay-speaking';
 
 @Component({
@@ -9,6 +10,10 @@ import { TopicModule } from '../../interfaces/essay-speaking';
 })
 export class WritingTestComponent implements OnInit {
   @Input() essay: TopicModule | null = null;
+
+  @Output() essayWritten = new EventEmitter<string>();
+
+  essayText = '';
 
   form!: FormGroup;
 
@@ -35,4 +40,8 @@ export class WritingTestComponent implements OnInit {
   }
 
   nextTest() {}
+
+  onWritingSubmit(): void {
+    this.essayWritten.emit();
+  }
 }

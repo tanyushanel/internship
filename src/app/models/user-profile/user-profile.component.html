@@ -1,5 +1,4 @@
 <div class="profile-container">
-  <h3 class="table-caption red" *ngIf="isAssigned">You have a test assigned on!</h3>
   <h3 class="table-caption">Please choose your level to start a test:</h3>
 
   <mat-radio-group name="levels" class="radio" [(ngModel)]="selectedLevel">
@@ -13,6 +12,7 @@
   </mat-radio-group>
 
   <button
+    *ngIf="!isAssigned"
     [disabled]="!selectedLevel || isStarted"
     mat-raised-button
     color="primary"
@@ -22,15 +22,33 @@
     START TEST
   </button>
 
-  <app-user-results-table
-    class="user-results-table"
-    [results]="(results$ | async)!"
-    [levels]="levels"
-    *ngIf="(results$ | async)?.length; else noResults"
-  >
-  </app-user-results-table>
+  <div *ngIf="isAssigned">
+    <h3 class="table-caption red">You have a test assigned on!</h3>
+    <button
+      [disabled]="!selectedLevel || isStarted"
+      mat-raised-button
+      color="primary"
+      class="start-btn"
+      (click)="onStartAssignedButtonClick(selectedLevel)"
+    >
+      START ASSIGNED TEST
+    </button>
+  </div>
 
-  <ng-template #noResults>
-    <p class="table-caption">You have no test results yet</p>
-  </ng-template>
+  <mat-tab-group mat-stretch-tabs mat-align-tabs="center">
+    <mat-tab label="TEST RESULTS" *ngIf="(results$ | async)?.length; else noResults">
+      <app-user-results-table
+        class="user-results-table"
+        [results]="(results$ | async)!"
+        [levels]="levels"
+      >
+      </app-user-results-table>
+    </mat-tab>
+
+    <ng-template #noResults>
+      <p class="table-caption">You have no test results yet</p>
+    </ng-template>
+
+    <mat-tab label="ASSIGNED TESTS"> </mat-tab>
+  </mat-tab-group>
 </div>
