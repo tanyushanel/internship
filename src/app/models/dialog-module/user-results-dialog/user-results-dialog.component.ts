@@ -27,8 +27,6 @@ export class UserResultsDialogComponent implements OnInit {
     return this.results.length;
   }
 
-  TestStoreService: any;
-
   constructor(
     private testStoreService: TestStoreService,
     public dialogRef: MatDialogRef<UserResultsDialogComponent>,
