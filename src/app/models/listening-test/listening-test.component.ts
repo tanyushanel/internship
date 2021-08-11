@@ -18,9 +18,9 @@ import { AnswerQuestion, Question } from '../../interfaces/question-answer';
 export class ListeningTestComponent implements AfterViewInit, AfterViewChecked {
   @Input() questions: Question[] | null = null;
 
-  @Input() answerChosen: AnswerQuestion | null = null;
+  @Input() answersSubmitted: AnswerQuestion[] | null = null;
 
-  @Output() answerListening = new EventEmitter<AnswerQuestion | null>();
+  @Output() answerListening = new EventEmitter<AnswerQuestion[] | null>();
 
   counter = 0;
 
@@ -91,6 +91,6 @@ export class ListeningTestComponent implements AfterViewInit, AfterViewChecked {
   }
 
   onAnswerSubmit(): void {
-    this.answerListening.emit(this.answerChosen);
+    this.answerListening.emit(this.answersSubmitted);
   }
 }

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { AnswerQuestion, Question } from '../../interfaces/question-answer';
 import { TopicModule } from '../../interfaces/essay-speaking';
 import { TestStoreService } from '../../services/store/test-store.service';
-import { TestContent } from '../../interfaces/test';
+import { TestContent, TestSubmit } from '../../interfaces/test';
 
 @Component({
   selector: 'app-common-test',
@@ -15,6 +15,16 @@ export class CommonTestComponent implements OnInit {
   @Input() grammar!: AnswerQuestion[] | null;
 
   @Input() listening!: AnswerQuestion[] | null;
+
+  @Input() grammarAnswer!: AnswerQuestion | null;
+
+  @Input() listeningAnswer!: AnswerQuestion | null;
+
+  @Input() essayText!: string;
+
+  @Input() speachRef!: string;
+
+  requestBody!: TestSubmit;
 
   test$: Observable<TestContent | null> = this.testStoreService.test$;
 
@@ -37,6 +47,14 @@ export class CommonTestComponent implements OnInit {
     this.listening$ = this.test$.pipe(map((test) => test?.audition.questions || null));
     this.essay$ = this.test$.pipe(map((test) => test?.essay || null));
     this.speaking$ = this.test$.pipe(map((test) => test?.speaking || null));
+
+    //   this.requestBody = {
+    //     id: '',
+    // grammarAnswers: AnswerQuestion[];
+    // auditionAnswers: AnswerQuestion[];
+    // essayAnswer: string;
+    // speakingAnswerReference: string;
+    //   }
   }
 
   setTabIndex(ind: number): void {

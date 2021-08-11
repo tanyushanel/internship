@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { AnswerQuestion, Question } from '../../interfaces/question-answer';
@@ -14,18 +14,18 @@ import { AnswerQuestion, Question } from '../../interfaces/question-answer';
     },
   ],
 })
-export class StepperComponent implements OnInit, OnChanges {
+export class StepperComponent implements OnChanges {
   @Input() questionList: Question[] | null = null;
 
-  @Output() answerChosen = new EventEmitter<AnswerQuestion | null>();
+  @Output() answersChosen = new EventEmitter<AnswerQuestion[] | null>();
+
+  answersForSubmit: AnswerQuestion[] = [];
 
   selectedAnswer: AnswerQuestion | null = null;
 
   stepperFormGroups: FormGroup[] | undefined = [];
 
   constructor(private formBuilder: FormBuilder) {}
-
-  ngOnInit() {}
 
   ngOnChanges() {
     this.stepperFormGroups = this.questionList?.map(() =>
@@ -35,7 +35,5 @@ export class StepperComponent implements OnInit, OnChanges {
     );
   }
 
-  onAnswerSelect(): void {
-    this.answerChosen.emit(this.selectedAnswer);
-  }
+  onAnswerSelect(): void {}
 }

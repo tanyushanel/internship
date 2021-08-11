@@ -35,20 +35,15 @@
     </button>
   </div>
 
-  <mat-tab-group mat-stretch-tabs mat-align-tabs="center">
-    <mat-tab label="TEST RESULTS" *ngIf="(results$ | async)?.length; else noResults">
-      <app-user-results-table
-        class="user-results-table"
-        [results]="(results$ | async)!"
-        [levels]="levels"
-      >
-      </app-user-results-table>
-    </mat-tab>
+  <app-user-results-table
+    *ngIf="(results$ | async)?.length; else noResults"
+    class="user-results-table"
+    [results]="(results$ | async)!"
+    [levels]="levels"
+  >
+  </app-user-results-table>
 
-    <ng-template #noResults>
-      <p class="table-caption">You have no test results yet</p>
-    </ng-template>
-
-    <mat-tab label="ASSIGNED TESTS"> </mat-tab>
-  </mat-tab-group>
+  <ng-template #noResults>
+    <p class="table-caption">You have no test results yet</p>
+  </ng-template>
 </div>

@@ -42,6 +42,6 @@ export class WritingTestComponent implements OnInit {
   nextTest() {}
 
   onWritingSubmit(): void {
-    this.essayWritten.emit();
+    this.essayWritten.emit(this.essayText);
   }
 }

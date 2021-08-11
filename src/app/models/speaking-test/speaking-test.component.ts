@@ -24,7 +24,7 @@ declare let MediaRecorder: any;
 export class SpeakingTestComponent implements OnInit, OnDestroy {
   @Input() speaking: TopicModule | null = null;
 
-  @Output() speachRecorded = new EventEmitter<TopicModule | null>();
+  @Output() speachRecorded = new EventEmitter<{ src: SafeUrl } | null>();
 
   mediaRecorder: any;
 
@@ -157,6 +157,6 @@ export class SpeakingTestComponent implements OnInit, OnDestroy {
   }
 
   onSpeakingSubmit(): void {
-    this.speachRecorded.emit();
+    this.speachRecorded.emit(this.audioFile);
   }
 }
