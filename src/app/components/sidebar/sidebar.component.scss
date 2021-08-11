@@ -1,55 +1,11 @@
 @import 'src/theme/variables';
 
 .material-icons.md-30 {
-  font-size: 30px;
-}
-
-.sidebar-text {
-  margin-left: 22px;
-}
-
-.sidebar-container {
-  height: 120px;
-  margin-bottom: 15%;
-}
-
-.icon-position,
-.exit-position {
-  display: inline-block;
-  width: 32px;
-  height: 32px;
-  margin-left: 1px;
-}
-
-.sidebar__list_item:hover,
-.sidebar__list_item:focus,
-.is-active {
-  background-color: whitesmoke;
-
-  .material-icons.md-dark.md-inactive {
-    color: rgb(170, 213, 228);
-  }
-}
-
-.sidebar__list_item:hover .sidebar-text {
-  color: rgb(65, 64, 64);
-  font-weight: 500;
+  font-size: 1.88em;
 }
 
 .material-icons.md-dark {
   color: rgba(0, 0, 0, 0.54);
-}
-
-.material-icons.md-dark.md-inactive {
-  color: rgba(0, 0, 0, 0.26);
-}
-
-.sidebar__container_width {
-  width: 7%;
-  padding-top: 8px;
-  overflow-y: hidden;
-  background-color: $white;
-  visibility: visible;
 }
 
 .sidebar {
@@ -58,20 +14,12 @@
   color: $black;
   background-color: $others-grey6;
 
-  .exit__position {
-    margin-top: 90%;
-  }
-
   &__container {
     width: 15%;
-    padding-top: 8px;
+    padding-top: 0.5em;
     overflow-y: hidden;
     background-color: $white;
     visibility: visible;
-  }
-
-  &__username {
-    text-align: center;
   }
 
   &__logo {
@@ -84,12 +32,54 @@
     border-radius: 50%;
   }
 
+  &__items {
+    height: 7.5em;
+    margin-bottom: 15%;
+  }
+
+  &__items-heading {
+    margin-left: 1.38em;
+  }
+
+  &__icon-position,
+  &__exit-position {
+    display: inline-block;
+    width: 2em;
+    height: 2em;
+    margin-left: 0.06em;
+  }
+
+  &__list_item:hover,
+  &__list_item:focus,
+  .is-active {
+    background-color: whitesmoke;
+  }
+
+  &__list_item:hover &__icons-hover,
+  &__list_item:focus &__icons-hover,
+  .is-active-icon {
+    color: rgb(170, 213, 228);
+  }
+
+  &__list_item:hover &__items-heading {
+    color: rgb(65, 64, 64);
+    font-weight: 500;
+  }
+
+  &__username {
+    text-align: center;
+  }
+
   &__nav {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 67vh;
     margin-top: 5em;
+  }
+
+  &__exit {
+    margin-top: 90%;
   }
 
   &__button {

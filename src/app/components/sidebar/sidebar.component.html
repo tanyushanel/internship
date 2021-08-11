@@ -4,12 +4,11 @@
     class="sidebar__container"
     [style]="getWidth()"
     mode="side"
-    ng-show="toggleSideBar"
     [opened]="true"
   >
     <mat-nav-list>
       <ng-container *ngIf="{ user: user$ | async } as $">
-        <div class="sidebar-container">
+        <div class="sidebar__items">
           <ng-container *ngIf="isOpen">
             <div mat-card-avatar class="sidebar__logo"></div>
             <p class="sidebar__username">{{ $.user!.firstName }}</p>
@@ -24,22 +23,27 @@
                 [routerLink]="'/' + route"
                 class="sidebar__list_item"
               >
-                <div class="icon-position">
-                  <mat-icon class="material-icons-round md-30 md-dark md-inactive">
+                <div class="sidebar__icon-position">
+                  <mat-icon
+                    [routerLinkActive]="['is-active-icon']"
+                    class="sidebar__icons-hover material-icons-round md-30 md-dark"
+                  >
                     {{ usersRoute[$.user!.roles[0]].menuIcon[i] }}
                   </mat-icon>
                 </div>
-                <span *ngIf="isOpen" class="sidebar-text"
+                <span *ngIf="isOpen" class="sidebar__items-heading"
                   >{{ usersRoute[$.user!.roles[0]].menuItem[i] }}
                 </span>
               </mat-list-item>
             </div>
           </div>
-          <mat-list-item (click)="authService.signOut()" class="sidebar__list_item exit__position">
-            <div class="exit-position">
-              <mat-icon class="material-icons-round md-30 md-dark md-inactive"> logout </mat-icon>
+          <mat-list-item (click)="authService.signOut()" class="sidebar__list_item sidebar__exit">
+            <div class="sidebar__exit-position">
+              <mat-icon class="sidebar__icons-hover material-icons-round md-30 md-dark">
+                logout
+              </mat-icon>
             </div>
-            <span class="sidebar-text">Exit</span>
+            <span class="sidebar__items-heading">Exit</span>
           </mat-list-item>
         </nav>
       </ng-container>
@@ -47,7 +51,6 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-icon
-      ng-click="toggleSideBar=!toggleSideBar"
       *ngIf="$.isSingIn"
       mat-icon-button
       class="sidebar__button"

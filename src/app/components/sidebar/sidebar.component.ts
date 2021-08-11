@@ -19,8 +19,6 @@ export class SidebarComponent implements OnInit {
 
   usersRoute: UserRoutesType = usersRoute;
 
-  mode = new FormControl('over');
-
   constructor(
     private readonly userService: AuthStoreService,
     public readonly authService: AuthStoreService,
