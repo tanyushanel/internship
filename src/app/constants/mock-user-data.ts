@@ -1,5 +1,6 @@
 import { Route, SidebarMenu, SidebarIcon } from './route-constant';
 import { UserRole } from './data-constants';
+import { UserResponseType } from '../interfaces/user.interfaces';
 
 export interface UsersPermission {
   value: string;
@@ -33,14 +34,14 @@ export const usersRoute: UserRoutesType = {
   },
   [UserRole.Administrator]: {
     route: [Route.home, Route.manage, Route.statistics],
-    menuItem: [SidebarMenu.home, SidebarMenu.manage, SidebarMenu.statistics],
+    menuItem: [SidebarMenu.home, SidebarMenu.manage, SidebarIcon.statisticsicon],
     menuIcon: [SidebarIcon.homeicon, SidebarIcon.manageicon, SidebarIcon.statisticsicon],
   },
 };
 
-export const usersMockDataResponse = [
+export const usersMockDataResponse: UserResponseType[] = [
   {
-    id: 0,
+    userId: '0',
     message: null,
     isAuthenticated: true,
     firstName: 'Admin',
@@ -51,7 +52,7 @@ export const usersMockDataResponse = [
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBZG1pbkFkbWlub3YiLCJqdGkiOiJhOWUyNzA2Yi04NGEwLTQxNDMtOWQwZC0wODE4MGMzNDA2NzEiLCJlbWFpbCI6IkVsZXZlbEFkbWluaXN0cmF0b3JAZ21haWwuY29tIiwidWlkIjoiYTg2YTEyY2ItMmFmZS00MGE4LTA5ODItMDhkOTQyNDdlZmE1Iiwicm9sZXMiOiJBZG1pbmlzdHJhdG9yIiwiZXhwIjoxNjI2MTc0ODg5LCJpc3MiOiJTZWN1cmVBcGkiLCJhdWQiOiJTZWN1cmVBcGlVc2VyIn0.v5f7ZkoLC6lT5urcwy4XtY5NTR5ZpNfPHZeXwnwFzz4  ',
   },
   {
-    id: 1,
+    userId: '1',
     message: null,
     isAuthenticated: true,
     firstName: 'User',
@@ -62,7 +63,7 @@ export const usersMockDataResponse = [
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBZG1pbkFkbWlub3YiLCJqdGkiOiJhOWUyNzA2Yi04NGEwLTQxNDMtOWQwZC0wODE4MGMzNDA2NzEiLCJlbWFpbCI6IkVsZXZlbEFkbWluaXN0cmF0b3JAZ21haWwuY29tIiwidWlkIjoiYTg2YTEyY2ItMmFmZS00MGE4LTA5ODItMDhkOTQyNDdlZmE1Iiwicm9sZXMiOiJBZG1pbmlzdHJhdG9yIiwiZXhwIjoxNjI2MTc0ODg5LCJpc3MiOiJTZWN1cmVBcGkiLCJhdWQiOiJTZWN1cmVBcGlVc2VyIn0.v5f7ZkoLC6lT5urcwy4XtY5NTR5ZpNfPHZeXwnwFzz4  ',
   },
   {
-    id: 2,
+    userId: '2',
     message: null,
     isAuthenticated: true,
     firstName: 'HR',
@@ -73,7 +74,7 @@ export const usersMockDataResponse = [
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBZG1pbkFkbWlub3YiLCJqdGkiOiJhOWUyNzA2Yi04NGEwLTQxNDMtOWQwZC0wODE4MGMzNDA2NzEiLCJlbWFpbCI6IkVsZXZlbEFkbWluaXN0cmF0b3JAZ21haWwuY29tIiwidWlkIjoiYTg2YTEyY2ItMmFmZS00MGE4LTA5ODItMDhkOTQyNDdlZmE1Iiwicm9sZXMiOiJBZG1pbmlzdHJhdG9yIiwiZXhwIjoxNjI2MTc0ODg5LCJpc3MiOiJTZWN1cmVBcGkiLCJhdWQiOiJTZWN1cmVBcGlVc2VyIn0.v5f7ZkoLC6lT5urcwy4XtY5NTR5ZpNfPHZeXwnwFzz4  ',
   },
   {
-    id: 3,
+    userId: '3',
     message: null,
     isAuthenticated: true,
     firstName: 'Coach',

@@ -3,10 +3,10 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from
 import { Observable } from 'rxjs';
 import { map, skip } from 'rxjs/operators';
 import { AuthStoreService } from '../services/store/auth-store.service';
-import { Route } from '../../constants/route-constant';
+import { Route } from '../constants/route-constant';
 import { LocalStorageService } from '../services/local-storage.service';
-import { UserResponseType } from '../../interfaces/user.interfaces';
-import { isRoleExist } from '../helpers/check-role';
+import { UserResponseType } from '../interfaces/user.interfaces';
+import { isRoleExist } from '../helpers/checks';
 
 @Injectable({
   providedIn: 'root',
@@ -27,8 +27,9 @@ export class AuthGuard implements CanActivate {
       return isRoleExist(route, activeUser.roles[0]);
     }
     const token = this.localStorageService.getAccessToken();
+
     if (token) {
-      if (true) {
+      if (this.authService.checkValidToken(token)) {
         this.authService.getUser();
         return this.authService.activeUser$.pipe(
           skip(1),

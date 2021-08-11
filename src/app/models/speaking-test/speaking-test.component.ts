@@ -1,8 +1,10 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { TopicModule } from '../../interfaces/essay-speaking';
+
 import { ErrorStoreService } from '../../services/store/error-store.service';
-import { Route } from '../../../constants/route-constant';
+import { Route } from '../../constants/route-constant';
 
 declare let MediaRecorder: any;
 
@@ -12,6 +14,8 @@ declare let MediaRecorder: any;
   styleUrls: ['./speaking-test.component.scss'],
 })
 export class SpeakingTestComponent implements OnInit, OnDestroy {
+  @Input() speaking: TopicModule | null = null;
+
   mediaRecorder: any;
 
   chunks: Blob[] = [];
@@ -40,6 +44,10 @@ export class SpeakingTestComponent implements OnInit, OnDestroy {
   ) {}
 
   async ngOnInit() {
+    this.speaking = {
+      id: 0,
+      topicName: '',
+    };
     let stream = null;
     try {
       stream = await navigator.mediaDevices.getUserMedia({ audio: true });

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Test } from 'src/app/interfaces/test';
-import { Level } from 'src/constants/data-constants';
-import { Route } from 'src/constants/route-constant';
-import { MOCK_TEST_RESULTS } from '../../../constants/mock-test-results';
+import { Observable } from 'rxjs';
+import { Level } from 'src/app/constants/data-constants';
+import { Route } from 'src/app/constants/route-constant';
+import { Test } from '../../interfaces/test';
+import { TestStoreService } from '../../services/store/test-store.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -11,23 +12,23 @@ import { MOCK_TEST_RESULTS } from '../../../constants/mock-test-results';
   styleUrls: ['./user-profile.component.scss'],
 })
 export class UserProfileComponent implements OnInit {
-  results: Test[] = [];
+  results$: Observable<Test[] | null> = this.testStoreService.testResults$;
 
   levels = [...Object.values(Level)];
 
-  selectedLevel: Level | undefined;
+  isStarted = false;
 
-  constructor(private router: Router) {}
+  selectedLevel!: Level;
 
-  get testsCount() {
-    return this.results.length;
+  constructor(private router: Router, private testStoreService: TestStoreService) {}
+
+  ngOnInit(): void {
+    this.testStoreService.getTestResults();
   }
 
-  ngOnInit() {
-    this.results = [...MOCK_TEST_RESULTS];
-  }
-
-  onStartButtonClick(): void {
+  onStartButtonClick(level: Level): void {
+    this.isStarted = true;
+    this.testStoreService.selectLevel(level);
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate([Route.test]);
     });

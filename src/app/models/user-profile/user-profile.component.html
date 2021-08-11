@@ -1,27 +1,32 @@
 <div class="profile-container">
-  <h3 class="table-caption">Please, choose your level of language before you start a TEST:</h3>
+  <h3 class="table-caption">Please choose your level to Start Test:</h3>
 
   <mat-radio-group name="levels" class="radio" [(ngModel)]="selectedLevel">
-    <mat-radio-button class="radio-btn" *ngFor="let level of levels" [value]="level">
-      {{ level }}
+    <mat-radio-button
+      class="radio-btn"
+      *ngFor="let level of levels; let ind = index"
+      [value]="ind + 1"
+    >
+      {{ levels[ind] }}
     </mat-radio-button>
   </mat-radio-group>
 
-  <p *ngIf="selectedLevel" class="for-delete">
-    Your choise is <b>{{ selectedLevel }}</b>
-  </p>
-
   <button
-    [disabled]="!selectedLevel"
+    [disabled]="!selectedLevel || isStarted"
     mat-raised-button
     color="primary"
     class="start-btn"
-    (click)="onStartButtonClick()"
+    (click)="onStartButtonClick(selectedLevel)"
   >
     START TEST
   </button>
 
-  <app-user-results-table class="user-results-table" *ngIf="testsCount > 0; else noResults">
+  <app-user-results-table
+    class="user-results-table"
+    [results]="(results$ | async)!"
+    [levels]="levels"
+    *ngIf="(results$ | async)?.length; else noResults"
+  >
   </app-user-results-table>
 
   <ng-template #noResults>

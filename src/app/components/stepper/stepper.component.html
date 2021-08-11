@@ -1,13 +1,13 @@
 <mat-stepper class="stepper" labelPosition="bottom">
   <mat-step
     class="step"
-    [stepControl]="stepperFormGroups[ind]"
+    [stepControl]="stepperFormGroups![ind]"
     *ngFor="let question of questionList; let ind = index; let first = first; let last = last"
     label="Question {{ ind + 1 }}"
     errorMessage="Not Answered"
   >
-    <form class="form__color" [formGroup]="stepperFormGroups[ind]">
-      <p class="text__center">{{ question.text }}</p>
+    <form class="form__color" [formGroup]="stepperFormGroups![ind]">
+      <p class="text__center">{{ question.nameQuestion }}</p>
 
       <p></p>
 
@@ -17,13 +17,13 @@
           *ngFor="let answerCase of question.answers"
           [value]="answerCase"
         >
-          {{ answerCase.text }}
+          {{ answerCase.nameAnswer }}
         </mat-radio-button>
       </mat-radio-group>
 
       <div>
-        <button class="button__color" mat-button matStepperPrevious *ngIf="!first">Back</button>
-        <button class="button__color" mat-button matStepperNext *ngIf="!last">Next</button>
+        <button class="button__color" mat-button matStepperPrevious [disabled]="first">Back</button>
+        <button class="button__color" mat-button matStepperNext [disabled]="last">Next</button>
       </div>
     </form>
   </mat-step>

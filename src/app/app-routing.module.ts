@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { StatisticsComponent } from './components/mock-component/statistics/statistics.component';
-import { Route } from '../constants/route-constant';
+import { Route } from './constants/route-constant';
+
 import { NotFoundComponent } from './models/not-found/not-found.component';
 
 const routes: Routes = [
@@ -38,10 +38,7 @@ const routes: Routes = [
     path: Route.result,
     loadChildren: () => import('./models/result/result.module').then((m) => m.ResultModule),
   },
-  {
-    path: Route.statistics,
-    component: StatisticsComponent,
-  },
+
   {
     path: Route.editor,
     loadChildren: () =>

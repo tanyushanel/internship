@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Route } from '../../../constants/route-constant';
+import { TopicModule } from '../../interfaces/essay-speaking';
 
 @Component({
   selector: 'app-writing-test',
@@ -9,11 +8,17 @@ import { Route } from '../../../constants/route-constant';
   styleUrls: ['./writing-test.component.scss'],
 })
 export class WritingTestComponent implements OnInit {
+  @Input() essay: TopicModule | null = null;
+
   form!: FormGroup;
 
   disabled = false;
 
   ngOnInit() {
+    this.essay = {
+      id: 0,
+      topicName: '',
+    };
     this.form = new FormGroup({
       text: new FormControl('', [Validators.required, Validators.minLength(10)]),
     });

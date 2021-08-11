@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { UserRoutesType, usersRoute } from '../../../constants/mock-user-data';
-import { UserResponseType } from '../../../interfaces/user.interfaces';
+import { UserRoutesType, usersRoute } from '../../constants/mock-user-data';
+import { UserResponseType } from '../../interfaces/user.interfaces';
 import { AuthStoreService } from '../../services/store/auth-store.service';
 
 @Component({
