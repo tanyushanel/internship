@@ -8,15 +8,7 @@
     <form class="form__color" [formGroup]="stepperFormGroups![ind]">
       <p class="text__center">{{ question.nameQuestion }}</p>
 
-      <p></p>
-
-      <mat-radio-group
-        id="answer-label-group"
-        class="mat-radio-group"
-        formControlName="stepCtrl"
-        [(ngModel)]="selectedAnswer"
-        (change)="onAnswerSelect()"
-      >
+      <mat-radio-group id="answer-label-group" class="mat-radio-group" formControlName="stepCtrl">
         <mat-radio-button
           class="answer-radio-button"
           *ngFor="let answerCase of question.answers"

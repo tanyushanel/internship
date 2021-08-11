@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { Component, EventEmitter, Input, OnInit, Output, OnChanges } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { combineLatest } from 'rxjs';
 import { AnswerQuestion, Question } from '../../interfaces/question-answer';
 
 @Component({
@@ -17,9 +18,9 @@ import { AnswerQuestion, Question } from '../../interfaces/question-answer';
 export class StepperComponent implements OnChanges {
   @Input() questionList: Question[] | null = null;
 
-  @Output() answersChosen = new EventEmitter<AnswerQuestion[] | null>();
+  @Output() answersChosenId = new EventEmitter<AnswerQuestion[] | null>();
 
-  answersForSubmit: AnswerQuestion[] = [];
+  listOfId: string[] | undefined = [];
 
   selectedAnswer: AnswerQuestion | null = null;
 
@@ -33,7 +34,21 @@ export class StepperComponent implements OnChanges {
         stepCtrl: ['', Validators.required],
       }),
     );
+
+    this.onFormChanges();
+
+    // this.listOfId = this.stepperFormGroups?.map((group) => group.controls.stepCtrl.value);
+
+    // console.log(this.stepperFormGroups);
+    // console.log(this.stepperFormGroups ? this.stepperFormGroups[1].controls.stepCtrl : null);
+    // console.log(this.listOfId);
   }
 
-  onAnswerSelect(): void {}
+  onFormChanges(): void {
+    this.stepperFormGroups?.forEach((formGroup) =>
+      formGroup.controls.stepCtrl.valueChanges.subscribe((value) => {
+        this.selectedAnswer = value;
+      }),
+    );
+  }
 }

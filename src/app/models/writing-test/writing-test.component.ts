@@ -13,7 +13,7 @@ export class WritingTestComponent implements OnInit {
 
   @Output() essayWritten = new EventEmitter<string>();
 
-  essayText = '';
+  text = '';
 
   form!: FormGroup;
 
@@ -42,6 +42,6 @@ export class WritingTestComponent implements OnInit {
   nextTest() {}
 
   onWritingSubmit(): void {
-    this.essayWritten.emit(this.essayText);
+    this.essayWritten.emit(this.text);
   }
 }
