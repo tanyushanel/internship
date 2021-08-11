@@ -2,7 +2,7 @@
   <table mat-table [dataSource]="tableData" class="mat-elevation-z8 data-table">
     <ng-container matColumnDef="Position">
       <th mat-header-cell *matHeaderCellDef>Test Number</th>
-      <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.testNumber }}</td>
     </ng-container>
 
     <ng-container matColumnDef="Level">
@@ -12,20 +12,20 @@
 
     <ng-container matColumnDef="Date">
       <th mat-header-cell *matHeaderCellDef>Date</th>
-      <td mat-cell *matCellDef="let element">{{ element.date }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.testPassingDate | date: 'dd.MM.YYYY' }}</td>
     </ng-container>
 
     <ng-container matColumnDef="Coach">
       <th mat-header-cell *matHeaderCellDef>Coach</th>
       <td mat-cell *matCellDef="let element">
-        {{ element.coach.name === null ? 'Not Assign' : element.coach.name }}
+        {{ element.position }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="Button">
       <th mat-header-cell *matHeaderCellDef>Test Assignment</th>
       <td mat-cell *matCellDef="let element">
-        <button mat-raised-button color="primary" (click)="openDialog(element)">
+        <button mat-raised-button color="primary" (click)="openDialog(element, coaches)">
           {{ element.isAssign ? 'Reassign' : 'Assign' }}
         </button>
       </td>

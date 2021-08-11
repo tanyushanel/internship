@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
-import { TestData } from 'src/interfaces/admin.interfaces';
+import { ServiceCoachData, ServiceTestData, TestData } from 'src/mocks/admin-profile-utils.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -10,16 +9,19 @@ export class AdminHttpService {
   constructor(private readonly http: HttpClient) {}
 
   getAdminTests() {
-    console.log(
-      this.http.get<TestData[]>('http://elevel-001-site1.btempurl.com/api/Test/forAdmin'),
+    return this.http.get<ServiceTestData>(
+      'http://elevel-001-site1.btempurl.com/api/Test/forAdmin?PageSize=100000',
     );
-    return this.http.get<TestData[]>('http://elevel-001-site1.btempurl.com/api/Test/forAdmin');
   }
 
-  passAdminTest(test: TestData) {
-    return this.http.post<TestData[]>(
-      'http://elevel-001-site1.btempurl.com/api/Test/forAdmin',
-      test,
+  getAdminCoaches() {
+    return this.http.get<ServiceCoachData>('http://elevel-001-site1.btempurl.com/api/User/coaches');
+  }
+
+  updateCoachTest(data: TestData, testID: number) {
+    return this.http.put<ServiceTestData>(
+      `http://elevel-001-site1.btempurl.com/api/Test/forAdmin${testID}`,
+      data,
     );
   }
 }

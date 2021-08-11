@@ -2,9 +2,16 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { HttpClient } from '@angular/common/http';
-import { AdminTestTabs, TestData } from '../../../../mocks/admin-profile-utils.mock';
+import { ServiceComponent } from 'src/mocks/admin-mock.service';
+import { AdminTableStoreService } from 'src/app/services/store/adminTableStore.service';
+import { interval } from 'rxjs';
+import { timeInterval } from 'rxjs/operators';
 import { AdminDialogComponent } from '../admin-dialog/admin-dialog.component';
-import { ServiceComponent } from '../service/service.component';
+import {
+  AdminTestTabs,
+  ServiceCoachData,
+  TestData,
+} from '../../../../mocks/admin-profile-utils.mock';
 
 @Component({
   selector: 'app-table',
@@ -14,34 +21,35 @@ import { ServiceComponent } from '../service/service.component';
 export class TableComponent implements OnInit {
   AssignSelector = true;
 
+  coaches!: ServiceCoachData;
+
   @Input() tableData: TestData[] = [];
 
   @Input() displaedColums: string[] = [];
 
-  constructor(
-    public dialog: MatDialog,
-    private readonly http: HttpClient,
-    private service: ServiceComponent,
-  ) {}
+  constructor(public dialog: MatDialog, private service: AdminTableStoreService) {}
 
   @ViewChild(MatTable) table!: MatTable<any>;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.service.getCoachData().subscribe((data) => {
+      this.coaches = data;
+    });
+  }
 
-  openDialog(element: TestData) {
+  openDialog(element: TestData, CoachData: ServiceCoachData) {
     const dialogRef = this.dialog.open(AdminDialogComponent, {
       data: {
-        position: element.position,
-        isAssign: element.isAssign,
-        isHighPriority: element.isHighPriority,
+        position: element.testNumber,
+
         coach: element.coach,
-        date: element.date,
-        level: element.level,
+        coaches: CoachData.coaches,
       },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      this.service.postData(result);
+      console.log(result);
+      this.service.updateTestData(result.coach.userId, result.position);
     });
   }
 }

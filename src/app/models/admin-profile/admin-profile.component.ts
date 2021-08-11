@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminTestTabs, TestData } from 'src/mocks/admin-profile-utils.mock';
-import { ServiceComponent } from './service/service.component';
+import { AdminTableStoreService } from 'src/app/services/store/adminTableStore.service';
+import { ServiceComponent } from 'src/mocks/admin-mock.service';
+import { AdminTestTabs, ServiceTestData, TestData } from 'src/mocks/admin-profile-utils.mock';
 
 @Component({
   selector: 'app-admin-profile',
@@ -14,13 +15,17 @@ export class AdminProfileComponent implements OnInit {
 
   adminDisplayListMap: { [key: string]: string[] } = {};
 
+  data: ServiceTestData | undefined;
+
   ngOnInit(): void {}
 
-  constructor(private service: ServiceComponent) {
-    this.service.getData().subscribe((data) => {
+  constructor(private service: AdminTableStoreService) {
+    this.service.getTestData().subscribe((data) => {
+      this.data = data;
+      console.log(data.results);
       this.adminTable = {
-        [AdminTestTabs.notAssigned]: data.filter((test) => !test.isAssign),
-        [AdminTestTabs.assigned]: data.filter((test) => test.isAssign),
+        [AdminTestTabs.notAssigned]: this.data.results.filter((test) => !test.isAssign),
+        [AdminTestTabs.assigned]: this.data.results.filter((test) => test.isAssign),
       };
       this.adminDisplayListMap = {
         [AdminTestTabs.notAssigned]: ['Position', 'Level', 'Date', 'Button'],

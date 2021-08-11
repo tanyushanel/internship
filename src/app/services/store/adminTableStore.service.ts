@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TestData } from 'src/interfaces/admin.interfaces';
+import { TestData } from 'src/mocks/admin-profile-utils.mock';
 import { AdminHttpService } from '../adminTableData.service';
 
 @Injectable({
@@ -12,7 +12,11 @@ export class AdminTableStoreService {
     return this.adminHttpService.getAdminTests();
   }
 
-  postTestData(test: TestData) {
-    this.adminHttpService.passAdminTest(test);
+  getCoachData() {
+    return this.adminHttpService.getAdminCoaches();
+  }
+
+  updateTestData(data: TestData, testID: number) {
+    this.adminHttpService.updateCoachTest(data, testID);
   }
 }
