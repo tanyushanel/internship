@@ -55,10 +55,10 @@
           </div>
           <div>
             <div class="desc">
-              <span>Gramm</span>
-              <span>Audio</span>
-              <span>Essay</span>
-              <span>Speach</span>
+              <span>Grammar</span>
+              <span>Listening</span>
+              <span>Writing</span>
+              <span>Speaking</span>
             </div>
 
             <div class="scale">
@@ -67,7 +67,7 @@
               <span *ngIf="element.essayMark; else noResult">{{ element.essayMark }}</span>
               <span *ngIf="element.speakingMark; else noResult">{{ element.speakingMark }}</span>
               <ng-template #noResult>
-                <span class="material-icons"> hourglass_empty </span>
+                <span class="material-icons" matTooltip="Pending..."> query_builder </span>
               </ng-template>
             </div>
           </div>

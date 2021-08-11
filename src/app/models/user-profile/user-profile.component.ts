@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Level } from 'src/app/constants/data-constants';
 import { Route } from 'src/app/constants/route-constant';
 import { TestResult } from '../../interfaces/test';
@@ -27,6 +27,8 @@ export class UserProfileComponent implements OnInit {
 
   now = new Date();
 
+  deadLine: string | null = '';
+
   testId: string | null = '';
 
   constructor(private router: Router, private testStoreService: TestStoreService) {}
@@ -41,11 +43,14 @@ export class UserProfileComponent implements OnInit {
     this.assignedTests$ = this.allTests$.pipe(
       map((arr) =>
         arr?.filter(
-          // (i) => !i.testPassingDate && !i.level && new Date(i.assignmentEndDate) >= this.now,
-          (i) => !i.testPassingDate && !i.level,
+          (i) => !i.testPassingDate && !i.level && new Date(i.assignmentEndDate) >= this.now,
         ),
       ),
     );
+
+    this.assignedTests$.pipe(map((arr) => (arr ? arr[0].assignmentEndDate : null))).subscribe({
+      next: (date) => (this.deadLine = date),
+    });
   }
 
   onStartButtonClick(level: Level): void {
@@ -56,11 +61,14 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
-  onStartAssignedButtonClick(level: Level, tests?: Observable<TestResult[] | undefined>): void {
+  onStartAssignedButtonClick(
+    level: Level,
+    assignedTests?: Observable<TestResult[] | undefined>,
+  ): void {
     this.isStarted = true;
     this.testStoreService.selectLevel(level);
 
-    tests?.pipe(map((arr) => (arr ? arr[0].id : null))).subscribe({
+    assignedTests?.pipe(map((arr) => (arr ? arr[0].id : null))).subscribe({
       next: (str) => (this.testId = str),
     });
 

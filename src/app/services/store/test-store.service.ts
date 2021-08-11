@@ -37,11 +37,11 @@ export class TestStoreService {
     this.selectedLevel = selected;
   }
 
-  getAll(): void {
+  getTestResults(): void {
     this.authStoreService.activeUser$
       .pipe(
         take(1),
-        concatMap((user) => this.testHttpService.getAllTests(user !== null ? user.userId : '')),
+        concatMap((user) => this.testHttpService.getResults(user !== null ? user.userId : '')),
       )
       .subscribe({
         next: (res) => {
@@ -50,11 +50,11 @@ export class TestStoreService {
       });
   }
 
-  getTestResults(): void {
+  getAll(): void {
     this.authStoreService.activeUser$
       .pipe(
         take(1),
-        concatMap((user) => this.testHttpService.getResults(user !== null ? user.userId : '')),
+        concatMap((user) => this.testHttpService.getAllTests(user !== null ? user.userId : '')),
       )
       .subscribe({
         next: (res) => {
