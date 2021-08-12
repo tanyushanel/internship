@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, combineLatest } from 'rxjs';
+import { map, concatMap } from 'rxjs/operators';
 import { Level } from 'src/app/constants/data-constants';
 import { Route } from 'src/app/constants/route-constant';
 import { TestResult } from '../../interfaces/test';
@@ -17,13 +17,15 @@ export class UserProfileComponent implements OnInit {
 
   assignedTests$: Observable<TestResult[] | undefined> = this.testStoreService.assignedTests$;
 
+  assignedTest: TestResult | undefined;
+
   levels = [...Object.values(Level)];
 
   isStarted = false;
 
   selectedLevel!: Level;
 
-  deadLine: string | null = '';
+  deadLine: string | undefined = '';
 
   testId: string | null = '';
 
@@ -32,34 +34,26 @@ export class UserProfileComponent implements OnInit {
   ngOnInit(): void {
     this.testStoreService.getAll();
 
-    this.assignedTests$.pipe(map((arr) => (arr ? arr[0].assignmentEndDate : null))).subscribe({
-      next: (date) => (this.deadLine = date),
+    const chooseFirst = this.assignedTests$.pipe(map((arr) => (arr?.length ? arr[0] : undefined)));
+    chooseFirst.subscribe((test) => {
+      this.assignedTest = test;
+      this.deadLine = test?.assignmentEndDate;
     });
   }
 
   onStartButtonClick(level: Level): void {
     this.isStarted = true;
     this.testStoreService.selectLevel(level);
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate([Route.test]);
-    });
+
+    this.router.navigate([Route.test]);
   }
 
-  onStartAssignedButtonClick(
-    level: Level,
-    assignedTests?: Observable<TestResult[] | undefined>,
-  ): void {
+  onStartAssignedButtonClick(level: Level, assignedTest: TestResult | undefined): void {
     this.isStarted = true;
     this.testStoreService.selectLevel(level);
 
-    assignedTests?.pipe(map((arr) => (arr ? arr[0].id : null))).subscribe({
-      next: (str) => (this.testId = str),
-    });
-
-    if (this.testId) {
-      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-        this.router.navigate([Route.test, { id: this.testId }]);
-      });
+    if (assignedTest) {
+      this.router.navigate([Route.test, { id: assignedTest.id }]);
     } else {
       console.error('TestId is null and navigation is unavailable');
     }

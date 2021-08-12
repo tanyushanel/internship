@@ -19,15 +19,12 @@ export class TestStoreService {
   test$ = this.testSubject$.asObservable();
 
   results$: Observable<TestResult[] | undefined> = this.allTests$.pipe(
-    map((results) => results?.filter((result) => result.testPassingDate)),
+    map((results) => results?.filter((result) => result && result.testPassingDate)),
   );
 
   assignedTests$: Observable<TestResult[] | undefined> = this.allTests$.pipe(
     map((tests) =>
-      tests?.filter(
-        (test) =>
-          !test.testPassingDate && !test.level && new Date(test.assignmentEndDate) >= new Date(),
-      ),
+      tests?.filter((test) => !test.level && new Date(test.assignmentEndDate) >= new Date()),
     ),
   );
 
