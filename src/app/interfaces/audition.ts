@@ -1,10 +1,7 @@
-import { Question } from './question-answer';
-import { Level } from '../constants/data-constants';
-
-export interface Audition {
-  id: number;
-  auditionAudio: string;
-  level: Level;
+export interface CoachListening {
+  id: string;
+  level: number;
+  creatorId: string;
   creationDate: string;
-  questions: Question[];
+  questionNumber: number;
 }

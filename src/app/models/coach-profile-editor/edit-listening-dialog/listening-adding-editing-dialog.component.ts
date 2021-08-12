@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { languageLevel } from '../../../constants/data-constants';
 
 @Component({
@@ -17,7 +17,7 @@ export class ListeningAddingEditingDialogComponent {
   Array = new Array(10);
 
   constructor(
-    // @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<ListeningAddingEditingDialogComponent>,
   ) {}
 
