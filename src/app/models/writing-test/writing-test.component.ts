@@ -11,7 +11,7 @@ import { TopicModule } from '../../interfaces/essay-speaking';
 export class WritingTestComponent implements OnInit {
   @Input() essay: TopicModule | null = null;
 
-  @Output() essayWritten = new EventEmitter<string>();
+  @Output() essayWritten = new EventEmitter<string | null>();
 
   text = '';
 

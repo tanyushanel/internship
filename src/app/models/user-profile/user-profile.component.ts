@@ -31,16 +31,12 @@ export class UserProfileComponent implements OnInit {
   onStartButtonClick(level: Level): void {
     this.isStarted = true;
     this.testStoreService.selectLevel(level);
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate([Route.test]);
-    });
+    this.router.navigate([Route.test]);
   }
 
   onStartAssignedButtonClick(level: Level): void {
     this.isStarted = true;
     this.testStoreService.selectLevel(level);
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate([Route.assigned]);
-    });
+    this.router.navigate([Route.assigned]);
   }
 }
