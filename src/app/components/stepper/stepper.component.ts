@@ -2,6 +2,7 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { Component, EventEmitter, Input, OnInit, Output, OnChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { combineLatest } from 'rxjs';
+import { startWith } from 'rxjs/operators';
 import { AnswerQuestion, Question } from '../../interfaces/question-answer';
 
 @Component({
@@ -18,11 +19,11 @@ import { AnswerQuestion, Question } from '../../interfaces/question-answer';
 export class StepperComponent implements OnChanges, OnInit {
   @Input() questionList: Question[] | null = null;
 
-  @Output() answersChosenId = new EventEmitter<AnswerQuestion[] | null>();
+  @Output() answersChosenId = new EventEmitter<string[] | null>();
 
   listOfId: string[] | undefined = [];
 
-  selectedAnswer: AnswerQuestion | null = null;
+  selectedAnswersId: string[] | null = null;
 
   stepperFormGroups: FormGroup[] | undefined = [];
 
@@ -37,22 +38,19 @@ export class StepperComponent implements OnChanges, OnInit {
       }),
     );
     this.onChanges();
-    // this.listOfId = this.stepperFormGroups?.map((group) => group.controls.stepCtrl.value);
-
-    // console.log(this.stepperFormGroups);
-    // console.log(this.stepperFormGroups ? this.stepperFormGroups[1].controls.stepCtrl : null);
-    // console.log(this.listOfId);
   }
 
   onChanges(): void {
-    console.log(this.stepperFormGroups);
-
-    this.stepperFormGroups?.forEach((formGroup) =>
-      formGroup.controls.stepCtrl.valueChanges.subscribe((value) => {
-        this.selectedAnswer = value;
-        console.log('2');
-        console.log(this.selectedAnswer);
-      }),
+    const observables = this.stepperFormGroups?.map(
+      (f) => f.controls.stepCtrl.valueChanges.pipe(startWith('')), // set initial value to let the subscribe to be called
     );
+
+    if (!observables) return;
+
+    const combined = combineLatest(observables);
+
+    combined.subscribe((value: AnswerQuestion[]) => {
+      this.selectedAnswersId = value.map((answer) => answer.id);
+    });
   }
 }
