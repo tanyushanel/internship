@@ -76,10 +76,17 @@ export class TestStoreService {
     });
   }
 
-  testSubmit(): void {
+  testSubmit(grammar: string[], listening: string[], writing: string, speaking: string): void {
     this.testHttpService.finishTest(this.testId).subscribe({
       next: (request) => {
-        this.requestBody = { ...request, id: this.testId };
+        this.requestBody = {
+          ...request,
+          id: this.testId,
+          grammarAnswers: grammar,
+          auditionAnswers: listening,
+          essayAnswer: writing,
+          speakingAnswerReference: speaking,
+        };
       },
     });
   }

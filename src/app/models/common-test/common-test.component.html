@@ -31,3 +31,12 @@
     ></app-proceed-buttons>
   </mat-tab>
 </mat-tab-group>
+<button
+  mat-raised-button
+  [disabled]="isFinished"
+  color="secondary"
+  class="button-submit"
+  (click)="onFinishTestClick()"
+>
+  Finish Test
+</button>

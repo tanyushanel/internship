@@ -38,6 +38,8 @@ export class CommonTestComponent implements OnInit {
 
   selectedIndex = 0;
 
+  isFinished = false;
+
   constructor(private testStoreService: TestStoreService) {}
 
   ngOnInit() {
@@ -48,19 +50,20 @@ export class CommonTestComponent implements OnInit {
     this.listening$ = this.test$.pipe(map((test) => test?.audition.questions || null));
     this.essay$ = this.test$.pipe(map((test) => test?.essay || null));
     this.speaking$ = this.test$.pipe(map((test) => test?.speaking || null));
-
-    // this.requestBody = {
-    //   id: this.testStoreService.testId,
-    //   this.grammarAnswers: this.grammarAnswers,
-    //   auditionAnswers: this.listeningAnswers,
-    //   essayAnswer: this.essayText,
-    //   speakingAnswerReference: this.speachRef,
-    // };
-
-    console.log(this.requestBody);
   }
 
   setTabIndex(ind: number): void {
     this.selectedIndex = ind;
+  }
+
+  onFinishTestClick(): void {
+    this.testStoreService.testSubmit(
+      this.grammarAnswers,
+      this.listeningAnswers,
+      this.essayText,
+      this.speachRef,
+    );
+
+    this.isFinished = true;
   }
 }
