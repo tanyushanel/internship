@@ -52,16 +52,21 @@ export class CoachProfileEditorComponent implements OnInit {
   onAddAudioClick(): void {
     this.dialog.open(AddListeningDialogComponent, {
       autoFocus: false,
+      disableClose: true,
     });
   }
 
   openGrammarModal() {
     this.dialog.open(GrammarAddingEditingDialogComponent, {
       data: { ...emptyQuestion, isEdit: false },
+      disableClose: true,
     });
   }
 
   openTopicModal() {
-    this.dialog.open(TopicAddingEditingDialogComponent, { data: { isEdit: false } });
+    this.dialog.open(TopicAddingEditingDialogComponent, {
+      data: { isEdit: false },
+      disableClose: true,
+    });
   }
 }

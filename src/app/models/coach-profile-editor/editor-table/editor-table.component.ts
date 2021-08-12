@@ -108,16 +108,24 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
         if (question !== null) {
           this.dialog.open(GrammarAddingEditingDialogComponent, {
             data: { ...question, isEdit: true },
+            disableClose: true,
           });
         }
       });
     } else if (this.selectTab === CoachEditorTabs.audition) {
       this.dialog.open(EditListeningDialogComponent, {
         autoFocus: false,
+        disableClose: true,
       });
     } else if (this.selectTab === CoachEditorTabs.writingAndSpeaking)
       this.dialog.open(TopicAddingEditingDialogComponent, {
-        data: { id: row.id, level: row.level, question: 'Question', isEdit: true },
+        data: {
+          id: row.id,
+          level: row.level,
+          question: 'Question',
+          isEdit: true,
+          disableClose: true,
+        },
       });
   }
 }
