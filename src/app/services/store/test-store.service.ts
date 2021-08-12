@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { concatMap, take } from 'rxjs/operators';
-import { TestResult, TestContent } from '../../interfaces/test';
+import { TestResult, TestContent, TestSubmit } from '../../interfaces/test';
 import { TestHttpService } from '../test-http.service';
 import { AuthStoreService } from './auth-store.service';
 import { Level } from '../../constants/data-constants';
@@ -14,11 +14,17 @@ export class TestStoreService {
 
   testSubject$ = new BehaviorSubject<TestContent | null>(null);
 
+  requestSubject$ = new BehaviorSubject<TestSubmit | null>(null);
+
+  requestBody$ = this.requestSubject$.asObservable();
+
   testResults$ = this.resultsSubject$.asObservable();
 
   test$ = this.testSubject$.asObservable();
 
   selectedLevel!: Level;
+
+  testId = '';
 
   private set test(test: TestContent) {
     this.testSubject$.next(test);
@@ -28,6 +34,10 @@ export class TestStoreService {
     this.resultsSubject$.next(testResults);
   }
 
+  private set requestBody(body: TestSubmit) {
+    this.requestSubject$.next(body);
+  }
+
   constructor(
     private testHttpService: TestHttpService,
     private authStoreService: AuthStoreService,
@@ -35,6 +45,14 @@ export class TestStoreService {
 
   selectLevel(selected: Level): void {
     this.selectedLevel = selected;
+  }
+
+  getTestId(): void {
+    this.test$.subscribe((test) => {
+      if (test) {
+        this.testId = test.id;
+      }
+    });
   }
 
   getTestResults(): void {
@@ -58,5 +76,11 @@ export class TestStoreService {
     });
   }
 
-  updateTestContent(): void {}
+  testSubmit(): void {
+    this.testHttpService.finishTest(this.testId).subscribe({
+      next: (request) => {
+        this.requestBody = { ...request, id: this.testId };
+      },
+    });
+  }
 }

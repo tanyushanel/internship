@@ -24,7 +24,7 @@ export class CommonTestComponent implements OnInit {
 
   @Input() speachRef = '';
 
-  requestBody!: TestSubmit;
+  requestBody: Observable<TestSubmit | null> = this.testStoreService.requestBody$;
 
   test$: Observable<TestContent | null> = this.testStoreService.test$;
 
@@ -42,19 +42,22 @@ export class CommonTestComponent implements OnInit {
 
   ngOnInit() {
     this.testStoreService.createTestContent();
+    this.testStoreService.getTestId();
 
     this.grammar$ = this.test$.pipe(map((test) => test?.grammarQuestions || null));
     this.listening$ = this.test$.pipe(map((test) => test?.audition.questions || null));
     this.essay$ = this.test$.pipe(map((test) => test?.essay || null));
     this.speaking$ = this.test$.pipe(map((test) => test?.speaking || null));
 
-    this.requestBody = {
-      id: '',
-      grammarAnswers: this.grammarAnswers,
-      auditionAnswers: this.listeningAnswers,
-      essayAnswer: this.essayText,
-      speakingAnswerReference: this.speachRef,
-    };
+    // this.requestBody = {
+    //   id: this.testStoreService.testId,
+    //   this.grammarAnswers: this.grammarAnswers,
+    //   auditionAnswers: this.listeningAnswers,
+    //   essayAnswer: this.essayText,
+    //   speakingAnswerReference: this.speachRef,
+    // };
+
+    console.log(this.requestBody);
   }
 
   setTabIndex(ind: number): void {

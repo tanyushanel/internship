@@ -1,3 +1,4 @@
+import { TestStoreService } from 'src/app/services/store/test-store.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -34,17 +35,13 @@ export class TestHttpService {
     return this.http.post<TestContent>(`${BASE_API_URL}/Test`, { level });
   }
 
-  // createAssignedTest(level: Level): Observable<TestContent> {
-  //   // return this.http.post<TestContent>(`${BASE_API_URL}/Test/${testId}/start`, { level });
-  // }
-
-  // finishTest(testId: string) {
-  //   return this.http.put<TestSubmit>(`${BASE_API_URL}/Test/{testId}/submit`, {
-  //     id: testId,
-  //     grammarAnswers,
-  //     auditionAnswers,
-  //     essayAnswer,
-  //     speakingAnswerReference,
-  //   });
-  // }
+  finishTest(testId: string) {
+    return this.http.put<TestSubmit>(`${BASE_API_URL}/Test/{testId}/submit`, {
+      id: testId,
+      // grammarAnswers,
+      // auditionAnswers,
+      // essayAnswer,
+      // speakingAnswerReference,
+    });
+  }
 }

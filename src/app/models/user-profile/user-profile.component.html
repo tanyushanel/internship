@@ -22,19 +22,6 @@
     START TEST
   </button>
 
-  <div *ngIf="isAssigned">
-    <h3 class="table-caption red">You have a test assigned on!</h3>
-    <button
-      [disabled]="!selectedLevel || isStarted"
-      mat-raised-button
-      color="primary"
-      class="start-btn"
-      (click)="onStartAssignedButtonClick(selectedLevel)"
-    >
-      START ASSIGNED TEST
-    </button>
-  </div>
-
   <app-user-results-table
     *ngIf="(results$ | async)?.length; else noResults"
     class="user-results-table"

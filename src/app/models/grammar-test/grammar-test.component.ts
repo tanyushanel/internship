@@ -11,9 +11,9 @@ export class GrammarTestComponent {
 
   @Input() answersSubmitted: AnswerQuestion[] | null = null;
 
-  @Output() answerGrammar = new EventEmitter<AnswerQuestion[] | null>();
+  @Output() answersGrammar = new EventEmitter<AnswerQuestion[] | null>();
 
-  onFormSubmit(): void {
-    this.answerGrammar.emit(this.answersSubmitted);
+  onAnswersSubmit(): void {
+    this.answersGrammar.emit(this.answersSubmitted);
   }
 }
