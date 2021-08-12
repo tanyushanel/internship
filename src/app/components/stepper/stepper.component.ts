@@ -15,7 +15,7 @@ import { AnswerQuestion, Question } from '../../interfaces/question-answer';
     },
   ],
 })
-export class StepperComponent implements OnChanges {
+export class StepperComponent implements OnChanges, OnInit {
   @Input() questionList: Question[] | null = null;
 
   @Output() answersChosenId = new EventEmitter<AnswerQuestion[] | null>();
@@ -28,15 +28,15 @@ export class StepperComponent implements OnChanges {
 
   constructor(private formBuilder: FormBuilder) {}
 
-  ngOnChanges() {
+  ngOnInit(): void {}
+
+  ngOnChanges(): void {
     this.stepperFormGroups = this.questionList?.map(() =>
       this.formBuilder.group({
         stepCtrl: ['', Validators.required],
       }),
     );
-
-    this.onFormChanges();
-
+    this.onChanges();
     // this.listOfId = this.stepperFormGroups?.map((group) => group.controls.stepCtrl.value);
 
     // console.log(this.stepperFormGroups);
@@ -44,10 +44,14 @@ export class StepperComponent implements OnChanges {
     // console.log(this.listOfId);
   }
 
-  onFormChanges(): void {
+  onChanges(): void {
+    console.log(this.stepperFormGroups);
+
     this.stepperFormGroups?.forEach((formGroup) =>
       formGroup.controls.stepCtrl.valueChanges.subscribe((value) => {
         this.selectedAnswer = value;
+        console.log('2');
+        console.log(this.selectedAnswer);
       }),
     );
   }
