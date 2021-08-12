@@ -90,7 +90,9 @@ export class HrProfileComponent implements OnInit {
     });
   }
 
-  onClick() {
-    this.dialog.open(HrProfileDialogComponent);
+  onClick(userId: string) {
+    this.dialog.open(HrProfileDialogComponent, {
+      data: { userId },
+    });
   }
 }
