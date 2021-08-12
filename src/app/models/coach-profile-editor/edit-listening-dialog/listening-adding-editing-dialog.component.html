@@ -1,0 +1,44 @@
+<div class="main">
+  <h1>{{ data.isEdit ? 'Edit Listening' : 'Add Listening' }}</h1>
+  <div>
+    <input type="file" />
+  </div>
+  <div>
+    <h2>Select level</h2>
+    <app-choose-level></app-choose-level>
+  </div>
+
+  <mat-stepper orientation="vertical">
+    <mat-step *ngFor="let item of Array; let i = index">
+      <ng-template matStepLabel>{{ i + 1 }}</ng-template>
+      <ng-template matStepContent>
+        <mat-form-field appearance="fill">
+          <mat-label>Formulation of the question</mat-label>
+          <textarea matInput></textarea>
+        </mat-form-field>
+        <mat-radio-group
+          aria-labelledby="example-radio-group-label"
+          class="example-radio-group"
+          [(ngModel)]="favoriteSeason"
+        >
+          <mat-radio-button
+            class="example-radio-button"
+            *ngFor="let season of seasons"
+            [value]="season"
+          >
+            {{ season }}
+            <mat-form-field appearance="fill">
+              <mat-label>Answer option</mat-label>
+              <textarea matInput></textarea>
+            </mat-form-field>
+          </mat-radio-button>
+        </mat-radio-group>
+        <div>Correct Answer: {{ favoriteSeason }}</div>
+      </ng-template>
+    </mat-step>
+  </mat-stepper>
+  <div class="dialog-button">
+    <button mat-raised-button mat-dialog-close cdkFocusInitial>Close</button>
+    <button mat-raised-button color="primary">Save</button>
+  </div>
+</div>
