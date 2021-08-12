@@ -19,6 +19,15 @@ export enum SidebarMenu {
   manage = 'Manage',
 }
 
+export enum SidebarIcon {
+  homeicon = 'home',
+  usersicon = 'group',
+  checkicon = 'fact_check',
+  editoricon = 'edit_note',
+  manageicon = 'manage_accounts',
+  statisticsicon = 'insert_chart_outlined',
+}
+
 export const BASE_API_URL = 'http://elevel-001-site1.btempurl.com/api';
 
 export const UserTableUrl = `${BASE_API_URL}/User`;

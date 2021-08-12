@@ -13,6 +13,6 @@ export class ResultComponent implements OnInit {
   ngOnInit(): void {}
 
   home() {
-    this.router.navigate([Route.home]);
+    this.router.navigate([Route.test]);
   }
 }

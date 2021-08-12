@@ -1,12 +1,12 @@
 @import '../../../../theme/variables';
 
-button {
+button.mat-raised-button {
   position: relative;
   left: 50%;
   transform: translate(-50%, 0);
 }
 
-button:hover {
+button.mat-raised-button:hover {
   background-color: $secondary-grey2;
 }
 
@@ -15,15 +15,44 @@ mat-form-field {
 }
 
 .mat-dialog-content {
-  min-width: 600px;
+  position: relative;
+  width: 600px;
 }
 
-label {
-  float: right;
-  margin-top: 20px;
+.content {
+  display: grid;
+  grid-template-columns: 70% 30%;
+  padding-top: 50px;
 }
 
-input {
-  max-width: 40px;
-  margin-left: 10px;
+.text-essay {
+  grid-column: 1;
+}
+
+.essay-score {
+  display: flex;
+  grid-column: 2;
+  align-self: center;
+  justify-content: space-between;
+}
+
+.audio {
+  grid-column: 1;
+  margin-bottom: 18px;
+}
+
+.speaking-score {
+  display: flex;
+  grid-column: 2;
+  align-self: center;
+  justify-content: space-between;
+}
+
+.feedback {
+  grid-column: 1;
+}
+
+.close-button {
+  position: absolute;
+  right: 15px;
 }

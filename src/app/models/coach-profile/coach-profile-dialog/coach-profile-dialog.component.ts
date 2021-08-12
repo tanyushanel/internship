@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogData } from '../../../../mocks/users-utils.mock';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { CoachTest } from '../../../interfaces/coach-edit';
+import { CoachTestsStoreService } from '../service/coach-tests-store.service';
 
 @Component({
   selector: 'app-coach-profile-dialog',
@@ -8,5 +9,22 @@ import { DialogData } from '../../../../mocks/users-utils.mock';
   styleUrls: ['./coach-profile-dialog.component.scss'],
 })
 export class CoachProfileDialogComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: CoachTest,
+    public dialogRef: MatDialogRef<CoachProfileDialogComponent>,
+    private coachCheck: CoachTestsStoreService,
+  ) {}
+
+  submitTest(): void {
+    const question = {
+      essayMark: this.data.essayMark,
+      speakingMark: this.data.speakingMark,
+      comment: this.data.comment,
+    };
+    const id = {
+      id: this.data.id,
+    };
+    this.dialogRef.close();
+    this.coachCheck.sendCheckTest(question, id);
+  }
 }

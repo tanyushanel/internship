@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { TestData } from 'src/interfaces/admin.interfaces';
+
 import { AdminHttpService } from '../adminTableData.service';
+import { TestData } from '../../../mocks/admin-profile-utils.mock';
 
 @Injectable({
   providedIn: 'root',

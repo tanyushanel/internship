@@ -1,20 +1,24 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { concatMap, map, take } from 'rxjs/operators';
-import { TestResult, TestContent } from '../../interfaces/test';
+import { Level } from '../../constants/data-constants';
+import { TestContent, TestResult } from '../../interfaces/test';
 import { TestHttpService } from '../test-http.service';
 import { AuthStoreService } from './auth-store.service';
-import { Level } from '../../constants/data-constants';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TestStoreService {
-  allTestsSubject$ = new BehaviorSubject<TestResult[] | null>(null);
-
-  testSubject$ = new BehaviorSubject<TestContent | null>(null);
+  public allTestsSubject$ = new BehaviorSubject<TestResult[] | null>(null);
 
   allTests$ = this.allTestsSubject$.asObservable();
+
+  public resultsSubject$ = new BehaviorSubject<TestResult[] | null>(null);
+
+  testResults$ = this.resultsSubject$.asObservable();
+
+  public testSubject$ = new BehaviorSubject<TestContent | null>(null);
 
   test$ = this.testSubject$.asObservable();
 
@@ -36,6 +40,10 @@ export class TestStoreService {
 
   private set allTests(allTests: TestResult[]) {
     this.allTestsSubject$.next(allTests);
+  }
+
+  private set testResults(tests: TestResult[]) {
+    this.allTestsSubject$.next(tests);
   }
 
   constructor(
@@ -71,6 +79,14 @@ export class TestStoreService {
           this.allTests = [...res];
         },
       });
+  }
+
+  getAllUserResults(row: string): void {
+    this.testHttpService.getAllResults(row).subscribe({
+      next: (res) => {
+        this.testResults = [...res];
+      },
+    });
   }
 
   createTestContent(): void {
