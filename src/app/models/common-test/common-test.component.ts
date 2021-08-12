@@ -56,6 +56,14 @@ export class CommonTestComponent implements OnInit {
     if (txt) this.essayText = txt;
   }
 
+  onGrammarSubmit(answers: string[] | null): void {
+    if (answers) this.grammarAnswers = answers;
+  }
+
+  onListeningSubmit(answers: string[] | null): void {
+    if (answers) this.listeningAnswers = answers;
+  }
+
   onFinishTestClick(): void {
     this.testStoreService.testSubmit(
       this.grammarAnswers,

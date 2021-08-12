@@ -9,11 +9,9 @@ import { AnswerQuestion, Question } from '../../interfaces/question-answer';
 export class GrammarTestComponent {
   @Input() questions: Question[] | null = null;
 
-  @Input() answersSubmitted: AnswerQuestion[] | null = null;
+  @Output() answersGrammar = new EventEmitter<string[] | null>();
 
-  @Output() answersGrammar = new EventEmitter<AnswerQuestion[] | null>();
-
-  onAnswersSubmit(): void {
-    this.answersGrammar.emit(this.answersSubmitted);
+  onAnswersSubmit(answers: string[] | null): void {
+    if (answers) this.answersGrammar.emit(answers);
   }
 }
