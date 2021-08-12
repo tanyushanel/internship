@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, combineLatest } from 'rxjs';
-import { map, concatMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Level } from 'src/app/constants/data-constants';
 import { Route } from 'src/app/constants/route-constant';
 import { TestResult } from '../../interfaces/test';
@@ -54,8 +54,6 @@ export class UserProfileComponent implements OnInit {
 
     if (assignedTest) {
       this.router.navigate([Route.test, { id: assignedTest.id }]);
-    } else {
-      console.error('TestId is null and navigation is unavailable');
     }
   }
 }
