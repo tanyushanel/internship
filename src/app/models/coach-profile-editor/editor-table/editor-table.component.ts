@@ -121,14 +121,22 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
         disableClose: true,
       });
     } else if (this.selectTab === CoachEditorTabs.writingAndSpeaking)
-      this.dialog.open(TopicAddingEditingDialogComponent, {
-        data: {
-          id: row.id,
-          level: row.level,
-          question: 'Question',
-          isEdit: true,
+      this.coachEditTopic.getTopic(row.id);
+    this.coachEditTopic.topic$.pipe(take(1)).subscribe((topic) => {
+      if (topic !== null) {
+        this.dialog.open(TopicAddingEditingDialogComponent, {
+          data: { ...topic, isEdit: true },
           disableClose: true,
-        },
-      });
+        });
+      }
+    });
+  }
+
+  delete(id: string) {
+    if (this.selectTab === CoachEditorTabs.grammar) {
+      this.coachEditQuestion.deleteQuestion(id);
+    } else if (this.selectTab === CoachEditorTabs.writingAndSpeaking) {
+      this.coachEditTopic.deleteTopic(id);
+    }
   }
 }

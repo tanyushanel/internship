@@ -6,7 +6,7 @@ import { TopicAddingEditingDialogComponent } from './topic-adding-editing-dialog
 import { AddListeningDialogComponent } from './add-listening-dialog/add-listening-dialog.component';
 import { CoachQuestionStoreService } from '../../services/store/coach-question-store.service';
 import { GrammarAddingEditingDialogComponent } from './grammar-adding-editing-dialog/grammar-adding-editing-dialog.component';
-import { CoachEditorTabs, emptyQuestion, emptyTopic } from '../../constants/data-constants';
+import { CoachEditorTabs, emptyQuestion } from '../../constants/data-constants';
 import { CoachTopicStoreService } from '../../services/store/coach-topic-store.service';
 import { TableData } from '../../interfaces/question-answer';
 
