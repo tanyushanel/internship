@@ -7,5 +7,5 @@ import { Question } from '../../interfaces/question-answer';
   styleUrls: ['./grammar-test.component.scss'],
 })
 export class GrammarTestComponent {
-  @Input() questions!: Question[] | null;
+  @Input() questions: Question[] | null = null;
 }

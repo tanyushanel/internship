@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { languageLevel, GrammarAnswers, Level } from '../../../constants/data-constants';
 import { CoachQuestionStoreService } from '../../../services/store/coach-question-store.service';
 import { CoachQuestion } from '../../../interfaces/question-answer';
+import { englishLevelNumber } from '../../../helpers/checks';
 
 @Component({
   selector: 'app-coach-profile-editor-grammar-edit-dialog',
@@ -42,8 +43,7 @@ export class GrammarAddingEditingDialogComponent {
   }
 
   levelChangeHandler($event: Level): void {
-    const level = Object.keys(this.languageLevel).find((key) => this.languageLevel[key] === $event);
-    this.englishLevel = Number(level);
+    this.englishLevel = englishLevelNumber($event);
   }
 
   radioChangeHandler(i: number): void {

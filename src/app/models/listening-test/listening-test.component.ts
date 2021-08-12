@@ -8,7 +8,7 @@ import { Question } from '../../interfaces/question-answer';
   styleUrls: ['./listening-test.component.scss'],
 })
 export class ListeningTestComponent implements AfterViewInit, AfterViewChecked {
-  @Input() questions!: Question[] | null;
+  @Input() questions: Question[] | null = null;
 
   counter = 0;
 
