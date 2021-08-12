@@ -52,8 +52,8 @@ export interface TestContent {
 
 export interface TestSubmit {
   id: string;
-  grammarAnswers: AnswerQuestion[];
-  auditionAnswers: AnswerQuestion[];
+  grammarAnswers: string[];
+  auditionAnswers: string[];
   essayAnswer: string;
   speakingAnswerReference: string;
 }

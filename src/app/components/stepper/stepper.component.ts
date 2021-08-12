@@ -53,4 +53,8 @@ export class StepperComponent implements OnChanges, OnInit {
       this.selectedAnswersId = value.map((answer) => answer.id);
     });
   }
+
+  onAnswersSubmit(): void {
+    this.answersChosenId.emit(this.selectedAnswersId);
+  }
 }

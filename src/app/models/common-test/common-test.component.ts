@@ -16,13 +16,13 @@ export class CommonTestComponent implements OnInit {
 
   @Input() listening!: AnswerQuestion[] | null;
 
-  @Input() grammarAnswer!: AnswerQuestion | null;
+  @Input() grammarAnswers: string[] = [];
 
-  @Input() listeningAnswer!: AnswerQuestion | null;
+  @Input() listeningAnswers: string[] = [];
 
-  @Input() essayText!: string;
+  @Input() essayText = '';
 
-  @Input() speachRef!: string;
+  @Input() speachRef = '';
 
   requestBody!: TestSubmit;
 
@@ -48,13 +48,13 @@ export class CommonTestComponent implements OnInit {
     this.essay$ = this.test$.pipe(map((test) => test?.essay || null));
     this.speaking$ = this.test$.pipe(map((test) => test?.speaking || null));
 
-    //   this.requestBody = {
-    //     id: '',
-    // grammarAnswers: AnswerQuestion[];
-    // auditionAnswers: AnswerQuestion[];
-    // essayAnswer: string;
-    // speakingAnswerReference: string;
-    //   }
+    this.requestBody = {
+      id: '',
+      grammarAnswers: this.grammarAnswers,
+      auditionAnswers: this.listeningAnswers,
+      essayAnswer: this.essayText,
+      speakingAnswerReference: this.speachRef,
+    };
   }
 
   setTabIndex(ind: number): void {
