@@ -1,7 +1,7 @@
 import { UserRole } from '../constants/data-constants';
 
 export interface User {
-  id: number;
+  id: string;
   message: null;
   isAuthenticated: boolean;
   firstName: string;
@@ -9,6 +9,15 @@ export interface User {
   email: string;
   roles: UserRole[];
   token?: string;
+}
+export interface GetHrUser {
+  avatar: string;
+  creationDate: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  userId: string;
+  roles: UserRole[];
 }
 
 export interface UserResponseType {
