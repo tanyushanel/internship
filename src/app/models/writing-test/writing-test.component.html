@@ -13,6 +13,7 @@
         formControlName="text"
         #text
         (paste)="$event.preventDefault()"
+        (ngModelChange)="onWritingSubmit()"
       ></textarea>
       <mat-hint align="start">Max 512 characters</mat-hint>
 

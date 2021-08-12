@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { AnswerQuestion, Question } from '../../interfaces/question-answer';
+import { Question } from '../../interfaces/question-answer';
 import { TopicModule } from '../../interfaces/essay-speaking';
 import { TestStoreService } from '../../services/store/test-store.service';
 import { TestContent, TestSubmit } from '../../interfaces/test';
@@ -12,17 +12,13 @@ import { TestContent, TestSubmit } from '../../interfaces/test';
   styleUrls: ['./common-test.component.scss'],
 })
 export class CommonTestComponent implements OnInit {
-  @Input() grammar!: AnswerQuestion[] | null;
+  grammarAnswers: string[] = [];
 
-  @Input() listening!: AnswerQuestion[] | null;
+  listeningAnswers: string[] = [];
 
-  @Input() grammarAnswers: string[] = [];
+  essayText = '';
 
-  @Input() listeningAnswers: string[] = [];
-
-  @Input() essayText = '';
-
-  @Input() speachRef = '';
+  speachRef = '';
 
   requestBody: Observable<TestSubmit | null> = this.testStoreService.requestBody$;
 
@@ -54,6 +50,10 @@ export class CommonTestComponent implements OnInit {
 
   setTabIndex(ind: number): void {
     this.selectedIndex = ind;
+  }
+
+  onWritingSubmit(txt: string | null): void {
+    if (txt) this.essayText = txt;
   }
 
   onFinishTestClick(): void {

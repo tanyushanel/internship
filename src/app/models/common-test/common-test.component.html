@@ -16,7 +16,10 @@
   </mat-tab>
 
   <mat-tab label="ESSAY">
-    <app-writing-test [essay]="essay$ | async"></app-writing-test>
+    <app-writing-test
+      [essay]="essay$ | async"
+      (essayWritten)="onWritingSubmit($event)"
+    ></app-writing-test>
     <app-proceed-buttons
       [currentIndex]="selectedIndex"
       (changedIndex)="setTabIndex($event)"

@@ -13,8 +13,6 @@ export class WritingTestComponent implements OnInit {
 
   @Output() essayWritten = new EventEmitter<string | null>();
 
-  text = '';
-
   form!: FormGroup;
 
   disabled = false;
@@ -42,6 +40,6 @@ export class WritingTestComponent implements OnInit {
   nextTest() {}
 
   onWritingSubmit(): void {
-    this.essayWritten.emit(this.text);
+    this.essayWritten.emit(this.form.controls.text.value);
   }
 }

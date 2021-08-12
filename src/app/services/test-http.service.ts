@@ -35,13 +35,19 @@ export class TestHttpService {
     return this.http.post<TestContent>(`${BASE_API_URL}/Test`, { level });
   }
 
-  finishTest(testId: string) {
-    return this.http.put<TestSubmit>(`${BASE_API_URL}/Test/{testId}/submit`, {
+  finishTest(
+    testId: string,
+    grammar: string[],
+    listening: string[],
+    writing: string,
+    speaking: string,
+  ) {
+    return this.http.put<TestSubmit>(`${BASE_API_URL}/Test/${testId}/submit`, {
       id: testId,
-      // grammarAnswers,
-      // auditionAnswers,
-      // essayAnswer,
-      // speakingAnswerReference,
+      grammarAnswers: grammar,
+      auditionAnswers: listening,
+      essayAnswer: writing,
+      speakingAnswerReference: speaking,
     });
   }
 }

@@ -77,7 +77,7 @@ export class TestStoreService {
   }
 
   testSubmit(grammar: string[], listening: string[], writing: string, speaking: string): void {
-    this.testHttpService.finishTest(this.testId).subscribe({
+    this.testHttpService.finishTest(this.testId, grammar, listening, writing, speaking).subscribe({
       next: (request) => {
         this.requestBody = {
           ...request,
