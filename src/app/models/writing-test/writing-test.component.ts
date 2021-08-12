@@ -29,10 +29,4 @@ export class WritingTestComponent implements OnInit {
     this.form.disable();
     this.disabled = true;
   }
-
-  clear() {
-    this.form.reset();
-  }
-
-  nextTest() {}
 }
