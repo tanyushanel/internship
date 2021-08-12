@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { GetCoachTestsHttpService } from './get-coach-tests-http.service';
-import { CoachTest } from '../../../interfaces/coach-edit';
+import { CoachCheckTest, CoachCheckTestID, CoachTest } from '../../../interfaces/coach-edit';
 
 @Injectable({
   providedIn: 'root',
@@ -29,5 +29,9 @@ export class CoachTestsStoreService {
     this.coachTestHttpService
       .getUncheckedCoachTests()
       .subscribe({ next: (value) => this.coachTestSubject$.next(value) });
+  }
+
+  sendCheckTest(test: CoachCheckTest, id: CoachCheckTestID) {
+    this.coachTestHttpService.testCheck(test, id).subscribe();
   }
 }

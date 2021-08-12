@@ -1,39 +1,38 @@
 <div mat-dialog-content>
-  <mat-form-field appearance="fill">
-    <textarea matInput> Essay {{ data.id }}</textarea>
-  </mat-form-field>
-  <label
-    >Essay score
-    <input
-      #childInput1
-      required
-      type="number"
-      name="essayScore"
-      min="0"
-      max="100"
-      step="1"
-      value=""
-    />
-  </label>
-  <p>
-    <audio controls></audio
-    ><label
+  <button mat-icon-button class="close-button" [mat-dialog-close]="true">✖</button>
+  <div class="content">
+    <mat-form-field appearance="fill" class="text-essay">
+      <textarea matInput readonly>{{ data.essayAnswer }}</textarea>
+    </mat-form-field>
+    <label class="essay-score">
+      Essay score
+      <input
+        [(ngModel)]="data.essayMark"
+        required
+        type="number"
+        name="essayScore"
+        min="0"
+        max="10"
+        step="1"
+      />
+    </label>
+    <audio class="audio" controls></audio>
+    <label class="speaking-score"
       >Speaking score
       <input
+        [(ngModel)]="data.speakingMark"
         required
         type="number"
         name="speakingScore"
         min="0"
-        max="100"
+        max="10"
         step="1"
-        value=""
-        #childInput2
       />
     </label>
-  </p>
-  <mat-form-field appearance="fill">
-    <mat-label>Your feedback</mat-label>
-    <textarea matInput></textarea>
-  </mat-form-field>
+    <mat-form-field appearance="outline" class="feedback">
+      <mat-label>Your feedback</mat-label>
+      <textarea [(ngModel)]="data.comment" matInput></textarea>
+    </mat-form-field>
+  </div>
 </div>
-<button mat-raised-button color="primary">SUBMIT</button>
+<button mat-raised-button color="primary" (click)="submitTest()">SUBMIT</button>

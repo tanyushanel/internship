@@ -37,7 +37,14 @@
     <ng-container matColumnDef="button">
       <th class="header" mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let row">
-        <button mat-raised-button color="primary" (click)="onClick(row.id)">Check</button>
+        <button
+          [disabled]="selectTab === 'Reviewed'"
+          mat-raised-button
+          color="primary"
+          (click)="onClick(row.essayAnswer, row.id)"
+        >
+          Check
+        </button>
       </td>
     </ng-container>
 
