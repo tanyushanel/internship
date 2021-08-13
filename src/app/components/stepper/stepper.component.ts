@@ -2,7 +2,7 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { Component, EventEmitter, Input, OnInit, Output, OnChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { combineLatest } from 'rxjs';
-import { startWith } from 'rxjs/operators';
+import { filter, startWith } from 'rxjs/operators';
 import { AnswerQuestion, Question } from '../../interfaces/question-answer';
 
 @Component({
@@ -41,16 +41,18 @@ export class StepperComponent implements OnChanges, OnInit {
   }
 
   onChanges(): void {
-    const observables = this.stepperFormGroups?.map(
-      (f) => f.controls.stepCtrl.valueChanges.pipe(startWith('')), // set initial value to let the subscribe to be called
+    const observables = this.stepperFormGroups?.map((form) =>
+      form.controls.stepCtrl.valueChanges.pipe(
+        startWith(''), // set initial value to let the subscribe to be called
+      ),
     );
 
     if (!observables) return;
 
     const combined = combineLatest(observables);
 
-    combined.subscribe((value: AnswerQuestion[]) => {
-      this.selectedAnswersId = value.map((answer) => answer.id);
+    combined.subscribe((answers: AnswerQuestion[]) => {
+      this.selectedAnswersId = answers.map((answer) => answer.id).filter((answ) => answ);
     });
   }
 

@@ -20,15 +20,13 @@ export class TestHttpService {
   getResults(userId: string): Observable<TestResult[]> {
     return this.http
       .get<GetTestsResults>(`${BASE_API_URL}/Test?userId=${userId}`)
-      .pipe(map((res) => res.results.filter((r) => r.testPassingDate !== null)));
+      .pipe(map((res) => res.results.filter((r) => r.testPassingDate)));
   }
 
   getAssignedTests(userId: string): Observable<TestResult[]> {
     return this.http
       .get<GetTestsResults>(`${BASE_API_URL}/Test?userId=${userId}`)
-      .pipe(
-        map((res) => res.results.filter((r) => !r.testPassingDate && r.assignmentEndDate !== null)),
-      );
+      .pipe(map((res) => res.results.filter((r) => !r.testPassingDate && r.assignmentEndDate)));
   }
 
   createTest(level: Level): Observable<TestContent> {

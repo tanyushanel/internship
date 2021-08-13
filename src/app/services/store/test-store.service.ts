@@ -59,7 +59,7 @@ export class TestStoreService {
     this.authStoreService.activeUser$
       .pipe(
         take(1),
-        concatMap((user) => this.testHttpService.getResults(user !== null ? user.userId : '')),
+        concatMap((user) => this.testHttpService.getResults(user ? user.userId : '')),
       )
       .subscribe({
         next: (res) => {
