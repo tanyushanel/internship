@@ -21,8 +21,6 @@ export class StepperComponent implements OnChanges, OnInit {
 
   @Output() answersChosenId = new EventEmitter<string[] | null>();
 
-  listOfId: string[] | undefined = [];
-
   selectedAnswersId: string[] | null = null;
 
   stepperFormGroups: FormGroup[] | undefined = [];

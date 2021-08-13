@@ -21,7 +21,7 @@ export class CommonTestComponent implements OnInit {
 
   speachRef = '';
 
-  requestBody: Observable<TestSubmit | null> = this.testStoreService.requestBody$;
+  requestBody: Observable<TestSubmit | null> = this.testStoreService.submitTestBody$;
 
   test$: Observable<TestContent | null> = this.testStoreService.test$;
 

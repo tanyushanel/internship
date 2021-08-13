@@ -32,12 +32,6 @@ export class WritingTestComponent implements OnInit {
     this.disabled = true;
   }
 
-  clear() {
-    this.form.reset();
-  }
-
-  nextTest() {}
-
   onWritingSubmit(): void {
     this.essayWritten.emit(this.form.controls.text.value);
   }

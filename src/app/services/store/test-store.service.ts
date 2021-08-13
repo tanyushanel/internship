@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { concatMap, map, take } from 'rxjs/operators';
 import { Level } from '../../constants/data-constants';
 import { TestContent, TestResult, TestSubmit } from '../../interfaces/test';
@@ -14,11 +14,11 @@ export class TestStoreService {
 
   allTests$ = this.allTestsSubject$.asObservable();
 
-  public requestSubject$ = new BehaviorSubject<TestSubmit | null>(null);
+  public submitTestSubject$ = new Subject<TestSubmit | null>();
 
-  requestBody$ = this.requestSubject$.asObservable();
+  submitTestBody$ = this.submitTestSubject$.asObservable();
 
-  public testSubject$ = new BehaviorSubject<TestContent | null>(null);
+  public testSubject$ = new Subject<TestContent | null>();
 
   test$ = this.testSubject$.asObservable();
 
@@ -48,8 +48,8 @@ export class TestStoreService {
     this.allTestsSubject$.next(testResults);
   }
 
-  private set requestBody(body: TestSubmit) {
-    this.requestSubject$.next(body);
+  private set submitTestBody(body: TestSubmit) {
+    this.submitTestSubject$.next(body);
   }
 
   constructor(
@@ -101,7 +101,7 @@ export class TestStoreService {
   testSubmit(grammar: string[], listening: string[], writing: string, speaking: string): void {
     this.testHttpService.finishTest(this.testId, grammar, listening, writing, speaking).subscribe({
       next: (request) => {
-        this.requestBody = {
+        this.submitTestBody = {
           ...request,
           id: this.testId,
           grammarAnswers: grammar,
