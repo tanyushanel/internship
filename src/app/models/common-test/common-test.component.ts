@@ -36,6 +36,8 @@ export class CommonTestComponent implements OnInit {
 
   isFinished = false;
 
+  maxIndex = 3;
+
   constructor(private testStoreService: TestStoreService) {}
 
   ngOnInit() {
