@@ -6,7 +6,7 @@ button.mat-raised-button {
   transform: translate(-50%, 0);
 }
 
-button.mat-raised-button:hover {
+button.mat-raised-button:not([disabled]):hover {
   background-color: $secondary-grey2;
 }
 
@@ -30,8 +30,11 @@ mat-form-field {
 }
 
 .essay-mark {
-  display: flex;
   grid-column: 2;
+}
+
+.essay-mark-label {
+  display: flex;
   align-self: center;
   justify-content: space-between;
 }
@@ -42,8 +45,11 @@ mat-form-field {
 }
 
 .speaking-mark {
-  display: flex;
   grid-column: 2;
+}
+
+.speaking-mark-label {
+  display: flex;
   align-self: center;
   justify-content: space-between;
 }

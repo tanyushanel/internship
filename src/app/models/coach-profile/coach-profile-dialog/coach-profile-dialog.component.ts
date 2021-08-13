@@ -18,11 +18,13 @@ export class CoachProfileDialogComponent implements OnInit {
 
   form!: FormGroup;
 
+  markPattern = '^[0-9]$|[1][0]$';
+
   ngOnInit() {
     this.form = new FormGroup({
       comment: new FormControl(''),
-      speakingMark: new FormControl(null, [Validators.pattern('^[0-9]$|[1][0]$')]),
-      essayMark: new FormControl(null, [Validators.pattern('^[0-9]$|[1][0]$')]),
+      speakingMark: new FormControl(null, [Validators.pattern(this.markPattern)]),
+      essayMark: new FormControl(null, [Validators.pattern(this.markPattern)]),
     });
   }
 
