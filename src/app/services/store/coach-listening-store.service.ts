@@ -3,13 +3,13 @@ import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { TableData } from '../../interfaces/question-answer';
 import { CoachListeningHttpService } from '../coach-listening-http.service';
-import { CoachListening } from '../../interfaces/audition';
+import { EditionCoachListening } from '../../interfaces/audition';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CoachTopicStoreService {
-  readonly listen$ = new Subject<CoachListening>();
+export class CoachListeningStoreService {
+  readonly listen$ = new Subject<EditionCoachListening>();
 
   readonly listens$ = new Subject<TableData[]>();
 
@@ -26,7 +26,7 @@ export class CoachTopicStoreService {
             creationDate: listen.creationDate,
             creatorId: listen.creatorId,
             level: listen.level,
-            name: listen.questionNumber.toString(),
+            name: '',
             number: listen.questionNumber,
           }));
           return table;
@@ -35,6 +35,7 @@ export class CoachTopicStoreService {
       .subscribe({
         next: (listen) => {
           this.listens$.next(listen);
+          console.log(listen);
         },
       });
   }
@@ -43,20 +44,29 @@ export class CoachTopicStoreService {
     this.coachListeningHttpService.getListening(id).subscribe({
       next: (listen) => {
         this.listen$.next(listen);
+        console.log(listen);
         this.getAllListening();
       },
     });
   }
-  //
-  // updateTopic(topic: CoachTopicUpdate) {
-  //   this.couchHttpService.updateTopic(topic).subscribe(() => this.getAllTopic());
-  // }
-  //
-  // createTopic(topic: CoachTopicUpdate) {
-  //   this.couchHttpService.createTopic(topic).subscribe(() => this.getAllTopic());
-  // }
-  //
-  // deleteTopic(id: string) {
-  //   this.couchHttpService.deleteTopic(id).subscribe(() => this.getAllTopic());
-  // }
+
+  updateListening(listen: any) {
+    this.coachListeningHttpService.updateListening(listen).subscribe(() => this.getAllListening());
+  }
+
+  createListening(listen: any) {
+    this.coachListeningHttpService.createListening(listen).subscribe(() => this.getAllListening());
+  }
+
+  deleteListening(id: string) {
+    this.coachListeningHttpService.deleteListening(id).subscribe(() => this.getAllListening());
+  }
+
+  uploadListeningFile(file: any) {
+    this.coachListeningHttpService.uploadListeningFile(file);
+  }
+
+  downloadListeningFile(file: any) {
+    this.coachListeningHttpService.uploadListeningFile(file);
+  }
 }

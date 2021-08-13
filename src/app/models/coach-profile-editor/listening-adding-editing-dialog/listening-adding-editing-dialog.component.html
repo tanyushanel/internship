@@ -1,0 +1,49 @@
+<div class="main">
+  <h1>{{ data.isEdit ? 'Edit Listening' : 'Add Listening' }}</h1>
+  <div>
+    <input type="file" (change)="handleFileInput($event)" />
+  </div>
+  <div>
+    <h2>Select level</h2>
+    <app-choose-level
+      (changeLevel)="levelChangeHandler($event)"
+      [currentLevel]="languageLevel[data.level.toString()]"
+    ></app-choose-level>
+  </div>
+
+  <mat-stepper orientation="vertical">
+    <mat-step *ngFor="let question of questions; let i = index">
+      <ng-template matStepLabel>{{ i + 1 }}</ng-template>
+      <ng-template matStepContent>
+        <mat-form-field appearance="fill">
+          <mat-label>Formulation of the question</mat-label>
+          <textarea matInput [(ngModel)]="question.nameQuestion">{{
+            question.nameQuestion
+          }}</textarea>
+        </mat-form-field>
+        <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
+          <div *ngFor="let answer of question.answers; let i = index">
+            <mat-radio-button
+              class="example-radio-button"
+              [value]="QuestionList[i]"
+              [checked]="answer.isRight"
+              (change)="radioChangeHandler(i, question)"
+            >
+              {{ QuestionList[i] }}
+              <mat-form-field appearance="fill">
+                <mat-label>Answer option</mat-label>
+                <textarea matInput>{{ answer.nameAnswer }}</textarea>
+              </mat-form-field>
+            </mat-radio-button>
+          </div>
+        </mat-radio-group>
+      </ng-template>
+    </mat-step>
+  </mat-stepper>
+  <div class="dialog-button">
+    <button mat-raised-button mat-dialog-close cdkFocusInitial>Close</button>
+    <button mat-raised-button color="primary" (click)="updateData()">
+      {{ data.isEdit ? 'Update' : 'Save' }}
+    </button>
+  </div>
+</div>

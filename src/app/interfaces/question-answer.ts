@@ -3,7 +3,7 @@ import { Level } from '../constants/data-constants';
 
 export interface Question {
   id: number;
-  nameQuestion: string;
+  nameQuestion: string | null;
   level: Level;
   auditionId: number;
   answerId: number;

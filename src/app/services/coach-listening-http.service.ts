@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ResponseGetAll } from '../interfaces/question-answer';
-import { ListeningApiUrl } from '../constants/route-constant';
-import { CoachListening } from '../interfaces/audition';
+import {
+  DownloadFileListeningApiUrl,
+  ListeningApiUrl,
+  UploadFileListeningApiUrl,
+} from '../constants/route-constant';
+import { CoachListening, EditionCoachListening } from '../interfaces/audition';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +19,7 @@ export class CoachListeningHttpService {
   }
 
   getListening(id: string) {
-    return this.http.get<CoachListening>(`${ListeningApiUrl}/${id}`);
+    return this.http.get<EditionCoachListening>(`${ListeningApiUrl}/${id}`);
   }
 
   updateListening(topic: CoachListening) {
@@ -28,5 +32,13 @@ export class CoachListeningHttpService {
 
   deleteListening(id: string) {
     return this.http.delete(`${ListeningApiUrl}/${id}`);
+  }
+
+  uploadListeningFile(file: any) {
+    return this.http.post(UploadFileListeningApiUrl, file);
+  }
+
+  downloadListeningFile() {
+    return this.http.get(DownloadFileListeningApiUrl);
   }
 }

@@ -19,10 +19,11 @@ import { CoachEditorTabs, languageLevel } from '../../../constants/data-constant
 import { GrammarAddingEditingDialogComponent } from '../grammar-adding-editing-dialog/grammar-adding-editing-dialog.component';
 import { CoachQuestionStoreService } from '../../../services/store/coach-question-store.service';
 import { TableData } from '../../../interfaces/question-answer';
-import { EditListeningDialogComponent } from '../edit-listening-dialog/edit-listening-dialog.component';
 import { TopicAddingEditingDialogComponent } from '../topic-adding-editing-dialog/topic-adding-editing-dialog.component';
 import { isSubstring } from '../../../helpers/filter-check';
 import { CoachTopicStoreService } from '../../../services/store/coach-topic-store.service';
+import { ListeningAddingEditingDialogComponent } from '../listening-adding-editing-dialog/listening-adding-editing-dialog.component';
+import { CoachListeningStoreService } from '../../../services/store/coach-listening-store.service';
 
 @Component({
   selector: 'app-coach-profile-editor-table',
@@ -61,6 +62,7 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
     public dialog: MatDialog,
     private coachEditQuestion: CoachQuestionStoreService,
     private coachEditTopic: CoachTopicStoreService,
+    private coachListening: CoachListeningStoreService,
   ) {
     this.dataSource = new MatTableDataSource(this.table);
     this.dataSource.filterPredicate = this.createFilter();
@@ -116,9 +118,15 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
         }
       });
     } else if (this.selectTab === CoachEditorTabs.audition) {
-      this.dialog.open(EditListeningDialogComponent, {
-        autoFocus: false,
-        disableClose: true,
+      this.coachListening.getListening(row.id);
+      this.coachListening.listen$.pipe(take(1)).subscribe((listen) => {
+        if (listen !== null) {
+          console.log(listen, 'LISTEN');
+          this.dialog.open(ListeningAddingEditingDialogComponent, {
+            data: { ...listen, isEdit: true },
+            disableClose: true,
+          });
+        }
       });
     } else if (this.selectTab === CoachEditorTabs.writingAndSpeaking)
       this.coachEditTopic.getTopic(row.id);
@@ -135,6 +143,8 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
   delete(id: string) {
     if (this.selectTab === CoachEditorTabs.grammar) {
       this.coachEditQuestion.deleteQuestion(id);
+    } else if (this.selectTab === CoachEditorTabs.audition) {
+      this.coachListening.deleteListening(id);
     } else if (this.selectTab === CoachEditorTabs.writingAndSpeaking) {
       this.coachEditTopic.deleteTopic(id);
     }

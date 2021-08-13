@@ -49,31 +49,39 @@ export enum FilterFields {
   level = 'level',
   date = 'date',
 }
+const answer = {
+  nameAnswer: '',
+  isRight: false,
+};
+const answers = [answer, answer, answer, answer];
 
 export const emptyQuestion: EmptyQuestion = {
   level: 1,
   nameQuestion: '',
-  answers: [
-    {
-      nameAnswer: '',
-      isRight: false,
-    },
-    {
-      nameAnswer: '',
-      isRight: false,
-    },
-    {
-      nameAnswer: '',
-      isRight: false,
-    },
-    {
-      nameAnswer: '',
-      isRight: false,
-    },
-  ],
+  answers,
 };
 
 export const emptyTopic: CoachEmptyTopic = {
   level: 1,
   topicName: '',
+};
+const emptyListeningQuestions = {
+  nameQuestion: '',
+  answers,
+};
+export const emptyListening = {
+  audioFilePath: '',
+  level: 3,
+  questions: [
+    emptyListeningQuestions,
+    emptyListeningQuestions,
+    emptyListeningQuestions,
+    emptyListeningQuestions,
+    emptyListeningQuestions,
+    emptyListeningQuestions,
+    emptyListeningQuestions,
+    emptyListeningQuestions,
+    emptyListeningQuestions,
+    emptyListeningQuestions,
+  ],
 };
