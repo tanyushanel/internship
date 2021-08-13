@@ -16,8 +16,6 @@ export class TestStoreService {
 
   public resultsSubject$ = new BehaviorSubject<TestResult[] | null>(null);
 
-  // testResults$ = this.resultsSubject$.asObservable();
-
   public testSubject$ = new BehaviorSubject<TestContent | null>(null);
 
   test$ = this.testSubject$.asObservable();
