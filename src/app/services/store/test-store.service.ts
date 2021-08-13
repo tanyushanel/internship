@@ -14,19 +14,15 @@ export class TestStoreService {
 
   allTests$ = this.allTestsSubject$.asObservable();
 
-  public resultsSubject$ = new BehaviorSubject<TestResult[] | null>(null);
-
-  requestSubject$ = new BehaviorSubject<TestSubmit | null>(null);
+  public requestSubject$ = new BehaviorSubject<TestSubmit | null>(null);
 
   requestBody$ = this.requestSubject$.asObservable();
-
-  testResults$ = this.resultsSubject$.asObservable();
 
   public testSubject$ = new BehaviorSubject<TestContent | null>(null);
 
   test$ = this.testSubject$.asObservable();
 
-  results$: Observable<TestResult[] | undefined> = this.allTests$.pipe(
+  testResults$: Observable<TestResult[] | undefined> = this.allTests$.pipe(
     map((results) => results?.filter((result) => result && result.testPassingDate)),
   );
 
@@ -48,8 +44,8 @@ export class TestStoreService {
     this.allTestsSubject$.next(allTests);
   }
 
-  private set testResults(tests: TestResult[]) {
-    this.allTestsSubject$.next(tests);
+  private set testResults(testResults: TestResult[]) {
+    this.allTestsSubject$.next(testResults);
   }
 
   private set requestBody(body: TestSubmit) {
@@ -71,19 +67,6 @@ export class TestStoreService {
         this.testId = test.id;
       }
     });
-  }
-
-  getTestResults(): void {
-    this.authStoreService.activeUser$
-      .pipe(
-        take(1),
-        concatMap((user) => this.testHttpService.getResults(user ? user.userId : '')),
-      )
-      .subscribe({
-        next: (res) => {
-          this.allTests = [...res];
-        },
-      });
   }
 
   getAll(): void {

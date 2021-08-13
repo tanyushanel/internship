@@ -15,7 +15,7 @@ import { GetHrUser } from '../../../interfaces/user.interfaces';
 export class UserResultsDialogComponent implements OnInit {
   @Input() user!: GetHrUser;
 
-  results$: Observable<TestResult[] | null> = this.testStoreService.testResults$;
+  results$: Observable<TestResult[] | undefined> = this.testStoreService.testResults$;
 
   levels = [...Object.values(Level)];
 
