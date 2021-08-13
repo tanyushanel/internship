@@ -10,6 +10,15 @@ export interface User {
   roles: UserRole[];
   token?: string;
 }
+export interface GetHrUser {
+  avatar: string;
+  creationDate: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  userId: string;
+  roles: UserRole[];
+}
 
 export interface UserResponseType {
   userId: string;

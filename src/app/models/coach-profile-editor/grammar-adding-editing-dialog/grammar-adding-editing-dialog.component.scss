@@ -1,4 +1,4 @@
-button {
+button.mat-raised-button {
   position: relative;
   left: 50%;
   margin-bottom: 40px;
@@ -28,4 +28,10 @@ mat-form-field {
 h1,
 h3 {
   text-align: center;
+}
+
+.close-button {
+  position: relative;
+  float: right;
+  margin-bottom: 30px;
 }

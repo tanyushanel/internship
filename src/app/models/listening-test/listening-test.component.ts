@@ -1,14 +1,14 @@
 import {
+  AfterViewChecked,
+  AfterViewInit,
   Component,
   ElementRef,
-  Input,
-  AfterViewInit,
-  AfterViewChecked,
-  Output,
   EventEmitter,
+  Input,
+  Output,
 } from '@angular/core';
 import { Track } from 'ngx-audio-player';
-import { AnswerQuestion, Question } from '../../interfaces/question-answer';
+import { Question } from '../../interfaces/question-answer';
 
 @Component({
   selector: 'app-listening',

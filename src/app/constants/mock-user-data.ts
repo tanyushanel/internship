@@ -1,4 +1,4 @@
-import { Route, SidebarMenu } from './route-constant';
+import { Route, SidebarMenu, SidebarIcon } from './route-constant';
 import { UserRole } from './data-constants';
 import { UserResponseType } from '../interfaces/user.interfaces';
 
@@ -9,6 +9,7 @@ export interface UsersPermission {
 export interface UserRoutType {
   route: string[];
   menuItem: string[];
+  menuIcon: string[];
 }
 export interface UserRoutesType {
   [key: string]: UserRoutType;
@@ -18,19 +19,23 @@ export const usersRoute: UserRoutesType = {
   [UserRole.User]: {
     route: [Route.home],
     menuItem: [SidebarMenu.home],
+    menuIcon: [SidebarIcon.homeicon],
   },
 
   [UserRole.HumanResourceManager]: {
     route: [Route.home, Route.users],
     menuItem: [SidebarMenu.home, SidebarMenu.users],
+    menuIcon: [SidebarIcon.homeicon, SidebarIcon.usersicon],
   },
   [UserRole.Coach]: {
     route: [Route.home, Route.check, Route.editor],
     menuItem: [SidebarMenu.home, SidebarMenu.check, SidebarMenu.editor],
+    menuIcon: [SidebarIcon.homeicon, SidebarIcon.checkicon, SidebarIcon.editoricon],
   },
   [UserRole.Administrator]: {
-    route: [Route.home, Route.manage],
-    menuItem: [SidebarMenu.home, SidebarMenu.manage],
+    route: [Route.home, Route.manage, Route.statistics],
+    menuItem: [SidebarMenu.home, SidebarMenu.manage, SidebarIcon.statisticsicon],
+    menuIcon: [SidebarIcon.homeicon, SidebarIcon.manageicon],
   },
 };
 

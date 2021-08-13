@@ -1,11 +1,10 @@
-import { TestStoreService } from 'src/app/services/store/test-store.service';
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Level } from '../constants/data-constants';
-import { TestResult, TestContent, TestSubmit } from '../interfaces/test';
 import { BASE_API_URL } from '../constants/route-constant';
+import { TestContent, TestResult, TestSubmit } from '../interfaces/test';
 
 interface GetTestsResults {
   results: TestResult[];
@@ -17,7 +16,19 @@ interface GetTestsResults {
 export class TestHttpService {
   constructor(private http: HttpClient) {}
 
+  getAllTests(userId: string): Observable<TestResult[]> {
+    return this.http
+      .get<GetTestsResults>(`${BASE_API_URL}/Test?userId=${userId}`)
+      .pipe(map((res) => res.results));
+  }
+
   getResults(userId: string): Observable<TestResult[]> {
+    return this.http
+      .get<GetTestsResults>(`${BASE_API_URL}/Test?userId=${userId}`)
+      .pipe(map((res) => res.results.filter((r) => r.testPassingDate !== null)));
+  }
+
+  getAllResults(userId: string): Observable<TestResult[]> {
     return this.http
       .get<GetTestsResults>(`${BASE_API_URL}/Test?userId=${userId}`)
       .pipe(map((res) => res.results.filter((r) => r.testPassingDate)));
@@ -47,5 +58,9 @@ export class TestHttpService {
       essayAnswer: writing,
       speakingAnswerReference: speaking,
     });
+  }
+
+  startAssignedTest(level: Level, testId: string): Observable<TestContent> {
+    return this.http.put<TestContent>(`${BASE_API_URL}/Test/${testId}/start`, { level });
   }
 }

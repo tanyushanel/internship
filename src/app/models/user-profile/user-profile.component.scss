@@ -1,3 +1,5 @@
+@import '../../../theme/variables';
+
 .profile-container {
   min-width: 30rem;
   margin: 0 auto;
@@ -31,6 +33,6 @@
   text-align: center;
 }
 
-.red {
-  color: red;
+.warn {
+  color: $error;
 }

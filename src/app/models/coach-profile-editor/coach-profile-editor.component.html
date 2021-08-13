@@ -20,11 +20,7 @@
       <mat-card-title>Editing</mat-card-title>
     </mat-card-header>
     <div>
-      <mat-tab-group
-        mat-align-tabs="start"
-        (selectedTabChange)="tabChanged($event)"
-        backgroundColor="primary"
-      >
+      <mat-tab-group mat-align-tabs="start" (selectedTabChange)="tabChanged($event)">
         <ng-container *ngIf="{ table: tables$ | async } as $">
           <mat-tab *ngFor="let tab of tabsTitle" [label]="tab">
             <app-coach-profile-editor-table

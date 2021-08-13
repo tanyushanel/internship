@@ -1,6 +1,8 @@
 @import 'src/theme/variables.scss';
 
 .container {
+  margin: 12em 0 2em;
+  padding-left: 30px;
   text-align: center;
 
   span {
@@ -24,10 +26,11 @@
 
 mat-form-field {
   width: 70%;
+  background-color: rgb(241, 233, 248);
   border-radius: $border-radius-medium;
 
   textarea {
-    height: 100px;
+    height: 14em;
     resize: none;
   }
 }

@@ -1,8 +1,8 @@
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { Component, EventEmitter, Input, OnInit, Output, OnChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { combineLatest } from 'rxjs';
-import { filter, startWith } from 'rxjs/operators';
+import { startWith } from 'rxjs/operators';
 import { AnswerQuestion, Question } from '../../interfaces/question-answer';
 
 @Component({

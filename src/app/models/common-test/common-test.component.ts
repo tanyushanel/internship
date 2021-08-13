@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Question } from '../../interfaces/question-answer';
+import { map } from 'rxjs/operators';
 import { TopicModule } from '../../interfaces/essay-speaking';
-import { TestStoreService } from '../../services/store/test-store.service';
+import { Question } from '../../interfaces/question-answer';
 import { TestContent, TestSubmit } from '../../interfaces/test';
+import { TestStoreService } from '../../services/store/test-store.service';
 
 @Component({
   selector: 'app-common-test',
@@ -38,11 +39,17 @@ export class CommonTestComponent implements OnInit {
 
   maxIndex = 3;
 
-  constructor(private testStoreService: TestStoreService) {}
+  constructor(private testStoreService: TestStoreService, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.testStoreService.createTestContent();
     this.testStoreService.getTestId();
+
+    const testId = this.route.snapshot.paramMap.get('id');
+
+    if (testId) {
+      this.testStoreService.createAssignedTestContent(testId);
+    } else this.testStoreService.createTestContent();
 
     this.grammar$ = this.test$.pipe(map((test) => test?.grammarQuestions || null));
     this.listening$ = this.test$.pipe(map((test) => test?.audition.questions || null));

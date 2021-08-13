@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BASE_API_URL } from '../../../constants/route-constant';
-import { CoachTest } from '../../../interfaces/coach-edit';
+import { CoachCheckTest, CoachCheckTestID, CoachTest } from '../../../interfaces/coach-edit';
 
 interface GetCoachTests {
   results: CoachTest[];
@@ -39,5 +39,9 @@ export class GetCoachTestsHttpService {
         return res.results.filter((r) => r.id !== null);
       }),
     );
+  }
+
+  testCheck(test: CoachCheckTest, id: CoachCheckTestID) {
+    return this.http.put(`${BASE_API_URL}/Test/${id.id}/check`, test);
   }
 }

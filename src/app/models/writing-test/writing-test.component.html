@@ -8,6 +8,7 @@
   <form [formGroup]="form" (ngSubmit)="submit()">
     <mat-form-field appearance="fill">
       <textarea
+        class="essay-area__size"
         matNativeControl
         maxlength="512"
         formControlName="text"

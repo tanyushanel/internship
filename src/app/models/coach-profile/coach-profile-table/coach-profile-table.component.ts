@@ -23,6 +23,8 @@ import { languageLevel } from '../../../constants/data-constants';
   styleUrls: ['./coach-profile-table.component.scss'],
 })
 export class CoachProfileTableComponent implements AfterViewInit, OnInit, OnChanges {
+  @Input() selectTab = '';
+
   languageLevel = languageLevel;
 
   displayedColumns: string[] = ['id', 'level', 'date', 'button'];
@@ -72,8 +74,11 @@ export class CoachProfileTableComponent implements AfterViewInit, OnInit, OnChan
     }, 10);
   }
 
-  onClick(id: number) {
-    this.dialog.open(CoachProfileDialogComponent, { data: { id } });
+  onClick(essayAnswer: string, id: string) {
+    this.dialog.open(CoachProfileDialogComponent, {
+      data: { essayAnswer, id },
+      disableClose: true,
+    });
   }
 
   ngOnInit(): void {
