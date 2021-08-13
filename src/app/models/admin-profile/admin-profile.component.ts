@@ -13,6 +13,8 @@ export class AdminProfileComponent implements OnInit {
 
   adminTable: { [key: string]: TestData[] } = {};
 
+  AdminTestData!: ServiceTestData;
+
   adminDisplayListMap: { [key: string]: string[] } = {};
 
   data: ServiceTestData | undefined;
@@ -20,12 +22,16 @@ export class AdminProfileComponent implements OnInit {
   ngOnInit(): void {}
 
   constructor(private service: AdminTableStoreService) {
-    this.service.getTestData().subscribe((data) => {
-      this.data = data;
+    this.service.getAssignedTestData().subscribe((data) => {
       console.log(data.results);
       this.adminTable = {
-        [AdminTestTabs.notAssigned]: this.data.results.filter((test) => !test.isAssign),
-        [AdminTestTabs.assigned]: this.data.results.filter((test) => test.isAssign),
+        [AdminTestTabs.assigned]: data.results,
+      };
+    });
+    this.service.getNotAssignedTestData().subscribe((Data) => {
+      console.log(Data.results);
+      this.adminTable = {
+        [AdminTestTabs.notAssigned]: Data.results,
       };
       this.adminDisplayListMap = {
         [AdminTestTabs.notAssigned]: ['Position', 'Level', 'Date', 'Button'],

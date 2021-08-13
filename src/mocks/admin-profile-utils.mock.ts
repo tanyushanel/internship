@@ -10,6 +10,11 @@ export interface ServiceCoachData {
   coaches: CoachData[];
 }
 
+export interface UpdateCoachesData {
+  testId: string;
+  coachId: string;
+}
+
 export interface ServiceTestData {
   results: TestData[];
 }

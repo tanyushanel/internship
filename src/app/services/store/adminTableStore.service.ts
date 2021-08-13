@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TestData } from 'src/mocks/admin-profile-utils.mock';
+import { TestData, UpdateCoachesData } from 'src/mocks/admin-profile-utils.mock';
 import { AdminHttpService } from '../adminTableData.service';
 
 @Injectable({
@@ -8,15 +8,20 @@ import { AdminHttpService } from '../adminTableData.service';
 export class AdminTableStoreService {
   constructor(private readonly adminHttpService: AdminHttpService) {}
 
-  getTestData() {
-    return this.adminHttpService.getAdminTests();
+  getAssignedTestData() {
+    return this.adminHttpService.getAssignedAdminTests();
+  }
+
+  getNotAssignedTestData() {
+    return this.adminHttpService.getNotAssignedAdminTests();
   }
 
   getCoachData() {
     return this.adminHttpService.getAdminCoaches();
   }
 
-  updateTestData(data: TestData, testID: number) {
-    this.adminHttpService.updateCoachTest(data, testID);
+  updateTestData(data: UpdateCoachesData, testID: number) {
+    console.log(data);
+    this.adminHttpService.updateCoachTest(data, testID).subscribe((resp) => console.log(resp));
   }
 }

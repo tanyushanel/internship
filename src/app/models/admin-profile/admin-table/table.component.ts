@@ -11,6 +11,7 @@ import {
   AdminTestTabs,
   ServiceCoachData,
   TestData,
+  UpdateCoachesData,
 } from '../../../../mocks/admin-profile-utils.mock';
 
 @Component({
@@ -22,6 +23,8 @@ export class TableComponent implements OnInit {
   AssignSelector = true;
 
   coaches!: ServiceCoachData;
+
+  coachUpdate: UpdateCoachesData | undefined;
 
   @Input() tableData: TestData[] = [];
 
@@ -41,15 +44,19 @@ export class TableComponent implements OnInit {
     const dialogRef = this.dialog.open(AdminDialogComponent, {
       data: {
         position: element.testNumber,
-
+        id: element.id,
         coach: element.coach,
         coaches: CoachData.coaches,
       },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
-      this.service.updateTestData(result.coach.userId, result.position);
+      this.coachUpdate = {
+        testId: result.id,
+        coachId: result.coach.userId,
+      };
+      console.log(this.coachUpdate);
+      this.service.updateTestData(this.coachUpdate, result.id);
     });
   }
 }
