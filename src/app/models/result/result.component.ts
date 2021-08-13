@@ -11,8 +11,4 @@ export class ResultComponent implements OnInit {
   constructor(private readonly router: Router) {}
 
   ngOnInit(): void {}
-
-  home() {
-    this.router.navigate([Route.test]);
-  }
 }
