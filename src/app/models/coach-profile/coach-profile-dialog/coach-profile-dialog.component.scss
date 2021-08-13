@@ -29,7 +29,7 @@ mat-form-field {
   grid-column: 1;
 }
 
-.essay-score {
+.essay-mark {
   display: flex;
   grid-column: 2;
   align-self: center;
@@ -41,7 +41,7 @@ mat-form-field {
   margin-bottom: 18px;
 }
 
-.speaking-score {
+.speaking-mark {
   display: flex;
   grid-column: 2;
   align-self: center;
@@ -55,4 +55,19 @@ mat-form-field {
 .close-button {
   position: absolute;
   right: 15px;
+}
+
+input {
+  &.ng-invalid.ng-touched {
+    border: 1px solid red;
+  }
+
+  &.ng-valid.ng-touched {
+    border: 1px solid green;
+  }
+}
+
+.validation {
+  grid-column: 2;
+  color: red;
 }
