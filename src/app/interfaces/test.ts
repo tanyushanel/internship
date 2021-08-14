@@ -57,3 +57,10 @@ export interface TestSubmit {
   essayAnswer: string;
   speakingAnswerReference: string;
 }
+
+export interface FinishTestBody {
+  grammarAnswers: string[];
+  auditionAnswers: string[];
+  essayAnswer: string;
+  speakingAnswerReference: string;
+}

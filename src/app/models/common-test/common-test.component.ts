@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -6,6 +7,7 @@ import { TopicModule } from '../../interfaces/essay-speaking';
 import { Question } from '../../interfaces/question-answer';
 import { TestContent, TestSubmit } from '../../interfaces/test';
 import { TestStoreService } from '../../services/store/test-store.service';
+import { FinishModalDialogComponent } from '../dialog-module/finish-modal-dialog/finish-modal-dialog.component';
 
 @Component({
   selector: 'app-common-test',
@@ -35,11 +37,13 @@ export class CommonTestComponent implements OnInit {
 
   selectedIndex = 0;
 
-  isFinished = false;
-
   maxIndex = 3;
 
-  constructor(private testStoreService: TestStoreService, private route: ActivatedRoute) {}
+  constructor(
+    private testStoreService: TestStoreService,
+    private route: ActivatedRoute,
+    public dialog: MatDialog,
+  ) {}
 
   ngOnInit() {
     this.testStoreService.createTestContent();
@@ -73,14 +77,15 @@ export class CommonTestComponent implements OnInit {
     if (answers) this.listeningAnswers = answers;
   }
 
-  onFinishTestClick(): void {
-    this.testStoreService.testSubmit(
-      this.grammarAnswers,
-      this.listeningAnswers,
-      this.essayText,
-      this.speachRef,
-    );
-
-    this.isFinished = true;
+  onFinishButtonClick(): void {
+    this.dialog.open(FinishModalDialogComponent, {
+      width: '45rem',
+      data: {
+        grammarAnswers: this.grammarAnswers,
+        auditionAnswers: this.listeningAnswers,
+        essayAnswer: this.essayText,
+        speakingAnswerReference: this.speachRef,
+      },
+    });
   }
 }
