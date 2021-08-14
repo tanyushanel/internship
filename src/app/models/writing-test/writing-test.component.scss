@@ -1,5 +1,13 @@
 @import 'src/theme/variables.scss';
 
+.container {
+  text-align: center;
+
+  span {
+    font-style: italic;
+  }
+}
+
 .description {
   margin-bottom: 50px;
   text-align: center;
@@ -10,14 +18,18 @@
   text-transform: uppercase;
 }
 
-mat-form-field {
+.mat-form-field {
   width: 70%;
-  background-color: rgb(241, 233, 248);
   border-radius: $border-radius-medium;
 
   textarea {
     height: 14em;
     resize: none;
+  }
+
+  .symbol-count {
+    float: right;
+    font-size: 0.75rem;
   }
 }
 
