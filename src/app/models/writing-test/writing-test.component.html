@@ -1,9 +1,12 @@
 <div class="container">
-  <p>Write about <span>some theme</span></p>
+  <p>
+    Please, write something about <b>{{ essay!.topicName }}</b>
+  </p>
 
   <form class="essay-area" [formGroup]="form" (ngSubmit)="submit()">
     <mat-form-field appearance="fill">
       <textarea
+        class="essay-area__size"
         matNativeControl
         maxlength="512"
         formControlName="text"
@@ -23,20 +26,5 @@
         </small>
       </div>
     </mat-form-field>
-
-    <div class="buttons">
-      <button
-        type="submit"
-        class="send"
-        [disabled]="form.invalid || disabled"
-        mat-raised-button
-        color="primary"
-      >
-        Send essay
-      </button>
-      <button type="button" class="clear" [disabled]="disabled" mat-raised-button (click)="clear()">
-        Clear form
-      </button>
-    </div>
   </form>
 </div>

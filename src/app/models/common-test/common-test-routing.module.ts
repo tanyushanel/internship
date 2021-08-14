@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonTestComponent } from './common-test.component';
-import { UserRole } from '../../../constants/data-constants';
+import { UserRole } from '../../constants/data-constants';
 import { AuthGuard } from '../../guard/auth.guard';
 
 const routes: Routes = [

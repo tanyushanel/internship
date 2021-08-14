@@ -1,20 +1,31 @@
 <div class="container">
+  <button mat-icon-button class="close-button" [mat-dialog-close]="true">✖</button>
   <h1>{{ data.isEdit ? 'Edit Grammar' : 'Add Grammar' }}</h1>
   <mat-form-field appearance="fill">
     <mat-label>Grammar Question</mat-label>
-    <textarea matInput>{{ data.isEdit ? 'Grammar Question ' + data.id : '' }}</textarea>
+    <textarea matInput [(ngModel)]="nameQuestion">{{ nameQuestion }}</textarea>
   </mat-form-field>
   <h3>Select level</h3>
-  <app-choose-level [currentLevel]="data.level"></app-choose-level>
+  <app-choose-level
+    (changeLevel)="levelChangeHandler($event)"
+    [currentLevel]="languageLevel[data.level.toString()]"
+  ></app-choose-level>
   <mat-radio-group class="radio-group">
-    <div *ngFor="let answer of grammar.answers; let i = index">
-      <mat-radio-button [checked]="answer.isRight" [value]="QuestionList[i]" class="radio-button">{{
-        QuestionList[i]
-      }}</mat-radio-button>
+    <div *ngFor="let answer of answerOption; let i = index">
+      <mat-radio-button
+        [value]="QuestionList[i]"
+        [checked]="answer.isRight"
+        (change)="radioChangeHandler(i)"
+        class="radio-button"
+      >
+        {{ QuestionList[i] }}
+      </mat-radio-button>
       <span>
-        <mat-form-field><input matInput [value]="answer.title" /></mat-form-field>
+        <mat-form-field><input matInput [(ngModel)]="answer.nameAnswer" /></mat-form-field>
       </span>
     </div>
   </mat-radio-group>
-  <button mat-raised-button color="primary">{{ data.isEdit ? 'UPDATE' : 'SAVE' }}</button>
+  <button mat-raised-button color="primary" (click)="updateData()">
+    {{ data.isEdit ? 'UPDATE' : 'SAVE' }}
+  </button>
 </div>

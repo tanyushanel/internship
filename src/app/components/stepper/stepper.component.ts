@@ -10,21 +10,21 @@ import { Question } from '../../interfaces/question-answer';
   providers: [
     {
       provide: STEPPER_GLOBAL_OPTIONS,
-      useValue: { showError: true },
+      useValue: { showError: true, displayDefaultIndicatorType: false },
     },
   ],
 })
 export class StepperComponent implements OnInit, OnChanges {
-  @Input() questionList!: Question[];
+  @Input() questionList!: Question[] | null | undefined;
 
-  stepperFormGroups: FormGroup[] = [];
+  stepperFormGroups: FormGroup[] | undefined = [];
 
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {}
 
   ngOnChanges() {
-    this.stepperFormGroups = this.questionList.map(() =>
+    this.stepperFormGroups = this.questionList?.map(() =>
       this.formBuilder.group({
         stepCtrl: ['', Validators.required],
       }),

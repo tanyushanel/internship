@@ -1,6 +1,6 @@
 <mat-tab-group mat-stretch-tabs mat-align-tabs="center" [(selectedIndex)]="selectedIndex">
   <mat-tab label="GRAMMAR">
-    <app-grammar-test></app-grammar-test>
+    <app-grammar-test [questions]="grammar$ | async"></app-grammar-test>
     <app-proceed-buttons
       [currentIndex]="selectedIndex"
       (changedIndex)="setTabIndex($event)"
@@ -8,15 +8,15 @@
   </mat-tab>
 
   <mat-tab label="LISTENING">
-    <app-listening></app-listening>
+    <app-listening [questions]="listening$ | async"></app-listening>
     <app-proceed-buttons
       [currentIndex]="selectedIndex"
       (changedIndex)="setTabIndex($event)"
     ></app-proceed-buttons>
   </mat-tab>
 
-  <mat-tab label="ESSAY">
-    <app-writing-test></app-writing-test>
+  <mat-tab label="WRITING">
+    <app-writing-test [essay]="essay$ | async"></app-writing-test>
     <app-proceed-buttons
       [currentIndex]="selectedIndex"
       (changedIndex)="setTabIndex($event)"
@@ -24,7 +24,7 @@
   </mat-tab>
 
   <mat-tab label="SPEAKING">
-    <app-speaking></app-speaking>
+    <app-speaking [speaking]="speaking$ | async"></app-speaking>
     <app-proceed-buttons
       [currentIndex]="selectedIndex"
       (changedIndex)="setTabIndex($event)"

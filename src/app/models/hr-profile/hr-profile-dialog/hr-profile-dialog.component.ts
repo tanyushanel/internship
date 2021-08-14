@@ -1,9 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-
-export interface DialogData {
-  id: number;
-}
+import { ApiAssignTest } from 'src/app/interfaces/user.interfaces';
+import { PostHttpService } from '../services/post-http.service';
 
 @Component({
   selector: 'app-hr-profile-dialog',
@@ -11,6 +9,10 @@ export interface DialogData {
   styleUrls: ['./hr-profile-dialog.component.scss'],
 })
 export class HrProfileDialogComponent {
+  assignmentEndDate = new Date();
+
+  priority = false;
+
   currentDay = new Date();
 
   myFilter = (d: Date | null): boolean => {
@@ -18,5 +20,18 @@ export class HrProfileDialogComponent {
     return day > this.currentDay.getDate();
   };
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: ApiAssignTest,
+    private readonly postHttpService: PostHttpService,
+  ) {}
+
+  assignTestUser() {
+    this.postHttpService
+      .assignTest({
+        assignmentEndDate: this.assignmentEndDate.toISOString(),
+        userId: this.data.userId,
+        priority: this.priority,
+      })
+      .subscribe();
+  }
 }

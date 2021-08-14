@@ -1,34 +1,52 @@
-import { Priority, Level } from '../../constants/data-constants';
 import { Audition } from './audition';
-import { Question } from './question-answer';
-import { TestModule } from './test-module';
-import { User } from './user';
+import { Level } from '../constants/data-constants';
+import { TopicModule } from './essay-speaking';
 
-export interface Test {
-  id: number;
+import { Question } from './question-answer';
+
+export interface TestResult {
+  id: string;
   level: Level;
-  userId: User['id'];
-  hrId?: User['id'];
-  coachId?: User['id'];
-  priority?: Priority;
-  date: {
-    creationDate?: string;
-    assignmentStartDate?: string;
-    assignmentEndDate?: string;
-  };
-  content: {
-    grammar: TestModule;
-    audition: TestModule;
-    essay: TestModule;
-    speaking: TestModule;
-  };
-  feedback?: string;
+  testNumber: string;
+  creationDate: string;
+  testPassingDate: string;
+  assignmentEndDate: string;
+  grammarMark: number | null;
+  auditionMark: number | null;
+  essayMark: number | null;
+  speakingMark: number | null;
+  comment: string | null;
+  userId: string | null;
+  hrId: string | null;
+  coachId: string | null;
+  priority: boolean;
 }
 
-export interface FullTestToPass {
+export interface UserTable {
+  id: string;
+  firstName: string;
+  lastName: string;
+  creationDate: string;
+  avatar: string;
+  email: string;
+}
+export interface UsersList {
+  currentPage: number;
+  firstRowOnPage: number;
+  lastRowOnPage: number;
+  pageCount: number;
+  pageSize: number;
+  results: UserTable[];
+  rowCount: number;
+}
+
+export interface TestContent {
   id: number;
-  auditionId: Audition['id'];
-  essayId: number;
-  speakingId: number;
-  testQuestions: Question[];
+  userId: number;
+  level: Level;
+  testPassingDate: string;
+  grammarQuestions: Question[];
+  audition: Audition;
+  essay: TopicModule;
+  speaking: TopicModule;
 }

@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, Input } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Test } from 'src/app/interfaces/test';
-import { MOCK_TEST_RESULTS } from '../../../constants/mock-test-results';
+import { TestResult } from '../../interfaces/test';
+import { Level } from '../../constants/data-constants';
 
 @Component({
   selector: 'app-user-results-table',
@@ -18,22 +18,33 @@ import { MOCK_TEST_RESULTS } from '../../../constants/mock-test-results';
   ],
 })
 export class UserResultsTableComponent implements OnInit, AfterViewInit {
-  results: Test[] = [];
+  @Input() results: TestResult[] = [];
+
+  @Input() levels: Level[] = [];
 
   columnsToDisplay: string[] = ['id', 'date', 'level', 'result'];
 
-  expandedElement: Test | undefined;
+  isOpen = false;
 
-  dataSource!: MatTableDataSource<Test>;
+  get columnsCount() {
+    return this.columnsToDisplay.length;
+  }
+
+  expandedElement: TestResult | undefined;
+
+  dataSource!: MatTableDataSource<TestResult>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }
 
   ngOnInit(): void {
-    this.results = [...MOCK_TEST_RESULTS];
     this.dataSource = new MatTableDataSource(this.results);
+  }
+
+  onUnrollToggle(): void {
+    this.isOpen = !this.isOpen;
   }
 }

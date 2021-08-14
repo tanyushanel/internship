@@ -1,17 +1,16 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import {
-  CreateDialogData,
-  EditDialogData,
-} from '../grammar-adding-editing-dialog/grammar-adding-editing-dialog.component';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { languageLevel, Level } from '../../../constants/data-constants';
+import { CoachTopicStoreService } from '../../../services/store/coach-topic-store.service';
+import { CoachTopicUpdate } from '../../../interfaces/coach-edit';
+import { englishLevelNumber } from '../../../helpers/checks';
 
-interface Topic {
-  question: string;
+export interface TopicEditDialogData {
+  id: string;
+  level: Level;
+  isEdit: true;
+  topicName: string;
 }
-
-const emptyTopic: Topic = {
-  question: '',
-};
 
 @Component({
   selector: 'app-coach-profile-editor-topic-create-dialog',
@@ -19,13 +18,39 @@ const emptyTopic: Topic = {
   styleUrls: ['./topic-adding-editing-dialog.component.scss'],
 })
 export class TopicAddingEditingDialogComponent {
-  topic: Topic = emptyTopic;
+  topic: TopicEditDialogData | undefined;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: CreateDialogData | EditDialogData) {
-    if (data.isEdit) {
-      this.topic = {
-        question: data.question,
-      };
+  languageLevel = languageLevel;
+
+  topicName = this.data.topicName;
+
+  englishLevel: number | undefined;
+
+  constructor(
+    public dialogRef: MatDialogRef<TopicAddingEditingDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: TopicEditDialogData,
+    private coachEditorTopic: CoachTopicStoreService,
+  ) {
+    if (data.isEdit && data.topicName) {
+      this.topic = { ...data };
     }
+  }
+
+  levelChangeHandler($event: Level): void {
+    this.englishLevel = englishLevelNumber($event);
+  }
+
+  updateData(): void {
+    const topic: CoachTopicUpdate = {
+      id: this.data.id,
+      topicName: this.topicName,
+      level: this.englishLevel ?? this.data.level,
+    };
+    if (this.data.isEdit) {
+      this.coachEditorTopic.updateTopic(topic);
+    } else {
+      this.coachEditorTopic.createTopic(topic);
+    }
+    this.dialogRef.close();
   }
 }
