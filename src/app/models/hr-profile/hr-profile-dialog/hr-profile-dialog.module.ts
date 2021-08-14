@@ -7,12 +7,14 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { FormsModule } from '@angular/forms';
 import { AngularMaterialCommonModule } from '../../angular-material-common.module';
 import { HrProfileDialogComponent } from './hr-profile-dialog.component';
 
 @NgModule({
   declarations: [HrProfileDialogComponent],
   imports: [
+    FormsModule,
     CommonModule,
     MatNativeDateModule,
     MatCheckboxModule,

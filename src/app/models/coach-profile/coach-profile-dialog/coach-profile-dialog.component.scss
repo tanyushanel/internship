@@ -6,7 +6,7 @@ button.mat-raised-button {
   transform: translate(-50%, 0);
 }
 
-button.mat-raised-button:hover {
+button.mat-raised-button:not([disabled]):hover {
   background-color: $secondary-grey2;
 }
 
@@ -29,9 +29,12 @@ mat-form-field {
   grid-column: 1;
 }
 
-.essay-score {
-  display: flex;
+.essay-mark {
   grid-column: 2;
+}
+
+.essay-mark-label {
+  display: flex;
   align-self: center;
   justify-content: space-between;
 }
@@ -41,9 +44,12 @@ mat-form-field {
   margin-bottom: 18px;
 }
 
-.speaking-score {
-  display: flex;
+.speaking-mark {
   grid-column: 2;
+}
+
+.speaking-mark-label {
+  display: flex;
   align-self: center;
   justify-content: space-between;
 }
@@ -55,4 +61,19 @@ mat-form-field {
 .close-button {
   position: absolute;
   right: 15px;
+}
+
+input {
+  &.ng-invalid.ng-touched {
+    border: 1px solid red;
+  }
+
+  &.ng-valid.ng-touched {
+    border: 1px solid green;
+  }
+}
+
+.validation {
+  grid-column: 2;
+  color: red;
 }

@@ -6,7 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { UsersList, UserTable } from 'src/app/interfaces/test';
-import { GetHrUser, User } from 'src/app/interfaces/user.interfaces';
+import { ApiAssignTest, GetHrUser, User } from 'src/app/interfaces/user.interfaces';
 import { TestStoreService } from 'src/app/services/store/test-store.service';
 import { UserResultsDialogComponent } from '../dialog-module/user-results-dialog/user-results-dialog.component';
 import { HrProfileDialogComponent } from './hr-profile-dialog/hr-profile-dialog.component';
@@ -90,7 +90,9 @@ export class HrProfileComponent implements OnInit {
     });
   }
 
-  onClick() {
-    this.dialog.open(HrProfileDialogComponent);
+  onClick(userId: string) {
+    this.dialog.open(HrProfileDialogComponent, {
+      data: { userId } as ApiAssignTest,
+    });
   }
 }
