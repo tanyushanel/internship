@@ -39,9 +39,9 @@
   </div>
 
   <app-user-results-table
-    *ngIf="(testResults$ | async)?.length; else noResults"
+    *ngIf="(results$ | async)?.length; else noResults"
     class="user-results-table"
-    [results]="(testResults$ | async)!"
+    [results]="(results$ | async)!"
     [levels]="levels"
   >
   </app-user-results-table>
