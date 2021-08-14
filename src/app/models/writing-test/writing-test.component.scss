@@ -1,17 +1,8 @@
 @import 'src/theme/variables.scss';
 
-.container {
-  margin: 12em 0 2em;
-  padding-left: 30px;
+.description {
+  margin-bottom: 50px;
   text-align: center;
-
-  span {
-    position: absolute;
-    right: 0;
-    bottom: 0.25rem;
-    font-size: 80%;
-    font-style: italic;
-  }
 }
 
 .description {

@@ -1,11 +1,10 @@
 <mat-card class="description">
-  Please, tell some words about <b class="text-of-theme">{{ speaking!.topicName }}</b></mat-card
+  Please, tell some words about <b>{{ speaking!.topicName }}</b></mat-card
 >
 <mat-card class="text-of-theme-warning"
   >You have 5 min max for speaking module, coutdown will start after you press button "Start
   Recording"</mat-card
 >
-
 <div class="audio-reserv-place">
   <section class="speaking-module-position" ng-controller="controller">
     <button
@@ -34,3 +33,7 @@
     ></audio>
   </div>
 </div>
+
+<button mat-raised-button color="secondary" class="button-submit" (click)="finishTest()">
+  Finish Test
+</button>

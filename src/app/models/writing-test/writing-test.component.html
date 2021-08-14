@@ -1,34 +1,28 @@
-<div class="container">
-  <mat-card class="description">
-    <p>
-      Please, write something about <b class="text-of-theme">{{ essay!.topicName }}</b>
-    </p>
-  </mat-card>
+<mat-card class="description">
+  Please, write something about <b>{{ essay!.topicName }}</b>
+</mat-card>
 
-  <form [formGroup]="form" (ngSubmit)="submit()">
-    <mat-form-field appearance="fill">
-      <textarea
-        class="essay-area__size"
-        matNativeControl
-        maxlength="512"
-        formControlName="text"
-        #text
-        (paste)="$event.preventDefault()"
-        (ngModelChange)="onWritingSubmit()"
-      ></textarea>
-      <mat-hint align="start">Max 512 characters</mat-hint>
+<form class="essay-area" [formGroup]="form" (ngSubmit)="submit()">
+  <mat-form-field appearance="fill">
+    <textarea
+      class="essay-area__size"
+      matNativeControl
+      maxlength="512"
+      formControlName="text"
+      #text
+      (paste)="$event.preventDefault()"
+    ></textarea>
+    <mat-hint align="start">Max 512 characters</mat-hint>
+    <span>{{ text.value.length }}/ 512 </span>
 
-      <div *ngIf="form.get('text')?.invalid && form.get('text')?.touched" class="validation">
-        <small class="error" *ngIf="form.get('text')?.errors?.required"
-          >You cannot submit an empty form</small
-        >
-        <small class="error" *ngIf="form.get('text')?.errors?.minlength">
-          Essay length should be at least
-          {{ form.get('text')?.errors?.minlength.requiredLength }} symbols
-        </small>
-      </div>
-
-      <span class="symbol-count">{{ text.value.length }}/ 512 </span>
-    </mat-form-field>
-  </form>
-</div>
+    <div *ngIf="form.get('text')?.invalid && form.get('text')?.touched" class="validation">
+      <small class="error" *ngIf="form.get('text')?.errors?.required"
+        >You cannot submit an empty form</small
+      >
+      <small class="error" *ngIf="form.get('text')?.errors?.minlength">
+        Essay length should be at least
+        {{ form.get('text')?.errors?.minlength.requiredLength }} symbols
+      </small>
+    </div>
+  </mat-form-field>
+</form>
