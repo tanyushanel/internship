@@ -1,10 +1,13 @@
 <div class="main">
   <h1>{{ data.isEdit ? 'Edit Listening' : 'Add Listening' }}</h1>
   <div>
-    <label class="load-file">
-      <input type="file" accept="audio/*" (change)="handleFileInput($event)" />
-      <span><span class="material-icons-outlined">publish</span>Upload</span>
-    </label>
+    <div class="load-file">
+      <label class="label">
+        <span class="material-icons-outlined">publish</span>
+        <span>Upload</span>
+        <input type="file" accept="audio/*" (change)="handleFileInput($event)" />
+      </label>
+    </div>
     <span class="file-path">{{ this.fileToUpload?.name ?? this.data.audioFilePath }}</span>
   </div>
   <audio *ngIf="srcData" controls><source [src]="srcData" /></audio>
