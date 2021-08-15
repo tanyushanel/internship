@@ -27,28 +27,28 @@
           >{{ question.nameQuestion }}</textarea
         >
       </mat-form-field>
-      <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
-        <div *ngFor="let answer of question.answers; let y = index">
+      <div *ngFor="let answer of question.answers; let y = index" class="answer-group">
+        <mat-radio-group class="example-radio-group">
           <mat-radio-button
             class="example-radio-button"
             [value]="QuestionList[y]"
             [checked]="answer.isRight"
-            (change)="radioChangeHandler(y, question)"
+            (change)="radioChangeHandler(i, y, questions[i])"
           >
             {{ QuestionList[y] }}
           </mat-radio-button>
-          <mat-form-field appearance="fill">
-            <mat-label>Answer option</mat-label>
-            <textarea
-              matInput
-              [value]="questions[i].answers[y].nameAnswer"
-              (change)="setNameAnswer($event, i, y)"
-              >{{ questions[i].answers[y].nameAnswer }}
+        </mat-radio-group>
+        <mat-form-field appearance="fill">
+          <mat-label>Answer option</mat-label>
+          <textarea
+            matInput
+            [value]="questions[i].answers[y].nameAnswer"
+            (change)="setNameAnswer($event, i, y)"
+            >{{ questions[i].answers[y].nameAnswer }}
 	              </textarea
-            >
-          </mat-form-field>
-        </div>
-      </mat-radio-group>
+          >
+        </mat-form-field>
+      </div>
     </mat-step>
   </mat-stepper>
   <div class="dialog-button">

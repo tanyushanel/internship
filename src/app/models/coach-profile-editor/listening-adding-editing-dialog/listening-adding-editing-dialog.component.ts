@@ -37,18 +37,21 @@ export class ListeningAddingEditingDialogComponent {
     this.englishLevel = englishLevelNumber($event);
   }
 
-  radioChangeHandler(numberAnswer: number, currentQuestion: ListeningQuestion) {
-    this.questions = this.questions.map((question) => {
-      if (question.id === currentQuestion.id) {
-        return {
-          ...question,
-          answers: currentQuestion.answers.map((answers, i) =>
-            i === numberAnswer ? { ...answers, isRight: true } : { ...answers, isRight: false },
-          ),
-        };
-      }
-      return { ...question };
-    });
+  radioChangeHandler(
+    numberQuestion: number,
+    numberAnswer: number,
+    currentQuestion: ListeningQuestion,
+  ) {
+    this.questions = this.questions.map((question, i) =>
+      numberQuestion === i
+        ? {
+            ...question,
+            answers: currentQuestion.answers.map((answer, y) =>
+              y === numberAnswer ? { ...answer, isRight: true } : { ...answer, isRight: false },
+            ),
+          }
+        : { ...question },
+    );
   }
 
   updateData() {

@@ -46,7 +46,7 @@ export enum GrammarAnswers {
   fourth = 'D)',
 }
 
-const emptyAnswers = () => {
+const emptyAnswersListening = () => {
   return Array.from({ length: 4 }, () => ({
     nameAnswer: '',
     isRight: false,
@@ -56,7 +56,7 @@ const emptyAnswers = () => {
 export const emptyQuestion: EmptyQuestion = {
   level: 1,
   nameQuestion: '',
-  answers: emptyAnswers(),
+  answers: emptyAnswersListening(),
 };
 
 export const emptyTopic: CoachEmptyTopic = {
@@ -69,7 +69,7 @@ export const emptyQuestionsListening = () => {
     id: '',
     nameQuestion: '',
     level: 1,
-    answers: emptyAnswers(),
+    answers: emptyAnswersListening(),
   }));
 };
 
