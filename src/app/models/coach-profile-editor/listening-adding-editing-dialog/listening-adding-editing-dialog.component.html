@@ -2,11 +2,12 @@
   <h1>{{ data.isEdit ? 'Edit Listening' : 'Add Listening' }}</h1>
   <div>
     <label class="load-file">
-      <input type="file" (change)="handleFileInput($event)" />
+      <input type="file" accept="audio/*" (change)="handleFileInput($event)" />
       <span>Custom Upload</span>
     </label>
     <span class="file-path">{{ this.fileToUpload?.name ?? this.data.audioFilePath }}</span>
   </div>
+  <audio *ngIf="srcData" controls><source [src]="srcData" /></audio>
   <div>
     <h2>Select level</h2>
     <app-choose-level

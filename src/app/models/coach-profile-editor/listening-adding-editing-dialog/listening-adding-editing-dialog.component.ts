@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { languageLevel, GrammarAnswers, Level } from '../../../constants/data-constants';
 import { EditionCoachListening, ListeningQuestion } from '../../../interfaces/audition';
 import { CoachListeningStoreService } from '../../../services/store/coach-listening-store.service';
@@ -21,10 +22,15 @@ export class ListeningAddingEditingDialogComponent {
 
   fileToUpload: File | undefined;
 
+  audioSrc: string | undefined;
+
+  srcData: SafeResourceUrl | undefined;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: EditionCoachListening,
     public dialogRef: MatDialogRef<ListeningAddingEditingDialogComponent>,
     private coachListening: CoachListeningStoreService,
+    private sanitizer: DomSanitizer,
   ) {}
 
   levelChangeHandler($event: Level) {
@@ -62,6 +68,8 @@ export class ListeningAddingEditingDialogComponent {
 
   handleFileInput(event: any) {
     this.fileToUpload = event.target.files[0];
+    this.audioSrc = URL.createObjectURL(event.target.files[0]);
+    this.srcData = this.sanitizer.bypassSecurityTrustResourceUrl(this.audioSrc);
     this.coachListening.uploadListeningFile(event.target.files[0]);
   }
 
