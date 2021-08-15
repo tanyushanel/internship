@@ -59,12 +59,15 @@ export interface ResponseGetAll<T> {
   results: T[];
   rowCount: number;
 }
-interface EmptyAnswer {
+
+export interface EmptyAnswer {
   nameAnswer: string;
   isRight: boolean;
 }
+
 export interface EmptyQuestion {
-  level: number;
+  id?: string;
+  level?: number;
   nameQuestion: string;
   answers: EmptyAnswer[];
 }

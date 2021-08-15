@@ -44,44 +44,263 @@ export enum GrammarAnswers {
   fourth = 'D)',
 }
 
-export enum FilterFields {
-  id = 'id',
-  level = 'level',
-  date = 'date',
-}
-const answer = {
-  nameAnswer: '',
-  isRight: false,
+const emptyAnswers = () => {
+  return Array.from({ length: 4 }, () => ({
+    nameAnswer: '',
+    isRight: false,
+  }));
 };
-const answers = [answer, answer, answer, answer];
 
 export const emptyQuestion: EmptyQuestion = {
   level: 1,
   nameQuestion: '',
-  answers,
+  answers: emptyAnswers(),
 };
 
 export const emptyTopic: CoachEmptyTopic = {
   level: 1,
   topicName: '',
 };
-const emptyListeningQuestions = {
-  nameQuestion: '',
-  answers,
-};
+
+// export const emptyQuestionsListening = () => {
+//   return Array.from({ length: 10 }, () => ({
+//     id: '',
+//     nameQuestion: '',
+//     level: 1,
+//     answers: emptyAnswers(),
+//   }));
+// };
+
+// export const emptyListening: UpdateCoachListening = {
+//   id: '',
+//   audioFilePath: '',
+//   level: 3,
+//   questions: emptyQuestionsListening(),
+// };
 export const emptyListening = {
+  id: '',
   audioFilePath: '',
   level: 3,
   questions: [
-    emptyListeningQuestions,
-    emptyListeningQuestions,
-    emptyListeningQuestions,
-    emptyListeningQuestions,
-    emptyListeningQuestions,
-    emptyListeningQuestions,
-    emptyListeningQuestions,
-    emptyListeningQuestions,
-    emptyListeningQuestions,
-    emptyListeningQuestions,
+    {
+      id: '',
+      nameQuestion: '',
+      answers: [
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+      ],
+    },
+    {
+      id: '',
+      nameQuestion: '',
+      answers: [
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+      ],
+    },
+    {
+      id: '',
+      nameQuestion: '',
+      answers: [
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+      ],
+    },
+    {
+      id: '',
+      nameQuestion: '',
+      answers: [
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+      ],
+    },
+    {
+      id: '',
+      nameQuestion: '',
+      answers: [
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+      ],
+    },
+    {
+      id: '',
+      nameQuestion: '',
+      answers: [
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+      ],
+    },
+    {
+      id: '',
+      nameQuestion: '',
+      answers: [
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+      ],
+    },
+    {
+      id: '',
+      nameQuestion: '',
+      answers: [
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+      ],
+    },
+    {
+      id: '',
+      nameQuestion: '',
+      answers: [
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+      ],
+    },
+    {
+      id: '',
+      nameQuestion: '',
+      answers: [
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+        {
+          nameAnswer: '',
+          isRight: false,
+        },
+      ],
+    },
   ],
 };

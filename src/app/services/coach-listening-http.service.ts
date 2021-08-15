@@ -6,7 +6,11 @@ import {
   ListeningApiUrl,
   UploadFileListeningApiUrl,
 } from '../constants/route-constant';
-import { CoachListening, EditionCoachListening } from '../interfaces/audition';
+import {
+  CoachListening,
+  EditionCoachListening,
+  UpdateCoachListening,
+} from '../interfaces/audition';
 
 @Injectable({
   providedIn: 'root',
@@ -22,11 +26,11 @@ export class CoachListeningHttpService {
     return this.http.get<EditionCoachListening>(`${ListeningApiUrl}/${id}`);
   }
 
-  updateListening(topic: CoachListening) {
+  updateListening(topic: UpdateCoachListening) {
     return this.http.put(`${ListeningApiUrl}/${topic.id}`, topic);
   }
 
-  createListening(topic: CoachListening) {
+  createListening(topic: UpdateCoachListening) {
     return this.http.post(ListeningApiUrl, topic);
   }
 
@@ -34,7 +38,7 @@ export class CoachListeningHttpService {
     return this.http.delete(`${ListeningApiUrl}/${id}`);
   }
 
-  uploadListeningFile(file: any) {
+  uploadListeningFile(file: FormData) {
     return this.http.post(UploadFileListeningApiUrl, file);
   }
 

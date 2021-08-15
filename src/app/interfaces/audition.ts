@@ -1,4 +1,6 @@
+// eslint-disable-next-line import/no-cycle
 import { Question } from '../constants/mock-grammar-test';
+// eslint-disable-next-line import/no-cycle
 import { Level } from '../constants/data-constants';
 
 export interface CoachListening {
@@ -18,7 +20,7 @@ export interface Audition {
 }
 
 interface AnswerListeningQuestion {
-  id: string;
+  id?: string;
   nameAnswer: string;
   isRight: boolean;
 }
@@ -26,7 +28,7 @@ interface AnswerListeningQuestion {
 export interface ListeningQuestion {
   id: string;
   nameQuestion: string;
-  level: number;
+  level?: number;
   answers: AnswerListeningQuestion[];
 }
 
@@ -38,5 +40,11 @@ export interface EditionCoachListening {
   isEdit?: boolean;
   creationDate: string;
   creatorId: string;
+  questions: ListeningQuestion[];
+}
+export interface UpdateCoachListening {
+  id: string | undefined;
+  audioFilePath: string | undefined;
+  level: number | undefined;
   questions: ListeningQuestion[];
 }

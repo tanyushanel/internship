@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { TableData } from '../../interfaces/question-answer';
 import { CoachListeningHttpService } from '../coach-listening-http.service';
-import { EditionCoachListening } from '../../interfaces/audition';
+import { EditionCoachListening, UpdateCoachListening } from '../../interfaces/audition';
 
 @Injectable({
   providedIn: 'root',
@@ -35,7 +35,6 @@ export class CoachListeningStoreService {
       .subscribe({
         next: (listen) => {
           this.listens$.next(listen);
-          console.log(listen);
         },
       });
   }
@@ -44,13 +43,12 @@ export class CoachListeningStoreService {
     this.coachListeningHttpService.getListening(id).subscribe({
       next: (listen) => {
         this.listen$.next(listen);
-        console.log(listen);
         this.getAllListening();
       },
     });
   }
 
-  updateListening(listen: any) {
+  updateListening(listen: UpdateCoachListening) {
     this.coachListeningHttpService.updateListening(listen).subscribe(() => this.getAllListening());
   }
 
@@ -62,11 +60,13 @@ export class CoachListeningStoreService {
     this.coachListeningHttpService.deleteListening(id).subscribe(() => this.getAllListening());
   }
 
-  uploadListeningFile(file: any) {
-    this.coachListeningHttpService.uploadListeningFile(file);
+  uploadListeningFile(file: File) {
+    const fd = new FormData();
+    fd.append('file', file);
+    this.coachListeningHttpService.uploadListeningFile(fd).subscribe();
   }
 
-  downloadListeningFile(file: any) {
-    this.coachListeningHttpService.uploadListeningFile(file);
+  downloadListeningFile() {
+    this.coachListeningHttpService.downloadListeningFile().subscribe();
   }
 }

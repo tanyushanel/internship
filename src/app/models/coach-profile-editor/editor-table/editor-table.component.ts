@@ -121,7 +121,6 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
       this.coachListening.getListening(row.id);
       this.coachListening.listen$.pipe(take(1)).subscribe((listen) => {
         if (listen !== null) {
-          console.log(listen, 'LISTEN');
           this.dialog.open(ListeningAddingEditingDialogComponent, {
             data: { ...listen, isEdit: true },
             disableClose: true,

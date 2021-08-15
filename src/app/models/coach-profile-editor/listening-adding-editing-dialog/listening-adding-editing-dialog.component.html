@@ -13,31 +13,37 @@
 
   <mat-stepper orientation="vertical">
     <mat-step *ngFor="let question of questions; let i = index">
-      <ng-template matStepLabel>{{ i + 1 }}</ng-template>
-      <ng-template matStepContent>
-        <mat-form-field appearance="fill">
-          <mat-label>Formulation of the question</mat-label>
-          <textarea matInput [(ngModel)]="question.nameQuestion">{{
-            question.nameQuestion
-          }}</textarea>
-        </mat-form-field>
-        <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
-          <div *ngFor="let answer of question.answers; let i = index">
-            <mat-radio-button
-              class="example-radio-button"
-              [value]="QuestionList[i]"
-              [checked]="answer.isRight"
-              (change)="radioChangeHandler(i, question)"
+      <mat-form-field appearance="fill">
+        <mat-label>Formulation of the question</mat-label>
+        <textarea
+          matInput
+          [value]="questions[i].nameQuestion"
+          (change)="setNameQuestion($event, i)"
+          >{{ question.nameQuestion }}</textarea
+        >
+      </mat-form-field>
+      <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group">
+        <div *ngFor="let answer of question.answers; let y = index">
+          <mat-radio-button
+            class="example-radio-button"
+            [value]="QuestionList[y]"
+            [checked]="answer.isRight"
+            (change)="radioChangeHandler(y, question)"
+          >
+            {{ QuestionList[y] }}
+          </mat-radio-button>
+          <mat-form-field appearance="fill">
+            <mat-label>Answer option</mat-label>
+            <textarea
+              matInput
+              [value]="questions[i].answers[y].nameAnswer"
+              (change)="setNameAnswer($event, i, y)"
+              >{{ questions[i].answers[y].nameAnswer }}
+	              </textarea
             >
-              {{ QuestionList[i] }}
-              <mat-form-field appearance="fill">
-                <mat-label>Answer option</mat-label>
-                <textarea matInput>{{ answer.nameAnswer }}</textarea>
-              </mat-form-field>
-            </mat-radio-button>
-          </div>
-        </mat-radio-group>
-      </ng-template>
+          </mat-form-field>
+        </div>
+      </mat-radio-group>
     </mat-step>
   </mat-stepper>
   <div class="dialog-button">

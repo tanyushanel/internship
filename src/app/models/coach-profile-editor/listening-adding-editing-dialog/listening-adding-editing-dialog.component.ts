@@ -19,15 +19,13 @@ export class ListeningAddingEditingDialogComponent {
 
   questions: ListeningQuestion[] = this.data.questions;
 
-  // fileToUpload: File = null;
+  fileToUpload: File | undefined;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: EditionCoachListening,
     public dialogRef: MatDialogRef<ListeningAddingEditingDialogComponent>,
     private coachListening: CoachListeningStoreService,
-  ) {
-    console.log(this.data);
-  }
+  ) {}
 
   levelChangeHandler($event: Level) {
     this.englishLevel = englishLevelNumber($event);
@@ -50,11 +48,10 @@ export class ListeningAddingEditingDialogComponent {
   updateData() {
     const questions = {
       id: this.data.id,
-      audioFilePath: this.data.audioFilePath,
-      level: this.englishLevel,
-      questions: [...this.questions],
+      audioFilePath: this.fileToUpload?.name ?? this.data.audioFilePath,
+      level: this.englishLevel ?? this.data.level,
+      questions: this.questions.slice(0, 10), // for wrong data in backend
     };
-    console.log(questions);
     if (this.data.isEdit) {
       this.coachListening.updateListening(questions);
     } else {
@@ -64,6 +61,15 @@ export class ListeningAddingEditingDialogComponent {
   }
 
   handleFileInput(event: any) {
-    console.log(event.target.files);
+    this.fileToUpload = event.target.files[0];
+    this.coachListening.uploadListeningFile(event.target.files[0]);
+  }
+
+  setNameQuestion(event: any, i: number) {
+    this.questions[i].nameQuestion = event.target.value;
+  }
+
+  setNameAnswer(event: any, i: number, y: number) {
+    this.questions[i].answers[y].nameAnswer = event.target.value;
   }
 }
