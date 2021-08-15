@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { TestData } from 'src/interfaces/admin.interfaces';
+import { TestData } from './admin-profile-utils.mock';
 
 const URL = '../assets/admin.json';
 

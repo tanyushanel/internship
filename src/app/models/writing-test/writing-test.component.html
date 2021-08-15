@@ -1,20 +1,20 @@
 <div class="container">
-  <p>
+  <mat-card class="description">
     Please, write something about <b>{{ essay!.topicName }}</b>
-  </p>
+  </mat-card>
 
-  <form class="essay-area" [formGroup]="form" (ngSubmit)="submit()">
-    <mat-form-field appearance="fill">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <mat-form-field class="mat-form-field" appearance="fill">
       <textarea
-        class="essay-area__size"
         matNativeControl
         maxlength="512"
         formControlName="text"
         #text
         (paste)="$event.preventDefault()"
+        (ngModelChange)="onWritingSubmit()"
       ></textarea>
       <mat-hint align="start">Max 512 characters</mat-hint>
-      <span>{{ text.value.length }}/ 512 </span>
+      <span class="symbol-count">{{ text.value.length }}/ 512 </span>
 
       <div *ngIf="form.get('text')?.invalid && form.get('text')?.touched" class="validation">
         <small class="error" *ngIf="form.get('text')?.errors?.required"

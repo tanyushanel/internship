@@ -1,4 +1,12 @@
-import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -16,6 +24,8 @@ declare let MediaRecorder: any;
 })
 export class SpeakingTestComponent implements OnInit, OnDestroy {
   @Input() speaking: TopicModule | null = null;
+
+  @Output() speachRecorded = new EventEmitter<{ src: SafeUrl } | null>();
 
   mediaRecorder: any;
 
@@ -55,7 +65,7 @@ export class SpeakingTestComponent implements OnInit, OnDestroy {
 
   async ngOnInit() {
     this.speaking = {
-      id: 0,
+      id: '',
       topicName: '',
     };
     let stream = null;
@@ -150,5 +160,14 @@ export class SpeakingTestComponent implements OnInit, OnDestroy {
   stopRecording() {
     this.mediaRecorder.stop();
     this.stopTimer();
+  }
+
+
+  finishTest() {
+    this.router.navigate([Route.result]);
+  }
+
+  onSpeakingSubmit(): void {
+    this.speachRecorded.emit(this.audioFile);
   }
 }

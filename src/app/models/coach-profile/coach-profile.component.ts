@@ -12,6 +12,8 @@ import { CoachTest } from '../../interfaces/coach-edit';
   styleUrls: ['./coach-profile.component.scss'],
 })
 export class CoachProfileComponent implements OnInit {
+  public selectedTab = CoachTestTabs.highPriority;
+
   tables$: Observable<CoachTest[] | null> = this.coachTestStoreService.coachTestResults$;
 
   tabs: CoachTestTabs[] = [
@@ -26,12 +28,15 @@ export class CoachProfileComponent implements OnInit {
     if (tabChangeEvent.index === 0) {
       this.coachTestStoreService.getCoachHighPriorityTestResults();
       this.tables$ = this.coachTestStoreService.coachTestResults$;
+      this.selectedTab = CoachTestTabs.highPriority;
     } else if (tabChangeEvent.index === 1) {
       this.coachTestStoreService.getCoachUncheckedTestResults();
       this.tables$ = this.coachTestStoreService.coachTestResults$;
+      this.selectedTab = CoachTestTabs.unchecked;
     } else if (tabChangeEvent.index === 2) {
       this.coachTestStoreService.getCoachCheckedTestResults();
       this.tables$ = this.coachTestStoreService.coachTestResults$;
+      this.selectedTab = CoachTestTabs.checked;
     }
   }
 

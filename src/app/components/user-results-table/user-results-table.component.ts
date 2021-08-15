@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, AfterViewInit, Input } from '@angular/cor
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Test } from '../../interfaces/test';
+import { TestResult } from '../../interfaces/test';
 import { Level } from '../../constants/data-constants';
 
 @Component({
@@ -18,7 +18,7 @@ import { Level } from '../../constants/data-constants';
   ],
 })
 export class UserResultsTableComponent implements OnInit, AfterViewInit {
-  @Input() results: Test[] = [];
+  @Input() results: TestResult[] = [];
 
   @Input() levels: Level[] = [];
 
@@ -30,9 +30,9 @@ export class UserResultsTableComponent implements OnInit, AfterViewInit {
     return this.columnsToDisplay.length;
   }
 
-  expandedElement: Test | undefined;
+  expandedElement: TestResult | undefined;
 
-  dataSource!: MatTableDataSource<Test>;
+  dataSource!: MatTableDataSource<TestResult>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
