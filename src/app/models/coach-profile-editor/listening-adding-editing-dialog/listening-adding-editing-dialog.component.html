@@ -3,7 +3,7 @@
   <div>
     <label class="load-file">
       <input type="file" accept="audio/*" (change)="handleFileInput($event)" />
-      <span>Custom Upload</span>
+      <span><span class="material-icons-outlined">publish</span>Upload</span>
     </label>
     <span class="file-path">{{ this.fileToUpload?.name ?? this.data.audioFilePath }}</span>
   </div>
