@@ -1,6 +1,10 @@
 .finish-test {
   margin: 5em auto;
 
+  &__heading {
+    margin-top: 1em;
+  }
+
   &__paragraph {
     padding: 2em;
     font-size: 1.5em;
@@ -38,11 +42,6 @@
     &:focus {
       background-color: lightgrey;
     }
-  }
-
-  &__warn-color {
-    margin-right: 2em;
-    color: rgb(41, 109, 212);
   }
 }
 
