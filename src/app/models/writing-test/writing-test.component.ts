@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TopicModule } from '../../interfaces/essay-speaking';
 
@@ -10,13 +10,15 @@ import { TopicModule } from '../../interfaces/essay-speaking';
 export class WritingTestComponent implements OnInit {
   @Input() essay: TopicModule | null = null;
 
+  @Output() essayWritten = new EventEmitter<string | null>();
+
   form!: FormGroup;
 
   disabled = false;
 
   ngOnInit() {
     this.essay = {
-      id: 0,
+      id: '',
       topicName: '',
     };
     this.form = new FormGroup({
@@ -28,5 +30,9 @@ export class WritingTestComponent implements OnInit {
     const formData = this.form.value;
     this.form.disable();
     this.disabled = true;
+  }
+
+  onWritingSubmit(): void {
+    this.essayWritten.emit(this.form.controls.text.value);
   }
 }

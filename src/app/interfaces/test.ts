@@ -1,7 +1,6 @@
-import { Audition } from './audition';
 import { Level } from '../constants/data-constants';
+import { Audition } from './audition';
 import { TopicModule } from './essay-speaking';
-
 import { Question } from './question-answer';
 
 export interface TestResult {
@@ -41,7 +40,7 @@ export interface UsersList {
 }
 
 export interface TestContent {
-  id: number;
+  id: string;
   userId: number;
   level: Level;
   testPassingDate: string;
@@ -49,4 +48,19 @@ export interface TestContent {
   audition: Audition;
   essay: TopicModule;
   speaking: TopicModule;
+}
+
+export interface TestSubmit {
+  id: string;
+  grammarAnswers: string[];
+  auditionAnswers: string[];
+  essayAnswer: string;
+  speakingAnswerReference: string;
+}
+
+export interface FinishTestBody {
+  grammarAnswers: string[];
+  auditionAnswers: string[];
+  essayAnswer: string;
+  speakingAnswerReference: string;
 }

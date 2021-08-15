@@ -1,35 +1,38 @@
 @import 'src/theme/variables.scss';
 
 .container {
-  margin: 12em 0 2em;
-  padding-left: 30px;
+  text-align: center;
 
   span {
     font-style: italic;
   }
 }
 
-mat-form-field {
+.description {
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.text-of-theme {
+  display: block;
+  text-transform: uppercase;
+}
+
+.mat-form-field {
   width: 70%;
-  background-color: rgb(241, 233, 248);
   border-radius: $border-radius-medium;
 
   textarea {
     height: 14em;
     resize: none;
   }
+
+  .symbol-count {
+    float: right;
+    font-size: 0.75rem;
+  }
 }
 
 .error {
   color: $error;
-}
-
-.buttons {
-  display: flex;
-  flex-wrap: wrap;
-  padding-top: 10px;
-
-  .send {
-    margin-right: 20px;
-  }
 }
