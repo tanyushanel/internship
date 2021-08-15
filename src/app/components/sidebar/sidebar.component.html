@@ -43,7 +43,7 @@
                 logout
               </mat-icon>
             </div>
-            <span class="sidebar__items-heading">Exit</span>
+            <span *ngIf="isOpen" class="sidebar__items-heading">Exit</span>
           </mat-list-item>
         </nav>
       </ng-container>

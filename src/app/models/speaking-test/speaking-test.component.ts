@@ -9,9 +9,11 @@ import {
 } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 import { TopicModule } from '../../interfaces/essay-speaking';
 import { ErrorStoreService } from '../../services/store/error-store.service';
 import { Route } from '../../constants/route-constant';
+import { FinishTestComponent } from '../finish-test-modal/finish-test.component';
 
 declare let MediaRecorder: any;
 
@@ -50,7 +52,16 @@ export class SpeakingTestComponent implements OnInit, OnDestroy {
     private dom: DomSanitizer,
     private errorStoreService: ErrorStoreService,
     private readonly router: Router,
+    public dialog: MatDialog,
   ) {}
+
+  home(): void {
+    throw new Error('Method not implemented.');
+  }
+
+  openDialog() {
+    this.dialog.open(FinishTestComponent);
+  }
 
   async ngOnInit() {
     this.speaking = {
@@ -150,6 +161,7 @@ export class SpeakingTestComponent implements OnInit, OnDestroy {
     this.mediaRecorder.stop();
     this.stopTimer();
   }
+
 
   finishTest() {
     this.router.navigate([Route.result]);
