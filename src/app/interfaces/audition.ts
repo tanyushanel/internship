@@ -1,7 +1,6 @@
 // eslint-disable-next-line import/no-cycle
-import { Question } from '../constants/mock-grammar-test';
-// eslint-disable-next-line import/no-cycle
 import { Level } from '../constants/data-constants';
+import { Question } from './question-answer';
 
 export interface CoachListening {
   id: string;

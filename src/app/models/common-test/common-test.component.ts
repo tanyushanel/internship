@@ -35,7 +35,7 @@ export class CommonTestComponent implements OnInit {
     } else this.testStoreService.createTestContent();
 
     this.grammar$ = this.test$.pipe(map((test) => test?.grammarQuestions || null));
-    // this.listening$ = this.test$.pipe(map((test) => test?.audition.questions || null));
+    this.listening$ = this.test$.pipe(map((test) => test?.audition.questions || null));
     this.essay$ = this.test$.pipe(map((test) => test?.essay || null));
     this.speaking$ = this.test$.pipe(map((test) => test?.speaking || null));
   }
