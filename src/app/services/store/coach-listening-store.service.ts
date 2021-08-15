@@ -21,13 +21,13 @@ export class CoachListeningStoreService {
       .pipe(
         map((res) => res.results),
         map((listening) => {
-          const table = listening.map((listen) => ({
+          const table = listening.map((listen, i) => ({
             id: listen.id,
             creationDate: listen.creationDate,
             creatorId: listen.creatorId,
             level: listen.level,
-            name: '',
-            number: listen.questionNumber,
+            name: 'Audition',
+            number: listen.questionNumber || i + 1,
           }));
           return table;
         }),
