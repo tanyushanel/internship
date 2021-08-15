@@ -4,10 +4,10 @@ import { TopicModule } from './essay-speaking';
 
 import { Question } from './question-answer';
 
-export interface Test {
-  id: number;
+export interface TestResult {
+  id: string;
   level: Level;
-  testNumber: number;
+  testNumber: string;
   creationDate: string;
   testPassingDate: string;
   assignmentEndDate: string;
@@ -15,10 +15,10 @@ export interface Test {
   auditionMark: number | null;
   essayMark: number | null;
   speakingMark: number | null;
-  comment: number | null;
-  userId: number | null;
-  hrId: number | null;
-  coachId: number | null;
+  comment: string | null;
+  userId: string | null;
+  hrId: string | null;
+  coachId: string | null;
   priority: boolean;
 }
 

@@ -1,8 +1,4 @@
-.table-caption {
-  margin: 1rem;
-  font-weight: 500;
-  text-align: center;
-}
+@import '../../../theme/variables';
 
 table {
   width: 100%;
@@ -17,6 +13,10 @@ table {
   }
 }
 
+.assigned {
+  background: $light-cyan;
+}
+
 .scale {
   display: flex;
   justify-content: space-around;
@@ -24,10 +24,10 @@ table {
   border-radius: 0.25rem;
 
   & span {
-    display: inline-block;
-    min-height: 1rem;
-    padding: 0.5rem 1.5rem;
-    color: white;
+    min-width: 4rem;
+    padding: 0.5rem 0;
+    color: $white;
+    font-size: 1.25rem;
     text-align: center;
   }
 }
@@ -37,7 +37,7 @@ table {
   justify-content: space-around;
 
   span {
-    color: black;
+    color: $black;
     font-size: 0.7rem;
   }
 }
@@ -51,11 +51,11 @@ tr.detail-row {
 }
 
 tr.element-row:not(.expanded-row):hover {
-  background: whitesmoke;
+  background: $others-grey6;
 }
 
 tr.element-row:not(.expanded-row):active {
-  background: #efefef;
+  background: $secondary-grey3;
 }
 
 .element-row td {

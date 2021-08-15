@@ -1,38 +1,64 @@
 <div mat-dialog-content>
-  <button mat-icon-button class="close-button" [mat-dialog-close]="true">✖</button>
-  <div class="content">
-    <mat-form-field appearance="fill" class="text-essay">
-      <textarea matInput readonly>{{ data.essayAnswer }}</textarea>
-    </mat-form-field>
-    <label class="essay-score">
-      Essay score
-      <input
-        [(ngModel)]="data.essayMark"
-        required
-        type="number"
-        name="essayScore"
-        min="0"
-        max="10"
-        step="1"
-      />
-    </label>
-    <audio class="audio" controls></audio>
-    <label class="speaking-score"
-      >Speaking score
-      <input
-        [(ngModel)]="data.speakingMark"
-        required
-        type="number"
-        name="speakingScore"
-        min="0"
-        max="10"
-        step="1"
-      />
-    </label>
-    <mat-form-field appearance="outline" class="feedback">
-      <mat-label>Your feedback</mat-label>
-      <textarea [(ngModel)]="data.comment" matInput></textarea>
-    </mat-form-field>
-  </div>
+  <button mat-icon-button type="button" class="close-button" [mat-dialog-close]="true">✖</button>
+  <form [formGroup]="form" (ngSubmit)="submitTest()">
+    <div class="content">
+      <mat-form-field appearance="fill" class="text-essay">
+        <textarea matInput readonly>{{ data.essayAnswer }}</textarea>
+      </mat-form-field>
+      <div class="essay-mark">
+        <label class="essay-mark-label">
+          Essay Score
+          <input
+            formControlName="essayMark"
+            required
+            type="number"
+            name="essayMark"
+            min="0"
+            max="10"
+            step="1"
+          />
+        </label>
+        <div
+          *ngIf="form.get('essayMark')?.invalid && form.get('essayMark')?.touched"
+          class="validation"
+        >
+          <small *ngIf="form.get('essayMark')?.errors?.pattern">Enter valid score (0-10)</small>
+          <small *ngIf="form.get('essayMark')?.errors?.required"
+            >Field Essay Score must be filled</small
+          >
+        </div>
+      </div>
+      <audio class="audio" controls></audio>
+      <div class="speaking-mark">
+        <label class="speaking-mark-label">
+          Speaking Score
+          <input
+            formControlName="speakingMark"
+            required
+            type="number"
+            name="speakingMark"
+            min="0"
+            max="10"
+            step="1"
+          />
+        </label>
+        <div
+          *ngIf="form.get('speakingMark')?.invalid && form.get('speakingMark')?.touched"
+          class="validation"
+        >
+          <small *ngIf="form.get('speakingMark')?.errors?.pattern">Enter valid score (0-10)</small>
+          <small *ngIf="form.get('speakingMark')?.errors?.required"
+            >Field Speaking Score must be filled</small
+          >
+        </div>
+      </div>
+      <mat-form-field appearance="outline" class="feedback">
+        <mat-label>Your feedback</mat-label>
+        <textarea name="comment" formControlName="comment" matInput></textarea>
+      </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+      SUBMIT
+    </button>
+  </form>
 </div>
-<button mat-raised-button color="primary" (click)="submitTest()">SUBMIT</button>

@@ -1,11 +1,11 @@
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Component, Inject, Input, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { Level } from 'src/app/constants/data-constants';
 import { TestStoreService } from 'src/app/services/store/test-store.service';
-import { Test } from '../../../interfaces/test';
-import { GetHrUser, User } from '../../../interfaces/user.interfaces';
 import { user } from '../../../constants/mock-user-data';
+import { TestResult } from '../../../interfaces/test';
+import { GetHrUser } from '../../../interfaces/user.interfaces';
 
 @Component({
   selector: 'app-user-results-dialog',
@@ -15,13 +15,13 @@ import { user } from '../../../constants/mock-user-data';
 export class UserResultsDialogComponent implements OnInit {
   @Input() user!: GetHrUser;
 
-  results$: Observable<Test[] | null> = this.testStoreService.testResults$;
+  results$: Observable<TestResult[] | undefined> = this.testStoreService.testResults$;
 
   levels = [...Object.values(Level)];
 
   isClicked = false;
 
-  results: Test[] = [];
+  results: TestResult[] = [];
 
   get testsCount() {
     return this.results.length;

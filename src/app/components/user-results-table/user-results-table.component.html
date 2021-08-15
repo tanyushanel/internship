@@ -1,24 +1,32 @@
-<h3 class="table-caption">Your recent results</h3>
-
-<table mat-table matSort [dataSource]="results" multiTemplateDataRows class="mat-elevation-z8">
+<table mat-table [dataSource]="results" multiTemplateDataRows class="mat-elevation-z8">
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef mat-header>No.</th>
-    <td mat-cell *matCellDef="let element; let ind = dataIndex">{{ ind + 1 }}</td>
+    <td
+      mat-cell
+      *matCellDef="let element; let ind = dataIndex"
+      [class.assigned]="element.assignmentEndDate"
+    >
+      {{ ind + 1 }}
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="date">
     <th mat-header-cell *matHeaderCellDef mat-header>Date</th>
-    <td mat-cell *matCellDef="let element">{{ element.creationDate | date: 'medium' }}</td>
+    <td mat-cell *matCellDef="let element" [class.assigned]="element.assignmentEndDate">
+      {{ element.creationDate | date: 'medium' }}
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="level">
     <th mat-header-cell *matHeaderCellDef mat-header>Level</th>
-    <td mat-cell *matCellDef="let element">{{ levels[element.level - 1] }}</td>
+    <td mat-cell *matCellDef="let element" [class.assigned]="element.assignmentEndDate">
+      {{ levels[element.level - 1] }}
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="result">
     <th mat-header-cell *matHeaderCellDef>Result</th>
-    <td mat-cell *matCellDef="let element">
+    <td mat-cell *matCellDef="let element" [class.assigned]="element.assignmentEndDate">
       <b>
         {{
           element!.grammarMark + element!.auditionMark + element!.essayMark + element!.speakingMark
@@ -48,9 +56,9 @@
           <div>
             <div class="desc">
               <span>Grammar</span>
-              <span>Audio</span>
-              <span>Essay</span>
-              <span>Speach</span>
+              <span>Listening</span>
+              <span>Writing</span>
+              <span>Speaking</span>
             </div>
 
             <div class="scale">
@@ -59,7 +67,7 @@
               <span *ngIf="element.essayMark; else noResult">{{ element.essayMark }}</span>
               <span *ngIf="element.speakingMark; else noResult">{{ element.speakingMark }}</span>
               <ng-template #noResult>
-                <span class="material-icons"> hourglass_empty </span>
+                <span class="material-icons" matTooltip="In review"> query_builder </span>
               </ng-template>
             </div>
           </div>

@@ -22,6 +22,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   imports: [
@@ -41,6 +42,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatTabsModule,
     ReactiveFormsModule,
     MatProgressBarModule,
+    MatTooltipModule,
     MatOptionModule,
     MatSelectModule,
     MatCheckboxModule,
