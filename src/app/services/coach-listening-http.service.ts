@@ -30,8 +30,8 @@ export class CoachListeningHttpService {
     return this.http.put(`${ListeningApiUrl}/${topic.id}`, topic);
   }
 
-  createListening(topic: UpdateCoachListening) {
-    return this.http.post(ListeningApiUrl, topic);
+  createListening(listening: UpdateCoachListening) {
+    return this.http.post(ListeningApiUrl, listening);
   }
 
   deleteListening(id: string) {

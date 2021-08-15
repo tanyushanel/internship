@@ -45,12 +45,13 @@ export class CoachProfileEditorComponent implements OnInit {
 
   tabChanged(tabChangeEvent: MatTabChangeEvent): void {
     if (tabChangeEvent.index === 0) {
-      this.coachEdit.getAllQuestion();
       this.selectedTab = CoachEditorTabs.grammar;
+      this.coachEdit.getAllQuestion();
+      this.tables$ = this.coachEdit.questions$;
     } else if (tabChangeEvent.index === 1) {
       this.selectedTab = CoachEditorTabs.audition;
       this.coachListening.getAllListening();
-      this.tables$ = this.coachListening.listens$;
+      this.tables$ = this.coachListening.listenings$;
     } else if (tabChangeEvent.index === 2) {
       this.selectedTab = CoachEditorTabs.writingAndSpeaking;
       this.coachTopic.getAllTopic();

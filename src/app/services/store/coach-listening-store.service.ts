@@ -9,9 +9,9 @@ import { EditionCoachListening, UpdateCoachListening } from '../../interfaces/au
   providedIn: 'root',
 })
 export class CoachListeningStoreService {
-  readonly listen$ = new Subject<EditionCoachListening>();
+  readonly listening$ = new Subject<EditionCoachListening>();
 
-  readonly listens$ = new Subject<TableData[]>();
+  readonly listenings$ = new Subject<TableData[]>();
 
   constructor(private readonly coachListeningHttpService: CoachListeningHttpService) {}
 
@@ -34,7 +34,7 @@ export class CoachListeningStoreService {
       )
       .subscribe({
         next: (listen) => {
-          this.listens$.next(listen);
+          this.listenings$.next(listen);
         },
       });
   }
@@ -42,7 +42,7 @@ export class CoachListeningStoreService {
   getListening(id: string) {
     this.coachListeningHttpService.getListening(id).subscribe({
       next: (listen) => {
-        this.listen$.next(listen);
+        this.listening$.next(listen);
         this.getAllListening();
       },
     });

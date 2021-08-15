@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/no-cycle
 import { Level } from '../constants/data-constants';
+// eslint-disable-next-line import/no-cycle
 import { Question } from './question-answer';
 
 export interface CoachListening {

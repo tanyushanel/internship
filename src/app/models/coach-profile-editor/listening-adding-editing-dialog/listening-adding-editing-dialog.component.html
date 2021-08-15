@@ -1,7 +1,11 @@
 <div class="main">
   <h1>{{ data.isEdit ? 'Edit Listening' : 'Add Listening' }}</h1>
   <div>
-    <input type="file" (change)="handleFileInput($event)" />
+    <label class="load-file">
+      <input type="file" (change)="handleFileInput($event)" />
+      <span>Custom Upload</span>
+    </label>
+    <span class="file-path">{{ this.fileToUpload?.name ?? this.data.audioFilePath }}</span>
   </div>
   <div>
     <h2>Select level</h2>
