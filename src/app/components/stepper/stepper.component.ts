@@ -40,9 +40,7 @@ export class StepperComponent implements OnChanges, OnInit {
 
   onChanges(): void {
     const observables = this.stepperFormGroups?.map((form) =>
-      form.controls.stepCtrl.valueChanges.pipe(
-        startWith(''), // set initial value to let the subscribe to be called
-      ),
+      form.controls.stepCtrl.valueChanges.pipe(startWith('')),
     );
 
     if (!observables) return;
