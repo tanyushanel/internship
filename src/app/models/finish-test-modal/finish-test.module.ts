@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { FinishTestComponent } from './finish-test.component';
+import { AngularMaterialCommonModule } from '../angular-material-common.module';
 
 @NgModule({
   declarations: [FinishTestComponent],
-  imports: [CommonModule, MatCardModule, MatButtonModule],
+  imports: [CommonModule, AngularMaterialCommonModule, MatButtonModule],
 })
 export class FinishTestModule {}

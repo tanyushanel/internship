@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { TopicModule } from '../../interfaces/essay-speaking';
 import { ErrorStoreService } from '../../services/store/error-store.service';
 import { Route } from '../../constants/route-constant';
-import { FinishTestComponent } from './finish-test-modal/finish-test.component';
+import { FinishTestComponent } from '../finish-test-modal/finish-test.component';
 
 declare let MediaRecorder: any;
 
