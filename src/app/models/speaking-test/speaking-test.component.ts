@@ -13,7 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { TopicModule } from '../../interfaces/essay-speaking';
 import { ErrorStoreService } from '../../services/store/error-store.service';
 import { Route } from '../../constants/route-constant';
-import { FinishTestComponent } from '../finish-test-modal/finish-test.component';
+import { FinishModalDialogComponent } from '../dialog-module/finish-modal-dialog/finish-modal-dialog.component';
 
 declare let MediaRecorder: any;
 
@@ -60,7 +60,7 @@ export class SpeakingTestComponent implements OnInit, OnDestroy {
   }
 
   openDialog() {
-    this.dialog.open(FinishTestComponent);
+    this.dialog.open(FinishModalDialogComponent);
   }
 
   async ngOnInit() {
@@ -161,7 +161,6 @@ export class SpeakingTestComponent implements OnInit, OnDestroy {
     this.mediaRecorder.stop();
     this.stopTimer();
   }
-
 
   finishTest() {
     this.router.navigate([Route.result]);
