@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { languageLevel, GrammarAnswers, Level } from '../../../constants/data-constants';
+import { GrammarAnswers, languageLevel, Level } from '../../../constants/data-constants';
 import { EditionCoachListening, ListeningQuestion } from '../../../interfaces/audition';
 import { CoachListeningStoreService } from '../../../services/store/coach-listening-store.service';
 import { englishLevelNumber } from '../../../helpers/checks';
@@ -20,7 +20,7 @@ export class ListeningAddingEditingDialogComponent {
 
   questions: ListeningQuestion[] = this.data.questions;
 
-  fileToUpload: File | undefined;
+  fileToUpload: null | File | undefined;
 
   audioSrc: string | undefined;
 
@@ -66,18 +66,18 @@ export class ListeningAddingEditingDialogComponent {
     this.dialogRef.close();
   }
 
-  handleFileInput(event: any) {
+  handleFileInput(event: any): void {
     this.fileToUpload = event.target.files[0];
     this.audioSrc = URL.createObjectURL(event.target.files[0]);
     this.srcData = this.sanitizer.bypassSecurityTrustResourceUrl(this.audioSrc);
     this.coachListening.uploadListeningFile(event.target.files[0]);
   }
 
-  setNameQuestion(event: any, i: number) {
-    this.questions[i].nameQuestion = event.target.value;
+  setNameQuestion(event: Event, i: number): void {
+    this.questions[i].nameQuestion = (event.target as HTMLInputElement).value;
   }
 
-  setNameAnswer(event: any, i: number, y: number) {
-    this.questions[i].answers[y].nameAnswer = event.target.value;
+  setNameAnswer(event: Event, i: number, y: number): void {
+    this.questions[i].answers[y].nameAnswer = (event.target as HTMLInputElement).value;
   }
 }
