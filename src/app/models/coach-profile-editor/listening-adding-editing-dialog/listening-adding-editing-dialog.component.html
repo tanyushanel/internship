@@ -1,0 +1,63 @@
+<div class="main">
+  <h1>{{ data.isEdit ? 'Edit Listening' : 'Add Listening' }}</h1>
+  <div>
+    <div class="load-file">
+      <label class="label">
+        <span class="material-icons-outlined">publish</span>
+        <span>Upload</span>
+        <input type="file" accept="audio/*" (change)="handleFileInput($event)" />
+      </label>
+    </div>
+    <span class="file-path">{{ this.fileToUpload?.name ?? this.data.audioFilePath }}</span>
+  </div>
+  <audio *ngIf="srcData" controls><source [src]="srcData" /></audio>
+  <div>
+    <h2>Select level</h2>
+    <app-choose-level
+      (changeLevel)="levelChangeHandler($event)"
+      [currentLevel]="languageLevel[data.level.toString()]"
+    ></app-choose-level>
+  </div>
+
+  <mat-stepper orientation="vertical">
+    <mat-step *ngFor="let question of questions; let i = index">
+      <mat-form-field appearance="fill">
+        <mat-label>Formulation of the question</mat-label>
+        <textarea
+          matInput
+          [value]="questions[i].nameQuestion"
+          (change)="setNameQuestion($event, i)"
+          >{{ question.nameQuestion }}</textarea
+        >
+      </mat-form-field>
+      <div *ngFor="let answer of question.answers; let y = index" class="answer-group">
+        <mat-radio-group class="example-radio-group">
+          <mat-radio-button
+            class="example-radio-button"
+            [value]="QuestionList[y]"
+            [checked]="answer.isRight"
+            (change)="radioChangeHandler(i, y, questions[i])"
+          >
+            {{ QuestionList[y] }}
+          </mat-radio-button>
+        </mat-radio-group>
+        <mat-form-field appearance="fill">
+          <mat-label>Answer option</mat-label>
+          <textarea
+            matInput
+            [value]="questions[i].answers[y].nameAnswer"
+            (change)="setNameAnswer($event, i, y)"
+            >{{ questions[i].answers[y].nameAnswer }}
+	              </textarea
+          >
+        </mat-form-field>
+      </div>
+    </mat-step>
+  </mat-stepper>
+  <div class="dialog-button">
+    <button mat-raised-button mat-dialog-close>Close</button>
+    <button mat-raised-button color="primary" (click)="updateData()">
+      {{ data.isEdit ? 'Update' : 'Save' }}
+    </button>
+  </div>
+</div>

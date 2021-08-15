@@ -2,6 +2,8 @@
 import { EmptyQuestion } from '../interfaces/question-answer';
 // eslint-disable-next-line import/no-cycle
 import { CoachEmptyTopic } from '../interfaces/coach-edit';
+// eslint-disable-next-line import/no-cycle
+import { UpdateCoachListening } from '../interfaces/audition';
 
 export enum Level {
   Elementary = 'Elementary',
@@ -44,36 +46,36 @@ export enum GrammarAnswers {
   fourth = 'D)',
 }
 
-export enum FilterFields {
-  id = 'id',
-  level = 'level',
-  date = 'date',
-}
+const emptyAnswersListening = () => {
+  return Array.from({ length: 4 }, () => ({
+    nameAnswer: '',
+    isRight: false,
+  }));
+};
 
 export const emptyQuestion: EmptyQuestion = {
   level: 1,
   nameQuestion: '',
-  answers: [
-    {
-      nameAnswer: '',
-      isRight: false,
-    },
-    {
-      nameAnswer: '',
-      isRight: false,
-    },
-    {
-      nameAnswer: '',
-      isRight: false,
-    },
-    {
-      nameAnswer: '',
-      isRight: false,
-    },
-  ],
+  answers: emptyAnswersListening(),
 };
 
 export const emptyTopic: CoachEmptyTopic = {
   level: 1,
   topicName: '',
+};
+
+export const emptyQuestionsListening = () => {
+  return Array.from({ length: 10 }, () => ({
+    id: '',
+    nameQuestion: '',
+    level: 1,
+    answers: emptyAnswersListening(),
+  }));
+};
+
+export const emptyListening: UpdateCoachListening = {
+  id: '',
+  audioFilePath: '',
+  level: 3,
+  questions: emptyQuestionsListening(),
 };
