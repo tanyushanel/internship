@@ -1,9 +1,13 @@
 <div mat-dialog-content>
+  <h1>{{ data.essayMark && data.speakingMark ? 'Test Check Results' : 'Test Checking' }}</h1>
   <button mat-icon-button type="button" class="close-button" [mat-dialog-close]="true">✖</button>
   <form [formGroup]="form" (ngSubmit)="submitTest()">
     <div class="content">
       <mat-form-field appearance="fill" class="text-essay">
-        <textarea matInput readonly>{{ data.essayAnswer }}</textarea>
+        <mat-label>Essay</mat-label>
+        <textarea cdkTextareaAutosize cdkAutosizeMinRows="4" matInput readonly>{{
+          data.essayAnswer
+        }}</textarea>
       </mat-form-field>
       <div class="essay-mark">
         <label class="essay-mark-label">
@@ -16,6 +20,7 @@
             min="0"
             max="10"
             step="1"
+            [readOnly]="data.essayMark"
           />
         </label>
         <div
@@ -40,6 +45,7 @@
             min="0"
             max="10"
             step="1"
+            [readOnly]="data.speakingMark"
           />
         </label>
         <div
@@ -54,10 +60,22 @@
       </div>
       <mat-form-field appearance="outline" class="feedback">
         <mat-label>Your feedback</mat-label>
-        <textarea name="comment" formControlName="comment" matInput></textarea>
+        <textarea
+          rows="4"
+          name="comment"
+          formControlName="comment"
+          matInput
+          [readonly]="data.comment"
+        ></textarea>
       </mat-form-field>
     </div>
-    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+    <button
+      *ngIf="data.essayMark === null"
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="form.invalid"
+    >
       SUBMIT
     </button>
   </form>

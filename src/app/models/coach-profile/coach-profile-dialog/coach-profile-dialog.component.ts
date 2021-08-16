@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CoachTest } from '../../../interfaces/coach-edit';
@@ -22,14 +22,15 @@ export class CoachProfileDialogComponent implements OnInit {
 
   ngOnInit() {
     this.form = new FormGroup({
-      comment: new FormControl(''),
-      speakingMark: new FormControl(null, [Validators.pattern(this.markPattern)]),
-      essayMark: new FormControl(null, [Validators.pattern(this.markPattern)]),
+      comment: new FormControl(this.data.comment),
+      speakingMark: new FormControl(this.data.speakingMark, [Validators.pattern(this.markPattern)]),
+      essayMark: new FormControl(this.data.essayMark, [Validators.pattern(this.markPattern)]),
     });
   }
 
   submitTest(): void {
     const formData = { ...this.form.value };
+
     const question = {
       essayMark: formData.essayMark,
       speakingMark: formData.speakingMark,
