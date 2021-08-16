@@ -1,16 +1,5 @@
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" matSort>
-    <ng-container matColumnDef="id">
-      <th class="header" mat-header-cell *matHeaderCellDef>
-        <mat-form-field class="filter" floatLabel="never">
-          <mat-label>Enter Number</mat-label>
-          <input matInput [formControl]="idFilter" />
-        </mat-form-field>
-        <div mat-sort-header>ID</div>
-      </th>
-      <td mat-cell *matCellDef="let row">{{ row.id }}</td>
-    </ng-container>
-
     <ng-container matColumnDef="firstName">
       <th class="header" mat-header-cell *matHeaderCellDef>
         <mat-form-field class="filter" floatLabel="never">
@@ -21,7 +10,6 @@
       </th>
       <td mat-cell *matCellDef="let row">{{ row.firstName }}</td>
     </ng-container>
-
     <ng-container matColumnDef="lastName">
       <th class="header" mat-header-cell *matHeaderCellDef>
         <mat-form-field class="filter" floatLabel="never">
@@ -36,7 +24,7 @@
     <ng-container matColumnDef="assessment">
       <th class="header" mat-header-cell *matHeaderCellDef>Assign Test</th>
       <td mat-cell *matCellDef="let row">
-        <button mat-raised-button (click)="onClick()" color="primary">Assign Test</button>
+        <button mat-raised-button (click)="onClick(row.userId)" color="primary">Assign Test</button>
       </td>
     </ng-container>
 

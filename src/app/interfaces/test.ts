@@ -1,13 +1,12 @@
-import { Audition } from './audition';
 import { Level } from '../constants/data-constants';
+import { Audition } from './audition';
 import { TopicModule } from './essay-speaking';
-
 import { Question } from './question-answer';
 
-export interface Test {
-  id: number;
+export interface TestResult {
+  id: string;
   level: Level;
-  testNumber: number;
+  testNumber: string;
   creationDate: string;
   testPassingDate: string;
   assignmentEndDate: string;
@@ -15,10 +14,10 @@ export interface Test {
   auditionMark: number | null;
   essayMark: number | null;
   speakingMark: number | null;
-  comment: number | null;
-  userId: number | null;
-  hrId: number | null;
-  coachId: number | null;
+  comment: string | null;
+  userId: string | null;
+  hrId: string | null;
+  coachId: string | null;
   priority: boolean;
 }
 
@@ -41,7 +40,7 @@ export interface UsersList {
 }
 
 export interface TestContent {
-  id: number;
+  id: string;
   userId: number;
   level: Level;
   testPassingDate: string;
@@ -49,4 +48,19 @@ export interface TestContent {
   audition: Audition;
   essay: TopicModule;
   speaking: TopicModule;
+}
+
+export interface TestSubmit {
+  id: string;
+  grammarAnswers: string[];
+  auditionAnswers: string[];
+  essayAnswer: string;
+  speakingAnswerReference: string;
+}
+
+export interface FinishTestBody {
+  grammarAnswers: string[];
+  auditionAnswers: string[];
+  essayAnswer: string;
+  speakingAnswerReference: string;
 }

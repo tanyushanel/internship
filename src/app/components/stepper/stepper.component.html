@@ -3,15 +3,17 @@
     class="step"
     [stepControl]="stepperFormGroups![ind]"
     *ngFor="let question of questionList; let ind = index; let first = first; let last = last"
-    label="Question {{ ind + 1 }}"
     errorMessage="Not Answered"
   >
     <form class="form__color" [formGroup]="stepperFormGroups![ind]">
       <p class="text__center">{{ question.nameQuestion }}</p>
 
-      <p></p>
-
-      <mat-radio-group id="answer-label-group" class="mat-radio-group" formControlName="stepCtrl">
+      <mat-radio-group
+        id="answer-label-group"
+        class="mat-radio-group"
+        formControlName="stepCtrl"
+        (ngModelChange)="onAnswersSubmit()"
+      >
         <mat-radio-button
           class="answer-radio-button"
           *ngFor="let answerCase of question.answers"

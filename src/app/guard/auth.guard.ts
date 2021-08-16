@@ -6,7 +6,7 @@ import { AuthStoreService } from '../services/store/auth-store.service';
 import { Route } from '../constants/route-constant';
 import { LocalStorageService } from '../services/local-storage.service';
 import { UserResponseType } from '../interfaces/user.interfaces';
-import { isRoleExist } from '../helpers/check-role';
+import { isRoleExist } from '../helpers/checks';
 
 @Injectable({
   providedIn: 'root',

@@ -6,7 +6,8 @@ import { MatSort } from '@angular/material/sort';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { UsersList, UserTable } from 'src/app/interfaces/test';
-import { User } from 'src/app/interfaces/user.interfaces';
+import { ApiAssignTest, GetHrUser, User } from 'src/app/interfaces/user.interfaces';
+import { TestStoreService } from 'src/app/services/store/test-store.service';
 import { UserResultsDialogComponent } from '../dialog-module/user-results-dialog/user-results-dialog.component';
 import { HrProfileDialogComponent } from './hr-profile-dialog/hr-profile-dialog.component';
 import { isSubstring } from '../../helpers/filter-check';
@@ -21,8 +22,6 @@ export class HrProfileComponent implements OnInit {
   displayedColumns: string[] = ['firstName', 'lastName', 'assessment', 'info'];
 
   results$: Observable<UsersList | null> = this.userTableStoreService.usersResults$;
-
-  idFilter = new FormControl('');
 
   firstNameFilter = new FormControl('');
 
@@ -43,9 +42,13 @@ export class HrProfileComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort | null = null;
 
-  constructor(public dialog: MatDialog, private userTableStoreService: UserTableStoreService) {}
+  constructor(
+    public dialog: MatDialog,
+    private userTableStoreService: UserTableStoreService,
+    private testStoreService: TestStoreService,
+  ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.userTableStoreService.usersSubject$.subscribe((value) => {
       if (value) {
         this.dataSource = new MatTableDataSource(value.results);
@@ -54,6 +57,7 @@ export class HrProfileComponent implements OnInit {
     });
 
     this.userTableStoreService.getUsersResults();
+
     this.firstNameFilter.valueChanges.subscribe((firstName) => {
       this.filterValues.firstName = firstName;
       this.dataSource.filter = JSON.stringify(this.filterValues);
@@ -72,21 +76,23 @@ export class HrProfileComponent implements OnInit {
     return (filterValues, filter): boolean => {
       const searchTerms = JSON.parse(filter);
       return (
-        isSubstring(filterValues.id, searchTerms.id) &&
         isSubstring(filterValues.firstName, searchTerms.firstName) &&
         isSubstring(filterValues.lastName, searchTerms.lastName)
       );
     };
   }
 
-  onOpenInfoDialog(row: User): void {
+  onOpenInfoDialog(row: GetHrUser): void {
+    this.testStoreService.getAllUserResults(row.userId);
     this.dialog.open(UserResultsDialogComponent, {
-      width: '35rem',
-      data: { firstName: row.firstName, lastName: row.lastName },
+      width: '45rem',
+      data: { ...row },
     });
   }
 
-  onClick() {
-    this.dialog.open(HrProfileDialogComponent);
+  onClick(userId: string) {
+    this.dialog.open(HrProfileDialogComponent, {
+      data: { userId } as ApiAssignTest,
+    });
   }
 }

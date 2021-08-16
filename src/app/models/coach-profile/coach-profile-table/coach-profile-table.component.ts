@@ -15,6 +15,7 @@ import { FormControl } from '@angular/forms';
 import { CoachProfileDialogComponent } from '../coach-profile-dialog/coach-profile-dialog.component';
 import { isSubstring } from '../../../helpers/filter-check';
 import { CoachTest } from '../../../interfaces/coach-edit';
+import { languageLevel } from '../../../constants/data-constants';
 
 @Component({
   selector: 'app-coach-profile-table',
@@ -22,6 +23,10 @@ import { CoachTest } from '../../../interfaces/coach-edit';
   styleUrls: ['./coach-profile-table.component.scss'],
 })
 export class CoachProfileTableComponent implements AfterViewInit, OnInit, OnChanges {
+  @Input() selectTab = '';
+
+  languageLevel = languageLevel;
+
   displayedColumns: string[] = ['id', 'level', 'date', 'button'];
 
   idFilter = new FormControl('');
@@ -31,9 +36,9 @@ export class CoachProfileTableComponent implements AfterViewInit, OnInit, OnChan
   dateFilter = new FormControl('');
 
   filterValues = {
-    id: '',
+    testNumber: '',
     level: '',
-    date: '',
+    testPassingDate: '',
   };
 
   dataSource: MatTableDataSource<CoachTest>;
@@ -69,21 +74,24 @@ export class CoachProfileTableComponent implements AfterViewInit, OnInit, OnChan
     }, 10);
   }
 
-  onClick(id: number) {
-    this.dialog.open(CoachProfileDialogComponent, { data: { id } });
+  onClick(essayAnswer: string, id: string) {
+    this.dialog.open(CoachProfileDialogComponent, {
+      data: { essayAnswer, id },
+      disableClose: true,
+    });
   }
 
   ngOnInit(): void {
-    this.idFilter.valueChanges.subscribe((id) => {
-      this.filterValues.id = id;
+    this.idFilter.valueChanges.subscribe((testNumber) => {
+      this.filterValues.testNumber = testNumber;
       this.dataSource.filter = JSON.stringify(this.filterValues);
     });
     this.levelFilter.valueChanges.subscribe((level) => {
       this.filterValues.level = level;
       this.dataSource.filter = JSON.stringify(this.filterValues);
     });
-    this.dateFilter.valueChanges.subscribe((date) => {
-      this.filterValues.date = date;
+    this.dateFilter.valueChanges.subscribe((testPassingDate) => {
+      this.filterValues.testPassingDate = testPassingDate;
       this.dataSource.filter = JSON.stringify(this.filterValues);
     });
   }
@@ -92,9 +100,9 @@ export class CoachProfileTableComponent implements AfterViewInit, OnInit, OnChan
     return function filterFunction(filterValues, filter): boolean {
       const searchTerms = JSON.parse(filter);
       return (
-        isSubstring(filterValues.id, searchTerms.id) &&
-        isSubstring(filterValues.level, searchTerms.level) &&
-        isSubstring(filterValues.date, searchTerms.date)
+        isSubstring(filterValues.testNumber, searchTerms.testNumber) &&
+        isSubstring(languageLevel[filterValues.level], searchTerms.level) &&
+        isSubstring(filterValues.testPassingDate, searchTerms.testPassingDate)
       );
     };
   }

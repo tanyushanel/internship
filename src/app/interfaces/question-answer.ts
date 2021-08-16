@@ -1,30 +1,30 @@
-// eslint-disable-next-line import/no-cycle
-import { Level } from '../constants/data-constants';
-
 export interface Question {
-  id: number;
+  id: string;
   nameQuestion: string;
-  level: Level;
+  level: number;
   auditionId: number;
   answerId: number;
-  answers: Answer[];
-}
-export interface CoachQuestion {
-  id: string;
-  questionNumber: string;
-  numberTest: string;
-  level: number;
-  nameQuestion: string;
-  creatorId: string;
-  answers?: AnswerQuestion[];
-  isEdit?: boolean;
+  answers: AnswerQuestion[];
 }
 
-export interface Answer {
-  id: number;
-  nameAnswer: string;
-  questionId: Question['id'];
-  isRight: boolean;
+export interface CoachQuestion {
+  id: string;
+  level: number;
+  creatorId: string;
+  numberTest: string;
+  creationDate: string;
+  questionNumber: number;
+  nameQuestion: string;
+  isEdit?: boolean;
+  answers?: AnswerQuestion[];
+}
+export interface TableData {
+  id: string;
+  creationDate: string;
+  creatorId: string;
+  level: number;
+  name: string;
+  number: number;
 }
 
 export interface AnswerQuestion {
@@ -41,21 +41,24 @@ export interface UpdateCoachQuestion {
   answers: AnswerQuestion[] | undefined;
 }
 
-export interface ResponseGetAllQuestion {
+export interface ResponseGetAll<T> {
   currentPage: number;
   firstRowOnPage: number;
   lastRowOnPage: number;
   pageCount: number;
   pageSize: number;
-  results: CoachQuestion[];
+  results: T[];
   rowCount: number;
 }
-interface EmptyAnswer {
+
+export interface EmptyAnswer {
   nameAnswer: string;
   isRight: boolean;
 }
+
 export interface EmptyQuestion {
-  level: number;
+  id?: string;
+  level?: number;
   nameQuestion: string;
   answers: EmptyAnswer[];
 }

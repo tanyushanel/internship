@@ -20,6 +20,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   imports: [
@@ -38,8 +41,12 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatDialogModule,
     MatTabsModule,
     ReactiveFormsModule,
-    MatIconModule,
     MatProgressBarModule,
+    MatTooltipModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatMenuModule,
   ],
   declarations: [],
   exports: [
@@ -58,15 +65,15 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatIconModule,
     MatDialogModule,
     ReactiveFormsModule,
-    MatIconModule,
     MatProgressBarModule,
     MatSidenavModule,
     MatListModule,
     MatToolbarModule,
-    MatCardModule,
     MatOptionModule,
     MatSelectModule,
     MatSnackBarModule,
+    MatCheckboxModule,
+    MatMenuModule,
   ],
   providers: [
     {

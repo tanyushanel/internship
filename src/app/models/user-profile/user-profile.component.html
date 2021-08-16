@@ -1,5 +1,5 @@
 <div class="profile-container">
-  <h3 class="table-caption">Please, choose your language level before starting a test:</h3>
+  <h3 class="table-caption">Please choose your level to start a test:</h3>
 
   <mat-radio-group name="levels" class="radio" [(ngModel)]="selectedLevel">
     <mat-radio-button
@@ -12,6 +12,7 @@
   </mat-radio-group>
 
   <button
+    *ngIf="!(assignedTests$ | async)?.length"
     [disabled]="!selectedLevel || isStarted"
     mat-raised-button
     color="primary"
@@ -21,11 +22,27 @@
     START TEST
   </button>
 
+  <div *ngIf="(assignedTests$ | async)?.length">
+    <h3 class="table-caption warn">You have a test assigned!</h3>
+    <p class="table-caption">
+      Deadline: <span class="warn">{{ deadLine | date: 'medium' }}</span>
+    </p>
+    <button
+      [disabled]="!selectedLevel || isStarted"
+      mat-raised-button
+      color="primary"
+      class="start-btn"
+      (click)="onStartAssignedButtonClick(selectedLevel, assignedTest)"
+    >
+      START ASSIGNED TEST
+    </button>
+  </div>
+
   <app-user-results-table
+    *ngIf="(results$ | async)?.length; else noResults"
     class="user-results-table"
     [results]="(results$ | async)!"
     [levels]="levels"
-    *ngIf="(results$ | async)?.length; else noResults"
   >
   </app-user-results-table>
 

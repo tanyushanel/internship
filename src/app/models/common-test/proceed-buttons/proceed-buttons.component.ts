@@ -10,7 +10,7 @@ export class ProceedButtonsComponent implements OnInit {
 
   @Output() changedIndex: EventEmitter<number> = new EventEmitter<number>();
 
-  maxIndex = 3;
+  @Input() maxIndex = 0;
 
   ngOnInit(): void {}
 
