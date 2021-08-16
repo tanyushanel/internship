@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Route } from 'src/app/constants/route-constant';
@@ -11,14 +11,16 @@ import { FinishTestBody } from '../../../interfaces/test';
   styleUrls: ['./finish-modal-dialog.component.scss'],
 })
 export class FinishModalDialogComponent implements OnInit {
-  isFinished = false;
+  @Input() isFinished = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: FinishTestBody,
     private testStoreService: TestStoreService,
     private readonly router: Router,
     public dialogRef: MatDialogRef<FinishModalDialogComponent>,
-  ) {}
+  ) {
+    this.dialogRef.disableClose = true;
+  }
 
   ngOnInit(): void {}
 
@@ -28,7 +30,7 @@ export class FinishModalDialogComponent implements OnInit {
 
   onFinishTestClick(): void {
     this.router.navigate([Route.result]);
-    this.dialogRef.close();
+
     this.testStoreService.testSubmit(
       this.data.grammarAnswers,
       this.data.auditionAnswers,
@@ -37,5 +39,7 @@ export class FinishModalDialogComponent implements OnInit {
     );
 
     this.isFinished = true;
+
+    this.dialogRef.close();
   }
 }

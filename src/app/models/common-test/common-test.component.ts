@@ -94,14 +94,17 @@ export class CommonTestComponent implements OnInit {
   }
 
   onSubmitTest(): void {
-    this.testStoreService.testSubmit(
-      this.grammarAnswers,
-      this.listeningAnswers,
-      this.essayText,
-      this.speachRef,
-    );
-
     this.isFinished = true;
+
+    this.dialog.open(FinishModalDialogComponent, {
+      width: '45rem',
+      data: {
+        grammarAnswers: this.grammarAnswers,
+        auditionAnswers: this.listeningAnswers,
+        essayAnswer: this.essayText,
+        speakingAnswerReference: this.speachRef,
+      },
+    });
   }
 
   onTimerRunOut(): void {
