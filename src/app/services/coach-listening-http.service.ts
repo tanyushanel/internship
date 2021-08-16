@@ -9,6 +9,7 @@ import {
 import {
   CoachListening,
   EditionCoachListening,
+  PathFile,
   UpdateCoachListening,
 } from '../interfaces/audition';
 
@@ -39,10 +40,10 @@ export class CoachListeningHttpService {
   }
 
   uploadListeningFile(file: FormData) {
-    return this.http.post(UploadFileListeningApiUrl, file);
+    return this.http.post<PathFile>(UploadFileListeningApiUrl, file);
   }
 
-  downloadListeningFile() {
-    return this.http.get(DownloadFileListeningApiUrl);
+  downloadListeningFile(filePath: string) {
+    return this.http.get<any>(`${DownloadFileListeningApiUrl}?filePath=${filePath}`);
   }
 }

@@ -119,6 +119,7 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
       });
     } else if (this.selectTab === CoachEditorTabs.audition) {
       this.coachListening.getListening(row.id);
+      this.coachListening.downloadListeningFile();
       this.coachListening.listening$.pipe(take(1)).subscribe((listen) => {
         if (listen !== null) {
           this.dialog.open(ListeningAddingEditingDialogComponent, {

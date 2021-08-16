@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { map } from 'rxjs/operators';
 import { GrammarAnswers, languageLevel, Level } from '../../../constants/data-constants';
 import { EditionCoachListening, ListeningQuestion } from '../../../interfaces/audition';
 import { CoachListeningStoreService } from '../../../services/store/coach-listening-store.service';
@@ -25,6 +26,8 @@ export class ListeningAddingEditingDialogComponent {
   audioSrc: string | undefined;
 
   srcData: SafeResourceUrl | undefined;
+
+  audioFilePath: string | undefined;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: EditionCoachListening,
@@ -57,10 +60,11 @@ export class ListeningAddingEditingDialogComponent {
   updateData() {
     const questions = {
       id: this.data.id,
-      audioFilePath: this.fileToUpload?.name ?? this.data.audioFilePath,
+      audioFilePath: this.audioFilePath,
       level: this.englishLevel ?? this.data.level,
       questions: this.questions.slice(0, 10), // for wrong data in backend
     };
+
     if (this.data.isEdit) {
       this.coachListening.updateListening(questions);
     } else {
@@ -74,6 +78,13 @@ export class ListeningAddingEditingDialogComponent {
     this.audioSrc = URL.createObjectURL(event.target.files[0]);
     this.srcData = this.sanitizer.bypassSecurityTrustResourceUrl(this.audioSrc);
     this.coachListening.uploadListeningFile(event.target.files[0]);
+    this.coachListening.audioFilePath$
+      .pipe(
+        map((path) => {
+          this.audioFilePath = path.pathfile;
+        }),
+      )
+      .subscribe();
   }
 
   setNameQuestion(event: Event, i: number): void {
