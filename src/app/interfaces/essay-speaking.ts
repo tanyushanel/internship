@@ -1,4 +1,4 @@
 export interface TopicModule {
-  id: number;
+  id: string;
   topicName: string;
 }

@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { TopicModule } from '../../interfaces/essay-speaking';
 import { Question } from '../../interfaces/question-answer';
+import { TestContent, TestSubmit } from '../../interfaces/test';
 import { TestStoreService } from '../../services/store/test-store.service';
-import { TestContent } from '../../interfaces/test';
+import { FinishModalDialogComponent } from '../dialog-module/finish-modal-dialog/finish-modal-dialog.component';
 
 @Component({
   selector: 'app-common-test',
@@ -13,6 +15,16 @@ import { TestContent } from '../../interfaces/test';
   styleUrls: ['./common-test.component.scss'],
 })
 export class CommonTestComponent implements OnInit {
+  grammarAnswers: string[] = [];
+
+  listeningAnswers: string[] = [];
+
+  essayText = '';
+
+  speachRef = '';
+
+  requestBody: Observable<TestSubmit | null> = this.testStoreService.submitTestBody$;
+
   test$: Observable<TestContent | null> = this.testStoreService.test$;
 
   grammar$!: Observable<Question[] | null>;
@@ -25,9 +37,18 @@ export class CommonTestComponent implements OnInit {
 
   selectedIndex = 0;
 
-  constructor(private testStoreService: TestStoreService, private route: ActivatedRoute) {}
+  maxIndex = 3;
+
+  constructor(
+    private testStoreService: TestStoreService,
+    private route: ActivatedRoute,
+    public dialog: MatDialog,
+  ) {}
 
   ngOnInit() {
+    this.testStoreService.createTestContent();
+    this.testStoreService.getTestId();
+
     const testId = this.route.snapshot.paramMap.get('id');
 
     if (testId) {
@@ -42,5 +63,29 @@ export class CommonTestComponent implements OnInit {
 
   setTabIndex(ind: number): void {
     this.selectedIndex = ind;
+  }
+
+  onWritingSubmit(txt: string | null): void {
+    if (txt) this.essayText = txt;
+  }
+
+  onGrammarSubmit(answers: string[] | null): void {
+    if (answers) this.grammarAnswers = answers;
+  }
+
+  onListeningSubmit(answers: string[] | null): void {
+    if (answers) this.listeningAnswers = answers;
+  }
+
+  onFinishButtonClick(): void {
+    this.dialog.open(FinishModalDialogComponent, {
+      width: '45rem',
+      data: {
+        grammarAnswers: this.grammarAnswers,
+        auditionAnswers: this.listeningAnswers,
+        essayAnswer: this.essayText,
+        speakingAnswerReference: this.speachRef,
+      },
+    });
   }
 }

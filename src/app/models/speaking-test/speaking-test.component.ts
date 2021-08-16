@@ -9,10 +9,11 @@ import {
 } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 import { TopicModule } from '../../interfaces/essay-speaking';
-
 import { ErrorStoreService } from '../../services/store/error-store.service';
 import { Route } from '../../constants/route-constant';
+import { FinishModalDialogComponent } from '../dialog-module/finish-modal-dialog/finish-modal-dialog.component';
 
 declare let MediaRecorder: any;
 
@@ -24,7 +25,7 @@ declare let MediaRecorder: any;
 export class SpeakingTestComponent implements OnInit, OnDestroy {
   @Input() speaking: TopicModule | null = null;
 
-  @Output() speachRecordedRef = new EventEmitter<{ src: SafeUrl } | null>();
+  @Output() speachRecorded = new EventEmitter<{ src: SafeUrl } | null>();
 
   mediaRecorder: any;
 
@@ -51,11 +52,20 @@ export class SpeakingTestComponent implements OnInit, OnDestroy {
     private dom: DomSanitizer,
     private errorStoreService: ErrorStoreService,
     private readonly router: Router,
+    public dialog: MatDialog,
   ) {}
+
+  home(): void {
+    throw new Error('Method not implemented.');
+  }
+
+  openDialog() {
+    this.dialog.open(FinishModalDialogComponent);
+  }
 
   async ngOnInit() {
     this.speaking = {
-      id: 0,
+      id: '',
       topicName: '',
     };
     let stream = null;
@@ -154,5 +164,9 @@ export class SpeakingTestComponent implements OnInit, OnDestroy {
 
   finishTest() {
     this.router.navigate([Route.result]);
+  }
+
+  onSpeakingSubmit(): void {
+    this.speachRecorded.emit(this.audioFile);
   }
 }

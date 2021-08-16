@@ -1,5 +1,7 @@
 // eslint-disable-next-line import/no-cycle
 import { Level } from '../constants/data-constants';
+// eslint-disable-next-line import/no-cycle
+import { EmptyQuestion } from './question-answer';
 
 export interface CoachTest {
   id: string;
@@ -38,4 +40,12 @@ export interface CoachTopicUpdate {
   id: string;
   topicName: string | undefined;
   level: number | Level;
+}
+
+export interface EmptyListening {
+  id?: string;
+  isEdit?: boolean;
+  audioFilePath: string | undefined;
+  level: number | undefined;
+  questions: EmptyQuestion[];
 }

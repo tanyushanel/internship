@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { concatMap, map, take } from 'rxjs/operators';
 import { Level } from '../../constants/data-constants';
-import { TestContent, TestResult } from '../../interfaces/test';
+import { TestContent, TestResult, TestSubmit } from '../../interfaces/test';
 import { TestHttpService } from '../test-http.service';
 import { AuthStoreService } from './auth-store.service';
 
@@ -14,15 +14,15 @@ export class TestStoreService {
 
   allTests$ = this.allTestsSubject$.asObservable();
 
-  public resultsSubject$ = new BehaviorSubject<TestResult[] | null>(null);
+  public submitTestSubject$ = new Subject<TestSubmit | null>();
 
-  testResults$ = this.resultsSubject$.asObservable();
+  submitTestBody$ = this.submitTestSubject$.asObservable();
 
-  public testSubject$ = new BehaviorSubject<TestContent | null>(null);
+  public testSubject$ = new Subject<TestContent | null>();
 
   test$ = this.testSubject$.asObservable();
 
-  results$: Observable<TestResult[] | undefined> = this.allTests$.pipe(
+  testResults$: Observable<TestResult[] | undefined> = this.allTests$.pipe(
     map((results) => results?.filter((result) => result && result.testPassingDate)),
   );
 
@@ -34,6 +34,8 @@ export class TestStoreService {
 
   selectedLevel!: Level;
 
+  testId = '';
+
   private set test(test: TestContent) {
     this.testSubject$.next(test);
   }
@@ -42,8 +44,12 @@ export class TestStoreService {
     this.allTestsSubject$.next(allTests);
   }
 
-  private set testResults(tests: TestResult[]) {
-    this.allTestsSubject$.next(tests);
+  private set testResults(testResults: TestResult[]) {
+    this.allTestsSubject$.next(testResults);
+  }
+
+  private set submitTestBody(body: TestSubmit) {
+    this.submitTestSubject$.next(body);
   }
 
   constructor(
@@ -55,17 +61,12 @@ export class TestStoreService {
     this.selectedLevel = selected;
   }
 
-  getTestResults(): void {
-    this.authStoreService.activeUser$
-      .pipe(
-        take(1),
-        concatMap((user) => this.testHttpService.getResults(user !== null ? user.userId : '')),
-      )
-      .subscribe({
-        next: (res) => {
-          this.allTests = [...res];
-        },
-      });
+  getTestId(): void {
+    this.test$.subscribe((test) => {
+      if (test) {
+        this.testId = test.id;
+      }
+    });
   }
 
   getAll(): void {
@@ -93,6 +94,21 @@ export class TestStoreService {
     this.testHttpService.createTest(this.selectedLevel).subscribe({
       next: (test) => {
         this.test = { ...test };
+      },
+    });
+  }
+
+  testSubmit(grammar: string[], listening: string[], writing: string, speaking: string): void {
+    this.testHttpService.finishTest(this.testId, grammar, listening, writing, speaking).subscribe({
+      next: (request) => {
+        this.submitTestBody = {
+          ...request,
+          id: this.testId,
+          grammarAnswers: grammar,
+          auditionAnswers: listening,
+          essayAnswer: writing,
+          speakingAnswerReference: speaking,
+        };
       },
     });
   }

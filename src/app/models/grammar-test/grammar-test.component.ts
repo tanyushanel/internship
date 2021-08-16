@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { Question } from '../../interfaces/question-answer';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { AnswerQuestion, Question } from '../../interfaces/question-answer';
 
 @Component({
   selector: 'app-grammar-test',
@@ -8,4 +8,10 @@ import { Question } from '../../interfaces/question-answer';
 })
 export class GrammarTestComponent {
   @Input() questions: Question[] | null = null;
+
+  @Output() answersGrammar = new EventEmitter<string[] | null>();
+
+  onAnswersSubmit(answers: string[] | null): void {
+    if (answers) this.answersGrammar.emit(answers);
+  }
 }
