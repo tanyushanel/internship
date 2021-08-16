@@ -1,8 +1,14 @@
+@import 'src/theme/variables.scss';
+
 .finish-test {
   margin: 5em auto;
 
+  &__alert {
+    text-align: center;
+  }
+
   &__heading {
-    margin-top: 1em;
+    margin-top: 0;
   }
 
   &__button-position {
@@ -42,4 +48,8 @@
   &:focus {
     background-color: lightgrey;
   }
+}
+
+.warn {
+  color: $error;
 }

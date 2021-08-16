@@ -1,7 +1,8 @@
-<h1 class="finish-test__heading" mat-dialog-title>
-  <p *ngIf="!isFinished">The time is out.</p>
-  By completing the Test all answered data will be sent to review.
-</h1>
+<h1 class="finish-test__heading" mat-dialog-title>Finish test</h1>
+<div class="finish-test__alert">
+  <span class="warn" *ngIf="!isFinished">The time is out.</span>
+  <span> By completing the Test all answered data will be sent to review. </span>
+</div>
 <div class="finish-test__button-position" mat-dialog-content>
   <button mat-raised-button class="finish-test__button" (click)="onFinishTestClick()">
     Complete
@@ -15,3 +16,5 @@
     Close
   </button>
 </div>
+
+<div class="count-down"></div>

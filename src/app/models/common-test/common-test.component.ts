@@ -97,6 +97,8 @@ export class CommonTestComponent implements OnInit {
     this.isFinished = true;
 
     this.dialog.open(FinishModalDialogComponent, {
+      hasBackdrop: false,
+      closeOnNavigation: false,
       width: '45rem',
       data: {
         grammarAnswers: this.grammarAnswers,
