@@ -1,4 +1,5 @@
 <mat-tab-group mat-stretch-tabs mat-align-tabs="center" [(selectedIndex)]="selectedIndex">
+  <app-timer></app-timer>
   <mat-tab label="GRAMMAR">
     <app-grammar-test [questions]="grammar$ | async"></app-grammar-test>
     <app-proceed-buttons
