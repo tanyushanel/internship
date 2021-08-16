@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { concatMap, map, take } from 'rxjs/operators';
 import { Level } from '../../constants/data-constants';
@@ -55,6 +56,7 @@ export class TestStoreService {
   constructor(
     private testHttpService: TestHttpService,
     private authStoreService: AuthStoreService,
+    private snackbar: MatSnackBar,
   ) {}
 
   selectLevel(selected: Level): void {
@@ -109,6 +111,12 @@ export class TestStoreService {
           essayAnswer: writing,
           speakingAnswerReference: speaking,
         };
+
+        this.snackbar.open('Test was successfully submitted', 'Close', {
+          verticalPosition: 'bottom',
+          duration: 2000,
+          panelClass: 'success',
+        });
       },
     });
   }

@@ -17,4 +17,6 @@
   </button>
 </div>
 
-<div class="count-down"></div>
+<div class="count-down warn" *ngIf="!isFinished">
+  <span>{{ timer }} sec last</span>
+</div>

@@ -1,7 +1,8 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Observable, timer } from 'rxjs';
+import { scan, takeWhile, tap } from 'rxjs/operators';
 import { Route } from 'src/app/constants/route-constant';
 import { TestStoreService } from 'src/app/services/store/test-store.service';
 import { FinishTestBody } from '../../../interfaces/test';
@@ -14,9 +15,12 @@ import { FinishTestBody } from '../../../interfaces/test';
 export class FinishModalDialogComponent implements OnInit {
   @Input() isFinished = false;
 
+  timer!: number;
+
+  counter = 6;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: FinishTestBody,
-    private snackbar: MatSnackBar,
     private testStoreService: TestStoreService,
     private readonly router: Router,
     public dialogRef: MatDialogRef<FinishModalDialogComponent>,
@@ -24,7 +28,17 @@ export class FinishModalDialogComponent implements OnInit {
     this.dialogRef.disableClose = true;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    timer(0, 1000)
+      .pipe(
+        takeWhile(() => this.counter > 0),
+        tap(() => (this.counter -= 1)),
+      )
+      .subscribe(() => {
+        if (this.counter === 0) this.onTickerRunOut();
+        return (this.timer = this.counter);
+      });
+  }
 
   closeClick() {
     this.dialogRef.close();
@@ -39,11 +53,11 @@ export class FinishModalDialogComponent implements OnInit {
       this.data.essayAnswer,
       this.data.speakingAnswerReference,
     );
-    this.snackbar.open('Test was successfully submitted', 'Close', {
-      verticalPosition: 'bottom',
-      duration: 2000,
-      panelClass: 'success',
-    });
+
     this.dialogRef.close();
+  }
+
+  onTickerRunOut(): void {
+    this.onFinishTestClick();
   }
 }

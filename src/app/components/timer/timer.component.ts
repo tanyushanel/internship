@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { timer, Observable } from 'rxjs';
+import { timer } from 'rxjs';
 import { takeWhile, tap } from 'rxjs/operators';
 
 @Component({
@@ -10,14 +10,14 @@ import { takeWhile, tap } from 'rxjs/operators';
 export class TestTimerComponent implements OnInit {
   timer = 0;
 
-  ngOnInit(): void {
-    let counter = 60;
+  counter = 60;
 
+  ngOnInit(): void {
     timer(0, 60000)
       .pipe(
-        takeWhile(() => counter > 0),
-        tap(() => (counter -= 1)),
+        takeWhile(() => this.counter > 0),
+        tap(() => (this.counter -= 1)),
       )
-      .subscribe(() => (this.timer = counter));
+      .subscribe(() => (this.timer = this.counter));
   }
 }
