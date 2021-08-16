@@ -1,5 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { Route } from 'src/app/constants/route-constant';
 import { TestStoreService } from 'src/app/services/store/test-store.service';
 import { FinishTestBody } from '../../../interfaces/test';
 
@@ -14,11 +16,19 @@ export class FinishModalDialogComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: FinishTestBody,
     private testStoreService: TestStoreService,
+    private readonly router: Router,
+    public dialogRef: MatDialogRef<FinishModalDialogComponent>,
   ) {}
 
   ngOnInit(): void {}
 
+  closeClick() {
+    this.dialogRef.close();
+  }
+
   onFinishTestClick(): void {
+    this.router.navigate([Route.result]);
+    this.dialogRef.close();
     this.testStoreService.testSubmit(
       this.data.grammarAnswers,
       this.data.auditionAnswers,

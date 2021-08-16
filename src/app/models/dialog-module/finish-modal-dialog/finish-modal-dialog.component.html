@@ -1,3 +1,15 @@
-<p>finish-modal-dialog works!</p>
-
-<button (click)="onFinishTestClick()" [disabled]="isFinished">Finish</button>
+<h1 class="finish-test__heading" mat-dialog-title>
+  By completing the Test all answered data will be sent to review.
+</h1>
+<div class="finish-test__button-position" mat-dialog-content>
+  <button mat-raised-button class="finish-test__button" (click)="onFinishTestClick()">
+    Complete
+  </button>
+  <button
+    mat-raised-button
+    class="finish-test__button finish-test__button-close"
+    (click)="closeClick()"
+  >
+    Close
+  </button>
+</div>
