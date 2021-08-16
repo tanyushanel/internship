@@ -1,5 +1,5 @@
+<app-timer class="timer"></app-timer>
 <mat-tab-group mat-stretch-tabs mat-align-tabs="center" [(selectedIndex)]="selectedIndex">
-  <app-timer></app-timer>
   <mat-tab label="GRAMMAR">
     <app-grammar-test
       [questions]="grammar$ | async"
