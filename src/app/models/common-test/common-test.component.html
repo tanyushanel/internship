@@ -48,6 +48,7 @@
 <button
   mat-raised-button
   [class.hidden]="selectedIndex < 3"
+  [disabled]="isFinished"
   color="secondary"
   class="button-submit"
   (click)="onFinishButtonClick()"

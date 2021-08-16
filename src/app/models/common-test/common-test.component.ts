@@ -39,6 +39,8 @@ export class CommonTestComponent implements OnInit {
 
   maxIndex = 3;
 
+  isFinished = false;
+
   constructor(
     private testStoreService: TestStoreService,
     private route: ActivatedRoute,
@@ -59,6 +61,8 @@ export class CommonTestComponent implements OnInit {
     this.listening$ = this.test$.pipe(map((test) => test?.audition.questions || null));
     this.essay$ = this.test$.pipe(map((test) => test?.essay || null));
     this.speaking$ = this.test$.pipe(map((test) => test?.speaking || null));
+
+    this.onTimerRunOut();
   }
 
   setTabIndex(ind: number): void {
@@ -87,5 +91,20 @@ export class CommonTestComponent implements OnInit {
         speakingAnswerReference: this.speachRef,
       },
     });
+  }
+
+  onSubmitTest(): void {
+    this.testStoreService.testSubmit(
+      this.grammarAnswers,
+      this.listeningAnswers,
+      this.essayText,
+      this.speachRef,
+    );
+
+    this.isFinished = true;
+  }
+
+  onTimerRunOut(): void {
+    setTimeout(() => this.onSubmitTest(), 360000);
   }
 }

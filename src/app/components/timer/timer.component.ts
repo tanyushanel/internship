@@ -8,10 +8,10 @@ import { takeWhile, tap } from 'rxjs/operators';
   styleUrls: ['./timer.component.scss'],
 })
 export class TestTimerComponent implements OnInit {
-  timer = 60;
+  timer = 0;
 
   ngOnInit(): void {
-    let counter = 10;
+    let counter = 60;
 
     timer(0, 60000)
       .pipe(
