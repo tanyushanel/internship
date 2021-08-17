@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { TableData } from '../../interfaces/question-answer';
 import { CoachListeningHttpService } from '../coach-listening-http.service';
-import { EditionCoachListening, PathFile, UpdateCoachListening } from '../../interfaces/audition';
+import { EditionCoachListening, UpdateCoachListening } from '../../interfaces/audition';
 
 @Injectable({
   providedIn: 'root',
@@ -12,10 +12,6 @@ export class CoachListeningStoreService {
   readonly listening$ = new Subject<EditionCoachListening>();
 
   readonly listenings$ = new Subject<TableData[]>();
-
-  readonly audioFilePath$ = new Subject<PathFile>();
-
-  readonly audioData$ = new Subject<any>();
 
   constructor(private readonly coachListeningHttpService: CoachListeningHttpService) {}
 
@@ -62,39 +58,5 @@ export class CoachListeningStoreService {
 
   deleteListening(id: string) {
     this.coachListeningHttpService.deleteListening(id).subscribe(() => this.getAllListening());
-  }
-
-  uploadListeningFile(file: File) {
-    const fd = new FormData();
-    fd.append('formFiles', file);
-    this.coachListeningHttpService.uploadListeningFile(fd).subscribe({
-      next: (path) => {
-        this.audioFilePath$.next(path);
-      },
-    });
-  }
-
-  downloadListeningFile() {
-    this.listening$
-      .pipe(
-        map((res) => {
-          const filePath = res.audioFilePath.split('\\');
-          this.coachListeningHttpService
-            .downloadListeningFile(filePath[filePath.length - 1])
-            .subscribe
-            // {
-            // next: (audio) => {
-            // const formData = new FormData();
-            // formData.append('username', audio);
-            // formData.get('username');
-            // console.log(formData.get('username'), 'FormDAtaa');
-            // console.log(audio, 'audio');
-            // this.audioData$.next(audio);
-            // },
-            // }
-            ();
-        }),
-      )
-      .subscribe();
   }
 }
