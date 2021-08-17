@@ -74,9 +74,16 @@ export class CoachProfileTableComponent implements AfterViewInit, OnInit, OnChan
     }, 10);
   }
 
-  onClick(essayAnswer: string, id: string) {
+  onClick(
+    essayAnswer: string,
+    id: string,
+    speakingMark: number,
+    essayMark: number,
+    comment: string,
+    speakingAnswerReference: string,
+  ) {
     this.dialog.open(CoachProfileDialogComponent, {
-      data: { essayAnswer, id },
+      data: { essayAnswer, id, speakingMark, essayMark, comment, speakingAnswerReference },
       disableClose: true,
     });
   }

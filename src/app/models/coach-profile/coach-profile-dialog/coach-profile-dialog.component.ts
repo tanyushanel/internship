@@ -16,20 +16,23 @@ export class CoachProfileDialogComponent implements OnInit {
     private coachCheck: CoachTestsStoreService,
   ) {}
 
+  downloadURL = 'http://elevel-001-site1.btempurl.com/api/File/Download?filePath=';
+
   form!: FormGroup;
 
   markPattern = '^[0-9]$|[1][0]$';
 
   ngOnInit() {
     this.form = new FormGroup({
-      comment: new FormControl(''),
-      speakingMark: new FormControl(null, [Validators.pattern(this.markPattern)]),
-      essayMark: new FormControl(null, [Validators.pattern(this.markPattern)]),
+      comment: new FormControl(this.data.comment),
+      speakingMark: new FormControl(this.data.speakingMark, [Validators.pattern(this.markPattern)]),
+      essayMark: new FormControl(this.data.essayMark, [Validators.pattern(this.markPattern)]),
     });
   }
 
   submitTest(): void {
     const formData = { ...this.form.value };
+
     const question = {
       essayMark: formData.essayMark,
       speakingMark: formData.speakingMark,
