@@ -48,3 +48,7 @@ export interface UpdateCoachListening {
   level: number | undefined;
   questions: ListeningQuestion[];
 }
+
+export interface PathFile {
+  pathfile: string;
+}
