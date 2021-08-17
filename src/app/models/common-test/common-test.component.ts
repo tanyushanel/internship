@@ -88,6 +88,7 @@ export class CommonTestComponent implements OnInit {
   }
 
   onFinishButtonOpenDialog(): void {
+    this.dialog.closeAll();
     this.dialog.open(FinishModalDialogComponent, {
       width: '45rem',
       data: {
@@ -102,6 +103,7 @@ export class CommonTestComponent implements OnInit {
   }
 
   onSubmitTestOnTimerRunOut(): void {
+    this.dialog.closeAll();
     if (this.timerSubscription) this.timerSubscription.unsubscribe();
 
     this.isFinished = true;
