@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -13,9 +14,11 @@ import { FinishTestBody } from '../../../interfaces/test';
 export class FinishModalDialogComponent implements OnInit {
   isFinished = this.data.isFinished;
 
-  timer$ = this.testStoreService.timerValue$;
+  testTimerSubscription = this.data.timerSubscription;
 
-  counter = 6;
+  buttonTimerSubscription!: Subscription;
+
+  timer$ = this.testStoreService.timerValue$;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: FinishTestBody,
@@ -27,17 +30,23 @@ export class FinishModalDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (!this.isFinished) this.testStoreService.timer(8, 1000, () => this.onTickerRunOut());
+    if (this.isFinished)
+      this.buttonTimerSubscription = this.testStoreService.timer(8, 1000, () =>
+        this.onTickerRunOut(),
+      );
   }
 
   closeClick() {
     this.dialogRef.close();
   }
 
-  onFinishTestClick(): void {
-    this.router.navigate([Route.result]);
+  onCompleteTestClick(): void {
+    this.testTimerSubscription.unsubscribe();
+    if (this.buttonTimerSubscription) this.buttonTimerSubscription.unsubscribe();
 
-    this.isFinished = true;
+    this.dialogRef.close();
+
+    this.router.navigate([Route.result]);
 
     this.testStoreService.testSubmit(
       this.data.grammarAnswers,
@@ -45,11 +54,9 @@ export class FinishModalDialogComponent implements OnInit {
       this.data.essayAnswer,
       this.data.speakingAnswerReference,
     );
-
-    this.dialogRef.close();
   }
 
   onTickerRunOut(): void {
-    this.onFinishTestClick();
+    this.onCompleteTestClick();
   }
 }

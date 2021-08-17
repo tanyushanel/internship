@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { TopicModule } from '../../interfaces/essay-speaking';
 import { Question } from '../../interfaces/question-answer';
@@ -43,7 +43,7 @@ export class CommonTestComponent implements OnInit {
 
   timer$ = this.testStoreService.timerValue$;
 
-  timerValue!: number;
+  timerSubscription!: Subscription;
 
   constructor(
     private testStoreService: TestStoreService,
@@ -66,7 +66,9 @@ export class CommonTestComponent implements OnInit {
     this.essay$ = this.test$.pipe(map((test) => test?.essay || null));
     this.speaking$ = this.test$.pipe(map((test) => test?.speaking || null));
 
-    if (!this.isFinished) this.testStoreService.timer(10, 1000, () => this.onSubmitTest());
+    this.timerSubscription = this.testStoreService.timer(10, 1000, () =>
+      this.onSubmitTestOnTimerRunOut(),
+    );
   }
 
   setTabIndex(ind: number): void {
@@ -85,8 +87,7 @@ export class CommonTestComponent implements OnInit {
     if (answers) this.listeningAnswers = answers;
   }
 
-  onFinishButtonClick(): void {
-    this.testStoreService.cancelTimer();
+  onFinishButtonOpenDialog(): void {
     this.dialog.open(FinishModalDialogComponent, {
       width: '45rem',
       data: {
@@ -94,15 +95,18 @@ export class CommonTestComponent implements OnInit {
         auditionAnswers: this.listeningAnswers,
         essayAnswer: this.essayText,
         speakingAnswerReference: this.speachRef,
+        isFinished: this.isFinished,
+        timerSubscription: this.timerSubscription,
       },
     });
   }
 
-  onSubmitTest(): void {
+  onSubmitTestOnTimerRunOut(): void {
+    if (this.timerSubscription) this.timerSubscription.unsubscribe();
+
     this.isFinished = true;
 
     this.dialog.open(FinishModalDialogComponent, {
-      hasBackdrop: false,
       closeOnNavigation: false,
       width: '45rem',
       data: {
@@ -111,6 +115,7 @@ export class CommonTestComponent implements OnInit {
         essayAnswer: this.essayText,
         speakingAnswerReference: this.speachRef,
         isFinished: this.isFinished,
+        timerSubscription: this.timerSubscription,
       },
     });
   }

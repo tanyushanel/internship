@@ -42,8 +42,6 @@ export class TestStoreService {
 
   testId = '';
 
-  timerSubscription!: Subscription;
-
   private set test(test: TestContent) {
     this.testSubject$.next(test);
   }
@@ -148,17 +146,15 @@ export class TestStoreService {
     });
   }
 
-  timer(counter: number, interval: number, func: () => void): void {
+  timer(counter: number, interval: number, func: () => void): Subscription {
     const obs = timer(0, interval).pipe(
       takeWhile(() => counter > 0),
       tap(() => (counter -= 1)),
-      finalize(() => func()),
     );
 
-    this.timerSubscription = obs.subscribe(() => (this.timerValue = counter));
-  }
-
-  cancelTimer(): void {
-    this.timerSubscription?.unsubscribe();
+    return obs.subscribe(() => {
+      if (counter === 0) func();
+      return (this.timerValue = counter);
+    });
   }
 }
