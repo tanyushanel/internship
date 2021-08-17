@@ -24,11 +24,4 @@ export class AdminDialogComponent implements OnInit {
     this.coachControl.reset(null);
     this.data.coach = null;
   }
-
-  // getSelectedCoach(coachInfo: string | null): string | null {
-  //   if (this.data.coach?.firstName === null) {
-  //     return 'Not Assign';
-  //   }
-  //   return coachInfo;
-  // }
 }

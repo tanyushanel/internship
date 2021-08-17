@@ -21,7 +21,7 @@ export interface ServiceTestData {
 
 export interface TestData {
   id: number;
-  priority: boolean;
+  priority: boolean | null;
   testNumber: number;
   testPassingDate: number;
   level: string;

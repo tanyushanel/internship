@@ -5,6 +5,12 @@ cdk-virtual-scroll-viewport {
   margin-left: 8vw;
 }
 
+mat-tab-group {
+  justify-self: center;
+  max-width: 100%;
+  margin: 0 50px;
+}
+
 table {
   width: 90%;
   background-color: $others-grey6;

@@ -1,14 +1,10 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { HttpClient } from '@angular/common/http';
-import { ServiceComponent } from 'src/mocks/admin-mock.service';
+import { MatTable } from '@angular/material/table';
 import { AdminTableStoreService } from 'src/app/services/store/adminTableStore.service';
-import { interval } from 'rxjs';
-import { timeInterval } from 'rxjs/operators';
+import { Level } from 'src/constants/data-constants';
 import { AdminDialogComponent } from '../admin-dialog/admin-dialog.component';
 import {
-  AdminTestTabs,
   ServiceCoachData,
   TestData,
   UpdateCoachesData,
@@ -20,21 +16,44 @@ import {
   styleUrls: ['./table.component.scss'],
 })
 export class TableComponent implements OnInit {
+  Level: string[] = [
+    'Elementary',
+    'PreIntermediate',
+    'Intermediate',
+    'UpperIntermediate',
+    'Advanced',
+  ];
+
   AssignSelector = true;
 
   coaches!: ServiceCoachData;
 
   coachUpdate: UpdateCoachesData | undefined;
 
-  @Input() tableData: TestData[] = [];
+  assignedData!: TestData[];
 
-  @Input() displaedColums: string[] = [];
+  notAssignedData!: TestData[];
+
+  priorityData!: TestData[];
+
+  displaedColums = ['Position', 'Level', 'Date', 'Button'];
+
+  displaedColumshasCoach = ['Position', 'Level', 'Date', 'Coach', 'Button'];
 
   constructor(public dialog: MatDialog, private service: AdminTableStoreService) {}
 
   @ViewChild(MatTable) table!: MatTable<any>;
 
   ngOnInit(): void {
+    this.service.getAssignedTestData().subscribe((assignedData) => {
+      console.log(assignedData);
+      this.assignedData = assignedData.results;
+    });
+    this.service.getNotAssignedTestData().subscribe((notAssignedData) => {
+      this.notAssignedData = notAssignedData.results;
+      this.priorityData = this.notAssignedData.filter((test) => test.priority);
+    });
+
     this.service.getCoachData().subscribe((data) => {
       this.coaches = data;
     });
@@ -43,7 +62,6 @@ export class TableComponent implements OnInit {
   openDialog(element: TestData, CoachData: ServiceCoachData) {
     const dialogRef = this.dialog.open(AdminDialogComponent, {
       data: {
-        position: element.testNumber,
         id: element.id,
         coach: element.coach,
         coaches: CoachData.coaches,
@@ -55,7 +73,6 @@ export class TableComponent implements OnInit {
         testId: result.id,
         coachId: result.coach.userId,
       };
-      console.log(this.coachUpdate);
       this.service.updateTestData(this.coachUpdate, result.id);
     });
   }
