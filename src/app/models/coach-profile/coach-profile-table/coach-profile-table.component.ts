@@ -86,7 +86,6 @@ export class CoachProfileTableComponent implements AfterViewInit, OnInit, OnChan
       data: { essayAnswer, id, speakingMark, essayMark, comment, speakingAnswerReference },
       disableClose: true,
     });
-    console.log(speakingAnswerReference);
   }
 
   ngOnInit(): void {

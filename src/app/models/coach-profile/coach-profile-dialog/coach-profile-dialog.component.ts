@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CoachTest } from '../../../interfaces/coach-edit';
@@ -17,10 +17,6 @@ export class CoachProfileDialogComponent implements OnInit {
   ) {}
 
   downloadURL = 'http://elevel-001-site1.btempurl.com/api/File/Download?filePath=';
-
-  fileName = this.data.speakingAnswerReference.split('\\');
-
-  rFileName = this.fileName.reverse();
 
   form!: FormGroup;
 
@@ -46,7 +42,6 @@ export class CoachProfileDialogComponent implements OnInit {
       id: this.data.id,
     };
     if (this.form.valid) {
-      console.log(this.data.speakingAnswerReference);
       this.dialogRef.close();
       this.coachCheck.sendCheckTest(question, id);
     }
