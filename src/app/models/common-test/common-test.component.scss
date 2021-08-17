@@ -1,3 +1,7 @@
+@import '../../../theme/variables';
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100&display=swap');
+
 .button-submit {
   display: block;
   width: 15em;
@@ -19,4 +23,13 @@
 
 .module {
   margin-top: 3rem;
+}
+
+.styled {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.warn {
+  color: $error;
+  vertical-align: middle;
 }

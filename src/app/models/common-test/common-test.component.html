@@ -1,4 +1,7 @@
-<app-timer class="timer"></app-timer>
+<!-- <app-timer class="timer"
+           (timeEmitted)="onTimerRunOut($event)"></app-timer> -->
+<p class="timer styled" [class.warn]="(timer$ | async)! < 3">{{ (timer$ | async)! | time }}</p>
+
 <mat-tab-group mat-stretch-tabs mat-align-tabs="center" [(selectedIndex)]="selectedIndex">
   <mat-tab label="GRAMMAR">
     <app-grammar-test

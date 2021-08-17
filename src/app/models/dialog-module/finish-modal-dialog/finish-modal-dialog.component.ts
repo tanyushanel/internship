@@ -1,8 +1,6 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Observable, timer } from 'rxjs';
-import { scan, takeWhile, tap } from 'rxjs/operators';
 import { Route } from 'src/app/constants/route-constant';
 import { TestStoreService } from 'src/app/services/store/test-store.service';
 import { FinishTestBody } from '../../../interfaces/test';
@@ -13,9 +11,9 @@ import { FinishTestBody } from '../../../interfaces/test';
   styleUrls: ['./finish-modal-dialog.component.scss'],
 })
 export class FinishModalDialogComponent implements OnInit {
-  @Input() isFinished = false;
+  isFinished = this.data.isFinished;
 
-  timer!: number;
+  timer$ = this.testStoreService.timerValue$;
 
   counter = 6;
 
@@ -29,15 +27,7 @@ export class FinishModalDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    timer(0, 1000)
-      .pipe(
-        takeWhile(() => this.counter > 0),
-        tap(() => (this.counter -= 1)),
-      )
-      .subscribe(() => {
-        if (this.counter === 0) this.onTickerRunOut();
-        return (this.timer = this.counter);
-      });
+    if (!this.isFinished) this.testStoreService.timer(8, 1000, () => this.onTickerRunOut());
   }
 
   closeClick() {
@@ -46,7 +36,9 @@ export class FinishModalDialogComponent implements OnInit {
 
   onFinishTestClick(): void {
     this.router.navigate([Route.result]);
+
     this.isFinished = true;
+
     this.testStoreService.testSubmit(
       this.data.grammarAnswers,
       this.data.auditionAnswers,

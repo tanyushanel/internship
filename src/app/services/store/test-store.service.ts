@@ -1,7 +1,8 @@
+/* eslint-disable no-param-reassign */
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { concatMap, map, take } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subject, Subscription, timer } from 'rxjs';
+import { concatMap, finalize, map, take, takeWhile, tap } from 'rxjs/operators';
 import { Level } from '../../constants/data-constants';
 import { TestContent, TestResult, TestSubmit } from '../../interfaces/test';
 import { TestHttpService } from '../test-http.service';
@@ -33,9 +34,15 @@ export class TestStoreService {
     ),
   );
 
+  public timerSubject$ = new BehaviorSubject<number>(0);
+
+  timerValue$ = this.timerSubject$.asObservable();
+
   selectedLevel!: Level;
 
   testId = '';
+
+  timerSubscription!: Subscription;
 
   private set test(test: TestContent) {
     this.testSubject$.next(test);
@@ -51,6 +58,10 @@ export class TestStoreService {
 
   private set submitTestBody(body: TestSubmit) {
     this.submitTestSubject$.next(body);
+  }
+
+  private set timerValue(timerValue: number) {
+    this.timerSubject$.next(timerValue);
   }
 
   constructor(
@@ -118,6 +129,14 @@ export class TestStoreService {
           panelClass: 'success',
         });
       },
+
+      error: () => {
+        this.snackbar.open('Something went wrong', 'Close', {
+          verticalPosition: 'bottom',
+          duration: 2000,
+          panelClass: 'error',
+        });
+      },
     });
   }
 
@@ -127,5 +146,19 @@ export class TestStoreService {
         this.test = { ...test };
       },
     });
+  }
+
+  timer(counter: number, interval: number, func: () => void): void {
+    const obs = timer(0, interval).pipe(
+      takeWhile(() => counter > 0),
+      tap(() => (counter -= 1)),
+      finalize(() => func()),
+    );
+
+    this.timerSubscription = obs.subscribe(() => (this.timerValue = counter));
+  }
+
+  cancelTimer(): void {
+    this.timerSubscription?.unsubscribe();
   }
 }

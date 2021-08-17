@@ -41,6 +41,10 @@ export class CommonTestComponent implements OnInit {
 
   isFinished = false;
 
+  timer$ = this.testStoreService.timerValue$;
+
+  timerValue!: number;
+
   constructor(
     private testStoreService: TestStoreService,
     private route: ActivatedRoute,
@@ -62,7 +66,7 @@ export class CommonTestComponent implements OnInit {
     this.essay$ = this.test$.pipe(map((test) => test?.essay || null));
     this.speaking$ = this.test$.pipe(map((test) => test?.speaking || null));
 
-    this.onTimerRunOut();
+    if (!this.isFinished) this.testStoreService.timer(10, 1000, () => this.onSubmitTest());
   }
 
   setTabIndex(ind: number): void {
@@ -82,6 +86,7 @@ export class CommonTestComponent implements OnInit {
   }
 
   onFinishButtonClick(): void {
+    this.testStoreService.cancelTimer();
     this.dialog.open(FinishModalDialogComponent, {
       width: '45rem',
       data: {
@@ -105,11 +110,8 @@ export class CommonTestComponent implements OnInit {
         auditionAnswers: this.listeningAnswers,
         essayAnswer: this.essayText,
         speakingAnswerReference: this.speachRef,
+        isFinished: this.isFinished,
       },
     });
-  }
-
-  onTimerRunOut(): void {
-    setTimeout(() => this.onSubmitTest(), 360000);
   }
 }

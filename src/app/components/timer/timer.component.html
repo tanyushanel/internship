@@ -1,1 +1,3 @@
-<span class="warn styled" [class.warn]="timer < 10">{{ timer | time }}</span>
+<span class="warn styled" [class.warn]="timer < 10" (onChanges)="onTimeGo(timer)">{{
+  timer | time
+}}</span>

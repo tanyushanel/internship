@@ -63,4 +63,5 @@ export interface FinishTestBody {
   auditionAnswers: string[];
   essayAnswer: string;
   speakingAnswerReference: string;
+  isFinished?: boolean;
 }
