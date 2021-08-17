@@ -66,7 +66,7 @@ export class CommonTestComponent implements OnInit {
     this.essay$ = this.test$.pipe(map((test) => test?.essay || null));
     this.speaking$ = this.test$.pipe(map((test) => test?.speaking || null));
 
-    this.timerSubscription = this.testStoreService.timer(10, 1000, () =>
+    this.timerSubscription = this.testStoreService.timer(60, 60000, () =>
       this.onSubmitTestOnTimerRunOut(),
     );
   }

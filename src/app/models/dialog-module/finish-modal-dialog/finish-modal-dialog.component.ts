@@ -31,7 +31,7 @@ export class FinishModalDialogComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.isFinished)
-      this.buttonTimerSubscription = this.testStoreService.timer(8, 1000, () =>
+      this.buttonTimerSubscription = this.testStoreService.timer(6, 1000, () =>
         this.onTickerRunOut(),
       );
   }
