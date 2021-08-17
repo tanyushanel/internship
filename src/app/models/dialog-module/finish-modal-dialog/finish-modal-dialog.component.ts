@@ -1,7 +1,7 @@
-import { Subscription } from 'rxjs';
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Route } from 'src/app/constants/route-constant';
 import { TestStoreService } from 'src/app/services/store/test-store.service';
 import { FinishTestBody } from '../../../interfaces/test';
