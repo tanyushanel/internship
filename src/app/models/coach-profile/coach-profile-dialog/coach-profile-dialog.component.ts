@@ -16,6 +16,12 @@ export class CoachProfileDialogComponent implements OnInit {
     private coachCheck: CoachTestsStoreService,
   ) {}
 
+  downloadURL = 'http://elevel-001-site1.btempurl.com/api/File/Download?filePath=';
+
+  fileName = this.data.speakingAnswerReference.split('\\');
+
+  rFileName = this.fileName.reverse();
+
   form!: FormGroup;
 
   markPattern = '^[0-9]$|[1][0]$';
@@ -40,6 +46,7 @@ export class CoachProfileDialogComponent implements OnInit {
       id: this.data.id,
     };
     if (this.form.valid) {
+      console.log(this.data.speakingAnswerReference);
       this.dialogRef.close();
       this.coachCheck.sendCheckTest(question, id);
     }

@@ -33,7 +33,11 @@
           >
         </div>
       </div>
-      <audio class="audio" controls></audio>
+      <audio
+        class="audio"
+        controls
+        src="{{ downloadURL + data.speakingAnswerReference.substr(14) }}"
+      ></audio>
       <div class="speaking-mark">
         <label class="speaking-mark-label">
           Speaking Score

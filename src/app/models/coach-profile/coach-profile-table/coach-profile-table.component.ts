@@ -80,11 +80,13 @@ export class CoachProfileTableComponent implements AfterViewInit, OnInit, OnChan
     speakingMark: number,
     essayMark: number,
     comment: string,
+    speakingAnswerReference: string,
   ) {
     this.dialog.open(CoachProfileDialogComponent, {
-      data: { essayAnswer, id, speakingMark, essayMark, comment },
+      data: { essayAnswer, id, speakingMark, essayMark, comment, speakingAnswerReference },
       disableClose: true,
     });
+    console.log(speakingAnswerReference);
   }
 
   ngOnInit(): void {

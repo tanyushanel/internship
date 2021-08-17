@@ -40,7 +40,16 @@
         <button
           mat-raised-button
           color="primary"
-          (click)="onClick(row.essayAnswer, row.id, row.essayMark, row.speakingMark, row.comment)"
+          (click)="
+            onClick(
+              row.essayAnswer,
+              row.id,
+              row.essayMark,
+              row.speakingMark,
+              row.comment,
+              row.speakingAnswerReference
+            )
+          "
         >
           {{ selectTab != 'Reviewed' ? 'Check' : 'View' }}
         </button>
