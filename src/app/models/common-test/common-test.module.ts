@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { SnackBarComponent } from '../../shared/snack-bar/snack-bar.component';
 import { TimePipe } from '../../components/timer/time.pipe';
 import { AngularMaterialCommonModule } from '../angular-material-common.module';
 import { GrammarTestModule } from '../grammar-test/grammar-test.module';
@@ -12,7 +11,7 @@ import { CommonTestComponent } from './common-test.component';
 import { ProceedButtonsComponent } from './proceed-buttons/proceed-buttons.component';
 
 @NgModule({
-  declarations: [CommonTestComponent, ProceedButtonsComponent, TimePipe, SnackBarComponent],
+  declarations: [CommonTestComponent, ProceedButtonsComponent, TimePipe],
   imports: [
     CommonModule,
     AngularMaterialCommonModule,
@@ -22,6 +21,6 @@ import { ProceedButtonsComponent } from './proceed-buttons/proceed-buttons.compo
     SpeakingTestModule,
     WritingTestModule,
   ],
-  exports: [ProceedButtonsComponent, TimePipe, SnackBarComponent],
+  exports: [ProceedButtonsComponent, TimePipe],
 })
 export class CommonTestModule {}
