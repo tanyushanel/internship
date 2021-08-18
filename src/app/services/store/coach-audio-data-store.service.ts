@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { CoachListeningHttpService } from '../coach-listening-http.service';
 import { PathFile } from '../../interfaces/audition';
 import { CoachListeningStoreService } from './coach-listening-store.service';
 import { DownloadFileListeningApiUrl } from '../../constants/route-constant';
+import { TestStoreService } from './test-store.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +16,7 @@ export class CoachAudioDataStoreService {
   audioData$ = new Subject<Blob>();
 
   constructor(
+    private readonly testStoreService: TestStoreService,
     private readonly coachListeningHttpService: CoachListeningHttpService,
     private readonly coachListeningStoreService: CoachListeningStoreService,
   ) {}
@@ -29,18 +31,36 @@ export class CoachAudioDataStoreService {
     });
   }
 
+  async fetchUrlAudio(audioPath: string): Promise<Blob> {
+    const urlAudio = `${DownloadFileListeningApiUrl}?filePath=${audioPath}`;
+    const result = await fetch(urlAudio, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return result.blob();
+  }
+
   downloadListeningFile() {
     this.coachListeningStoreService.listening$
       .pipe(
         map(async (res) => {
-          const filePath = res.audioFilePath;
-          const urlAudio = `${DownloadFileListeningApiUrl}?filePath=${filePath}`;
-          const result = await fetch(urlAudio, {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-          });
-          return result.blob();
+          return this.fetchUrlAudio(res.audioFilePath);
+        }),
+      )
+      .subscribe({
+        next: async (blob) => {
+          this.audioData$.next(await blob);
+        },
+      });
+  }
+
+  downloadTestListening() {
+    this.testStoreService.test$
+      .pipe(
+        take(1),
+        map((res) => {
+          return this.fetchUrlAudio(res?.audition.audioFilePath as string);
         }),
       )
       .subscribe({

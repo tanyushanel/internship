@@ -5,17 +5,21 @@ import {
   ElementRef,
   EventEmitter,
   Input,
+  OnInit,
   Output,
 } from '@angular/core';
 import { Track } from 'ngx-audio-player';
+import { map } from 'rxjs/operators';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Question } from '../../interfaces/question-answer';
+import { CoachAudioDataStoreService } from '../../services/store/coach-audio-data-store.service';
 
 @Component({
   selector: 'app-listening',
   templateUrl: './listening-test.component.html',
   styleUrls: ['./listening-test.component.scss'],
 })
-export class ListeningTestComponent implements AfterViewInit, AfterViewChecked {
+export class ListeningTestComponent implements OnInit, AfterViewInit, AfterViewChecked {
   @Input() questions: Question[] | null = null;
 
   @Output() answersListening = new EventEmitter<string[] | null>();
@@ -49,7 +53,13 @@ export class ListeningTestComponent implements AfterViewInit, AfterViewChecked {
     },
   ];
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(
+    private dom: DomSanitizer,
+    private elementRef: ElementRef,
+    private audioDataStoreService: CoachAudioDataStoreService,
+  ) {
+    this.audioDataStoreService.downloadTestListening();
+  }
 
   ngAfterViewInit() {
     this.elementRef.nativeElement
@@ -90,5 +100,20 @@ export class ListeningTestComponent implements AfterViewInit, AfterViewChecked {
 
   onAnswersSubmit(answers: string[] | null): void {
     this.answersListening.emit(answers);
+  }
+
+  ngOnInit() {
+    this.audioDataStoreService.downloadTestListening();
+    this.audioDataStoreService.audioData$
+      .pipe(
+        map(async (blob) => {
+          const audioURL = URL.createObjectURL(blob);
+          const audio = {
+            src: this.dom.bypassSecurityTrustUrl(audioURL),
+          };
+          this.msaapPlaylist[0].link = audio.src as string;
+        }),
+      )
+      .subscribe();
   }
 }
