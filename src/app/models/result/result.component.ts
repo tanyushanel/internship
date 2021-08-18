@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Route } from '../../constants/route-constant';
+import { Observable } from 'rxjs';
+import { TestStoreService } from 'src/app/services/store/test-store.service';
+import { SubmitTestResponse } from '../../interfaces/test';
 
 @Component({
   selector: 'app-result',
@@ -8,7 +9,20 @@ import { Route } from '../../constants/route-constant';
   styleUrls: ['./result.component.scss'],
 })
 export class ResultComponent implements OnInit {
-  constructor(private readonly router: Router) {}
+  currentTest$: Observable<SubmitTestResponse> = this.testStoreService.submitTestBody$;
 
-  ngOnInit(): void {}
+  currentGrammarResult = 0;
+
+  currentAuditionResult = 0;
+
+  constructor(private testStoreService: TestStoreService) {}
+
+  ngOnInit(): void {
+    this.currentTest$.subscribe((test) => {
+      if (test) {
+        this.currentGrammarResult = test.grammarMark;
+        this.currentAuditionResult = test.grammarMark;
+      }
+    });
+  }
 }
