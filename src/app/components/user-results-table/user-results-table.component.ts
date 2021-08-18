@@ -1,9 +1,19 @@
-import { Component, OnInit, ViewChild, AfterViewInit, Input } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { TestResult } from '../../interfaces/test';
+import { Observable } from 'rxjs';
 import { Level } from '../../constants/data-constants';
+import { TestResult } from '../../interfaces/test';
 
 @Component({
   selector: 'app-user-results-table',
@@ -17,14 +27,20 @@ import { Level } from '../../constants/data-constants';
     ]),
   ],
 })
-export class UserResultsTableComponent implements OnInit, AfterViewInit {
+export class UserResultsTableComponent implements AfterViewInit, OnChanges {
+  @Input() results$!: Observable<TestResult[]>;
+
   @Input() results: TestResult[] = [];
 
   @Input() levels: Level[] = [];
 
-  columnsToDisplay: string[] = ['id', 'date', 'level', 'result'];
+  columnsToDisplay: string[] = ['id', 'testPassingDate', 'level', 'result'];
 
   isOpen = false;
+
+  get resultsCount() {
+    return this.results?.length;
+  }
 
   get columnsCount() {
     return this.columnsToDisplay.length;
@@ -32,15 +48,32 @@ export class UserResultsTableComponent implements OnInit, AfterViewInit {
 
   expandedElement: TestResult | undefined;
 
-  dataSource!: MatTableDataSource<TestResult>;
+  dataSource: MatTableDataSource<TestResult>;
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
+  @ViewChild(MatSort, { static: false })
+  set sort(value: MatSort) {
+    if (this.dataSource) {
+      this.dataSource.sort = value;
+    }
   }
 
-  ngOnInit(): void {
+  @ViewChild(MatPaginator, { static: false })
+  set paginator(value: MatPaginator) {
+    if (this.dataSource) {
+      this.dataSource.paginator = value;
+    }
+  }
+
+  constructor(private cdr: ChangeDetectorRef) {
+    this.dataSource = new MatTableDataSource(this.results);
+  }
+
+  ngAfterViewInit() {
+    this.cdr.detectChanges();
+    // this.dataSource.sort = this.sort;
+  }
+
+  ngOnChanges(): void {
     this.dataSource = new MatTableDataSource(this.results);
   }
 

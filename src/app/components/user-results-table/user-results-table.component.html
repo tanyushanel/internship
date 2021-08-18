@@ -1,4 +1,11 @@
-<table mat-table [dataSource]="results" multiTemplateDataRows class="mat-elevation-z8">
+<table
+  mat-table
+  [dataSource]="results"
+  multiTemplateDataRows
+  class="mat-elevation-z8"
+  [hidden]="!resultsCount"
+  matSort
+>
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef mat-header>No.</th>
     <td
@@ -10,10 +17,10 @@
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="date">
-    <th mat-header-cell *matHeaderCellDef mat-header>Date</th>
+  <ng-container matColumnDef="testPassingDate">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
     <td mat-cell *matCellDef="let element" [class.assigned]="element.assignmentEndDate">
-      {{ element.creationDate | date: 'medium' }}
+      {{ element.testPassingDate | date: 'medium' }}
     </td>
   </ng-container>
 
@@ -88,9 +95,18 @@
 </table>
 
 <mat-paginator
-  [length]="50"
+  [length]="resultsCount"
   [pageSize]="5"
   [pageSizeOptions]="[5, 10, 25, 100]"
+  [pageIndex]=""
   showFirstLastButtons
 >
+  <!-- <mat-paginator [length]="resultsCount"
+                 [pageSize]="pageSize$ | async"
+                 [pageSizeOptions]="[5, 10, 25, 100]"
+                 [pageIndex]="currentPage$ | async"
+                 (page)="onPaginateChange($event)">
+  </mat-paginator> -->
 </mat-paginator>
+
+<p class="table-caption" [hidden]="resultsCount">No results yet</p>
