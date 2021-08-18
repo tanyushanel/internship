@@ -1,6 +1,8 @@
+/* eslint-disable no-param-reassign */
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { concatMap, map, take } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { BehaviorSubject, Observable, Subject, Subscription, timer } from 'rxjs';
+import { concatMap, finalize, map, take, takeWhile, tap } from 'rxjs/operators';
 import { Level } from '../../constants/data-constants';
 import { TestContent, TestResult, TestSubmit } from '../../interfaces/test';
 import { TestHttpService } from '../test-http.service';
@@ -32,6 +34,10 @@ export class TestStoreService {
     ),
   );
 
+  public timerSubject$ = new BehaviorSubject<number>(0);
+
+  timerValue$ = this.timerSubject$.asObservable();
+
   selectedLevel!: Level;
 
   testId = '';
@@ -52,9 +58,14 @@ export class TestStoreService {
     this.submitTestSubject$.next(body);
   }
 
+  private set timerValue(timerValue: number) {
+    this.timerSubject$.next(timerValue);
+  }
+
   constructor(
     private testHttpService: TestHttpService,
     private authStoreService: AuthStoreService,
+    private snackbar: MatSnackBar,
   ) {}
 
   selectLevel(selected: Level): void {
@@ -109,6 +120,20 @@ export class TestStoreService {
           essayAnswer: writing,
           speakingAnswerReference: speaking,
         };
+
+        this.snackbar.open('Test was successfully submitted', 'Close', {
+          verticalPosition: 'bottom',
+          duration: 2000,
+          panelClass: 'success',
+        });
+      },
+
+      error: () => {
+        this.snackbar.open('Something went wrong', 'Close', {
+          verticalPosition: 'bottom',
+          duration: 2000,
+          panelClass: 'error',
+        });
       },
     });
   }
@@ -118,6 +143,18 @@ export class TestStoreService {
       next: (test) => {
         this.test = { ...test };
       },
+    });
+  }
+
+  timer(counter: number, interval: number, func: () => void): Subscription {
+    const obs = timer(0, interval).pipe(
+      takeWhile(() => counter > 0),
+      tap(() => (counter -= 1)),
+    );
+
+    return obs.subscribe(() => {
+      if (counter === 0) func();
+      return (this.timerValue = counter);
     });
   }
 }

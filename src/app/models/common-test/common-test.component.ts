@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { TopicModule } from '../../interfaces/essay-speaking';
 import { Question } from '../../interfaces/question-answer';
@@ -39,6 +39,12 @@ export class CommonTestComponent implements OnInit {
 
   maxIndex = 3;
 
+  isFinished = false;
+
+  timer$ = this.testStoreService.timerValue$;
+
+  timerSubscription!: Subscription;
+
   constructor(
     private testStoreService: TestStoreService,
     private route: ActivatedRoute,
@@ -59,6 +65,10 @@ export class CommonTestComponent implements OnInit {
     this.listening$ = this.test$.pipe(map((test) => test?.audition.questions || null));
     this.essay$ = this.test$.pipe(map((test) => test?.essay || null));
     this.speaking$ = this.test$.pipe(map((test) => test?.speaking || null));
+
+    this.timerSubscription = this.testStoreService.timer(60, 60000, () =>
+      this.onSubmitTestOnTimerRunOut(),
+    );
   }
 
   setTabIndex(ind: number): void {
@@ -77,7 +87,8 @@ export class CommonTestComponent implements OnInit {
     if (answers) this.listeningAnswers = answers;
   }
 
-  onFinishButtonClick(): void {
+  onFinishButtonOpenDialog(): void {
+    this.dialog.closeAll();
     this.dialog.open(FinishModalDialogComponent, {
       width: '45rem',
       data: {
@@ -85,6 +96,28 @@ export class CommonTestComponent implements OnInit {
         auditionAnswers: this.listeningAnswers,
         essayAnswer: this.essayText,
         speakingAnswerReference: this.speachRef,
+        isFinished: this.isFinished,
+        timerSubscription: this.timerSubscription,
+      },
+    });
+  }
+
+  onSubmitTestOnTimerRunOut(): void {
+    this.dialog.closeAll();
+    if (this.timerSubscription) this.timerSubscription.unsubscribe();
+
+    this.isFinished = true;
+
+    this.dialog.open(FinishModalDialogComponent, {
+      closeOnNavigation: false,
+      width: '45rem',
+      data: {
+        grammarAnswers: this.grammarAnswers,
+        auditionAnswers: this.listeningAnswers,
+        essayAnswer: this.essayText,
+        speakingAnswerReference: this.speachRef,
+        isFinished: this.isFinished,
+        timerSubscription: this.timerSubscription,
       },
     });
   }

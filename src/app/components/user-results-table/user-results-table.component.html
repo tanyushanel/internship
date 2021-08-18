@@ -62,10 +62,16 @@
             </div>
 
             <div class="scale">
-              <span *ngIf="element.grammarMark; else noResult">{{ element.grammarMark }}</span>
-              <span *ngIf="element.auditionMark; else noResult">{{ element.auditionMark }}</span>
-              <span *ngIf="element.essayMark; else noResult">{{ element.essayMark }}</span>
-              <span *ngIf="element.speakingMark; else noResult">{{ element.speakingMark }}</span>
+              <span *ngIf="element.grammarMark !== null; else noResult">{{
+                element.grammarMark
+              }}</span>
+              <span *ngIf="element.auditionMark !== null; else noResult">{{
+                element.auditionMark
+              }}</span>
+              <span *ngIf="element.essayMark !== null; else noResult">{{ element.essayMark }}</span>
+              <span *ngIf="element.speakingMark !== null; else noResult">{{
+                element.speakingMark
+              }}</span>
               <ng-template #noResult>
                 <span class="material-icons" matTooltip="In review"> query_builder </span>
               </ng-template>

@@ -1,3 +1,5 @@
+<p class="timer styled" [class.warn]="(timer$ | async)! < 10">{{ (timer$ | async)! | time }}</p>
+
 <mat-tab-group mat-stretch-tabs mat-align-tabs="center" [(selectedIndex)]="selectedIndex">
   <mat-tab label="GRAMMAR">
     <app-grammar-test
@@ -47,9 +49,10 @@
 <button
   mat-raised-button
   [class.hidden]="selectedIndex < 3"
+  [disabled]="isFinished"
   color="secondary"
   class="button-submit"
-  (click)="onFinishButtonClick()"
+  (click)="onFinishButtonOpenDialog()"
 >
-  Finish Test
+  COMPLETE TEST
 </button>
