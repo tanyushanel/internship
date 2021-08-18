@@ -57,9 +57,7 @@ export class ListeningTestComponent implements OnInit, AfterViewInit, AfterViewC
     private dom: DomSanitizer,
     private elementRef: ElementRef,
     private audioDataStoreService: CoachAudioDataStoreService,
-  ) {
-    this.audioDataStoreService.downloadTestListening();
-  }
+  ) {}
 
   ngAfterViewInit() {
     this.elementRef.nativeElement
