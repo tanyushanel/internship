@@ -20,8 +20,6 @@ export class FinishModalDialogComponent implements OnInit {
 
   timer$ = this.testStoreService.timerValue$;
 
-  testResponse!: Observable<SubmitTestResponse>;
-
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: FinishTestBody,
     private testStoreService: TestStoreService,

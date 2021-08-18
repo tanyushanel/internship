@@ -47,11 +47,7 @@ export class CommonTestComponent implements OnInit {
 
   testId: string | undefined = '';
 
-  constructor(
-    private testStoreService: TestStoreService,
-    private route: ActivatedRoute,
-    public dialog: MatDialog,
-  ) {}
+  constructor(private testStoreService: TestStoreService, public dialog: MatDialog) {}
 
   ngOnInit() {
     this.testStoreService.createTestContent();
