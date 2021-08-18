@@ -6,10 +6,11 @@ import {
   Input,
   OnChanges,
   OnInit,
+  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { Level } from '../../constants/data-constants';
@@ -50,31 +51,30 @@ export class UserResultsTableComponent implements AfterViewInit, OnChanges {
 
   dataSource: MatTableDataSource<TestResult>;
 
-  @ViewChild(MatSort, { static: false })
-  set sort(value: MatSort) {
-    if (this.dataSource) {
-      this.dataSource.sort = value;
-    }
-  }
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  @ViewChild(MatPaginator, { static: false })
-  set paginator(value: MatPaginator) {
-    if (this.dataSource) {
-      this.dataSource.paginator = value;
-    }
-  }
+  @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private cdr: ChangeDetectorRef) {
+  constructor() {
     this.dataSource = new MatTableDataSource(this.results);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.results?.currentValue) {
+      this.dataSource.data = changes.results.currentValue;
+    }
   }
 
   ngAfterViewInit() {
-    this.cdr.detectChanges();
-    // this.dataSource.sort = this.sort;
-  }
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
 
-  ngOnChanges(): void {
-    this.dataSource = new MatTableDataSource(this.results);
+    setTimeout(() => {
+      const sortState: Sort = { active: 'date', direction: 'desc' };
+      this.sort.active = sortState.active;
+      this.sort.direction = sortState.direction;
+      this.sort.sortChange.emit(sortState);
+    }, 10);
   }
 
   onUnrollToggle(): void {
