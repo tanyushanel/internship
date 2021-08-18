@@ -145,15 +145,15 @@ export class TestStoreService {
   }
 
   timer(counter: number, interval: number, func: () => void): Subscription {
+    let timeLast = counter;
     const obs = timer(0, interval).pipe(
-      takeWhile(() => counter > 0),
-      // eslint-disable-next-line no-param-reassign
-      tap(() => (counter -= 1)),
+      takeWhile(() => timeLast > 0),
+      tap(() => (timeLast -= 1)),
     );
 
     return obs.subscribe(() => {
-      if (counter === 0) func();
-      return (this.timerValue = counter);
+      if (timeLast === 0) func();
+      return (this.timerValue = timeLast);
     });
   }
 }
