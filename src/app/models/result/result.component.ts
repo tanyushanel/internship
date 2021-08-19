@@ -23,7 +23,7 @@ export class ResultComponent implements OnInit {
     this.currentTest$.subscribe((test) => {
       if (test) {
         this.currentGrammarResult = test.grammarMark;
-        this.currentAuditionResult = test.grammarMark;
+        this.currentAuditionResult = test.auditionMark;
       }
     });
   }

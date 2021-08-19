@@ -4,14 +4,17 @@ import {
   Component,
   Input,
   OnChanges,
+  OnInit,
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
-import { Level } from '../../constants/data-constants';
+import { isSubstring } from 'src/app/helpers/filter-check';
+import { languageLevel, Level } from '../../constants/data-constants';
 import { TestResult } from '../../interfaces/test';
 
 @Component({
@@ -26,16 +29,29 @@ import { TestResult } from '../../interfaces/test';
     ]),
   ],
 })
-export class UserResultsTableComponent implements AfterViewInit, OnChanges {
-  @Input() results$!: Observable<TestResult[]>;
-
+export class UserResultsTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() results: TestResult[] = [];
 
-  @Input() levels: Level[] = [];
+  languageLevel = languageLevel;
 
   columnsToDisplay: string[] = ['id', 'testPassingDate', 'level', 'result'];
 
   isOpen = false;
+
+  idFilter = new FormControl('');
+
+  levelFilter = new FormControl('');
+
+  dateFilter = new FormControl('');
+
+  resultFilter = new FormControl('');
+
+  filterValues = {
+    testNumber: '',
+    level: '',
+    testPassingDate: '',
+    result: '',
+  };
 
   get resultsCount() {
     return this.results?.length;
@@ -55,6 +71,38 @@ export class UserResultsTableComponent implements AfterViewInit, OnChanges {
 
   constructor() {
     this.dataSource = new MatTableDataSource(this.results);
+    this.dataSource.filterPredicate = this.createFilter();
+  }
+
+  ngOnInit(): void {
+    this.idFilter.valueChanges.subscribe((testNumber) => {
+      this.filterValues.testNumber = testNumber;
+      this.dataSource.filter = JSON.stringify(this.filterValues);
+    });
+    this.levelFilter.valueChanges.subscribe((level) => {
+      this.filterValues.level = level;
+      this.dataSource.filter = JSON.stringify(this.filterValues);
+    });
+    this.dateFilter.valueChanges.subscribe((testPassingDate) => {
+      this.filterValues.testPassingDate = testPassingDate;
+      this.dataSource.filter = JSON.stringify(this.filterValues);
+    });
+
+    this.resultFilter.valueChanges.subscribe((result) => {
+      this.filterValues.result = result;
+      this.dataSource.filter = JSON.stringify(this.filterValues);
+    });
+  }
+
+  createFilter(): (filterValues: TestResult, filter: string) => boolean {
+    return function filterFunction(filterValues, filter): boolean {
+      const searchTerms = JSON.parse(filter);
+      return (
+        isSubstring(filterValues.testNumber, searchTerms.testNumber) &&
+        isSubstring(languageLevel[filterValues.level], searchTerms.level) &&
+        isSubstring(filterValues.testPassingDate, searchTerms.testPassingDate)
+      );
+    };
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -78,4 +126,6 @@ export class UserResultsTableComponent implements AfterViewInit, OnChanges {
   onUnrollToggle(): void {
     this.isOpen = !this.isOpen;
   }
+
+  getTotalResult(): void {}
 }
