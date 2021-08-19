@@ -5,6 +5,7 @@
     <app-grammar-test
       [questions]="grammar$ | async"
       (answersGrammar)="onGrammarSubmit($event)"
+      [testId]="testId"
     ></app-grammar-test>
   </mat-tab>
 
@@ -12,6 +13,7 @@
     <app-listening
       [questions]="listening$ | async"
       (answersListening)="onListeningSubmit($event)"
+      [testId]="testId"
     ></app-listening>
   </mat-tab>
 
@@ -19,11 +21,12 @@
     <app-writing-test
       [essay]="essay$ | async"
       (essayWritten)="onWritingSubmit($event)"
+      [testId]="testId"
     ></app-writing-test>
   </mat-tab>
 
   <mat-tab label="SPEAKING">
-    <app-speaking [speaking]="speaking$ | async"></app-speaking>
+    <app-speaking [testId]="testId" [speaking]="speaking$ | async"></app-speaking>
   </mat-tab>
 </mat-tab-group>
 <button

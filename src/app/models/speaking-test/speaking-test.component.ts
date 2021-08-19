@@ -14,6 +14,7 @@ import { TopicModule } from '../../interfaces/essay-speaking';
 import { ErrorStoreService } from '../../services/store/error-store.service';
 import { Route } from '../../constants/route-constant';
 import { FinishModalDialogComponent } from '../dialog-module/finish-modal-dialog/finish-modal-dialog.component';
+import { ReportMistakeDialogComponent } from '../../components/report-mistake-dialog/report-mistake-dialog.component';
 
 declare let MediaRecorder: any;
 
@@ -24,6 +25,8 @@ declare let MediaRecorder: any;
 })
 export class SpeakingTestComponent implements OnInit, OnDestroy {
   @Input() speaking: TopicModule | null = null;
+
+  @Input() testId: string | undefined;
 
   @Output() speachRecorded = new EventEmitter<{ src: SafeUrl } | null>();
 
@@ -168,5 +171,9 @@ export class SpeakingTestComponent implements OnInit, OnDestroy {
 
   onSpeakingSubmit(): void {
     this.speachRecorded.emit(this.audioFile);
+  }
+
+  openReportDialog(speakingId?: string) {
+    this.dialog.open(ReportMistakeDialogComponent, { data: { speakingId, testId: this.testId } });
   }
 }

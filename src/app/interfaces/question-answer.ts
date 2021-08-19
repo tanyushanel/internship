@@ -2,7 +2,7 @@ export interface Question {
   id: string;
   nameQuestion: string;
   level: number;
-  auditionId: number;
+  auditionId: string;
   answerId: number;
   answers: AnswerQuestion[];
 }

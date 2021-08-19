@@ -28,5 +28,11 @@
         <button class="button__color" mat-button matStepperNext [disabled]="last">Next</button>
       </div>
     </form>
+    <div class="report">
+      <mat-icon>warning_amber</mat-icon>
+      <span class="report__text" (click)="openReportDialog(question.id, question.auditionId)"
+        >Report Mistake</span
+      >
+    </div>
   </mat-step>
 </mat-stepper>
