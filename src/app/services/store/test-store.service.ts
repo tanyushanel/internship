@@ -1,10 +1,9 @@
-/* eslint-disable no-param-reassign */
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BehaviorSubject, Observable, Subject, Subscription, timer } from 'rxjs';
-import { concatMap, finalize, map, take, takeWhile, tap } from 'rxjs/operators';
+import { concatMap, map, take, takeWhile, tap } from 'rxjs/operators';
 import { Level } from '../../constants/data-constants';
-import { TestContent, TestResult, TestSubmit } from '../../interfaces/test';
+import { SubmitTestResponse, TestContent, TestResult } from '../../interfaces/test';
 import { TestHttpService } from '../test-http.service';
 import { AuthStoreService } from './auth-store.service';
 
@@ -16,11 +15,11 @@ export class TestStoreService {
 
   allTests$ = this.allTestsSubject$.asObservable();
 
-  public submitTestSubject$ = new Subject<TestSubmit | null>();
+  public submitTestSubject$ = new Subject<SubmitTestResponse>();
 
   submitTestBody$ = this.submitTestSubject$.asObservable();
 
-  public testSubject$ = new Subject<TestContent | null>();
+  public testSubject$ = new Subject<TestContent>();
 
   test$ = this.testSubject$.asObservable();
 
@@ -54,7 +53,7 @@ export class TestStoreService {
     this.allTestsSubject$.next(testResults);
   }
 
-  private set submitTestBody(body: TestSubmit) {
+  private set submitTestBody(body: SubmitTestResponse) {
     this.submitTestSubject$.next(body);
   }
 
@@ -109,17 +108,16 @@ export class TestStoreService {
     });
   }
 
-  testSubmit(grammar: string[], listening: string[], writing: string, speaking: string): void {
-    this.testHttpService.finishTest(this.testId, grammar, listening, writing, speaking).subscribe({
-      next: (request) => {
-        this.submitTestBody = {
-          ...request,
-          id: this.testId,
-          grammarAnswers: grammar,
-          auditionAnswers: listening,
-          essayAnswer: writing,
-          speakingAnswerReference: speaking,
-        };
+  testSubmit(
+    id: string,
+    grammar: string[],
+    listening: string[],
+    writing: string,
+    speaking: string,
+  ): void {
+    this.testHttpService.finishTest(id, grammar, listening, writing, speaking).subscribe({
+      next: (responce) => {
+        this.submitTestBody = responce;
 
         this.snackbar.open('Test was successfully submitted', 'Close', {
           verticalPosition: 'bottom',
@@ -147,14 +145,15 @@ export class TestStoreService {
   }
 
   timer(counter: number, interval: number, func: () => void): Subscription {
+    let timeLast = counter;
     const obs = timer(0, interval).pipe(
-      takeWhile(() => counter > 0),
-      tap(() => (counter -= 1)),
+      takeWhile(() => timeLast > 0),
+      tap(() => (timeLast -= 1)),
     );
 
     return obs.subscribe(() => {
-      if (counter === 0) func();
-      return (this.timerValue = counter);
+      if (timeLast === 0) func();
+      return (this.timerValue = timeLast);
     });
   }
 }
