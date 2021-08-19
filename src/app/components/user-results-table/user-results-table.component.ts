@@ -46,11 +46,16 @@ export class UserResultsTableComponent implements OnInit, AfterViewInit, OnChang
 
   resultFilter = new FormControl('');
 
+  result = 0;
+
   filterValues = {
     testNumber: '',
     level: '',
     testPassingDate: '',
-    result: '',
+    grammarMark: '',
+    auditionMark: '',
+    speakingMark: '',
+    essayMark: '',
   };
 
   get resultsCount() {
@@ -90,19 +95,26 @@ export class UserResultsTableComponent implements OnInit, AfterViewInit, OnChang
     });
 
     this.resultFilter.valueChanges.subscribe((result) => {
-      this.filterValues.result = result;
+      this.result = result;
       this.dataSource.filter = JSON.stringify(this.filterValues);
     });
   }
 
   createFilter(): (filterValues: TestResult, filter: string) => boolean {
-    return function filterFunction(filterValues, filter): boolean {
+    return (filterValues, filter): boolean => {
       const searchTerms = JSON.parse(filter);
+
+      this.result = this.calculateResult(
+        filterValues.grammarMark,
+        filterValues.essayMark,
+        filterValues.auditionMark,
+        filterValues.speakingMark,
+      );
       return (
         isSubstring(filterValues.testNumber, searchTerms.testNumber) &&
         isSubstring(languageLevel[filterValues.level], searchTerms.level) &&
-        isSubstring(filterValues.testPassingDate, searchTerms.testPassingDate)
-        // isSubstring(filterValues.result, searchTerms.result)
+        isSubstring(filterValues.testPassingDate, searchTerms.testPassingDate) &&
+        isSubstring(this.result, filter)
       );
     };
   }
@@ -129,7 +141,12 @@ export class UserResultsTableComponent implements OnInit, AfterViewInit, OnChang
     this.isOpen = !this.isOpen;
   }
 
-  getTotalResult(): void {
-    this.results.map((result) => result);
+  calculateResult(
+    grammarMark: number,
+    auditionMark: number,
+    essayMark: number,
+    speakingMark: number,
+  ): number {
+    return grammarMark + auditionMark + essayMark + speakingMark;
   }
 }
