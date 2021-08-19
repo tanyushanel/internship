@@ -1,0 +1,11 @@
+<mat-select
+  class="select"
+  #langSelect
+  [(ngModel)]="selectedLang"
+  (ngModelChange)="change($event)"
+  (change)="translate.use(langSelect.value)"
+>
+  <mat-option *ngFor="let lang of translate.getLangs()" [value]="lang === translate.currentLang">
+    {{ lang }}
+  </mat-option>
+</mat-select>

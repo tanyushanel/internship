@@ -44,7 +44,7 @@ export class SidebarComponent implements OnInit {
     this.isOpen = !this.isOpen;
   }
 
-  homeLangChange(event: string): void {
+  langChange(event: string): void {
     this.selectedLang = event;
   }
 }

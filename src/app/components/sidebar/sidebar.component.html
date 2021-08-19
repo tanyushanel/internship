@@ -1,9 +1,3 @@
-<app-switch-language
-  [(ngModel)]="selectedLang"
-  ngDefaultControl
-  (onChangeSelectedLang)="homeLangChange(selectedLang)"
-></app-switch-language>
-
 <mat-sidenav-container class="sidebar" autosize *ngIf="{ isSingIn: isSingIn$ | async } as $">
   <mat-sidenav
     *ngIf="$.isSingIn"
@@ -12,6 +6,11 @@
     mode="side"
     [opened]="true"
   >
+    <app-switch-language
+      [(ngModel)]="selectedLang"
+      ngDefaultControl
+      (onChangeSelectedLang)="langChange(selectedLang)"
+    ></app-switch-language>
     <mat-nav-list>
       <ng-container *ngIf="{ user: user$ | async } as $">
         <div class="sidebar__items">
@@ -55,6 +54,7 @@
       </ng-container>
     </mat-nav-list>
   </mat-sidenav>
+
   <mat-sidenav-content>
     <mat-icon
       *ngIf="$.isSingIn"

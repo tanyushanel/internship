@@ -1,0 +1,9 @@
+@import '../../../../theme/variables.scss';
+
+.select {
+  width: 2.5rem;
+  padding: 0.5rem;
+  text-transform: uppercase;
+  background: $secondary-grey3;
+  cursor: pointer;
+}
