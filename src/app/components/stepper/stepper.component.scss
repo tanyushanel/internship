@@ -33,3 +33,23 @@
 .text__center {
   font-size: 18px;
 }
+
+.mat-icon {
+  width: 12px;
+  height: 12px;
+  font-size: 12px;
+}
+
+.report {
+  float: right;
+}
+
+.report__text {
+  margin-left: 3px;
+}
+
+.report__text:hover {
+  color: $secondary-grey2;
+  text-decoration: underline;
+  cursor: pointer;
+}

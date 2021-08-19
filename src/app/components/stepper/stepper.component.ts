@@ -3,7 +3,9 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angu
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { combineLatest } from 'rxjs';
 import { startWith } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
 import { AnswerQuestion, Question } from '../../interfaces/question-answer';
+import { ReportMistakeDialogComponent } from '../report-mistake-dialog/report-mistake-dialog.component';
 
 @Component({
   selector: 'app-stepper',
@@ -17,6 +19,8 @@ import { AnswerQuestion, Question } from '../../interfaces/question-answer';
   ],
 })
 export class StepperComponent implements OnChanges, OnInit {
+  rofl: string | undefined;
+
   @Input() questionList: Question[] | null = null;
 
   @Output() answersChosenId = new EventEmitter<string[] | null>();
@@ -25,7 +29,7 @@ export class StepperComponent implements OnChanges, OnInit {
 
   stepperFormGroups: FormGroup[] | undefined = [];
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, public dialog: MatDialog) {}
 
   ngOnInit(): void {}
 
@@ -56,5 +60,9 @@ export class StepperComponent implements OnChanges, OnInit {
 
   onAnswersSubmit(): void {
     this.answersChosenId.emit(this.selectedAnswersId);
+  }
+
+  openReportDialog(questionId: string, auditionId: string) {
+    this.dialog.open(ReportMistakeDialogComponent, { data: { questionId, auditionId } });
   }
 }

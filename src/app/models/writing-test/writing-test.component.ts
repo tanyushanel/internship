@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { TopicModule } from '../../interfaces/essay-speaking';
+import { ReportMistakeDialogComponent } from '../../components/report-mistake-dialog/report-mistake-dialog.component';
 
 @Component({
   selector: 'app-writing-test',
@@ -8,6 +10,8 @@ import { TopicModule } from '../../interfaces/essay-speaking';
   styleUrls: ['./writing-test.component.scss'],
 })
 export class WritingTestComponent implements OnInit {
+  constructor(public dialog: MatDialog) {}
+
   @Input() essay: TopicModule | null = null;
 
   @Output() essayWritten = new EventEmitter<string | null>();
@@ -34,5 +38,9 @@ export class WritingTestComponent implements OnInit {
 
   onWritingSubmit(): void {
     this.essayWritten.emit(this.form.controls.text.value);
+  }
+
+  openReportDialog(essayId?: string) {
+    this.dialog.open(ReportMistakeDialogComponent, { data: { essayId } });
   }
 }

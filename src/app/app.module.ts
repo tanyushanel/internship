@@ -15,6 +15,8 @@ import { AngularMaterialCommonModule } from './models/angular-material-common.mo
 import { NotFoundComponent } from './models/not-found/not-found.component';
 import { AuthInterceptor } from './shared/auth.interceptor';
 import { LoadingIndicatorInterceptor } from './shared/loading-indicator.interceptor';
+import { ReportMistakeDialogComponent } from './components/report-mistake-dialog/report-mistake-dialog.component';
+import { ReportSubmitModalComponent } from './components/report-submit-modal/report-submit-modal.component';
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -36,6 +38,8 @@ const INTERCEPTOR_LOADING_INDICATOR: Provider = {
     EditorComponent,
     ManageComponent,
     NotFoundComponent,
+    ReportMistakeDialogComponent,
+    ReportSubmitModalComponent,
   ],
   imports: [
     BrowserModule,
