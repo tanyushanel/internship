@@ -24,6 +24,7 @@ import { isSubstring } from '../../../helpers/filter-check';
 import { CoachTopicStoreService } from '../../../services/store/coach-topic-store.service';
 import { ListeningAddingEditingDialogComponent } from '../listening-adding-editing-dialog/listening-adding-editing-dialog.component';
 import { CoachListeningStoreService } from '../../../services/store/coach-listening-store.service';
+import { CoachAudioDataStoreService } from '../../../services/store/coach-audio-data-store.service';
 
 @Component({
   selector: 'app-coach-profile-editor-table',
@@ -63,6 +64,7 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
     private coachEditQuestion: CoachQuestionStoreService,
     private coachEditTopic: CoachTopicStoreService,
     private coachListening: CoachListeningStoreService,
+    private coachAudioData: CoachAudioDataStoreService,
   ) {
     this.dataSource = new MatTableDataSource(this.table);
     this.dataSource.filterPredicate = this.createFilter();
@@ -119,6 +121,7 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
       });
     } else if (this.selectTab === CoachEditorTabs.audition) {
       this.coachListening.getListening(row.id);
+      this.coachAudioData.downloadListeningFile();
       this.coachListening.listening$.pipe(take(1)).subscribe((listen) => {
         if (listen !== null) {
           this.dialog.open(ListeningAddingEditingDialogComponent, {

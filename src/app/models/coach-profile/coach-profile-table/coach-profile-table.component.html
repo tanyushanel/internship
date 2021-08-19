@@ -38,12 +38,20 @@
       <th class="header" mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let row">
         <button
-          [disabled]="selectTab === 'Reviewed'"
           mat-raised-button
           color="primary"
-          (click)="onClick(row.essayAnswer, row.id)"
+          (click)="
+            onClick(
+              row.essayAnswer,
+              row.id,
+              row.essayMark,
+              row.speakingMark,
+              row.comment,
+              row.speakingAnswerReference
+            )
+          "
         >
-          Check
+          {{ selectTab != 'Reviewed' ? 'Check' : 'View' }}
         </button>
       </td>
     </ng-container>

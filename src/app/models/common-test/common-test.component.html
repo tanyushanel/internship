@@ -1,14 +1,11 @@
+<p class="timer styled" [class.warn]="(timer$ | async)! < 10">{{ (timer$ | async)! | time }}</p>
+
 <mat-tab-group mat-stretch-tabs mat-align-tabs="center" [(selectedIndex)]="selectedIndex">
   <mat-tab label="GRAMMAR">
     <app-grammar-test
       [questions]="grammar$ | async"
       (answersGrammar)="onGrammarSubmit($event)"
     ></app-grammar-test>
-    <app-proceed-buttons
-      [currentIndex]="selectedIndex"
-      (changedIndex)="setTabIndex($event)"
-      [maxIndex]="maxIndex"
-    ></app-proceed-buttons>
   </mat-tab>
 
   <mat-tab label="LISTENING">
@@ -16,11 +13,6 @@
       [questions]="listening$ | async"
       (answersListening)="onListeningSubmit($event)"
     ></app-listening>
-    <app-proceed-buttons
-      [currentIndex]="selectedIndex"
-      (changedIndex)="setTabIndex($event)"
-      [maxIndex]="maxIndex"
-    ></app-proceed-buttons>
   </mat-tab>
 
   <mat-tab label="WRITING">
@@ -28,28 +20,19 @@
       [essay]="essay$ | async"
       (essayWritten)="onWritingSubmit($event)"
     ></app-writing-test>
-    <app-proceed-buttons
-      [currentIndex]="selectedIndex"
-      (changedIndex)="setTabIndex($event)"
-      [maxIndex]="maxIndex"
-    ></app-proceed-buttons>
   </mat-tab>
 
   <mat-tab label="SPEAKING">
     <app-speaking [speaking]="speaking$ | async"></app-speaking>
-    <app-proceed-buttons
-      [currentIndex]="selectedIndex"
-      (changedIndex)="setTabIndex($event)"
-      [maxIndex]="maxIndex"
-    ></app-proceed-buttons>
   </mat-tab>
 </mat-tab-group>
 <button
   mat-raised-button
   [class.hidden]="selectedIndex < 3"
+  [disabled]="isFinished"
   color="secondary"
   class="button-submit"
-  (click)="onFinishButtonClick()"
+  (click)="onFinishButtonOpenDialog()"
 >
-  Finish Test
+  COMPLETE TEST
 </button>

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { TopicModule } from '../../interfaces/essay-speaking';
 import { Question } from '../../interfaces/question-answer';
-import { TestContent, TestSubmit } from '../../interfaces/test';
+import { SubmitTestResponse, TestContent } from '../../interfaces/test';
 import { TestStoreService } from '../../services/store/test-store.service';
 import { FinishModalDialogComponent } from '../dialog-module/finish-modal-dialog/finish-modal-dialog.component';
 
@@ -23,7 +23,7 @@ export class CommonTestComponent implements OnInit {
 
   speachRef = '';
 
-  requestBody: Observable<TestSubmit | null> = this.testStoreService.submitTestBody$;
+  requestBody: Observable<SubmitTestResponse | null> = this.testStoreService.submitTestBody$;
 
   test$: Observable<TestContent | null> = this.testStoreService.test$;
 
@@ -39,26 +39,33 @@ export class CommonTestComponent implements OnInit {
 
   maxIndex = 3;
 
-  constructor(
-    private testStoreService: TestStoreService,
-    private route: ActivatedRoute,
-    public dialog: MatDialog,
-  ) {}
+  isFinished = false;
+
+  timer$ = this.testStoreService.timerValue$;
+
+  timerSubscription!: Subscription;
+
+  testId: string | undefined = '';
+
+  constructor(private testStoreService: TestStoreService, public dialog: MatDialog) {}
 
   ngOnInit() {
     this.testStoreService.createTestContent();
     this.testStoreService.getTestId();
 
-    const testId = this.route.snapshot.paramMap.get('id');
-
-    if (testId) {
-      this.testStoreService.createAssignedTestContent(testId);
-    } else this.testStoreService.createTestContent();
-
+    this.test$.pipe(map((test) => test?.id)).subscribe((id) => (this.testId = id));
     this.grammar$ = this.test$.pipe(map((test) => test?.grammarQuestions || null));
     this.listening$ = this.test$.pipe(map((test) => test?.audition.questions || null));
     this.essay$ = this.test$.pipe(map((test) => test?.essay || null));
     this.speaking$ = this.test$.pipe(map((test) => test?.speaking || null));
+
+    if (this.testId) {
+      this.testStoreService.createAssignedTestContent(this.testId);
+    } else this.testStoreService.createTestContent();
+
+    this.timerSubscription = this.testStoreService.timer(60, 60000, () =>
+      this.onSubmitTestOnTimerRunOut(),
+    );
   }
 
   setTabIndex(ind: number): void {
@@ -77,14 +84,39 @@ export class CommonTestComponent implements OnInit {
     if (answers) this.listeningAnswers = answers;
   }
 
-  onFinishButtonClick(): void {
+  onFinishButtonOpenDialog(): void {
+    this.dialog.closeAll();
     this.dialog.open(FinishModalDialogComponent, {
       width: '45rem',
       data: {
+        id: this.testId,
         grammarAnswers: this.grammarAnswers,
         auditionAnswers: this.listeningAnswers,
         essayAnswer: this.essayText,
         speakingAnswerReference: this.speachRef,
+        isFinished: this.isFinished,
+        timerSubscription: this.timerSubscription,
+      },
+    });
+  }
+
+  onSubmitTestOnTimerRunOut(): void {
+    this.dialog.closeAll();
+    if (this.timerSubscription) this.timerSubscription.unsubscribe();
+
+    this.isFinished = true;
+
+    this.dialog.open(FinishModalDialogComponent, {
+      closeOnNavigation: false,
+      width: '45rem',
+      data: {
+        id: this.testId,
+        grammarAnswers: this.grammarAnswers,
+        auditionAnswers: this.listeningAnswers,
+        essayAnswer: this.essayText,
+        speakingAnswerReference: this.speachRef,
+        isFinished: this.isFinished,
+        timerSubscription: this.timerSubscription,
       },
     });
   }
