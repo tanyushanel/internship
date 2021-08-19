@@ -67,7 +67,7 @@ export class ListeningTestComponent implements OnInit, AfterViewInit, AfterViewC
 
   ngAfterViewChecked() {
     const repeatButton = this.elementRef.nativeElement.querySelector(
-      '#mat-tab-content-0-1 > div > app-listening > ngx-audio-player > mat-card > button.mat-focus-indicator.ngx-p-1.volume.justify-content-center.mat-button.mat-button-base.ng-star-inserted:not(.play-repeat-disable)',
+      'ngx-audio-player > mat-card > button.mat-focus-indicator.ngx-p-1.volume.justify-content-center.mat-button.mat-button-base.ng-star-inserted:not(.play-repeat-disable)',
     );
     if (repeatButton) {
       repeatButton.classList.add('play-repeat-disable');
