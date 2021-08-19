@@ -1,10 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Route } from 'src/app/constants/route-constant';
 import { TestStoreService } from 'src/app/services/store/test-store.service';
-import { FinishTestBody } from '../../../interfaces/test';
+import { SubmitTestResponse, FinishTestBody } from '../../../interfaces/test';
 
 @Component({
   selector: 'app-finish-modal-dialog',
@@ -44,16 +44,17 @@ export class FinishModalDialogComponent implements OnInit {
     this.testTimerSubscription.unsubscribe();
     if (this.buttonTimerSubscription) this.buttonTimerSubscription.unsubscribe();
 
-    this.dialogRef.close();
-
-    this.router.navigate([Route.result]);
-
     this.testStoreService.testSubmit(
+      this.data.id,
       this.data.grammarAnswers,
       this.data.auditionAnswers,
       this.data.essayAnswer,
       this.data.speakingAnswerReference,
     );
+
+    this.dialogRef.close();
+
+    this.router.navigate([Route.result]);
   }
 
   onTickerRunOut(): void {
