@@ -75,6 +75,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatSnackBarModule,
     MatCheckboxModule,
     MatMenuModule,
+    MatTooltipModule,
   ],
   providers: [
     {
