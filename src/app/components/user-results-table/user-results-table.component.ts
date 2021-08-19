@@ -1,11 +1,9 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import {
   AfterViewInit,
-  ChangeDetectorRef,
   Component,
   Input,
   OnChanges,
-  OnInit,
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
