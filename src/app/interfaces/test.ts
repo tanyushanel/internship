@@ -1,3 +1,5 @@
+import { Subscription } from 'rxjs';
+import { SignatureHelpTriggerReason } from 'typescript';
 import { Level } from '../constants/data-constants';
 import { Audition } from './audition';
 import { TopicModule } from './essay-speaking';
@@ -59,8 +61,20 @@ export interface TestSubmit {
 }
 
 export interface FinishTestBody {
+  id: string;
   grammarAnswers: string[];
   auditionAnswers: string[];
   essayAnswer: string;
   speakingAnswerReference: string;
+  isFinished?: boolean;
+  timerSubscription: Subscription;
+}
+
+export interface SubmitTestResponse {
+  id: string;
+  auditionMark: number;
+  grammarMark: number;
+  level: Level;
+  testPassingDate: string;
+  userId: string;
 }

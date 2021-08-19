@@ -13,7 +13,7 @@ export interface CoachListening {
 
 export interface Audition {
   id: string;
-  auditionAudio: string;
+  audioFilePath?: string;
   level: Level;
   creationDate: string;
   questions: Question[];
@@ -47,4 +47,8 @@ export interface UpdateCoachListening {
   audioFilePath: string | undefined;
   level: number | undefined;
   questions: ListeningQuestion[];
+}
+
+export interface PathFile {
+  pathfile: string;
 }

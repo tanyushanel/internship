@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Level } from '../constants/data-constants';
 import { BASE_API_URL } from '../constants/route-constant';
-import { TestContent, TestResult, TestSubmit } from '../interfaces/test';
+import { SubmitTestResponse, TestContent, TestResult } from '../interfaces/test';
 
 interface GetTestsResults {
   results: TestResult[];
@@ -50,8 +50,8 @@ export class TestHttpService {
     listening: string[],
     writing: string,
     speaking: string,
-  ) {
-    return this.http.put<TestSubmit>(`${BASE_API_URL}/Test/${testId}/submit`, {
+  ): Observable<SubmitTestResponse> {
+    return this.http.put<SubmitTestResponse>(`${BASE_API_URL}/Test/${testId}/submit`, {
       id: testId,
       grammarAnswers: grammar,
       auditionAnswers: listening,

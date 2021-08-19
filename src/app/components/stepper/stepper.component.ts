@@ -23,6 +23,8 @@ export class StepperComponent implements OnChanges, OnInit {
 
   @Input() questionList: Question[] | null = null;
 
+  @Input() testId: string | undefined;
+
   @Output() answersChosenId = new EventEmitter<string[] | null>();
 
   selectedAnswersId: string[] | null = null;
@@ -63,6 +65,8 @@ export class StepperComponent implements OnChanges, OnInit {
   }
 
   openReportDialog(questionId: string, auditionId: string) {
-    this.dialog.open(ReportMistakeDialogComponent, { data: { questionId, auditionId } });
+    this.dialog.open(ReportMistakeDialogComponent, {
+      data: { questionId, auditionId, testId: this.testId },
+    });
   }
 }

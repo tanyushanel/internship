@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { concatMap, map, take } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { BehaviorSubject, Observable, Subject, Subscription, timer } from 'rxjs';
+import { concatMap, map, take, takeWhile, tap } from 'rxjs/operators';
 import { Level } from '../../constants/data-constants';
-import { TestContent, TestResult, TestSubmit } from '../../interfaces/test';
+import { SubmitTestResponse, TestContent, TestResult } from '../../interfaces/test';
 import { TestHttpService } from '../test-http.service';
 import { AuthStoreService } from './auth-store.service';
 
@@ -14,11 +15,11 @@ export class TestStoreService {
 
   allTests$ = this.allTestsSubject$.asObservable();
 
-  public submitTestSubject$ = new Subject<TestSubmit | null>();
+  public submitTestSubject$ = new Subject<SubmitTestResponse>();
 
   submitTestBody$ = this.submitTestSubject$.asObservable();
 
-  public testSubject$ = new Subject<TestContent | null>();
+  public testSubject$ = new Subject<TestContent>();
 
   test$ = this.testSubject$.asObservable();
 
@@ -31,6 +32,10 @@ export class TestStoreService {
       tests?.filter((test) => !test.level && new Date(test.assignmentEndDate) >= new Date()),
     ),
   );
+
+  public timerSubject$ = new BehaviorSubject<number>(0);
+
+  timerValue$ = this.timerSubject$.asObservable();
 
   selectedLevel!: Level;
 
@@ -48,13 +53,18 @@ export class TestStoreService {
     this.allTestsSubject$.next(testResults);
   }
 
-  private set submitTestBody(body: TestSubmit) {
+  private set submitTestBody(body: SubmitTestResponse) {
     this.submitTestSubject$.next(body);
+  }
+
+  private set timerValue(timerValue: number) {
+    this.timerSubject$.next(timerValue);
   }
 
   constructor(
     private testHttpService: TestHttpService,
     private authStoreService: AuthStoreService,
+    private snackbar: MatSnackBar,
   ) {}
 
   selectLevel(selected: Level): void {
@@ -98,17 +108,30 @@ export class TestStoreService {
     });
   }
 
-  testSubmit(grammar: string[], listening: string[], writing: string, speaking: string): void {
-    this.testHttpService.finishTest(this.testId, grammar, listening, writing, speaking).subscribe({
-      next: (request) => {
-        this.submitTestBody = {
-          ...request,
-          id: this.testId,
-          grammarAnswers: grammar,
-          auditionAnswers: listening,
-          essayAnswer: writing,
-          speakingAnswerReference: speaking,
-        };
+  testSubmit(
+    id: string,
+    grammar: string[],
+    listening: string[],
+    writing: string,
+    speaking: string,
+  ): void {
+    this.testHttpService.finishTest(id, grammar, listening, writing, speaking).subscribe({
+      next: (responce) => {
+        this.submitTestBody = responce;
+
+        this.snackbar.open('Test was successfully submitted', 'Close', {
+          verticalPosition: 'bottom',
+          duration: 2000,
+          panelClass: 'success',
+        });
+      },
+
+      error: () => {
+        this.snackbar.open('Something went wrong', 'Close', {
+          verticalPosition: 'bottom',
+          duration: 2000,
+          panelClass: 'error',
+        });
       },
     });
   }
@@ -118,6 +141,19 @@ export class TestStoreService {
       next: (test) => {
         this.test = { ...test };
       },
+    });
+  }
+
+  timer(counter: number, interval: number, func: () => void): Subscription {
+    let timeLast = counter;
+    const obs = timer(0, interval).pipe(
+      takeWhile(() => timeLast > 0),
+      tap(() => (timeLast -= 1)),
+    );
+
+    return obs.subscribe(() => {
+      if (timeLast === 0) func();
+      return (this.timerValue = timeLast);
     });
   }
 }

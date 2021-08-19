@@ -26,6 +26,8 @@ declare let MediaRecorder: any;
 export class SpeakingTestComponent implements OnInit, OnDestroy {
   @Input() speaking: TopicModule | null = null;
 
+  @Input() testId: string | undefined;
+
   @Output() speachRecorded = new EventEmitter<{ src: SafeUrl } | null>();
 
   mediaRecorder: any;
@@ -172,6 +174,6 @@ export class SpeakingTestComponent implements OnInit, OnDestroy {
   }
 
   openReportDialog(speakingId?: string) {
-    this.dialog.open(ReportMistakeDialogComponent, { data: { speakingId } });
+    this.dialog.open(ReportMistakeDialogComponent, { data: { speakingId, testId: this.testId } });
   }
 }

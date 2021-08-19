@@ -23,15 +23,18 @@ export class ReportMistakeDialogComponent {
     const reportGrammar = {
       questionId: this.data.questionId,
       description: this.description,
+      testId: this.data.testId,
     };
     const reportListening = {
       questionId: this.data.questionId,
       auditionId: this.data.auditionId,
       description: this.description,
+      testId: this.data.testId,
     };
     const reportWritingOrSpeaking = {
       speakingId: this.data.topicId,
       description: this.description,
+      testId: this.data.testId,
     };
     if (this.data.questionId && this.data.auditionId) {
       this.sendReport.createMistakeReport(reportListening);

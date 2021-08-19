@@ -14,6 +14,8 @@ export class WritingTestComponent implements OnInit {
 
   @Input() essay: TopicModule | null = null;
 
+  @Input() testId: string | undefined;
+
   @Output() essayWritten = new EventEmitter<string | null>();
 
   form!: FormGroup;
@@ -41,6 +43,6 @@ export class WritingTestComponent implements OnInit {
   }
 
   openReportDialog(essayId?: string) {
-    this.dialog.open(ReportMistakeDialogComponent, { data: { essayId } });
+    this.dialog.open(ReportMistakeDialogComponent, { data: { essayId, testId: this.testId } });
   }
 }
