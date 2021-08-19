@@ -13,3 +13,19 @@ body {
 .red-snackbar {
   background: $error;
 }
+
+.mat-snack-bar-container.success {
+  color: $black;
+  background-color: $secondary-grey3;
+  border: 1px solid $primary-blue;
+}
+
+.mat-snack-bar-container.error {
+  color: $black;
+  background-color: $secondary-grey3;
+  border: 1px solid $error;
+}
+
+.mat-simple-snackbar-action {
+  color: $primary-blue;
+}

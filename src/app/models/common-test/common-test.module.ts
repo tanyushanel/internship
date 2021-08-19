@@ -1,16 +1,17 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CommonTestComponent } from './common-test.component';
+import { NgModule } from '@angular/core';
+import { TimePipe } from '../../components/timer/time.pipe';
 import { AngularMaterialCommonModule } from '../angular-material-common.module';
-import { WritingTestModule } from '../writing-test/writing-test.module';
-import { SpeakingTestModule } from '../speaking-test/speaking-test.module';
 import { GrammarTestModule } from '../grammar-test/grammar-test.module';
-import { ProceedButtonsComponent } from './proceed-buttons/proceed-buttons.component';
 import { ListeningTestModule } from '../listening-test/listening-test.module';
+import { SpeakingTestModule } from '../speaking-test/speaking-test.module';
+import { WritingTestModule } from '../writing-test/writing-test.module';
 import { CommonTestRoutingModule } from './common-test-routing.module';
+import { CommonTestComponent } from './common-test.component';
+import { ProceedButtonsComponent } from './proceed-buttons/proceed-buttons.component';
 
 @NgModule({
-  declarations: [CommonTestComponent, ProceedButtonsComponent],
+  declarations: [CommonTestComponent, ProceedButtonsComponent, TimePipe],
   imports: [
     CommonModule,
     AngularMaterialCommonModule,
@@ -20,6 +21,6 @@ import { CommonTestRoutingModule } from './common-test-routing.module';
     SpeakingTestModule,
     WritingTestModule,
   ],
-  exports: [ProceedButtonsComponent],
+  exports: [ProceedButtonsComponent, TimePipe],
 })
 export class CommonTestModule {}

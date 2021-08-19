@@ -10,7 +10,9 @@
     </div>
     <span class="file-path">{{ this.fileToUpload?.name ?? this.data.audioFilePath }}</span>
   </div>
-  <audio *ngIf="srcData" controls><source [src]="srcData" /></audio>
+  <audio *ngIf="displayPlayer" id="player" controls #player>
+    <source [src]="srcData" id="my-audio" #audio />
+  </audio>
   <div>
     <h2>Select level</h2>
     <app-choose-level

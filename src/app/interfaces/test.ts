@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { Level } from '../constants/data-constants';
 import { Audition } from './audition';
 import { TopicModule } from './essay-speaking';
@@ -63,4 +64,6 @@ export interface FinishTestBody {
   auditionAnswers: string[];
   essayAnswer: string;
   speakingAnswerReference: string;
+  isFinished?: boolean;
+  timerSubscription: Subscription;
 }

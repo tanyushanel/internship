@@ -1,16 +1,22 @@
+@import 'src/theme/variables.scss';
+
 .finish-test {
   margin: 5em auto;
 
+  &__alert {
+    text-align: center;
+  }
+
   &__heading {
-    margin-top: 1em;
+    margin-top: 0;
   }
 
   &__button-position {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    margin-top: 5em;
-    margin-bottom: 5em;
+    margin-top: 2em;
+    margin-bottom: 2em;
   }
 
   &__paragraph {
@@ -42,4 +48,12 @@
   &:focus {
     background-color: lightgrey;
   }
+}
+
+.warn {
+  color: $error;
+}
+
+.count-down {
+  text-align: center;
 }

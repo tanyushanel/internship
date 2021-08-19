@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ResponseGetAll } from '../interfaces/question-answer';
-import {
-  DownloadFileListeningApiUrl,
-  ListeningApiUrl,
-  UploadFileListeningApiUrl,
-} from '../constants/route-constant';
+import { ListeningApiUrl, UploadFileListeningApiUrl } from '../constants/route-constant';
 import {
   CoachListening,
   EditionCoachListening,
+  PathFile,
   UpdateCoachListening,
 } from '../interfaces/audition';
 
@@ -39,10 +36,6 @@ export class CoachListeningHttpService {
   }
 
   uploadListeningFile(file: FormData) {
-    return this.http.post(UploadFileListeningApiUrl, file);
-  }
-
-  downloadListeningFile() {
-    return this.http.get(DownloadFileListeningApiUrl);
+    return this.http.post<PathFile>(UploadFileListeningApiUrl, file);
   }
 }

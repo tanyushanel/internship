@@ -59,14 +59,4 @@ export class CoachListeningStoreService {
   deleteListening(id: string) {
     this.coachListeningHttpService.deleteListening(id).subscribe(() => this.getAllListening());
   }
-
-  uploadListeningFile(file: File) {
-    const fd = new FormData();
-    fd.append('file', file);
-    this.coachListeningHttpService.uploadListeningFile(fd).subscribe();
-  }
-
-  downloadListeningFile() {
-    this.coachListeningHttpService.downloadListeningFile().subscribe();
-  }
 }
