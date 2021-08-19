@@ -71,6 +71,7 @@ export class UserResultsTableComponent implements OnInit, AfterViewInit, OnChang
 
   constructor() {
     this.dataSource = new MatTableDataSource(this.results);
+
     this.dataSource.filterPredicate = this.createFilter();
   }
 
@@ -101,6 +102,7 @@ export class UserResultsTableComponent implements OnInit, AfterViewInit, OnChang
         isSubstring(filterValues.testNumber, searchTerms.testNumber) &&
         isSubstring(languageLevel[filterValues.level], searchTerms.level) &&
         isSubstring(filterValues.testPassingDate, searchTerms.testPassingDate)
+        // isSubstring(filterValues.result, searchTerms.result)
       );
     };
   }
@@ -127,5 +129,7 @@ export class UserResultsTableComponent implements OnInit, AfterViewInit, OnChang
     this.isOpen = !this.isOpen;
   }
 
-  getTotalResult(): void {}
+  getTotalResult(): void {
+    this.results.map((result) => result);
+  }
 }
