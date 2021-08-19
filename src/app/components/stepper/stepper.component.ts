@@ -19,8 +19,6 @@ import { ReportMistakeDialogComponent } from '../report-mistake-dialog/report-mi
   ],
 })
 export class StepperComponent implements OnChanges, OnInit {
-  rofl: string | undefined;
-
   @Input() questionList: Question[] | null = null;
 
   @Input() testId: string | undefined;

@@ -19,31 +19,35 @@ export class ReportMistakeDialogComponent {
 
   description = '';
 
-  submitMistake() {
-    const reportGrammar = {
-      questionId: this.data.questionId,
-      description: this.description,
-      testId: this.data.testId,
-    };
-    const reportListening = {
-      questionId: this.data.questionId,
-      auditionId: this.data.auditionId,
-      description: this.description,
-      testId: this.data.testId,
-    };
-    const reportWritingOrSpeaking = {
-      speakingId: this.data.topicId,
-      description: this.description,
-      testId: this.data.testId,
-    };
-    if (this.data.questionId && this.data.auditionId) {
-      this.sendReport.createMistakeReport(reportListening);
-    } else if (this.data.questionId && !this.data.auditionId) {
-      this.sendReport.createMistakeReport(reportGrammar);
-    } else if (this.data.topicId) {
-      this.sendReport.createMistakeReport(reportWritingOrSpeaking);
-    }
+  report!: MistakeReport;
 
+  mistakeType(): void {
+    if (this.data.questionId && !this.data.auditionId) {
+      this.report = {
+        questionId: this.data.questionId,
+        description: this.description,
+        testId: this.data.testId,
+      };
+    }
+    if (this.data.questionId && this.data.auditionId) {
+      this.report = {
+        questionId: this.data.questionId,
+        auditionId: this.data.auditionId,
+        description: this.description,
+        testId: this.data.testId,
+      };
+    } else if (this.data.topicId) {
+      this.report = {
+        topicId: this.data.topicId,
+        description: this.description,
+        testId: this.data.testId,
+      };
+    }
+  }
+
+  submitMistake() {
+    this.mistakeType();
+    this.sendReport.createMistakeReport(this.report);
     this.dialogRef.close();
     this.dialog.open(ReportSubmitModalComponent);
   }

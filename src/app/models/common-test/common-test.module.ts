@@ -10,6 +10,7 @@ import { CommonTestRoutingModule } from './common-test-routing.module';
 import { CommonTestComponent } from './common-test.component';
 import { ProceedButtonsComponent } from './proceed-buttons/proceed-buttons.component';
 import { ReportMistakeDialogComponent } from '../../components/report-mistake-dialog/report-mistake-dialog.component';
+import { ReportSubmitModalComponent } from '../../components/report-submit-modal/report-submit-modal.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { ReportMistakeDialogComponent } from '../../components/report-mistake-di
     ProceedButtonsComponent,
     TimePipe,
     ReportMistakeDialogComponent,
+    ReportSubmitModalComponent,
   ],
   imports: [
     CommonModule,
