@@ -13,7 +13,7 @@ export interface CoachListening {
 
 export interface Audition {
   id: string;
-  auditionAudio: string;
+  audioFilePath?: string;
   level: Level;
   creationDate: string;
   questions: Question[];
