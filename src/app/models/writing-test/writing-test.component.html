@@ -27,4 +27,8 @@
       </div>
     </mat-form-field>
   </form>
+  <div class="report">
+    <mat-icon>warning_amber</mat-icon>
+    <span class="report__text" (click)="openReportDialog(essay?.id)">Report Mistake</span>
+  </div>
 </div>

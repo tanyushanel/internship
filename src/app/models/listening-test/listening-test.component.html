@@ -19,4 +19,8 @@
   [disablePositionSlider]="msaapDisablePositionSlider"
 >
 </ngx-audio-player>
-<app-stepper [questionList]="questions" (answersChosenId)="onAnswersSubmit($event)"></app-stepper>
+<app-stepper
+  [testId]="testId"
+  [questionList]="questions"
+  (answersChosenId)="onAnswersSubmit($event)"
+></app-stepper>
