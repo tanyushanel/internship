@@ -1,7 +1,9 @@
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule, Provider } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CheckComponent } from './components/mock-component/check/check.component';
@@ -15,6 +17,10 @@ import { AngularMaterialCommonModule } from './models/angular-material-common.mo
 import { NotFoundComponent } from './models/not-found/not-found.component';
 import { AuthInterceptor } from './shared/auth.interceptor';
 import { LoadingIndicatorInterceptor } from './shared/loading-indicator.interceptor';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -45,6 +51,14 @@ const INTERCEPTOR_LOADING_INDICATOR: Provider = {
     HttpClientModule,
     ErrorHandlerModule,
     AngularMaterialCommonModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+      defaultLanguage: 'en',
+    }),
   ],
   providers: [INTERCEPTOR_PROVIDER, INTERCEPTOR_LOADING_INDICATOR],
   bootstrap: [AppComponent],

@@ -1,0 +1,27 @@
+@import 'src/theme/variables';
+
+select,
+input {
+  padding: 0.7rem;
+  color: $black;
+  font-size: 0.7em;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  outline: none;
+}
+
+.btn {
+  display: inline-flex;
+  margin-right: 0.7rem;
+  overflow: hidden;
+  font-weight: 700;
+  vertical-align: text-top;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+select {
+  position: absolute;
+  z-index: 10;
+  margin: 0.5rem;
+}

@@ -1,3 +1,9 @@
+<app-switch-language
+  [(ngModel)]="selectedLang"
+  ngDefaultControl
+  (onChangeSelectedLang)="homeLangChange(selectedLang)"
+></app-switch-language>
+
 <mat-sidenav-container class="sidebar" autosize *ngIf="{ isSingIn: isSingIn$ | async } as $">
   <mat-sidenav
     *ngIf="$.isSingIn"
