@@ -8,7 +8,7 @@ cdk-virtual-scroll-viewport {
 mat-tab-group {
   justify-self: center;
   max-width: 100%;
-  margin: 0 50px;
+  margin: 0 3rem;
 }
 
 table {
@@ -50,13 +50,13 @@ button {
 }
 
 .mat-column-Coach {
-  margin: 0 50px;
+  margin: 0 3rem;
 }
 
 td,
 th {
   width: 30%;
-  margin: 0 50px;
+  margin: 0 3rem;
 }
 
 cdk-virtual-scroll-viewport::-webkit-scrollbar {

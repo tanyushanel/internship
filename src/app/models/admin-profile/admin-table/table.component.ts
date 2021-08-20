@@ -2,13 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import { AdminTableStoreService } from 'src/app/services/store/adminTableStore.service';
-import { Level } from 'src/constants/data-constants';
 import { AdminDialogComponent } from '../admin-dialog/admin-dialog.component';
 import {
   ServiceCoachData,
   TestData,
   UpdateCoachesData,
-} from '../../../../mocks/admin-profile-utils.mock';
+} from '../../../../interfaces/admin-profile-intarfaces';
 
 @Component({
   selector: 'app-table',
@@ -30,6 +29,8 @@ export class TableComponent implements OnInit {
 
   coachUpdate: UpdateCoachesData | undefined;
 
+  temp: string | null | undefined;
+
   assignedData!: TestData[];
 
   notAssignedData!: TestData[];
@@ -46,7 +47,6 @@ export class TableComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.getAssignedTestData().subscribe((assignedData) => {
-      console.log(assignedData);
       this.assignedData = assignedData.results;
     });
     this.service.getNotAssignedTestData().subscribe((notAssignedData) => {
@@ -75,5 +75,15 @@ export class TableComponent implements OnInit {
       };
       this.service.updateTestData(this.coachUpdate, result.id);
     });
+  }
+
+  coachName(Id: string) {
+    for (let i = 0; i < this.coaches.coaches.length; i += 1) {
+      if (Id === this.coaches.coaches[i].userId) {
+        this.temp = this.coaches.coaches[i].firstName;
+        break;
+      }
+    }
+    return this.temp;
   }
 }

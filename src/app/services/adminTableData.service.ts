@@ -5,7 +5,7 @@ import {
   ServiceTestData,
   TestData,
   UpdateCoachesData,
-} from 'src/mocks/admin-profile-utils.mock';
+} from 'src/interfaces/admin-profile-intarfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -32,7 +32,6 @@ export class AdminHttpService {
   }
 
   updateCoachTest(data: UpdateCoachesData, testID: number) {
-    console.log(`http://elevel-001-site1.btempurl.com/api/Test/${testID}assignForCoach`);
     return this.http.put<TestData>(
       `http://elevel-001-site1.btempurl.com/api/Test/${testID}/assignForCoach`,
       data,

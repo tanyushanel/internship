@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { TestData, UpdateCoachesData } from 'src/mocks/admin-profile-utils.mock';
+import { TestData, UpdateCoachesData } from 'src/interfaces/admin-profile-intarfaces';
 import { AdminHttpService } from '../adminTableData.service';
 
 @Injectable({
@@ -22,7 +22,6 @@ export class AdminTableStoreService {
   }
 
   updateTestData(data: UpdateCoachesData, testID: number) {
-    console.log(data);
     this.adminHttpService.updateCoachTest(data, testID).subscribe((resp) => console.log(resp));
   }
 }

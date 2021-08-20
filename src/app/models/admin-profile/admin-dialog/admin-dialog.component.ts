@@ -1,9 +1,6 @@
-import { Input, Component, Inject, OnInit } from '@angular/core';
-
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { AdminTableStoreService } from 'src/app/services/store/adminTableStore.service';
-import { CoachData, ServiceCoachData, TestData } from '../../../../mocks/admin-profile-utils.mock';
 
 @Component({
   selector: 'app-admin-dialog',
