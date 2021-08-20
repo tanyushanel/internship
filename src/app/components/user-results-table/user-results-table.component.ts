@@ -108,7 +108,7 @@ export class UserResultsTableComponent implements OnInit, AfterViewInit, OnChang
 
   ngAfterViewInit() {
     setTimeout(() => {
-      const sortState: Sort = { active: 'date', direction: 'desc' };
+      const sortState: Sort = { active: 'testPassingDate', direction: 'desc' };
       this.sort.active = sortState.active;
       this.sort.direction = sortState.direction;
       this.sort.sortChange.emit(sortState);
