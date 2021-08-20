@@ -13,9 +13,9 @@ import { Route } from '../../constants/route-constant';
 export class ResultComponent implements OnInit {
   currentTest$: Observable<SubmitTestResponse> = this.testStoreService.submitTestBody$;
 
-  currentGrammarResult = 0;
+  currentGrammarResult!: number;
 
-  currentAuditionResult = 0;
+  currentAuditionResult!: number;
 
   constructor(private testStoreService: TestStoreService, private router: Router) {}
 
