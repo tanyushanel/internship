@@ -69,4 +69,10 @@ export class TestHttpService {
       .get<GetTestsResults>(`${BASE_API_URL}/Test?Id=${testId}`)
       .pipe(map((res) => res.results));
   }
+
+  getAssignedTestByLevel(userId: string) {
+    return this.http
+      .get<GetTestsResults>(`${BASE_API_URL}/Test?userId=${userId}&Level=0`)
+      .pipe(map((res) => res.results));
+  }
 }

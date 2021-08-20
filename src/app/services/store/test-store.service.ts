@@ -110,6 +110,21 @@ export class TestStoreService {
     });
   }
 
+  getAssignedTest(): void {
+    this.authStoreService.activeUser$
+      .pipe(
+        take(1),
+        concatMap((user) =>
+          this.testHttpService.getAssignedTestByLevel(user !== null ? user.userId : ''),
+        ),
+      )
+      .subscribe({
+        next: (res) => {
+          this.assignedTestsResults = [...res];
+        },
+      });
+  }
+
   createTestContent(): void {
     this.testHttpService.createTest(this.selectedLevel).subscribe({
       next: (test) => {
