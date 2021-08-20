@@ -23,9 +23,9 @@ import { UserTableService } from './services/user-table.service';
 export class HrProfileComponent implements OnInit {
   displayedColumns: string[] = ['firstName', 'lastName', 'assessment', 'info'];
 
-  filterFirstNameValue: string = null as any;
+  filterFirstNameValue = '';
 
-  filterLastNameValue: string = null as any;
+  filterLastNameValue = '';
 
   dataSource: UsersList | null = null;
 
