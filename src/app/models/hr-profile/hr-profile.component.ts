@@ -23,9 +23,9 @@ import { UserTableService } from './services/user-table.service';
 export class HrProfileComponent implements OnInit {
   displayedColumns: string[] = ['firstName', 'lastName', 'assessment', 'info'];
 
-  filterFirstNameValue = '';
+  filterFirstNameValue: string | null = null;
 
-  filterLastNameValue = '';
+  filterLastNameValue: string | null = null;
 
   dataSource: UsersList | null = null;
 
@@ -84,16 +84,16 @@ export class HrProfileComponent implements OnInit {
     }
   }
 
-  findFirstName(firstName: string) {
+  findFirstName(firstName: string | null) {
     this.userTableService
-      .paginateFirstName(1, 10, firstName)
+      .paginateFirstName(1, 10, `${firstName}`)
       .pipe(map((userList: UsersList) => (this.dataSource = userList)))
       .subscribe();
   }
 
-  findLastName(lastName: string) {
+  findLastName(lastName: string | null) {
     this.userTableService
-      .paginateLastName(1, 10, lastName)
+      .paginateLastName(1, 10, `${lastName}`)
       .pipe(map((userList: UsersList) => (this.dataSource = userList)))
       .subscribe();
   }
