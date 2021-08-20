@@ -23,13 +23,26 @@
   }
 
   &__logo {
+    position: relative;
     width: 98px;
     height: 98px;
     margin: 0 auto;
-    background-image: url('https://scontent.fiev6-1.fna.fbcdn.net/v/t1.6435-9/89845151_2502495549967541_8418276994130640896_n.jpg?_nc_cat=111&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=6tnOcGrridIAX8LQjDw&_nc_ht=scontent.fiev6-1.fna&oh=b7143c9dda9fd3ef81c86e41f788a9ab&oe=612EA9AA');
-    background-size: cover;
     border: 3px solid lightblue;
     border-radius: 50%;
+
+    input[type='file'] {
+      position: absolute;
+      width: 98px;
+      height: 98px;
+      cursor: pointer;
+      opacity: 0;
+    }
+
+    img {
+      width: 98px;
+      height: 98px;
+      border-radius: 50%;
+    }
   }
 
   &__items {
