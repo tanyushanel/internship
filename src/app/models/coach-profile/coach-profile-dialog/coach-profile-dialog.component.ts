@@ -1,8 +1,12 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { map } from 'rxjs/operators';
+import { SafeResourceUrl } from '@angular/platform-browser';
 import { CoachTest } from '../../../interfaces/coach-edit';
 import { CoachTestsStoreService } from '../service/coach-tests-store.service';
+import { CoachListeningStoreService } from '../../../services/store/coach-listening-store.service';
+import { CoachAudioDataStoreService } from '../../../services/store/coach-audio-data-store.service';
 
 @Component({
   selector: 'app-coach-profile-dialog',
@@ -14,13 +18,21 @@ export class CoachProfileDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: CoachTest,
     public dialogRef: MatDialogRef<CoachProfileDialogComponent>,
     private coachCheck: CoachTestsStoreService,
+    private coachListening: CoachListeningStoreService,
+    private coachAudioData: CoachAudioDataStoreService,
   ) {}
 
-  downloadURL = 'http://elevel-001-site1.btempurl.com/api/File/Download?filePath=';
+  srcData: SafeResourceUrl | undefined;
+
+  audioFilePath: string | undefined;
 
   form!: FormGroup;
 
   markPattern = '^[0-9]$|[1][0]$';
+
+  @ViewChild('audio') audio: ElementRef | undefined;
+
+  @ViewChild('player') player: ElementRef | undefined;
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -28,6 +40,7 @@ export class CoachProfileDialogComponent implements OnInit {
       speakingMark: new FormControl(this.data.speakingMark, [Validators.pattern(this.markPattern)]),
       essayMark: new FormControl(this.data.essayMark, [Validators.pattern(this.markPattern)]),
     });
+    this.downloadListeningFile();
   }
 
   submitTest(): void {
@@ -45,5 +58,19 @@ export class CoachProfileDialogComponent implements OnInit {
       this.dialogRef.close();
       this.coachCheck.sendCheckTest(question, id);
     }
+  }
+
+  downloadListeningFile() {
+    this.coachAudioData.downloadAudio();
+    this.coachAudioData.audioData$
+      .pipe(
+        map((blob) => {
+          if (blob && this.audio && this.player) {
+            this.audio.nativeElement.src = URL.createObjectURL(blob);
+            this.player.nativeElement.load();
+          }
+        }),
+      )
+      .subscribe();
   }
 }
