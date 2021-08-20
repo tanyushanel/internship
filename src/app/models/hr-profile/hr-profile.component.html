@@ -1,5 +1,5 @@
 <div class="mat-elevation-z8" *ngIf="dataSource">
-  <table mat-table [dataSource]="dataSource.results">
+  <table mat-table [dataSource]="dataSource.results" matSort>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
@@ -15,7 +15,7 @@
             placeholder="Search FirstName"
           />
         </mat-form-field>
-        First Name
+        <div mat-sort-header>First Name</div>
       </th>
       <td mat-cell *matCellDef="let row">{{ row.firstName }}</td>
     </ng-container>
@@ -32,7 +32,7 @@
             placeholder="Search LastName"
           />
         </mat-form-field>
-        LastName
+        <div mat-sort-header>Last Name</div>
       </th>
       <td mat-cell *matCellDef="let row">{{ row.lastName }}</td>
     </ng-container>

@@ -4,8 +4,7 @@
     <button mat-icon-button class="close-button" [mat-dialog-close]="true">✖</button>
     <h2>Found a mistake? Let us know!</h2>
     <p class="mistake__description">
-      Please describe the mistake as detailed as possible along with your expected correction, leave
-      your email so that we can contact you when needed. Thank you!
+      Please describe the mistake as detailed as possible. Thank you!
     </p>
     <mat-form-field appearance="outline" class="text-essay">
       <mat-label>Please describe exactly what is wrong</mat-label>
@@ -17,5 +16,7 @@
       ></textarea>
     </mat-form-field>
   </div>
-  <button mat-raised-button color="primary" (click)="submitMistake()">Submit</button>
+  <button mat-raised-button color="primary" [disabled]="!description" (click)="submitMistake()">
+    Submit
+  </button>
 </div>
