@@ -1,21 +1,12 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import {
-  AfterViewInit,
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-  ViewChild,
-} from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Observable } from 'rxjs';
 import { isSubstring } from 'src/app/helpers/filter-check';
-import { languageLevel, Level } from '../../constants/data-constants';
-import { TestResult } from '../../interfaces/test';
+import { languageLevel } from '../../constants/data-constants';
+import { TestResult, TestResultWithTotal } from '../../interfaces/test';
 
 @Component({
   selector: 'app-user-results-table',
@@ -32,6 +23,8 @@ import { TestResult } from '../../interfaces/test';
 export class UserResultsTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() results: TestResult[] = [];
 
+  resultsWithTotal: TestResultWithTotal[] = [];
+
   languageLevel = languageLevel;
 
   columnsToDisplay: string[] = ['id', 'testPassingDate', 'level', 'result'];
@@ -44,18 +37,10 @@ export class UserResultsTableComponent implements OnInit, AfterViewInit, OnChang
 
   dateFilter = new FormControl('');
 
-  resultFilter = new FormControl('');
-
-  result = 0;
-
   filterValues = {
     testNumber: '',
     level: '',
     testPassingDate: '',
-    grammarMark: '',
-    auditionMark: '',
-    speakingMark: '',
-    essayMark: '',
   };
 
   get resultsCount() {
@@ -68,17 +53,11 @@ export class UserResultsTableComponent implements OnInit, AfterViewInit, OnChang
 
   expandedElement: TestResult | undefined;
 
-  dataSource: MatTableDataSource<TestResult>;
+  dataSource!: MatTableDataSource<TestResultWithTotal>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   @ViewChild(MatSort) sort!: MatSort;
-
-  constructor() {
-    this.dataSource = new MatTableDataSource(this.results);
-
-    this.dataSource.filterPredicate = this.createFilter();
-  }
 
   ngOnInit(): void {
     this.idFilter.valueChanges.subscribe((testNumber) => {
@@ -93,42 +72,41 @@ export class UserResultsTableComponent implements OnInit, AfterViewInit, OnChang
       this.filterValues.testPassingDate = testPassingDate;
       this.dataSource.filter = JSON.stringify(this.filterValues);
     });
-
-    this.resultFilter.valueChanges.subscribe((result) => {
-      this.result = result;
-      this.dataSource.filter = JSON.stringify(this.filterValues);
-    });
   }
 
-  createFilter(): (filterValues: TestResult, filter: string) => boolean {
+  createFilter(): (filterValues: TestResultWithTotal, filter: string) => boolean {
     return (filterValues, filter): boolean => {
       const searchTerms = JSON.parse(filter);
 
-      this.result = this.calculateResult(
-        filterValues.grammarMark,
-        filterValues.essayMark,
-        filterValues.auditionMark,
-        filterValues.speakingMark,
-      );
       return (
         isSubstring(filterValues.testNumber, searchTerms.testNumber) &&
         isSubstring(languageLevel[filterValues.level], searchTerms.level) &&
-        isSubstring(filterValues.testPassingDate, searchTerms.testPassingDate) &&
-        isSubstring(this.result, filter)
+        isSubstring(filterValues.testPassingDate, searchTerms.testPassingDate)
       );
     };
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.results?.currentValue) {
-      this.dataSource.data = changes.results.currentValue;
+  ngOnChanges(): void {
+    if (this.results) {
+      this.resultsWithTotal = this.results.map((value) => {
+        return {
+          ...value,
+          result: this.calculateResult(
+            value.grammarMark,
+            value.auditionMark,
+            value.essayMark,
+            value.speakingMark,
+          ),
+        };
+      });
+      this.dataSource = new MatTableDataSource(this.resultsWithTotal);
+      this.dataSource.filterPredicate = this.createFilter();
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     }
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-
     setTimeout(() => {
       const sortState: Sort = { active: 'date', direction: 'desc' };
       this.sort.active = sortState.active;

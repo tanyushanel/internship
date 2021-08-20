@@ -23,6 +23,10 @@ export interface TestResult {
   priority: boolean;
 }
 
+export interface TestResultWithTotal extends TestResult {
+  result: number;
+}
+
 export interface UserTable {
   id: string;
   firstName: string;
