@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { TopicModule } from '../../interfaces/essay-speaking';
 import { Question } from '../../interfaces/question-answer';
 import { SubmitTestResponse, TestContent } from '../../interfaces/test';
@@ -14,6 +13,8 @@ import { FinishModalDialogComponent } from '../dialog-module/finish-modal-dialog
   styleUrls: ['./common-test.component.scss'],
 })
 export class CommonTestComponent implements OnInit {
+  test$: Observable<TestContent> = this.testStoreService.test$;
+
   grammarAnswers: string[] = [];
 
   listeningAnswers: string[] = [];
@@ -23,8 +24,6 @@ export class CommonTestComponent implements OnInit {
   speachRef = '';
 
   requestBody: Observable<SubmitTestResponse | null> = this.testStoreService.submitTestBody$;
-
-  test$: Observable<TestContent> = this.testStoreService.test$;
 
   grammar: Question[] = [];
 
@@ -44,11 +43,13 @@ export class CommonTestComponent implements OnInit {
 
   timerSubscription!: Subscription;
 
-  testId: string | undefined = '';
+  testId = '';
 
   constructor(private testStoreService: TestStoreService, public dialog: MatDialog) {}
 
   ngOnInit() {
+    // this.testStoreService.getTestId();
+
     this.test$.subscribe((test) => {
       this.testId = test.id;
       this.grammar = test.grammarQuestions;

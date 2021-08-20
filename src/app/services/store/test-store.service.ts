@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BehaviorSubject, Observable, Subject, Subscription, timer } from 'rxjs';
-import { concatMap, map, take, takeWhile, tap } from 'rxjs/operators';
+import { concatMap, map, take, takeWhile, tap, filter } from 'rxjs/operators';
 import { Level } from '../../constants/data-constants';
 import { SubmitTestResponse, TestContent, TestResult } from '../../interfaces/test';
 import { TestHttpService } from '../test-http.service';
@@ -27,17 +27,17 @@ export class TestStoreService {
     map((results) => results?.filter((result) => result && result.testPassingDate)),
   );
 
-  assignedTests$: Observable<TestResult[] | undefined> = this.allTests$.pipe(
-    map((tests) =>
-      tests?.filter((test) => !test.level && new Date(test.assignmentEndDate) >= new Date()),
-    ),
-  );
+  public assignedTestsSubject$ = new BehaviorSubject<TestResult[] | null>(null);
+
+  assignedTests$ = this.assignedTestsSubject$.asObservable();
 
   public timerSubject$ = new BehaviorSubject<number>(0);
 
   timerValue$ = this.timerSubject$.asObservable();
 
   selectedLevel!: Level;
+
+  testId = '';
 
   private set test(test: TestContent) {
     this.testSubject$.next(test);
@@ -49,6 +49,10 @@ export class TestStoreService {
 
   private set testResults(testResults: TestResult[]) {
     this.allTestsSubject$.next(testResults);
+  }
+
+  private set assignedTestsResults(testResults: TestResult[]) {
+    this.assignedTestsSubject$.next(testResults);
   }
 
   private set submitTestBody(body: SubmitTestResponse) {
@@ -64,6 +68,14 @@ export class TestStoreService {
     private authStoreService: AuthStoreService,
     private snackbar: MatSnackBar,
   ) {}
+
+  getTestId(): void {
+    this.test$.subscribe((test) => {
+      if (test) {
+        this.testId = test.id;
+      }
+    });
+  }
 
   selectLevel(selected: Level): void {
     this.selectedLevel = selected;
@@ -86,6 +98,14 @@ export class TestStoreService {
     this.testHttpService.getAllResults(row).subscribe({
       next: (res) => {
         this.testResults = [...res];
+      },
+    });
+  }
+
+  getAssignedTestById(): void {
+    this.testHttpService.getAssignedTest(this.testId).subscribe({
+      next: (res) => {
+        this.assignedTestsResults = [...res];
       },
     });
   }

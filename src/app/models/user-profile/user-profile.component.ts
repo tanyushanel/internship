@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -15,7 +15,7 @@ import { TestStoreService } from '../../services/store/test-store.service';
 export class UserProfileComponent implements OnInit {
   results$: Observable<TestResult[] | undefined> = this.testStoreService.testResults$;
 
-  assignedTests$: Observable<TestResult[] | undefined> = this.testStoreService.assignedTests$;
+  assignedTests$: Observable<TestResult[] | null> = this.testStoreService.assignedTests$;
 
   assignedTest: TestResult | undefined;
 
@@ -27,12 +27,14 @@ export class UserProfileComponent implements OnInit {
 
   deadLine: string | undefined = '';
 
-  testId: string | null = '';
+  testId: string | undefined = '';
 
   constructor(private router: Router, private testStoreService: TestStoreService) {}
 
   ngOnInit(): void {
     this.testStoreService.getAll();
+
+    // this.testStoreService.getAssignedTestById();
 
     const chooseFirst = this.assignedTests$.pipe(map((arr) => (arr?.length ? arr[0] : undefined)));
     chooseFirst.subscribe((test) => {
@@ -53,7 +55,7 @@ export class UserProfileComponent implements OnInit {
     this.testStoreService.selectLevel(level);
 
     if (assignedTest) {
-      this.router.navigate([Route.test, { id: assignedTest.id }]);
+      this.router.navigate([Route.test]);
     }
   }
 }
