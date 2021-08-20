@@ -55,7 +55,7 @@
   <mat-paginator
     [length]="dataSource.rowCount"
     [pageSize]="dataSource.pageSize"
-    [pageSizeOptions]="[5, 10, 25, 100]"
+    [pageSizeOptions]="[5, 10, 25, 50, 100]"
     (page)="pageEvent = $event; onPaginateChange($event)"
     showFirstLastButtons
   >
