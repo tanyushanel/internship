@@ -1,3 +1,5 @@
+@import 'theme/variables';
+
 html,
 body {
   height: 100%;
@@ -6,4 +8,24 @@ body {
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+.red-snackbar {
+  background: $error;
+}
+
+.mat-snack-bar-container.success {
+  color: $black;
+  background-color: $secondary-grey3;
+  border: 1px solid $primary-blue;
+}
+
+.mat-snack-bar-container.error {
+  color: $black;
+  background-color: $secondary-grey3;
+  border: 1px solid $error;
+}
+
+.mat-simple-snackbar-action {
+  color: $primary-blue;
 }

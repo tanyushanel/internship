@@ -1,0 +1,8 @@
+<mat-form-field appearance="fill">
+  <mat-label>Choose level:</mat-label>
+  <mat-select [(ngModel)]="currentLevel" (ngModelChange)="onLevelChange($event)">
+    <mat-option *ngFor="let level of LevelList" [value]="level">
+      {{ level }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

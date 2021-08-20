@@ -1,17 +1,20 @@
 <div class="container">
-  <p>Write about <span>some theme</span></p>
+  <mat-card class="description">
+    Please, write something about <b>{{ essay!.topicName }}</b>
+  </mat-card>
 
-  <form class="essay-area" [formGroup]="form" (ngSubmit)="submit()">
-    <mat-form-field appearance="fill">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <mat-form-field class="mat-form-field" appearance="fill">
       <textarea
         matNativeControl
         maxlength="512"
         formControlName="text"
         #text
         (paste)="$event.preventDefault()"
+        (ngModelChange)="onWritingSubmit()"
       ></textarea>
       <mat-hint align="start">Max 512 characters</mat-hint>
-      <span>{{ text.value.length }}/ 512 </span>
+      <span class="symbol-count">{{ text.value.length }}/ 512 </span>
 
       <div *ngIf="form.get('text')?.invalid && form.get('text')?.touched" class="validation">
         <small class="error" *ngIf="form.get('text')?.errors?.required"
@@ -23,20 +26,9 @@
         </small>
       </div>
     </mat-form-field>
-
-    <div class="buttons">
-      <button
-        type="submit"
-        class="send"
-        [disabled]="form.invalid || disabled"
-        mat-raised-button
-        color="primary"
-      >
-        Send essay
-      </button>
-      <button type="button" class="clear" [disabled]="disabled" mat-raised-button (click)="clear()">
-        Clear form
-      </button>
-    </div>
   </form>
+  <div class="report">
+    <mat-icon>warning_amber</mat-icon>
+    <span class="report__text" (click)="openReportDialog(essay?.id)">Report Mistake</span>
+  </div>
 </div>

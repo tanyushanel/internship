@@ -1,23 +1,30 @@
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule, Provider } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SidebarModule } from './components/sidebar/sidebar.module';
-import { UsersComponent } from './components/mock-component/users/users.component';
-import { HomeComponent } from './components/mock-component/home/home.component';
 import { CheckComponent } from './components/mock-component/check/check.component';
 import { EditorComponent } from './components/mock-component/editor/editor.component';
+import { HomeComponent } from './components/mock-component/home/home.component';
 import { ManageComponent } from './components/mock-component/manage/manage.component';
-import { StatisticsComponent } from './components/mock-component/statistics/statistics.component';
-import { AuthInterseptor } from './shared/auth.interseptor';
+import { UsersComponent } from './components/mock-component/users/users.component';
+import { SidebarModule } from './components/sidebar/sidebar.module';
+import { ErrorHandlerModule } from './core/errors/error-handler.module';
+import { AngularMaterialCommonModule } from './models/angular-material-common.module';
 import { NotFoundComponent } from './models/not-found/not-found.component';
+import { AuthInterceptor } from './shared/auth.interceptor';
+import { LoadingIndicatorInterceptor } from './shared/loading-indicator.interceptor';
 
-const INTERSEPTOR_PROVIDER: Provider = {
+const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
   multi: true,
-  useClass: AuthInterseptor,
+  useClass: AuthInterceptor,
+};
+const INTERCEPTOR_LOADING_INDICATOR: Provider = {
+  provide: HTTP_INTERCEPTORS,
+  multi: true,
+  useClass: LoadingIndicatorInterceptor,
 };
 
 @NgModule({
@@ -28,7 +35,6 @@ const INTERSEPTOR_PROVIDER: Provider = {
     CheckComponent,
     EditorComponent,
     ManageComponent,
-    StatisticsComponent,
     NotFoundComponent,
   ],
   imports: [
@@ -37,8 +43,10 @@ const INTERSEPTOR_PROVIDER: Provider = {
     BrowserAnimationsModule,
     SidebarModule,
     HttpClientModule,
+    ErrorHandlerModule,
+    AngularMaterialCommonModule,
   ],
-  providers: [INTERSEPTOR_PROVIDER],
+  providers: [INTERCEPTOR_PROVIDER, INTERCEPTOR_LOADING_INDICATOR],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

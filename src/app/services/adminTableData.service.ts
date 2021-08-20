@@ -1,11 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
 import {
   ServiceCoachData,
   ServiceTestData,
   TestData,
   UpdateCoachesData,
-} from 'src/interfaces/admin-profile-intarfaces';
+} from 'src/app/interfaces/admin-profile-intarfaces';
+import { AdmintableApi, CoachTestApi } from '../constants/route-constant';
 
 @Injectable({
   providedIn: 'root',
@@ -18,24 +20,22 @@ export class AdminHttpService {
   };
 
   getAssignedAdminTests() {
-    return this.http.get<ServiceTestData>(
-      'http://elevel-001-site1.btempurl.com/api/Test/forAdmin?IsAssigned=true',
-    );
+    return this.http.get<ServiceTestData>(`${AdmintableApi}forAdmin?IsAssigned=true`);
+  }
+
+  getAdminTests() {
+    return this.http.get<TestData[]>(`${AdmintableApi}forAdmin`);
   }
 
   getNotAssignedAdminTests() {
-    return this.http.get<ServiceTestData>('http://elevel-001-site1.btempurl.com/api/Test/forAdmin');
+    return this.http.get<ServiceTestData>(`${AdmintableApi}forAdmin`);
   }
 
   getAdminCoaches() {
-    return this.http.get<ServiceCoachData>('http://elevel-001-site1.btempurl.com/api/User/coaches');
+    return this.http.get<ServiceCoachData>(CoachTestApi);
   }
 
   updateCoachTest(data: UpdateCoachesData, testID: number) {
-    return this.http.put<TestData>(
-      `http://elevel-001-site1.btempurl.com/api/Test/${testID}/assignForCoach`,
-      data,
-      this.options,
-    );
+    return this.http.put<TestData>(`${AdmintableApi}${testID}/assignForCoach`, data, this.options);
   }
 }

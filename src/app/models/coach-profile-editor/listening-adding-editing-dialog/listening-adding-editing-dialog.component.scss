@@ -1,0 +1,70 @@
+@import '../../../../theme/variables';
+
+h1,
+h2 {
+  text-align: center;
+}
+
+.main {
+  width: 70vw;
+  height: 90vh;
+  padding: 5px;
+  overflow: auto;
+}
+
+.dialog-button {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+}
+
+.example-radio-button {
+  margin: 5px;
+}
+
+.close-button {
+  position: relative;
+  float: right;
+  margin-bottom: 30px;
+}
+
+input[type='file'] {
+  display: none;
+}
+
+.load-file {
+  display: inline-block;
+  padding: 6px 12px;
+  color: rgba(0, 0, 0, 0.87);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%),
+    0px 1px 5px 0px rgb(0 0 0 / 12%);
+  cursor: pointer;
+}
+
+.file-path {
+  display: inline-block;
+  margin-left: 2em;
+}
+
+audio {
+  margin: 20px 0;
+}
+
+.answer-group {
+  display: flex;
+}
+
+.label {
+  display: flex;
+  font-weight: 600;
+  column-gap: 5px;
+  cursor: pointer;
+}

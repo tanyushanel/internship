@@ -1,4 +1,35 @@
+@import '../../../theme/variables';
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100&display=swap');
+
 .button-submit {
   display: block;
+  width: 15em;
+  height: 8em;
   margin: 0 auto;
+  margin-top: 50px;
+}
+
+.hidden {
+  display: none;
+}
+
+.timer {
+  position: fixed;
+  top: 4rem;
+  right: 1rem;
+  z-index: 10;
+}
+
+.module {
+  margin-top: 3rem;
+}
+
+.styled {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.warn {
+  color: $error;
+  vertical-align: middle;
 }

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Route } from '../../../constants/route-constant';
+import { MatDialog } from '@angular/material/dialog';
+import { TopicModule } from '../../interfaces/essay-speaking';
+import { ReportMistakeDialogComponent } from '../../components/report-mistake-dialog/report-mistake-dialog.component';
 
 @Component({
   selector: 'app-writing-test',
@@ -9,11 +10,23 @@ import { Route } from '../../../constants/route-constant';
   styleUrls: ['./writing-test.component.scss'],
 })
 export class WritingTestComponent implements OnInit {
+  constructor(public dialog: MatDialog) {}
+
+  @Input() essay: TopicModule | null = null;
+
+  @Input() testId: string | undefined;
+
+  @Output() essayWritten = new EventEmitter<string | null>();
+
   form!: FormGroup;
 
   disabled = false;
 
   ngOnInit() {
+    this.essay = {
+      id: '',
+      topicName: '',
+    };
     this.form = new FormGroup({
       text: new FormControl('', [Validators.required, Validators.minLength(10)]),
     });
@@ -25,9 +38,11 @@ export class WritingTestComponent implements OnInit {
     this.disabled = true;
   }
 
-  clear() {
-    this.form.reset();
+  onWritingSubmit(): void {
+    this.essayWritten.emit(this.form.controls.text.value);
   }
 
-  nextTest() {}
+  openReportDialog(essayId?: string) {
+    this.dialog.open(ReportMistakeDialogComponent, { data: { essayId, testId: this.testId } });
+  }
 }

@@ -1,0 +1,26 @@
+button.mat-raised-button {
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.container {
+  min-width: 500px;
+  max-height: 800px;
+  padding: 20px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+h1,
+h3 {
+  text-align: center;
+}
+
+.close-button {
+  position: relative;
+  float: right;
+  margin-bottom: 30px;
+}

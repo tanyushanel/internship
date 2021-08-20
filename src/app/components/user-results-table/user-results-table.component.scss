@@ -1,3 +1,5 @@
+@import '../../../theme/variables';
+
 .table-caption {
   margin: 1rem;
   font-weight: 500;
@@ -24,17 +26,20 @@ table {
   border-radius: 0.25rem;
 
   & span {
-    padding: 0.5rem 1rem;
-    color: white;
+    min-width: 4rem;
+    padding: 0.5rem 0;
+    color: $white;
+    font-size: 1.25rem;
+    text-align: center;
   }
 }
 
 .desc {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 
   span {
-    color: black;
+    color: $black;
     font-size: 0.7rem;
   }
 }
@@ -48,16 +53,20 @@ tr.detail-row {
 }
 
 tr.element-row:not(.expanded-row):hover {
-  background: whitesmoke;
+  background: $others-grey6;
 }
 
 tr.element-row:not(.expanded-row):active {
-  background: #efefef;
+  background: $secondary-grey3;
 }
 
 .element-row td {
   border-bottom-width: 0;
   cursor: pointer;
+}
+
+.assigned {
+  background: $light-cyan;
 }
 
 .element-detail {
@@ -82,10 +91,23 @@ tr.element-row:not(.expanded-row):active {
 }
 
 .element-description {
+  display: inline-flex;
   max-width: 50%;
   margin: 0.5rem;
   white-space: normal;
   text-align: justify;
+}
+
+.element-description-attribution {
+  width: 100%;
+  cursor: pointer;
+
+  &.ellipsed {
+    width: 15rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 }
 
 .element-description-attribution {

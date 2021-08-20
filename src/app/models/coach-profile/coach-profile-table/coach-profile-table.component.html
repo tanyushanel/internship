@@ -1,28 +1,58 @@
 <div class="mat-elevation-z8">
-  <mat-form-field appearance="standard">
-    <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Enter test number" #input />
-  </mat-form-field>
   <table mat-table [dataSource]="dataSource" matSort matSortActive="date" matSortStart="asc">
     <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Test number</th>
-      <td mat-cell *matCellDef="let row">Test № {{ row.id }}</td>
+      <th class="header" mat-header-cell *matHeaderCellDef>
+        <mat-form-field class="filter" floatLabel="never">
+          <mat-label>Enter Test Number</mat-label>
+          <input matInput [formControl]="idFilter" />
+        </mat-form-field>
+        <div mat-sort-header>Test Number</div>
+      </th>
+
+      <td mat-cell *matCellDef="let row">№ {{ row.testNumber }}</td>
     </ng-container>
 
     <ng-container matColumnDef="level">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>English level</th>
-      <td mat-cell *matCellDef="let row">Level: {{ row.level }}</td>
+      <th class="header" mat-header-cell *matHeaderCellDef>
+        <mat-form-field class="filter" floatLabel="never">
+          <mat-label>Enter English Level</mat-label>
+          <input matInput [formControl]="levelFilter" />
+        </mat-form-field>
+        <div mat-sort-header>English Level</div>
+      </th>
+      <td mat-cell *matCellDef="let row">{{ languageLevel[row.level] }}</td>
     </ng-container>
 
     <ng-container matColumnDef="date">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="date">Test date</th>
-      <td mat-cell *matCellDef="let row">{{ row.date | date: 'dd.MM.YYYY' }}</td>
+      <th class="header" mat-header-cell *matHeaderCellDef>
+        <mat-form-field class="filter" floatLabel="never">
+          <mat-label>Enter Test Date</mat-label>
+          <input matInput [formControl]="dateFilter" />
+        </mat-form-field>
+        <div mat-sort-header>Test Date</div>
+      </th>
+      <td mat-cell *matCellDef="let row">{{ row.testPassingDate | date: 'dd.MM.YYYY' }}</td>
     </ng-container>
 
     <ng-container matColumnDef="button">
-      <th mat-header-cell *matHeaderCellDef></th>
+      <th class="header" mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let row">
-        <button mat-raised-button color="primary" (click)="onClick(row.id)">Check</button>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="
+            onClick(
+              row.essayAnswer,
+              row.id,
+              row.essayMark,
+              row.speakingMark,
+              row.comment,
+              row.speakingAnswerReference
+            )
+          "
+        >
+          {{ selectTab != 'Reviewed' ? 'Check' : 'View' }}
+        </button>
       </td>
     </ng-container>
 
@@ -31,12 +61,26 @@
       mat-row
       *matRowDef="let row; columns: displayedColumns"
       class="priority"
-      [ngClass]="{ high: row.isHigh === true }"
+      [ngClass]="{ high: row.priority === true }"
     ></tr>
 
     <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell" colspan="4">No data matching the filter "{{ input.value }}"</td>
+      <td class="mat-cell" colspan="4">
+        <div *ngIf="filterValues.testNumber">
+          No data matching the number filter "{{ filterValues.testNumber }}"
+        </div>
+        <div *ngIf="filterValues.level">
+          No data matching the level filter "{{ filterValues.level }}"
+        </div>
+        <div *ngIf="filterValues.testPassingDate">
+          No data matching the date filter "{{ filterValues.testPassingDate }}"
+        </div>
+      </td>
+    </tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="9999">No data matching the filter</td>
     </tr>
   </table>
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 50, 100]"></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
 </div>

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Test } from 'src/app/interfaces/test';
-import { Level } from 'src/constants/data-constants';
-import { Route } from 'src/constants/route-constant';
-import { MOCK_TEST_RESULTS } from '../../../constants/mock-test-results';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Level } from 'src/app/constants/data-constants';
+import { Route } from 'src/app/constants/route-constant';
+import { TestResult } from '../../interfaces/test';
+import { TestStoreService } from '../../services/store/test-store.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -11,25 +13,47 @@ import { MOCK_TEST_RESULTS } from '../../../constants/mock-test-results';
   styleUrls: ['./user-profile.component.scss'],
 })
 export class UserProfileComponent implements OnInit {
-  results: Test[] = [];
+  results$: Observable<TestResult[] | undefined> = this.testStoreService.testResults$;
+
+  assignedTests$: Observable<TestResult[] | undefined> = this.testStoreService.assignedTests$;
+
+  assignedTest: TestResult | undefined;
 
   levels = [...Object.values(Level)];
 
-  selectedLevel: Level | undefined;
+  isStarted = false;
 
-  constructor(private router: Router) {}
+  selectedLevel!: Level;
 
-  get testsCount() {
-    return this.results.length;
-  }
+  deadLine: string | undefined = '';
 
-  ngOnInit() {
-    this.results = [...MOCK_TEST_RESULTS];
-  }
+  testId: string | null = '';
 
-  onStartButtonClick(): void {
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate([Route.test]);
+  constructor(private router: Router, private testStoreService: TestStoreService) {}
+
+  ngOnInit(): void {
+    this.testStoreService.getAll();
+
+    const chooseFirst = this.assignedTests$.pipe(map((arr) => (arr?.length ? arr[0] : undefined)));
+    chooseFirst.subscribe((test) => {
+      this.assignedTest = test;
+      this.deadLine = test?.assignmentEndDate;
     });
+  }
+
+  onStartButtonClick(level: Level): void {
+    this.isStarted = true;
+    this.testStoreService.selectLevel(level);
+
+    this.router.navigate([Route.test]);
+  }
+
+  onStartAssignedButtonClick(level: Level, assignedTest: TestResult | undefined): void {
+    this.isStarted = true;
+    this.testStoreService.selectLevel(level);
+
+    if (assignedTest) {
+      this.router.navigate([Route.test, { id: assignedTest.id }]);
+    }
   }
 }

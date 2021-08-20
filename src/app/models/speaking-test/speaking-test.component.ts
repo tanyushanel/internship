@@ -1,8 +1,20 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { TopicModule } from '../../interfaces/essay-speaking';
 import { ErrorStoreService } from '../../services/store/error-store.service';
-import { Route } from '../../../constants/route-constant';
+import { Route } from '../../constants/route-constant';
+import { FinishModalDialogComponent } from '../dialog-module/finish-modal-dialog/finish-modal-dialog.component';
+import { ReportMistakeDialogComponent } from '../../components/report-mistake-dialog/report-mistake-dialog.component';
 
 declare let MediaRecorder: any;
 
@@ -11,25 +23,54 @@ declare let MediaRecorder: any;
   templateUrl: './speaking-test.component.html',
   styleUrls: ['./speaking-test.component.scss'],
 })
-export class SpeakingTestComponent implements OnInit {
+export class SpeakingTestComponent implements OnInit, OnDestroy {
+  @Input() speaking: TopicModule | null = null;
+
+  @Input() testId: string | undefined;
+
+  @Output() speachRecorded = new EventEmitter<{ src: SafeUrl } | null>();
+
   mediaRecorder: any;
 
   chunks: Blob[] = [];
 
   isRecording = false;
 
-  audioFiles: { src: SafeUrl }[] = [];
+  audioFile: { src: SafeUrl } | null = null;
 
   counter = 0;
+
+  intervalId = 0;
+
+  message = '';
+
+  minutes = 5;
+
+  seconds = 0;
+
+  numberAttempt = 0;
 
   constructor(
     private cd: ChangeDetectorRef,
     private dom: DomSanitizer,
     private errorStoreService: ErrorStoreService,
     private readonly router: Router,
+    public dialog: MatDialog,
   ) {}
 
+  home(): void {
+    throw new Error('Method not implemented.');
+  }
+
+  openDialog() {
+    this.dialog.open(FinishModalDialogComponent);
+  }
+
   async ngOnInit() {
+    this.speaking = {
+      id: '',
+      topicName: '',
+    };
     let stream = null;
     try {
       stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -41,7 +82,7 @@ export class SpeakingTestComponent implements OnInit {
         const audio = {
           src: this.dom.bypassSecurityTrustUrl(audioURL),
         };
-        this.audioFiles.push(audio);
+        this.audioFile = audio;
         this.cd.detectChanges();
       };
       this.mediaRecorder.ondataavailable = (e: { data: Blob }) => {
@@ -55,6 +96,41 @@ export class SpeakingTestComponent implements OnInit {
     }
   }
 
+  ngOnDestroy() {
+    this.clearTimer();
+  }
+
+  startTimer() {
+    this.countDown();
+  }
+
+  stopTimer() {
+    this.clearTimer();
+  }
+
+  private clearTimer() {
+    clearInterval(this.intervalId);
+  }
+
+  private countDown() {
+    this.clearTimer();
+    this.intervalId = window.setInterval(() => {
+      if (this.minutes === 0 && this.seconds === 0) {
+        this.toggleRecording();
+      } else if (this.seconds === 0) {
+        this.minutes -= 1;
+        this.seconds = 59;
+        return;
+      }
+      this.seconds -= 1;
+    }, 1000);
+  }
+
+  resetTimer() {
+    this.minutes = 5;
+    this.seconds = 0;
+  }
+
   toggleRecording() {
     this.isRecording = !this.isRecording;
     if (this.isRecording) {
@@ -65,19 +141,39 @@ export class SpeakingTestComponent implements OnInit {
     }
   }
 
+  getSeconds() {
+    return this.seconds >= 10 ? this.seconds : `0${this.seconds}`;
+  }
+
   getColor() {
     return !this.isRecording ? 'primary' : 'warn';
   }
 
+  counterOfAttempt() {
+    this.numberAttempt += 1;
+  }
+
   startRecording() {
     this.mediaRecorder.start();
+    this.startTimer();
+    this.counterOfAttempt();
+    this.resetTimer();
   }
 
   stopRecording() {
     this.mediaRecorder.stop();
+    this.stopTimer();
   }
 
   finishTest() {
     this.router.navigate([Route.result]);
+  }
+
+  onSpeakingSubmit(): void {
+    this.speachRecorded.emit(this.audioFile);
+  }
+
+  openReportDialog(speakingId?: string) {
+    this.dialog.open(ReportMistakeDialogComponent, { data: { speakingId, testId: this.testId } });
   }
 }

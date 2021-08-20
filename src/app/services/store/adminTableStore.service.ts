@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { TestData, UpdateCoachesData } from 'src/interfaces/admin-profile-intarfaces';
+import { UpdateCoachesData } from 'src/app/interfaces/admin-profile-intarfaces';
+
 import { AdminHttpService } from '../adminTableData.service';
 
 @Injectable({

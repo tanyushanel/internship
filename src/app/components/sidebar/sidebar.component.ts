@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { UserRoutesType, usersRoute } from '../../../constants/mock-user-data';
-import { UserResponseType } from '../../../interfaces/user.interfaces';
+import { UserRoutesType, usersRoute } from '../../constants/mock-user-data';
+import { UserResponseType } from '../../interfaces/user.interfaces';
 import { AuthStoreService } from '../../services/store/auth-store.service';
 
 @Component({
@@ -25,7 +26,11 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  handleSidebar() {
+  getWidth() {
+    return this.isOpen ? 'width:14%;' : 'width:4%;';
+  }
+
+  toggleShow() {
     this.isOpen = !this.isOpen;
   }
 }

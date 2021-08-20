@@ -7,7 +7,7 @@ import {
   ServiceCoachData,
   TestData,
   UpdateCoachesData,
-} from '../../../../interfaces/admin-profile-intarfaces';
+} from '../../../interfaces/admin-profile-intarfaces';
 
 @Component({
   selector: 'app-table',
@@ -46,15 +46,15 @@ export class TableComponent implements OnInit {
   @ViewChild(MatTable) table!: MatTable<any>;
 
   ngOnInit(): void {
-    this.service.getAssignedTestData().subscribe((assignedData) => {
+    this.service.getAssignedTestData().subscribe((assignedData: { results: TestData[] }) => {
       this.assignedData = assignedData.results;
     });
-    this.service.getNotAssignedTestData().subscribe((notAssignedData) => {
+    this.service.getNotAssignedTestData().subscribe((notAssignedData: { results: TestData[] }) => {
       this.notAssignedData = notAssignedData.results;
       this.priorityData = this.notAssignedData.filter((test) => test.priority);
     });
 
-    this.service.getCoachData().subscribe((data) => {
+    this.service.getCoachData().subscribe((data: ServiceCoachData) => {
       this.coaches = data;
     });
   }

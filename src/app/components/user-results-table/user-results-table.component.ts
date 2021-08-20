@@ -1,9 +1,18 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Test } from 'src/app/interfaces/test';
-import { MOCK_TEST_RESULTS } from '../../../constants/mock-test-results';
+import { Observable } from 'rxjs';
+import { Level } from '../../constants/data-constants';
+import { TestResult } from '../../interfaces/test';
 
 @Component({
   selector: 'app-user-results-table',
@@ -17,23 +26,56 @@ import { MOCK_TEST_RESULTS } from '../../../constants/mock-test-results';
     ]),
   ],
 })
-export class UserResultsTableComponent implements OnInit, AfterViewInit {
-  results: Test[] = [];
+export class UserResultsTableComponent implements AfterViewInit, OnChanges {
+  @Input() results$!: Observable<TestResult[]>;
 
-  columnsToDisplay: string[] = ['id', 'date', 'level', 'result'];
+  @Input() results: TestResult[] = [];
 
-  expandedElement: Test | undefined;
+  @Input() levels: Level[] = [];
 
-  dataSource!: MatTableDataSource<Test>;
+  columnsToDisplay: string[] = ['id', 'testPassingDate', 'level', 'result'];
+
+  isOpen = false;
+
+  get resultsCount() {
+    return this.results?.length;
+  }
+
+  get columnsCount() {
+    return this.columnsToDisplay.length;
+  }
+
+  expandedElement: TestResult | undefined;
+
+  dataSource: MatTableDataSource<TestResult>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  constructor() {
+    this.dataSource = new MatTableDataSource(this.results);
   }
 
-  ngOnInit(): void {
-    this.results = [...MOCK_TEST_RESULTS];
-    this.dataSource = new MatTableDataSource(this.results);
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.results?.currentValue) {
+      this.dataSource.data = changes.results.currentValue;
+    }
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+
+    setTimeout(() => {
+      const sortState: Sort = { active: 'date', direction: 'desc' };
+      this.sort.active = sortState.active;
+      this.sort.direction = sortState.direction;
+      this.sort.sortChange.emit(sortState);
+    }, 10);
+  }
+
+  onUnrollToggle(): void {
+    this.isOpen = !this.isOpen;
   }
 }

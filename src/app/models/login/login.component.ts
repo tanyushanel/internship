@@ -1,8 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { AuthStoreService } from '../../services/store/auth-store.service';
-import { usersMockDataResponse } from '../../../constants/mock-user-data';
-import { UserResponseType } from '../../../interfaces/user.interfaces';
+import { usersMockDataResponse } from '../../constants/mock-user-data';
+import { UserResponseType } from '../../interfaces/user.interfaces';
+import { ErrorStoreService } from '../../services/store/error-store.service';
+import { ErrorModel, ErrorType } from '../../interfaces/error';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +23,15 @@ export class LoginComponent implements OnInit {
 
   users: UserResponseType[] = usersMockDataResponse;
 
-  constructor(private fb: FormBuilder, private readonly authStoreService: AuthStoreService) {}
+  readonly error$: Observable<ErrorModel | null> = this.errorStoreService.error$.pipe(
+    filter((err) => err?.type === ErrorType.login),
+  );
+
+  constructor(
+    private fb: FormBuilder,
+    private readonly authStoreService: AuthStoreService,
+    private readonly errorStoreService: ErrorStoreService,
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -47,7 +59,7 @@ export class LoginComponent implements OnInit {
   private initForm() {
     this.loginReactiveForm = this.fb.group({
       userLogin: ['', [Validators.required, Validators.email]],
-      userPassword: ['', [Validators.required, Validators.minLength(6)]],
+      userPassword: ['Pa$$w0rd.', [Validators.required, Validators.minLength(6)]],
     });
   }
 }
