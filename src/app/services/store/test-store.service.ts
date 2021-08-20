@@ -90,6 +90,9 @@ export class TestStoreService {
       .subscribe({
         next: (res) => {
           this.allTests = [...res];
+          this.assignedTestsResults = res.filter(
+            (result) => !result.level && !result.testPassingDate,
+          );
         },
       });
   }
@@ -100,29 +103,6 @@ export class TestStoreService {
         this.testResults = [...res];
       },
     });
-  }
-
-  getAssignedTestById(): void {
-    this.testHttpService.getAssignedTest(this.testId).subscribe({
-      next: (res) => {
-        this.assignedTestsResults = [...res];
-      },
-    });
-  }
-
-  getAssignedTest(): void {
-    this.authStoreService.activeUser$
-      .pipe(
-        take(1),
-        concatMap((user) =>
-          this.testHttpService.getAssignedTestByLevel(user !== null ? user.userId : ''),
-        ),
-      )
-      .subscribe({
-        next: (res) => {
-          this.assignedTestsResults = [...res];
-        },
-      });
   }
 
   createTestContent(): void {

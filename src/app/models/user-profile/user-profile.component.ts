@@ -34,10 +34,6 @@ export class UserProfileComponent implements OnInit {
   ngOnInit(): void {
     this.testStoreService.getAll();
 
-    if (this.testId) {
-      this.testStoreService.getAssignedTestById();
-    } else this.testStoreService.getAssignedTest();
-
     const chooseFirst = this.assignedTests$.pipe(map((arr) => (arr?.length ? arr[0] : undefined)));
     chooseFirst.subscribe((test) => {
       this.assignedTest = test;
