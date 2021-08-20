@@ -35,6 +35,8 @@ export interface CoachTopic extends CoachEmptyTopic {
   id: string;
   creationDate: string;
   creatorId: string;
+  creatorLastName: string;
+  creatorFirstName: string;
 }
 
 export interface CoachTopicUpdate {

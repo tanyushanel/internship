@@ -11,6 +11,8 @@ export interface CoachQuestion {
   id: string;
   level: number;
   creatorId: string;
+  creatorLastName: string;
+  creatorFirstName: string;
   numberTest: string;
   creationDate: string;
   questionNumber: number;
@@ -25,6 +27,7 @@ export interface TableData {
   level: number;
   name: string;
   number: number;
+  creatorName: string;
 }
 
 export interface AnswerQuestion {

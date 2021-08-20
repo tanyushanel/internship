@@ -8,6 +8,8 @@ export interface CoachListening {
   level: number;
   creatorId: string;
   creationDate: string;
+  creatorLastName: string;
+  creatorFirstName: string;
   questionNumber: number;
 }
 

@@ -24,6 +24,7 @@ export class CoachQuestionStoreService {
             id: question.id,
             creationDate: question.creationDate,
             creatorId: question.creatorId,
+            creatorName: `${question.creatorFirstName} ${question.creatorLastName}`,
             level: question.level,
             name: question.nameQuestion,
             number: question.questionNumber,
