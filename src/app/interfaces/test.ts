@@ -33,9 +33,6 @@ export interface UserTable {
 }
 export interface UsersList {
   currentPage: number;
-  firstRowOnPage: number;
-  lastRowOnPage: number;
-  pageCount: number;
   pageSize: number;
   results: UserTable[];
   rowCount: number;
