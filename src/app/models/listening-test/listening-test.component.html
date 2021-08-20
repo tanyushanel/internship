@@ -1,24 +1,26 @@
-<mat-card class="description">Listen audio and answer the questions</mat-card>
+<mat-card class="description">
+  <p>Listen audio and answer the questions</p>
 
-<ngx-audio-player
-  class="ngx-audio"
-  class="audio-player-position"
-  [playlist]="msaapPlaylist"
-  [displayTitle]="msaapDisplayTitle"
-  [autoPlay]="false"
-  muted="true"
-  [autoPlay]="msaapAutoPlay"
-  [displayPlaylist]="msaapDisplayPlayList"
-  [pageSizeOptions]="msaapPageSizeOptions"
-  [displayArtist]="msaapDisplayArtist"
-  [displayDuration]="msaapDisplayDuration"
-  [expanded]="true"
-  (trackEnded)="onEnded()"
-  [displayVolumeControls]="msaapDisplayVolumeControls"
-  [displayRepeatControls]="msaapDisplayRepeatControls"
-  [disablePositionSlider]="msaapDisablePositionSlider"
->
-</ngx-audio-player>
+  <ngx-audio-player
+    class="ngx-audio"
+    class="audio-player-position"
+    [playlist]="msaapPlaylist"
+    [displayTitle]="msaapDisplayTitle"
+    [autoPlay]="false"
+    muted="true"
+    [autoPlay]="msaapAutoPlay"
+    [displayPlaylist]="msaapDisplayPlayList"
+    [pageSizeOptions]="msaapPageSizeOptions"
+    [displayArtist]="msaapDisplayArtist"
+    [displayDuration]="msaapDisplayDuration"
+    [expanded]="true"
+    (trackEnded)="onEnded()"
+    [displayVolumeControls]="msaapDisplayVolumeControls"
+    [displayRepeatControls]="msaapDisplayRepeatControls"
+    [disablePositionSlider]="msaapDisablePositionSlider"
+  >
+  </ngx-audio-player>
+</mat-card>
 <app-stepper
   [testId]="testId"
   [questionList]="questions"

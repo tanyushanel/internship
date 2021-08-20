@@ -34,7 +34,7 @@ export class UserProfileComponent implements OnInit {
   ngOnInit(): void {
     this.testStoreService.getAll();
 
-    // this.testStoreService.getAssignedTestById();
+    this.testStoreService.getAssignedTestById();
 
     const chooseFirst = this.assignedTests$.pipe(map((arr) => (arr?.length ? arr[0] : undefined)));
     chooseFirst.subscribe((test) => {
