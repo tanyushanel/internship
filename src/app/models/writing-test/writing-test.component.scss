@@ -1,11 +1,17 @@
 @import 'src/theme/variables.scss';
 
 .container {
+  width: 80%;
+  margin: 2rem auto;
   text-align: center;
 
   span {
     font-style: italic;
   }
+}
+
+form {
+  padding: 1rem;
 }
 
 .description {

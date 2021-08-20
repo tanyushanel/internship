@@ -1,7 +1,7 @@
-<div class="container">
-  <mat-card class="description">
+<mat-card class="container">
+  <p>
     Please, write something about <b>{{ essay!.topicName }}</b>
-  </mat-card>
+  </p>
 
   <form [formGroup]="form" (ngSubmit)="submit()">
     <mat-form-field class="mat-form-field" appearance="fill">
@@ -31,4 +31,4 @@
     <mat-icon>warning_amber</mat-icon>
     <span class="report__text" (click)="openReportDialog(essay?.id)">Report Mistake</span>
   </div>
-</div>
+</mat-card>
