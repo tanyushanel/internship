@@ -1,8 +1,8 @@
-<mat-card class="container">
-  <p>
-    Please, write something about <b>{{ essay!.topicName }}</b>
-  </p>
+<mat-card class="description">
+  Please, write something about <b>{{ essay!.topicName }}</b>
+</mat-card>
 
+<mat-card class="container">
   <form [formGroup]="form" (ngSubmit)="submit()">
     <mat-form-field class="mat-form-field" appearance="fill">
       <textarea
@@ -13,7 +13,7 @@
         (paste)="$event.preventDefault()"
         (ngModelChange)="onWritingSubmit()"
       ></textarea>
-      <mat-hint align="start">Max 512 characters</mat-hint>
+
       <span class="symbol-count">{{ text.value.length }}/ 512 </span>
 
       <div *ngIf="form.get('text')?.invalid && form.get('text')?.touched" class="validation">

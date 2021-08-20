@@ -1,8 +1,8 @@
 @import 'src/theme/variables.scss';
 
 .container {
-  width: 80%;
-  margin: 2rem auto;
+  width: 90%;
+  margin: 1rem auto;
   text-align: center;
 
   span {
@@ -15,7 +15,7 @@ form {
 }
 
 .description {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   text-align: center;
 }
 
@@ -53,12 +53,23 @@ form {
   font-size: 12px;
 }
 
+.report {
+  text-align: end;
+}
+
 .report__text {
-  margin-left: 3px;
+  display: inline-block;
+  margin-left: 0.5rem;
 }
 
 .report__text:hover {
   color: $secondary-grey2;
   text-decoration: underline;
   cursor: pointer;
+}
+
+.mat-icon {
+  color: $error;
+  font-size: 1rem;
+  vertical-align: top;
 }

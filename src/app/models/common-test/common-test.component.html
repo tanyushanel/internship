@@ -1,6 +1,4 @@
-<mat-card class="timer styled">
-  <p [class.warn]="(timer$ | async)! < 10">{{ (timer$ | async)! | time }}</p>
-</mat-card>
+<p class="timer styled" [class.warn]="(timer$ | async)! < 10">{{ (timer$ | async)! | time }}</p>
 
 <mat-tab-group mat-stretch-tabs mat-align-tabs="center" [(selectedIndex)]="selectedIndex">
   <mat-tab label="GRAMMAR">

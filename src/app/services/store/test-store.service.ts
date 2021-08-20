@@ -152,7 +152,7 @@ export class TestStoreService {
       },
 
       error: () => {
-        this.snackbar.open('Something went wrong', 'Close', {
+        this.snackbar.open(`Unfortunately, your test wasn't submitted`, 'Close', {
           verticalPosition: 'bottom',
           duration: 2000,
           panelClass: 'error',
