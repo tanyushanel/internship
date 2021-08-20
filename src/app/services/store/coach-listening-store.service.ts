@@ -25,6 +25,7 @@ export class CoachListeningStoreService {
             id: listen.id,
             creationDate: listen.creationDate,
             creatorId: listen.creatorId,
+            creatorName: `${listen.creatorFirstName} ${listen.creatorLastName}`,
             level: listen.level,
             name: 'Audition',
             number: listen.questionNumber || i + 1,

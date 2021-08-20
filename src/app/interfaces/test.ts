@@ -12,15 +12,19 @@ export interface TestResult {
   creationDate: string;
   testPassingDate: string;
   assignmentEndDate: string;
-  grammarMark: number | null;
-  auditionMark: number | null;
-  essayMark: number | null;
-  speakingMark: number | null;
-  comment: string | null;
-  userId: string | null;
-  hrId: string | null;
-  coachId: string | null;
+  grammarMark: number;
+  auditionMark: number;
+  essayMark: number;
+  speakingMark: number;
+  comment: string;
+  userId: string;
+  hrId: string;
+  coachId: string;
   priority: boolean;
+}
+
+export interface TestResultWithTotal extends TestResult {
+  result: number;
 }
 
 export interface UserTable {
@@ -47,6 +51,7 @@ export interface TestContent {
   level: Level;
   testPassingDate: string;
   grammarQuestions: Question[];
+  auditionQuestions: Question[];
   audition: Audition;
   essay: TopicModule;
   speaking: TopicModule;
@@ -60,11 +65,7 @@ export interface TestSubmit {
   speakingAnswerReference: string;
 }
 
-export interface FinishTestBody {
-  id: string;
-  grammarAnswers: string[];
-  auditionAnswers: string[];
-  essayAnswer: string;
+export interface FinishTestBody extends TestSubmit {
   speakingAnswerReference: string;
   isFinished?: boolean;
   timerSubscription: Subscription;

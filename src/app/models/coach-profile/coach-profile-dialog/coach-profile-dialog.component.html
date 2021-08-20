@@ -33,7 +33,9 @@
           >
         </div>
       </div>
-      <audio class="audio" controls src="{{ downloadURL + data.speakingAnswerReference }}"></audio>
+      <audio id="player" class="audio" controls #player>
+        <source [src]="srcData" id="my-audio" #audio />
+      </audio>
       <div class="speaking-mark">
         <label class="speaking-mark-label">
           Speaking Score

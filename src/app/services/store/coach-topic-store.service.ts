@@ -25,6 +25,7 @@ export class CoachTopicStoreService {
             id: topic.id,
             creationDate: topic.creationDate,
             creatorId: topic.creatorId,
+            creatorName: `${topic.creatorFirstName} ${topic.creatorLastName}`,
             level: topic.level,
             name: topic.topicName,
             number: i + 1,
