@@ -13,7 +13,7 @@ table {
 }
 
 .mat-elevation-z8 {
-  margin: 20% 100px 0;
+  margin: 5% 100px 0;
   background-color: $white;
 }
 
@@ -35,4 +35,7 @@ mat-spinner {
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
+}
+
+app-coach-profile-table {
 }

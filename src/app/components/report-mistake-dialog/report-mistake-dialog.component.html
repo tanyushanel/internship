@@ -17,5 +17,7 @@
       ></textarea>
     </mat-form-field>
   </div>
-  <button mat-raised-button color="primary" (click)="submitMistake()">Submit</button>
+  <button mat-raised-button color="primary" [disabled]="!description" (click)="submitMistake()">
+    Submit
+  </button>
 </div>

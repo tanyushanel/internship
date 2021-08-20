@@ -23,6 +23,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule, MAT_TABS_CONFIG } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { ReportMistakeComponent } from './report-mistake/report-mistake.component';
 
 @NgModule({
   imports: [
@@ -49,7 +50,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatMenuModule,
     MatSnackBarModule,
   ],
-  declarations: [],
+  declarations: [ReportMistakeComponent],
   exports: [
     CommonModule,
     MatPaginatorModule,
