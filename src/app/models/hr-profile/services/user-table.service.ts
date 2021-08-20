@@ -22,4 +22,30 @@ export class UserTableService {
       catchError((err) => throwError(err)),
     );
   }
+
+  paginateFirstName(page: number, size: number, firstName: string): Observable<UsersList> {
+    let params = new HttpParams();
+
+    params = params.append('currentPage', String(page));
+    params = params.append('pageSize', String(size));
+    params = params.append('firstName', firstName);
+
+    return this.http.get<UsersList>(UserTableUrl, { params }).pipe(
+      map((userList: UsersList) => userList),
+      catchError((err) => throwError(err)),
+    );
+  }
+
+  paginateLastName(page: number, size: number, lastName: string): Observable<UsersList> {
+    let params = new HttpParams();
+
+    params = params.append('currentPage', String(page));
+    params = params.append('pageSize', String(size));
+    params = params.append('lastName', lastName);
+
+    return this.http.get<UsersList>(UserTableUrl, { params }).pipe(
+      map((userList: UsersList) => userList),
+      catchError((err) => throwError(err)),
+    );
+  }
 }

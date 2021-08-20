@@ -23,6 +23,10 @@ import { UserTableService } from './services/user-table.service';
 export class HrProfileComponent implements OnInit {
   displayedColumns: string[] = ['firstName', 'lastName', 'assessment', 'info'];
 
+  filterFirstNameValue: string = null as any;
+
+  filterLastNameValue: string = null as any;
+
   dataSource: UsersList | null = null;
 
   pageEvent: PageEvent | undefined;
@@ -54,10 +58,7 @@ export class HrProfileComponent implements OnInit {
   initDataSource() {
     this.userTableService
       .findAll(1, 10)
-      .pipe(
-        tap((users) => console.log(users)),
-        map((userList: UsersList) => (this.dataSource = userList)),
-      )
+      .pipe(map((userList: UsersList) => (this.dataSource = userList)))
       .subscribe();
   }
 
@@ -65,10 +66,34 @@ export class HrProfileComponent implements OnInit {
     let page = event.pageIndex;
     const size = event.pageSize;
 
-    page += 1;
+    if (this.filterFirstNameValue == null || this.filterLastNameValue == null) {
+      page += 1;
+      this.userTableService
+        .findAll(page, size)
+        .pipe(map((userList: UsersList) => (this.dataSource = userList)))
+        .subscribe();
+    } else {
+      this.userTableService
+        .paginateFirstName(page, size, this.filterFirstNameValue)
+        .pipe(map((userList: UsersList) => (this.dataSource = userList)))
+        .subscribe();
+      this.userTableService
+        .paginateLastName(page, size, this.filterLastNameValue)
+        .pipe(map((userList: UsersList) => (this.dataSource = userList)))
+        .subscribe();
+    }
+  }
 
+  findFirstName(firstName: string) {
     this.userTableService
-      .findAll(page, size)
+      .paginateFirstName(1, 10, firstName)
+      .pipe(map((userList: UsersList) => (this.dataSource = userList)))
+      .subscribe();
+  }
+
+  findLastName(lastName: string) {
+    this.userTableService
+      .paginateLastName(1, 10, lastName)
       .pipe(map((userList: UsersList) => (this.dataSource = userList)))
       .subscribe();
   }
