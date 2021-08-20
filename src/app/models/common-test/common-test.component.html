@@ -3,7 +3,7 @@
 <mat-tab-group mat-stretch-tabs mat-align-tabs="center" [(selectedIndex)]="selectedIndex">
   <mat-tab label="GRAMMAR">
     <app-grammar-test
-      [questions]="grammar$ | async"
+      [questions]="grammar"
       (answersGrammar)="onGrammarSubmit($event)"
       [testId]="testId"
     ></app-grammar-test>
@@ -11,7 +11,7 @@
 
   <mat-tab label="LISTENING">
     <app-listening
-      [questions]="listening$ | async"
+      [questions]="listening"
       (answersListening)="onListeningSubmit($event)"
       [testId]="testId"
     ></app-listening>
@@ -19,14 +19,14 @@
 
   <mat-tab label="WRITING">
     <app-writing-test
-      [essay]="essay$ | async"
+      [essay]="essay"
       (essayWritten)="onWritingSubmit($event)"
       [testId]="testId"
     ></app-writing-test>
   </mat-tab>
 
   <mat-tab label="SPEAKING">
-    <app-speaking [testId]="testId" [speaking]="speaking$ | async"></app-speaking>
+    <app-speaking [testId]="testId" [speaking]="speaking"></app-speaking>
   </mat-tab>
 </mat-tab-group>
 <button

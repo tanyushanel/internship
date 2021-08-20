@@ -17,8 +17,6 @@ export class UserResultsDialogComponent implements OnInit {
 
   results$: Observable<TestResult[] | undefined> = this.testStoreService.testResults$;
 
-  levels = [...Object.values(Level)];
-
   isClicked = false;
 
   results: TestResult[] = [];

@@ -39,8 +39,6 @@ export class TestStoreService {
 
   selectedLevel!: Level;
 
-  testId = '';
-
   private set test(test: TestContent) {
     this.testSubject$.next(test);
   }
@@ -69,14 +67,6 @@ export class TestStoreService {
 
   selectLevel(selected: Level): void {
     this.selectedLevel = selected;
-  }
-
-  getTestId(): void {
-    this.test$.subscribe((test) => {
-      if (test) {
-        this.testId = test.id;
-      }
-    });
   }
 
   getAll(): void {

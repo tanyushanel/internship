@@ -38,10 +38,6 @@
     </button>
   </div>
 
-  <app-user-results-table
-    class="user-results-table"
-    [results]="(results$ | async)!"
-    [levels]="levels"
-  >
+  <app-user-results-table class="user-results-table" [results]="(results$ | async)!">
   </app-user-results-table>
 </div>
