@@ -6,6 +6,7 @@ import { PathFile } from '../../interfaces/audition';
 import { CoachListeningStoreService } from './coach-listening-store.service';
 import { DownloadFileListeningApiUrl } from '../../constants/route-constant';
 import { TestStoreService } from './test-store.service';
+import { CoachTestsStoreService } from '../../models/coach-profile/service/coach-tests-store.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +20,7 @@ export class CoachAudioDataStoreService {
     private readonly testStoreService: TestStoreService,
     private readonly coachListeningHttpService: CoachListeningHttpService,
     private readonly coachListeningStoreService: CoachListeningStoreService,
+    private readonly coachCheckService: CoachTestsStoreService,
   ) {}
 
   uploadListeningFile(file: File) {
@@ -47,6 +49,19 @@ export class CoachAudioDataStoreService {
         map(async (res) => {
           return this.fetchUrlAudio(res.audioFilePath);
         }),
+      )
+      .subscribe({
+        next: async (blob) => {
+          this.audioData$.next(await blob);
+        },
+      });
+  }
+
+  downloadAudio() {
+    this.coachCheckService.coachTestResults$
+      .pipe(
+        map((res) => res?.find((id) => id)),
+        map((user) => this.fetchUrlAudio(user?.speakingAnswerReference as string)),
       )
       .subscribe({
         next: async (blob) => {

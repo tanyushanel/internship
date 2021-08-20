@@ -7,7 +7,9 @@ import { CoachCheckTest, CoachCheckTestID, CoachTest } from '../../../interfaces
   providedIn: 'root',
 })
 export class CoachTestsStoreService {
-  coachTestSubject$ = new BehaviorSubject<CoachTest[] | null>(null);
+  init = null;
+
+  coachTestSubject$ = new BehaviorSubject<CoachTest[] | null>(this.init);
 
   coachTestResults$ = this.coachTestSubject$.asObservable();
 
