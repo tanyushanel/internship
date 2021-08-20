@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { UserTableUrl } from 'src/app/constants/route-constant';
-import { UsersList, UserTable } from 'src/app/interfaces/test';
+import { UsersList } from 'src/app/interfaces/test';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +11,15 @@ import { UsersList, UserTable } from 'src/app/interfaces/test';
 export class UserTableService {
   constructor(private http: HttpClient) {}
 
-  getUsers(): Observable<UsersList> {
-    return this.http.get<UsersList>(UserTableUrl);
+  findAll(page: number, size: number): Observable<UsersList> {
+    let params = new HttpParams();
+
+    params = params.append('currentPage', String(page));
+    params = params.append('pageSize', String(size));
+
+    return this.http.get<UsersList>(UserTableUrl, { params }).pipe(
+      map((userList: UsersList) => userList),
+      catchError((err) => throwError(err)),
+    );
   }
 }
