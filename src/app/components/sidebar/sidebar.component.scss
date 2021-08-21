@@ -74,12 +74,11 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 67vh;
     margin-top: 5em;
   }
 
   &__exit {
-    margin-top: 90%;
+    border-top: 1px solid rgb(170, 213, 228);
   }
 
   &__button {

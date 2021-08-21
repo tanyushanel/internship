@@ -12,7 +12,7 @@
 }
 
 .description {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   text-align: center;
 }
 
@@ -59,7 +59,7 @@ p {
 }
 
 .audio-reserv-place {
-  max-width: 1600px;
+  height: 19rem;
   margin: 0 auto;
 }
 
@@ -85,17 +85,34 @@ p {
   font-size: 12px;
 }
 
+.text-of-theme-warning {
+  font-size: 0.75rem;
+  font-style: italic;
+}
+
+.recorder-card {
+  width: 90%;
+  min-height: 20rem;
+  margin: 1rem auto;
+}
+
 .report {
-  display: flex;
-  justify-content: center;
+  text-align: end;
 }
 
 .report__text {
-  margin-left: 3px;
+  display: inline-block;
+  margin-left: 0.5rem;
 }
 
 .report__text:hover {
   color: $secondary-grey2;
   text-decoration: underline;
   cursor: pointer;
+}
+
+.mat-icon {
+  color: $error;
+  font-size: 1rem;
+  vertical-align: top;
 }

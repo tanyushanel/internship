@@ -1,39 +1,43 @@
-<mat-card class="description">
-  Please, tell some words about <b>{{ speaking!.topicName }}</b></mat-card
->
-<mat-card class="text-of-theme-warning"
-  >You have 5 min max for speaking module, coutdown will start after you press button "Start
-  Recording"</mat-card
->
-<div class="audio-reserv-place">
-  <section class="speaking-module-position" ng-controller="controller">
-    <button
-      mat-raised-button
-      class="button-position"
-      [color]="getColor()"
-      (click)="toggleRecording()"
-      [disabled]="counter === 3"
-    >
-      {{ !isRecording ? 'Start Recording' : 'Stop Recording' }}
-    </button>
-    <figure class="countdown-position">
-      <p class="countdown">{{ minutes }} : {{ getSeconds() }}</p>
-    </figure>
-    <div class="paragraph-position">
-      <p class="text-for-attemp">you have 3 attempts</p>
-      <p class="number-of-attempt">{{ numberAttempt }} / 3</p>
+<div class="container">
+  <mat-card class="description">
+    Please, tell some words about <b>{{ speaking!.topicName }}</b></mat-card
+  >
+  <mat-card class="recorder-card">
+    <div class="audio-reserv-place">
+      <section class="speaking-module-position" ng-controller="controller">
+        <button
+          mat-raised-button
+          class="button-position"
+          [color]="getColor()"
+          (click)="toggleRecording()"
+          [disabled]="counter === 3"
+        >
+          {{ !isRecording ? 'Start Recording' : 'Stop Recording' }}
+        </button>
+        <figure class="countdown-position">
+          <p class="countdown">{{ minutes }} : {{ getSeconds() }}</p>
+        </figure>
+        <div class="paragraph-position">
+          <p class="text-for-attemp">you have 3 attempts</p>
+          <p class="number-of-attempt">{{ numberAttempt }} / 3</p>
+        </div>
+      </section>
+      <div class="audio-position">
+        <audio
+          class="audio-speaking audio"
+          *ngIf="audioFile !== null"
+          controls="true"
+          [src]="audioFile.src"
+        ></audio>
+      </div>
+      <p class="text-of-theme-warning">
+        You have 5 min max for speaking module, countdown will start after you press button "Start
+        Recording"
+      </p>
     </div>
-  </section>
-  <div class="audio-position">
-    <audio
-      class="audio-speaking audio"
-      *ngIf="audioFile !== null"
-      controls="true"
-      [src]="audioFile.src"
-    ></audio>
-  </div>
-</div>
-<div class="report">
-  <mat-icon>warning_amber</mat-icon>
-  <span class="report__text" (click)="openReportDialog(speaking?.id)">Report Mistake</span>
+    <div class="report">
+      <mat-icon>warning_amber</mat-icon>
+      <span class="report__text" (click)="openReportDialog(speaking?.id)">Report Mistake</span>
+    </div>
+  </mat-card>
 </div>
