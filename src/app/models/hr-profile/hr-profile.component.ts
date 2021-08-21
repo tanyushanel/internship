@@ -13,7 +13,23 @@ import { UserResultsDialogComponent } from '../dialog-module/user-results-dialog
 import { HrProfileDialogComponent } from './hr-profile-dialog/hr-profile-dialog.component';
 import { isSubstring } from '../../helpers/filter-check';
 import { UserTableStoreService } from './services/user-table-store.service';
-import { UserTableService } from './services/user-table.service';
+import { FilterParams, SortType, UserTableService } from './services/user-table.service';
+
+const DEFAULT_SIZE = 10;
+const DEFAULT_PAGE = 1;
+
+function getNextSortType(sortType: SortType) {
+  if (sortType === null) {
+    return 'desc';
+  }
+  if (sortType === 'desc') {
+    return 'asc';
+  }
+  if (sortType === 'asc') {
+    return null;
+  }
+  return null;
+}
 
 @Component({
   selector: 'app-hr-profile',
@@ -27,7 +43,18 @@ export class HrProfileComponent implements OnInit {
 
   filterLastNameValue: string | null = null;
 
-  dataSource: UsersList | null = null;
+  sortOn: 'firstName' | 'lastName' = 'firstName';
+
+  currentFirstNameSortType: SortType = null;
+
+  currentLastNameSortType: SortType = null;
+
+  dataSource: UsersList = {
+    pageSize: DEFAULT_SIZE,
+    currentPage: DEFAULT_PAGE,
+    results: [],
+    rowCount: 0,
+  };
 
   pageEvent: PageEvent | undefined;
 
@@ -56,45 +83,67 @@ export class HrProfileComponent implements OnInit {
   }
 
   initDataSource() {
-    this.userTableService
-      .findAll(1, 10)
-      .pipe(map((userList: UsersList) => (this.dataSource = userList)))
-      .subscribe();
+    this.getUsers({});
   }
 
   onPaginateChange(event: PageEvent) {
-    let page = event.pageIndex;
+    const page = event.pageIndex;
     const size = event.pageSize;
 
-    if (this.filterFirstNameValue == null || this.filterLastNameValue == null) {
-      page += 1;
-      this.userTableService
-        .findAll(page, size)
-        .pipe(map((userList: UsersList) => (this.dataSource = userList)))
-        .subscribe();
-    } else {
-      this.userTableService
-        .paginateFirstName(page, size, this.filterFirstNameValue)
-        .pipe(map((userList: UsersList) => (this.dataSource = userList)))
-        .subscribe();
-      this.userTableService
-        .paginateLastName(page, size, this.filterLastNameValue)
-        .pipe(map((userList: UsersList) => (this.dataSource = userList)))
-        .subscribe();
-    }
+    this.getUsers({
+      page,
+      size,
+    });
   }
 
   findFirstName(firstName: string | null) {
-    this.userTableService
-      .paginateFirstName(1, 10, `${firstName}`)
-      .pipe(map((userList: UsersList) => (this.dataSource = userList)))
-      .subscribe();
+    this.getUsers({
+      page: DEFAULT_PAGE,
+      size: DEFAULT_SIZE,
+      firstName,
+    });
   }
 
   findLastName(lastName: string | null) {
+    this.getUsers({
+      page: DEFAULT_PAGE,
+      size: DEFAULT_SIZE,
+      lastName,
+    });
+  }
+
+  onChangeFirstName() {
+    this.sortOn = 'firstName';
+    this.currentLastNameSortType = null;
+    this.currentFirstNameSortType = getNextSortType(this.currentFirstNameSortType);
+
+    this.getUsers({});
+  }
+
+  onChangeLastName() {
+    this.sortOn = 'lastName';
+
+    this.currentFirstNameSortType = null;
+    this.currentLastNameSortType = getNextSortType(this.currentLastNameSortType);
+
+    this.getUsers({});
+  }
+
+  getUsers(filterParams: Partial<FilterParams>) {
+    const sortDirection =
+      this.sortOn === 'firstName' ? this.currentFirstNameSortType : this.currentLastNameSortType;
+
     this.userTableService
-      .paginateLastName(1, 10, `${lastName}`)
-      .pipe(map((userList: UsersList) => (this.dataSource = userList)))
-      .subscribe();
+      .getUsersByFilter({
+        page: filterParams.page || this.dataSource.currentPage,
+        size: filterParams.size || this.dataSource.pageSize,
+        firstName: filterParams.firstName || this.filterFirstNameValue,
+        lastName: filterParams.lastName || this.filterLastNameValue,
+        sortDirection,
+        sortOn: filterParams.sortOn || this.sortOn,
+      })
+      .subscribe((res: UsersList) => {
+        this.dataSource = res;
+      });
   }
 }
