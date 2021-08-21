@@ -48,7 +48,7 @@ export class CommonTestComponent implements OnInit {
   constructor(private testStoreService: TestStoreService, public dialog: MatDialog) {}
 
   ngOnInit() {
-    // this.testStoreService.getTestId();
+    
 
     this.test$.subscribe((test) => {
       this.testId = test.id;
