@@ -36,10 +36,6 @@ export class SidebarComponent implements OnInit {
     private readonly dataStoreService: CoachAudioDataStoreService,
   ) {}
 
-  ngOnInit(): void {
-    this.fetchAvatar();
-  }
-
   getWidth() {
     return this.isOpen ? 'width:14%;' : 'width:4%;';
   }
@@ -67,9 +63,24 @@ export class SidebarComponent implements OnInit {
         map((blob) => {
           const reader = new FileReader();
           reader.readAsDataURL(<Blob>blob);
-          reader.onload = () => {
-            this.imgFilePath = this.sanitizer.bypassSecurityTrustUrl(reader.result as string);
-          };
+          if (reader.result) {
+            reader.onload = () => {
+              this.imgFilePath = this.sanitizer.bypassSecurityTrustUrl(reader.result as string);
+            };
+          }
+        }),
+      )
+      .subscribe();
+  }
+
+  ngOnInit(): void {
+    this.isSingIn$
+      .pipe(
+        // eslint-disable-next-line consistent-return
+        map((res) => {
+          if (res) {
+            return this.fetchAvatar();
+          }
         }),
       )
       .subscribe();

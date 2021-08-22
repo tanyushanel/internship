@@ -10,10 +10,17 @@
       <ng-container *ngIf="{ user: user$ | async } as $">
         <div class="sidebar__items">
           <ng-container *ngIf="isOpen">
-            <div mat-card-avatar class="sidebar__logo" *ngIf="{ user: user$ | async }">
+            <div mat-card-avatar class="sidebar__logo" *ngIf="imgFilePath; else logo">
               <input type="file" accept="image/*" (change)="handleFileInput($event)" />
-              <img [src]="imgFilePath || defaultAvatar" alt="Avatar" #img />
+              <img [src]="imgFilePath" alt="Avatar" #img />
             </div>
+            <ng-template #logo>
+              <div class="sidebar__logo sidebar__center">
+                <span class="sidebar__initials">{{
+                  $.user!.lastName[0] + $.user!.firstName[0]
+                }}</span>
+              </div>
+            </ng-template>
             <p class="sidebar__username">{{ $.user!.firstName }}</p>
           </ng-container>
         </div>

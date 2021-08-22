@@ -35,8 +35,10 @@ export class CoachAudioDataStoreService {
     });
   }
 
-  async fetchUrlAudio(audioPath: string): Promise<Blob> {
-    const urlAudio = `${DownloadFileListeningApiUrl}?filePath=${audioPath}`;
+  async fetchUrlAudio(audioPath: string = ''): Promise<Blob> {
+    const audioPathWithWrongDataFromBackEnd = audioPath && audioPath.split('\\').reverse()[0];
+    // const urlAudio = audioPath && `${DownloadFileListeningApiUrl}?filePath=${audioPath}`;
+    const urlAudio = `${DownloadFileListeningApiUrl}?filePath=${audioPathWithWrongDataFromBackEnd}`;
     const result = await fetch(urlAudio, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
