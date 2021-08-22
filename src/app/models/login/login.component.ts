@@ -45,8 +45,8 @@ export class LoginComponent implements OnInit {
     }
     this.submitted = false;
     this.authStoreService.signIn({
-      email: this.loginReactiveForm.value.userLogin || this.selectedUser,
-      password: this.loginReactiveForm.value.userPassword || 'Pa$$w0rd.',
+      email: this.loginReactiveForm.value.userLogin,
+      password: this.loginReactiveForm.value.userPassword,
     });
   }
 
@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
   private initForm() {
     this.loginReactiveForm = this.fb.group({
       userLogin: ['', [Validators.required, Validators.email]],
-      userPassword: ['Pa$$w0rd.', [Validators.required, Validators.minLength(6)]],
+      userPassword: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 }

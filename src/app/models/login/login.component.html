@@ -1,14 +1,6 @@
 <div class="login_page">
   <mat-card class="login_card">
     <form [formGroup]="loginReactiveForm" (submit)="onSubmit()">
-      <mat-form-field appearance="outline">
-        <mat-label>Login</mat-label>
-        <mat-select [(value)]="selectedUser">
-          <mat-option *ngFor="let user of users" [value]="user.email">
-            {{ user.firstName }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
       <mat-form-field class="form-field">
         <mat-label for="userLogin">Login:</mat-label>
         <input
