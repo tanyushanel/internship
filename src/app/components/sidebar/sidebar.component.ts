@@ -74,15 +74,6 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isSingIn$
-      .pipe(
-        // eslint-disable-next-line consistent-return
-        map((res) => {
-          if (res) {
-            return this.fetchAvatar();
-          }
-        }),
-      )
-      .subscribe();
+    this.user$.pipe(map((res) => res?.isAuthenticated && this.fetchAvatar())).subscribe();
   }
 }
