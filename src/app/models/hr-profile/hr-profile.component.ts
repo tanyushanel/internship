@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { FormControl } from '@angular/forms';
@@ -8,10 +8,28 @@ import { Observable } from 'rxjs';
 import { UsersList, UserTable } from 'src/app/interfaces/test';
 import { ApiAssignTest, GetHrUser, User } from 'src/app/interfaces/user.interfaces';
 import { TestStoreService } from 'src/app/services/store/test-store.service';
+import { map, tap } from 'rxjs/operators';
 import { UserResultsDialogComponent } from '../dialog-module/user-results-dialog/user-results-dialog.component';
 import { HrProfileDialogComponent } from './hr-profile-dialog/hr-profile-dialog.component';
 import { isSubstring } from '../../helpers/filter-check';
 import { UserTableStoreService } from './services/user-table-store.service';
+import { FilterParams, SortType, UserTableService } from './services/user-table.service';
+
+const DEFAULT_SIZE = 10;
+const DEFAULT_PAGE = 1;
+
+function getNextSortType(sortType: SortType) {
+  if (sortType === null) {
+    return 'desc';
+  }
+  if (sortType === 'desc') {
+    return 'asc';
+  }
+  if (sortType === 'asc') {
+    return null;
+  }
+  return null;
+}
 
 @Component({
   selector: 'app-hr-profile',
@@ -21,65 +39,33 @@ import { UserTableStoreService } from './services/user-table-store.service';
 export class HrProfileComponent implements OnInit {
   displayedColumns: string[] = ['firstName', 'lastName', 'assessment', 'info'];
 
-  results$: Observable<UsersList | null> = this.userTableStoreService.usersResults$;
+  filterFirstNameValue: string | null = null;
 
-  firstNameFilter = new FormControl('');
+  filterLastNameValue: string | null = null;
 
-  lastNameFilter = new FormControl('');
+  sortOn: 'firstName' | 'lastName' = 'firstName';
 
-  filterValues = {
-    firstName: '',
-    lastName: '',
+  currentFirstNameSortType: SortType = null;
+
+  currentLastNameSortType: SortType = null;
+
+  dataSource: UsersList = {
+    pageSize: DEFAULT_SIZE,
+    currentPage: DEFAULT_PAGE,
+    results: [],
+    rowCount: 0,
   };
 
-  public searchQuery = '';
-
-  public dataSource!: MatTableDataSource<UserTable>;
-
-  public usersTestarg!: UserTable[];
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-
-  @ViewChild(MatSort) sort: MatSort | null = null;
+  pageEvent: PageEvent | undefined;
 
   constructor(
     public dialog: MatDialog,
-    private userTableStoreService: UserTableStoreService,
+    private userTableService: UserTableService,
     private testStoreService: TestStoreService,
   ) {}
 
   ngOnInit(): void {
-    this.userTableStoreService.usersSubject$.subscribe((value) => {
-      if (value) {
-        this.dataSource = new MatTableDataSource(value.results);
-        this.dataSource.filterPredicate = this.createFilter();
-      }
-    });
-
-    this.userTableStoreService.getUsersResults();
-
-    this.firstNameFilter.valueChanges.subscribe((firstName) => {
-      this.filterValues.firstName = firstName;
-      this.dataSource.filter = JSON.stringify(this.filterValues);
-    });
-    this.lastNameFilter.valueChanges.subscribe((lastName) => {
-      this.filterValues.lastName = lastName;
-      this.dataSource.filter = JSON.stringify(this.filterValues);
-    });
-    if (this.paginator && this.sort) {
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    }
-  }
-
-  createFilter(): (filterValues: UserTable, filter: string) => boolean {
-    return (filterValues, filter): boolean => {
-      const searchTerms = JSON.parse(filter);
-      return (
-        isSubstring(filterValues.firstName, searchTerms.firstName) &&
-        isSubstring(filterValues.lastName, searchTerms.lastName)
-      );
-    };
+    this.initDataSource();
   }
 
   onOpenInfoDialog(row: GetHrUser): void {
@@ -94,5 +80,70 @@ export class HrProfileComponent implements OnInit {
     this.dialog.open(HrProfileDialogComponent, {
       data: { userId } as ApiAssignTest,
     });
+  }
+
+  initDataSource() {
+    this.getUsers({});
+  }
+
+  onPaginateChange(event: PageEvent) {
+    const page = event.pageIndex;
+    const size = event.pageSize;
+
+    this.getUsers({
+      page,
+      size,
+    });
+  }
+
+  findFirstName(firstName: string | null) {
+    this.getUsers({
+      page: DEFAULT_PAGE,
+      size: DEFAULT_SIZE,
+      firstName,
+    });
+  }
+
+  findLastName(lastName: string | null) {
+    this.getUsers({
+      page: DEFAULT_PAGE,
+      size: DEFAULT_SIZE,
+      lastName,
+    });
+  }
+
+  onChangeFirstName() {
+    this.sortOn = 'firstName';
+    this.currentLastNameSortType = null;
+    this.currentFirstNameSortType = getNextSortType(this.currentFirstNameSortType);
+
+    this.getUsers({});
+  }
+
+  onChangeLastName() {
+    this.sortOn = 'lastName';
+
+    this.currentFirstNameSortType = null;
+    this.currentLastNameSortType = getNextSortType(this.currentLastNameSortType);
+
+    this.getUsers({});
+  }
+
+  getUsers(filterParams: Partial<FilterParams>) {
+    const sortDirection =
+      this.sortOn === 'firstName' ? this.currentFirstNameSortType : this.currentLastNameSortType;
+
+    this.userTableService
+      .getUsersByFilter({
+        page: filterParams.page || this.dataSource.currentPage,
+        size: filterParams.size || this.dataSource.pageSize,
+        firstName: filterParams.firstName || this.filterFirstNameValue,
+        lastName: filterParams.lastName || this.filterLastNameValue,
+        sortDirection,
+        sortOn: filterParams.sortOn || this.sortOn,
+      })
+      .subscribe((res: UsersList) => {
+        this.dataSource = res;
+      });
   }
 }

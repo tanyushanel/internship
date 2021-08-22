@@ -7,17 +7,8 @@
     </div>
   </mat-card>
 
-  <app-user-results-table
-    class="user-results-table"
-    [results]="(results$ | async)!"
-    [levels]="levels"
-    *ngIf="(results$ | async)?.length; else noResults"
-  >
+  <app-user-results-table class="user-results-table" [results]="(results$ | async)!">
   </app-user-results-table>
-
-  <ng-template #noResults>
-    <h3 class="table-caption">User has no results yet</h3>
-  </ng-template>
 </div>
 
 <mat-dialog-actions align="end">

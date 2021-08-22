@@ -9,6 +9,8 @@ import { AnswerQuestion, Question } from '../../interfaces/question-answer';
 export class GrammarTestComponent {
   @Input() questions: Question[] | null = null;
 
+  @Input() testId: string | undefined;
+
   @Output() answersGrammar = new EventEmitter<string[] | null>();
 
   onAnswersSubmit(answers: string[] | null): void {

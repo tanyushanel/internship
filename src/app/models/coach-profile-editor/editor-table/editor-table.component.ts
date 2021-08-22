@@ -32,7 +32,7 @@ import { CoachAudioDataStoreService } from '../../../services/store/coach-audio-
   styleUrls: ['./editor-table.component.scss'],
 })
 export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
-  displayedColumns: string[] = ['id', 'level', 'actions'];
+  displayedColumns: string[] = ['id', 'questionName', 'level', 'creator', 'actions'];
 
   public searchQuery = '';
 
@@ -42,11 +42,17 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
 
   idFilter = new FormControl('');
 
+  idNameFilter = new FormControl('');
+
+  idCoach = new FormControl('');
+
   levelFilter = new FormControl('');
 
   filterValues = {
     number: '',
+    name: '',
     level: '',
+    creatorName: '',
   };
 
   @Input() selectTab = '';
@@ -92,8 +98,16 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
       this.filterValues.number = number;
       this.dataSource.filter = JSON.stringify(this.filterValues);
     });
+    this.idNameFilter.valueChanges.subscribe((name) => {
+      this.filterValues.name = name;
+      this.dataSource.filter = JSON.stringify(this.filterValues);
+    });
     this.levelFilter.valueChanges.subscribe((level) => {
       this.filterValues.level = level;
+      this.dataSource.filter = JSON.stringify(this.filterValues);
+    });
+    this.idCoach.valueChanges.subscribe((creatorName) => {
+      this.filterValues.creatorName = creatorName;
       this.dataSource.filter = JSON.stringify(this.filterValues);
     });
   }
@@ -103,7 +117,9 @@ export class EditorTableComponent implements AfterViewInit, OnChanges, OnInit {
       const searchTerms = JSON.parse(filter);
       return (
         isSubstring(filterValues.number, searchTerms.number) &&
-        isSubstring(languageLevel[filterValues.level], searchTerms.level)
+        isSubstring(languageLevel[filterValues.level], searchTerms.level) &&
+        isSubstring(filterValues.name, searchTerms.name) &&
+        isSubstring(filterValues.creatorName, searchTerms.creatorName)
       );
     };
   }

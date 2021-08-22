@@ -1,5 +1,6 @@
 <mat-card class="description">Please, answer the questions</mat-card>
 <app-stepper
+  [testId]="testId"
   class="grammar-stepper__position"
   [questionList]="questions"
   (answersChosenId)="onAnswersSubmit($event)"

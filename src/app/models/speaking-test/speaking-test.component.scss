@@ -1,3 +1,5 @@
+@import 'src/theme/variables';
+
 .speaking-module-position {
   display: flex;
   align-items: center;
@@ -10,7 +12,7 @@
 }
 
 .description {
-  margin-bottom: 50px;
+  margin-bottom: 1rem;
   text-align: center;
 }
 
@@ -57,7 +59,7 @@ p {
 }
 
 .audio-reserv-place {
-  max-width: 1600px;
+  height: 19rem;
   margin: 0 auto;
 }
 
@@ -74,4 +76,43 @@ p {
   margin: 1% 30%;
   padding: 20px;
   text-align: center;
+}
+
+.mat-icon {
+  width: 12px;
+  height: 12px;
+  margin-top: 3px;
+  font-size: 12px;
+}
+
+.text-of-theme-warning {
+  font-size: 0.75rem;
+  font-style: italic;
+}
+
+.recorder-card {
+  width: 90%;
+  min-height: 20rem;
+  margin: 1rem auto;
+}
+
+.report {
+  text-align: end;
+}
+
+.report__text {
+  display: inline-block;
+  margin-left: 0.5rem;
+}
+
+.report__text:hover {
+  color: $secondary-grey2;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.mat-icon {
+  color: $error;
+  font-size: 1rem;
+  vertical-align: top;
 }

@@ -24,7 +24,7 @@
             <p class="sidebar__username">{{ $.user!.firstName }}</p>
           </ng-container>
         </div>
-        <app-notification class="notifications"> </app-notification>
+
         <nav class="sidebar__nav">
           <div class="sidebar__list">
             <div *ngFor="let route of usersRoute[$.user!.roles[0]].route; let i = index">
@@ -47,12 +47,14 @@
               </mat-list-item>
             </div>
           </div>
+
           <mat-list-item (click)="authService.signOut()" class="sidebar__list_item sidebar__exit">
             <div class="sidebar__exit-position">
               <mat-icon class="sidebar__icons-hover material-icons-round md-30 md-dark">
                 logout
               </mat-icon>
             </div>
+
             <span *ngIf="isOpen" class="sidebar__items-heading">Exit</span>
           </mat-list-item>
         </nav>
