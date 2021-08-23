@@ -60,7 +60,7 @@ export class CommonTestComponent implements OnInit {
       this.testStoreService.createAssignedTestContent(this.testId);
     } else this.testStoreService.createTestContent();
 
-    this.timerSubscription = this.testStoreService.timer(60, 60000, () =>
+    this.timerSubscription = this.testStoreService.timer(3600, 1000, () =>
       this.onSubmitTestOnTimerRunOut(),
     );
   }

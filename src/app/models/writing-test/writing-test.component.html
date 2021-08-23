@@ -1,6 +1,6 @@
 <mat-card class="container">
   <p>
-    Please write an essay on suggested <b>{{ essay!.topicName }}</b>
+    Please write an essay on suggested topic <b>{{ essay!.topicName }}</b>
   </p>
   <form [formGroup]="form" (ngSubmit)="submit()">
     <mat-form-field class="mat-form-field" appearance="fill">
@@ -28,6 +28,6 @@
   </form>
   <div class="report">
     <mat-icon>warning_amber</mat-icon>
-    <span class="report__text" (click)="openReportDialog(essay?.id)">Report Mistake</span>
+    <span class="report__text" (click)="openReportDialog(essay?.id)"> Report Mistake</span>
   </div>
 </mat-card>
