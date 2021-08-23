@@ -1,10 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Route } from 'src/app/constants/route-constant';
 import { TestStoreService } from 'src/app/services/store/test-store.service';
-import { SubmitTestResponse, FinishTestBody } from '../../../interfaces/test';
+import { FinishTestBody } from '../../../interfaces/test';
+import { CoachAudioDataStoreService } from '../../../services/store/coach-audio-data-store.service';
 
 @Component({
   selector: 'app-finish-modal-dialog',
@@ -20,16 +21,22 @@ export class FinishModalDialogComponent implements OnInit {
 
   timer$ = this.testStoreService.timerValue$;
 
+  audioFilePath = this.data.speakingAnswerReference;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: FinishTestBody,
     private testStoreService: TestStoreService,
     private readonly router: Router,
-    public dialogRef: MatDialogRef<FinishModalDialogComponent>,
+    public readonly dialogRef: MatDialogRef<FinishModalDialogComponent>,
+    private readonly audioData: CoachAudioDataStoreService,
   ) {
     this.dialogRef.disableClose = true;
   }
 
   ngOnInit(): void {
+    this.audioData.audioFilePath$.subscribe((path) => {
+      this.audioFilePath = path.pathfile;
+    });
     if (this.isFinished)
       this.buttonTimerSubscription = this.testStoreService.timer(6, 1000, () =>
         this.onTickerRunOut(),
@@ -43,13 +50,12 @@ export class FinishModalDialogComponent implements OnInit {
   onCompleteTestClick(): void {
     this.testTimerSubscription.unsubscribe();
     if (this.buttonTimerSubscription) this.buttonTimerSubscription.unsubscribe();
-
     this.testStoreService.testSubmit(
       this.data.id,
       this.data.grammarAnswers,
       this.data.auditionAnswers,
       this.data.essayAnswer,
-      this.data.speakingAnswerReference,
+      this.audioFilePath,
     );
 
     this.dialogRef.close();
