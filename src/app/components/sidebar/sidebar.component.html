@@ -36,7 +36,7 @@
                     {{ usersRoute[$.user!.roles[0]].menuIcon[i] }}
                   </mat-icon>
                 </div>
-                <span *ngIf="isOpen" class="sidebar__items-heading"
+                <span *ngIf="isOpen" class="sidebar__items-heading" i18n
                   >{{ usersRoute[$.user!.roles[0]].menuItem[i] }}
                 </span>
               </mat-list-item>
@@ -48,7 +48,7 @@
                 logout
               </mat-icon>
             </div>
-            <span *ngIf="isOpen" class="sidebar__items-heading">Exit</span>
+            <span *ngIf="isOpen" class="sidebar__items-heading" i18n>Exit</span>
           </mat-list-item>
         </nav>
       </ng-container>

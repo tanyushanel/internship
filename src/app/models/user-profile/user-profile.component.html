@@ -1,11 +1,12 @@
 <div class="profile-container">
-  <h3 class="table-caption">Please choose your level to start a test:</h3>
+  <h3 class="table-caption" i18n>Please choose your level to start a test:</h3>
 
   <mat-radio-group name="levels" class="radio" [(ngModel)]="selectedLevel">
     <mat-radio-button
       class="radio-btn"
       *ngFor="let level of levels; let ind = index"
       [value]="ind + 1"
+      i18n
     >
       {{ levels[ind] }}
     </mat-radio-button>
@@ -18,13 +19,14 @@
     color="primary"
     class="start-btn"
     (click)="onStartButtonClick(selectedLevel)"
+    i18n
   >
     START TEST
   </button>
 
   <div *ngIf="(assignedTests$ | async)?.length">
-    <h3 class="table-caption warn">You have a test assigned!</h3>
-    <p class="table-caption">
+    <h3 class="table-caption warn" i18n>You have a test assigned!</h3>
+    <p class="table-caption" i18n>
       Deadline: <span class="warn">{{ deadLine | date: 'medium' }}</span>
     </p>
     <button
@@ -33,6 +35,7 @@
       color="primary"
       class="start-btn"
       (click)="onStartAssignedButtonClick(selectedLevel, assignedTest)"
+      i18n
     >
       START ASSIGNED TEST
     </button>

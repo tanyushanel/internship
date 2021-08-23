@@ -1,7 +1,7 @@
-<mat-card class="description">
+<mat-card class="description" i18n>
   Please, tell some words about <b>{{ speaking!.topicName }}</b></mat-card
 >
-<mat-card class="text-of-theme-warning"
+<mat-card class="text-of-theme-warning" i18n
   >You have 5 min max for speaking module, coutdown will start after you press button "Start
   Recording"</mat-card
 >
@@ -13,6 +13,7 @@
       [color]="getColor()"
       (click)="toggleRecording()"
       [disabled]="counter === 3"
+      i18n
     >
       {{ !isRecording ? 'Start Recording' : 'Stop Recording' }}
     </button>
@@ -20,7 +21,7 @@
       <p class="countdown">{{ minutes }} : {{ getSeconds() }}</p>
     </figure>
     <div class="paragraph-position">
-      <p class="text-for-attemp">you have 3 attempts</p>
+      <p class="text-for-attemp" i18n>you have 3 attempts</p>
       <p class="number-of-attempt">{{ numberAttempt }} / 3</p>
     </div>
   </section>
