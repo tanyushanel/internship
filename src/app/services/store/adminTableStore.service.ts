@@ -1,20 +1,29 @@
 import { Injectable } from '@angular/core';
-import { UpdateCoachesData } from 'src/app/interfaces/admin-profile-intarfaces';
+import { TestData, UpdateCoachesData } from 'src/app/interfaces/admin-profile-intarfaces';
 
+import { BehaviorSubject } from 'rxjs';
 import { AdminHttpService } from '../adminTableData.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AdminTableStoreService {
+  adminTestSubject$ = new BehaviorSubject<TestData[] | null>(null);
+
+  adminTestResults$ = this.adminTestSubject$.asObservable();
+
   constructor(private readonly adminHttpService: AdminHttpService) {}
 
   getAssignedTestData() {
-    return this.adminHttpService.getAssignedAdminTests();
+    return this.adminHttpService
+      .getAssignedAdminTests()
+      .subscribe({ next: (value) => this.adminTestSubject$.next(value) });
   }
 
   getNotAssignedTestData() {
-    return this.adminHttpService.getNotAssignedAdminTests();
+    return this.adminHttpService
+      .getNotAssignedAdminTests()
+      .subscribe({ next: (value) => this.adminTestSubject$.next(value) });
   }
 
   getCoachData() {

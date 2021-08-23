@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatTable } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { AdminTableStoreService } from 'src/app/services/store/adminTableStore.service';
 import { AdminDialogComponent } from '../admin-dialog/admin-dialog.component';
 import {
@@ -8,6 +8,7 @@ import {
   TestData,
   UpdateCoachesData,
 } from '../../../interfaces/admin-profile-intarfaces';
+import { CoachTest } from '../../../interfaces/coach-edit';
 
 @Component({
   selector: 'app-table',
@@ -23,6 +24,8 @@ export class TableComponent implements OnInit {
     'Advanced',
   ];
 
+  @Input() tableData: TestData[] = [];
+
   AssignSelector = true;
 
   coaches!: ServiceCoachData;
@@ -31,32 +34,18 @@ export class TableComponent implements OnInit {
 
   temp: string | null | undefined;
 
-  assignedData!: TestData[];
-
-  notAssignedData!: TestData[];
-
-  priorityData!: TestData[];
-
-  displaedColums = ['Position', 'Level', 'Date', 'Button'];
+  dataSource: MatTableDataSource<TestData>;
 
   displaedColumshasCoach = ['Position', 'Level', 'Date', 'Coach', 'Button'];
 
-  constructor(public dialog: MatDialog, private service: AdminTableStoreService) {}
+  constructor(public dialog: MatDialog, private service: AdminTableStoreService) {
+    this.dataSource = new MatTableDataSource(this.tableData);
+  }
 
   @ViewChild(MatTable) table!: MatTable<any>;
 
   ngOnInit(): void {
-    this.service.getAssignedTestData().subscribe((assignedData: { results: TestData[] }) => {
-      this.assignedData = assignedData.results;
-    });
-    this.service.getNotAssignedTestData().subscribe((notAssignedData: { results: TestData[] }) => {
-      this.notAssignedData = notAssignedData.results;
-      this.priorityData = this.notAssignedData.filter((test) => test.priority);
-    });
-
-    this.service.getCoachData().subscribe((data: ServiceCoachData) => {
-      this.coaches = data;
-    });
+    console.log(this.tableData);
   }
 
   openDialog(element: TestData, CoachData: ServiceCoachData) {

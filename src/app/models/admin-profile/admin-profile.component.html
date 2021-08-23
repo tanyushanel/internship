@@ -1,1 +1,9 @@
-<app-table></app-table>
+<div class="mat-elevation-z8">
+  <mat-tab-group mat-align-tabs="center" (selectedTabChange)="tabChanged($event)">
+    <ng-container *ngIf="{ table: tables$ | async } as $">
+      <mat-tab *ngFor="let tab of tabs" [label]="tab">
+        <app-table *ngIf="$.table" [tableData]="$.table"> </app-table>
+      </mat-tab>
+    </ng-container>
+  </mat-tab-group>
+</div>

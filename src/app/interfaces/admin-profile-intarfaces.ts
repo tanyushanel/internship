@@ -44,6 +44,7 @@ const MOCK_EMPTY_COACH: CoachData = {
 };
 
 export enum AdminTestTabs {
+  highPriority = 'High Priority',
   notAssigned = 'Not Assigned',
   assigned = 'Assigned',
 }
