@@ -1,5 +1,8 @@
-@import '../../../theme/variables';
-
 button:hover {
-  background-color: $secondary-grey2;
+  background-color: grey;
+}
+
+table {
+  width: 100%;
+  margin: 0 auto;
 }

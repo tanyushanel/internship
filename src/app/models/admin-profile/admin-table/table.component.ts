@@ -8,7 +8,6 @@ import {
   TestData,
   UpdateCoachesData,
 } from '../../../interfaces/admin-profile-intarfaces';
-import { CoachTest } from '../../../interfaces/coach-edit';
 
 @Component({
   selector: 'app-table',
@@ -24,19 +23,19 @@ export class TableComponent implements OnInit {
     'Advanced',
   ];
 
-  @Input() tableData: TestData[] = [];
-
   AssignSelector = true;
-
-  coaches!: ServiceCoachData;
 
   coachUpdate: UpdateCoachesData | undefined;
 
   temp: string | null | undefined;
 
+  @Input() tableData!: TestData[];
+
+  @Input() coachData!: ServiceCoachData | null;
+
   dataSource: MatTableDataSource<TestData>;
 
-  displaedColumshasCoach = ['Position', 'Level', 'Date', 'Coach', 'Button'];
+  displaedColumshasCoach = ['testNumber', 'Level', 'Date', 'Coach', 'Button'];
 
   constructor(public dialog: MatDialog, private service: AdminTableStoreService) {
     this.dataSource = new MatTableDataSource(this.tableData);
@@ -44,33 +43,35 @@ export class TableComponent implements OnInit {
 
   @ViewChild(MatTable) table!: MatTable<any>;
 
-  ngOnInit(): void {
-    console.log(this.tableData);
-  }
+  ngOnInit(): void {}
 
-  openDialog(element: TestData, CoachData: ServiceCoachData) {
+  openDialog(element: TestData, coachesData: ServiceCoachData | null) {
     const dialogRef = this.dialog.open(AdminDialogComponent, {
       data: {
         id: element.id,
         coach: element.coach,
-        coaches: CoachData.coaches,
+        coaches: coachesData?.coaches,
       },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      this.coachUpdate = {
-        testId: result.id,
-        coachId: result.coach.userId,
-      };
-      this.service.updateTestData(this.coachUpdate, result.id);
+      if (result === null) {
+        this.coachUpdate = {
+          testId: result?.id,
+          coachId: result?.coach?.userId,
+        };
+        this.service.updateTestData(this.coachUpdate, result.id);
+      }
     });
   }
 
   coachName(Id: string) {
-    for (let i = 0; i < this.coaches.coaches.length; i += 1) {
-      if (Id === this.coaches.coaches[i].userId) {
-        this.temp = this.coaches.coaches[i].firstName;
-        break;
+    if (this.coachData !== null) {
+      for (let i = 0; i < this.coachData.coaches.length; i += 1) {
+        if (Id === this.coachData.coaches[i].userId) {
+          this.temp = this.coachData.coaches[i].firstName;
+          break;
+        }
       }
     }
     return this.temp;

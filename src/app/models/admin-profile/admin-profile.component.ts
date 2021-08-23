@@ -4,7 +4,14 @@ import { Observable } from 'rxjs';
 import { AdminTableStoreService } from '../../services/store/adminTableStore.service';
 import { CoachTestTabs } from '../../constants/data-constants';
 import { CoachTest } from '../../interfaces/coach-edit';
-import { AdminTestTabs, TestData } from '../../interfaces/admin-profile-intarfaces';
+import {
+  AdminTestTabs,
+  CoachData,
+  ServiceCoachData,
+  ServiceTestData,
+  TestData,
+} from '../../interfaces/admin-profile-intarfaces';
+import { AdminHttpService } from '../../services/adminTableData.service';
 
 @Component({
   selector: 'app-admin-profile',
@@ -13,6 +20,8 @@ import { AdminTestTabs, TestData } from '../../interfaces/admin-profile-intarfac
 })
 export class AdminProfileComponent implements OnInit {
   tables$: Observable<TestData[] | null> = this.admin.adminTestResults$;
+
+  coaches$: Observable<ServiceCoachData | null> = this.admin.adminCoachResults$;
 
   public selectedTab = AdminTestTabs.highPriority;
 
@@ -25,12 +34,16 @@ export class AdminProfileComponent implements OnInit {
   constructor(private admin: AdminTableStoreService) {}
 
   tabChanged(tabChangeEvent: MatTabChangeEvent): void {
-    if (tabChangeEvent.index === 0) {
+    if (tabChangeEvent.index === 2) {
       this.admin.getAssignedTestData();
       this.tables$ = this.admin.adminTestResults$;
       this.selectedTab = AdminTestTabs.notAssigned;
     } else if (tabChangeEvent.index === 1) {
       this.admin.getNotAssignedTestData();
+      this.tables$ = this.admin.adminTestResults$;
+      this.selectedTab = AdminTestTabs.assigned;
+    } else if (tabChangeEvent.index === 0) {
+      this.admin.getAssignedTestData();
       this.tables$ = this.admin.adminTestResults$;
       this.selectedTab = AdminTestTabs.assigned;
     }
@@ -39,5 +52,7 @@ export class AdminProfileComponent implements OnInit {
   ngOnInit() {
     this.admin.getAssignedTestData();
     this.tables$ = this.admin.adminTestResults$;
+    this.admin.getCoachData();
+    this.coaches$ = this.admin.adminCoachResults$;
   }
 }

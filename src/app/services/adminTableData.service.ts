@@ -8,25 +8,21 @@ import {
   UpdateCoachesData,
 } from 'src/app/interfaces/admin-profile-intarfaces';
 import { map } from 'rxjs/operators';
-import { AdmintableApi, BASE_API_URL, CoachTestApi } from '../constants/route-constant';
+import { AdmintableApi, CoachTestApi } from '../constants/route-constant';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AdminHttpService {
-  constructor(private readonly http: HttpClient) {}
-
   data: any;
+
+  constructor(private readonly http: HttpClient) {}
 
   options = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
   getAssignedAdminTests() {
-    this.http.get<TestData[]>(`${AdmintableApi}forAdmin`).subscribe((data) => {
-      this.data = data;
-      console.log(this.data);
-    });
     return this.http.get<ServiceTestData>(`${AdmintableApi}forAdmin?IsAssigned=true`).pipe(
       map((res) => {
         return res.results;
@@ -35,11 +31,11 @@ export class AdminHttpService {
   }
 
   getAdminTests() {
-    return this.http.get<TestData[]>(`${AdmintableApi}forAdmin`).pipe(
-      map((res) => {
-        return res;
-      }),
-    );
+    this.http
+      .get<ServiceTestData>(
+        'http://elevel-001-site1.btempurl.com/api/Test/forAdmin?IsAssigned=true',
+      )
+      .subscribe((data) => console.log(data.results));
   }
 
   getNotAssignedAdminTests() {
@@ -53,7 +49,7 @@ export class AdminHttpService {
   getAdminCoaches() {
     return this.http.get<ServiceCoachData>(CoachTestApi).pipe(
       map((res) => {
-        return res.coaches;
+        return res;
       }),
     );
   }
