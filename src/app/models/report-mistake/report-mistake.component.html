@@ -1,0 +1,20 @@
+<div class="mat-elevation-z8">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Mistake Reports</mat-card-title>
+    </mat-card-header>
+    <div>
+      <mat-tab-group mat-align-tabs="start" (selectedTabChange)="tabChanged($event)">
+        <ng-container *ngIf="{ table: tables$ | async } as $">
+          <mat-tab *ngFor="let tab of tabsTitle" [label]="tab">
+            <app-report-mistake-table
+              *ngIf="$.table"
+              [table]="$.table"
+              [selectTab]="selectedTab"
+            ></app-report-mistake-table>
+          </mat-tab>
+        </ng-container>
+      </mat-tab-group>
+    </div>
+  </mat-card>
+</div>

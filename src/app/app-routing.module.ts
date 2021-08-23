@@ -47,6 +47,13 @@ const routes: Routes = [
         (m) => m.CoachProfileEditorModule,
       ),
   },
+
+  {
+    path: Route.report,
+    loadChildren: () =>
+      import('./models/report-mistake/report-mistake.module').then((m) => m.ReportMistakeModule),
+  },
+
   {
     path: Route.error,
     component: NotFoundComponent,

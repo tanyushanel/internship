@@ -39,7 +39,7 @@ export class CoachQuestionStoreService {
       });
   }
 
-  getQuestion(id: string) {
+  getQuestion(id: string | undefined) {
     this.couchHttpService.getQuestion(id).subscribe({
       next: (question) => {
         this.question$.next(question);

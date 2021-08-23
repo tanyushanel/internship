@@ -3,6 +3,7 @@ export enum Route {
   home = 'home',
   check = 'coachProfile',
   editor = 'editor',
+  report = 'report',
   manage = 'adminProfile',
   statistics = 'statistics',
   result = 'result',
@@ -17,6 +18,7 @@ export enum SidebarMenu {
   users = 'Users',
   check = 'Test Checking',
   editor = 'Test Editor',
+  mistakes = 'Mistake Reports',
   manage = 'Manage',
 }
 
@@ -27,6 +29,7 @@ export enum SidebarIcon {
   editoricon = 'edit_note',
   manageicon = 'manage_accounts',
   statisticsicon = 'insert_chart_outlined',
+  reporticon = 'report',
 }
 
 export const BASE_API_URL = 'http://elevel-001-site1.btempurl.com/api';

@@ -40,7 +40,7 @@ export class CoachListeningStoreService {
       });
   }
 
-  getListening(id: string) {
+  getListening(id: string | undefined) {
     this.coachListeningHttpService.getListening(id).subscribe({
       next: (listen) => {
         this.listening$.next(listen);

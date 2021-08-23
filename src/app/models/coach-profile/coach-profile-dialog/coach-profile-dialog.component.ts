@@ -55,9 +55,12 @@ export class CoachProfileDialogComponent implements OnInit {
       id: this.data.id,
     };
     if (this.form.valid) {
-      this.dialogRef.close();
       this.coachCheck.sendCheckTest(question, id);
+      this.dialogRef.close();
     }
+    if (this.data.priority) {
+      this.coachCheck.getCoachHighPriorityTestResults();
+    } else this.coachCheck.getCoachUncheckedTestResults();
   }
 
   downloadListeningFile() {

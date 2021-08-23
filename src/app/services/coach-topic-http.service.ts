@@ -14,7 +14,7 @@ export class CoachTopicHttpService {
     return this.http.get<ResponseGetAll<CoachTopic>>(TopicApiUrl);
   }
 
-  getTopic(id: string) {
+  getTopic(id: string | undefined) {
     return this.http.get<CoachTopic>(`${TopicApiUrl}/${id}`);
   }
 

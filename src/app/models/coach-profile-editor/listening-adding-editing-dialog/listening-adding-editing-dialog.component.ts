@@ -7,6 +7,7 @@ import { EditionCoachListening, ListeningQuestion } from '../../../interfaces/au
 import { CoachListeningStoreService } from '../../../services/store/coach-listening-store.service';
 import { englishLevelNumber } from '../../../helpers/checks';
 import { CoachAudioDataStoreService } from '../../../services/store/coach-audio-data-store.service';
+import { MistakeReport } from '../../../interfaces/mistake-report';
 
 @Component({
   selector: 'app-edit-listening-dialog',
@@ -38,6 +39,7 @@ export class ListeningAddingEditingDialogComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: EditionCoachListening,
+    @Inject(MAT_DIALOG_DATA) public report: MistakeReport,
     public dialogRef: MatDialogRef<ListeningAddingEditingDialogComponent>,
     private coachListening: CoachListeningStoreService,
     private coachAudioData: CoachAudioDataStoreService,
