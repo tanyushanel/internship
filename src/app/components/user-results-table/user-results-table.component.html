@@ -28,7 +28,7 @@
         </mat-form-field>
         <div mat-sort-header>Passing Date</div>
       </th>
-      <td mat-cell *matCellDef="let element">{{ element.testPassingDate }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.testPassingDate | date: 'dd.mm.yyyy' }}</td>
     </ng-container>
 
     <ng-container matColumnDef="level">
