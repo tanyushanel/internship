@@ -1,29 +1,31 @@
 <mat-card class="description">
-  <p>Listen audio and answer the questions</p>
+  <p>
+    Listen audio and answer the questions. <br />
+    The audio can be played 2 times
+  </p>
+  <ngx-audio-player
+    class="ngx-audio"
+    class="audio-player-position"
+    [playlist]="msaapPlaylist"
+    [displayTitle]="msaapDisplayTitle"
+    [autoPlay]="false"
+    muted="true"
+    [autoPlay]="msaapAutoPlay"
+    [displayPlaylist]="msaapDisplayPlayList"
+    [pageSizeOptions]="msaapPageSizeOptions"
+    [displayArtist]="msaapDisplayArtist"
+    [displayDuration]="msaapDisplayDuration"
+    [expanded]="true"
+    (trackEnded)="onEnded()"
+    [displayVolumeControls]="msaapDisplayVolumeControls"
+    [displayRepeatControls]="msaapDisplayRepeatControls"
+    [disablePositionSlider]="msaapDisablePositionSlider"
+  >
+  </ngx-audio-player>
+
+  <app-stepper
+    [testId]="testId"
+    [questionList]="questions"
+    (answersChosenId)="onAnswersSubmit($event)"
+  ></app-stepper>
 </mat-card>
-
-<ngx-audio-player
-  class="ngx-audio"
-  class="audio-player-position"
-  [playlist]="msaapPlaylist"
-  [displayTitle]="msaapDisplayTitle"
-  [autoPlay]="false"
-  muted="true"
-  [autoPlay]="msaapAutoPlay"
-  [displayPlaylist]="msaapDisplayPlayList"
-  [pageSizeOptions]="msaapPageSizeOptions"
-  [displayArtist]="msaapDisplayArtist"
-  [displayDuration]="msaapDisplayDuration"
-  [expanded]="true"
-  (trackEnded)="onEnded()"
-  [displayVolumeControls]="msaapDisplayVolumeControls"
-  [displayRepeatControls]="msaapDisplayRepeatControls"
-  [disablePositionSlider]="msaapDisablePositionSlider"
->
-</ngx-audio-player>
-
-<app-stepper
-  [testId]="testId"
-  [questionList]="questions"
-  (answersChosenId)="onAnswersSubmit($event)"
-></app-stepper>

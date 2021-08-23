@@ -86,13 +86,10 @@ export class HrProfileComponent implements OnInit {
     this.getUsers({});
   }
 
-  onPaginateChange(event: PageEvent) {
-    const page = event.pageIndex;
-    const size = event.pageSize;
-
+  onPaginateChange({ pageIndex, pageSize }: PageEvent) {
     this.getUsers({
-      page,
-      size,
+      page: pageIndex + 1,
+      size: pageSize,
     });
   }
 
