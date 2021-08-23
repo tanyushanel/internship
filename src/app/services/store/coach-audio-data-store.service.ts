@@ -27,7 +27,7 @@ export class CoachAudioDataStoreService {
     private readonly userService: AuthStoreService,
   ) {}
 
-  uploadListeningFile(file: File) {
+  uploadListeningFile(file: File | Blob) {
     const fd = new FormData();
     fd.append('formFiles', file);
     this.coachListeningHttpService.uploadListeningFile(fd).subscribe({

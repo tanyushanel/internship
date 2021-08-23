@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-cycle
 import { EmptyQuestion } from '../interfaces/question-answer';
 // eslint-disable-next-line import/no-cycle
 import { CoachEmptyTopic } from '../interfaces/coach-edit';
@@ -48,7 +47,7 @@ export enum GrammarAnswers {
 
 const emptyAnswersListening = () => {
   return Array.from({ length: 4 }, () => ({
-    nameAnswer: 'empty answer', // for check
+    nameAnswer: '',
     isRight: false,
   }));
 };
@@ -67,7 +66,7 @@ export const emptyTopic: CoachEmptyTopic = {
 export const emptyQuestionsListening = () => {
   return Array.from({ length: 10 }, () => ({
     id: '',
-    nameQuestion: 'empty Question', // for check
+    nameQuestion: '',
     level: 1,
     answers: emptyAnswersListening(),
   }));
