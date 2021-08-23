@@ -48,8 +48,8 @@ export class AuthStoreService {
           });
           return;
         }
+        this.localStorageService.setAccessToken(<string>user.token);
         this.user = { ...user };
-        this.localStorageService.setAccessToken(<string>this.user.token);
         this.router.navigate([Route.home]);
       },
       error: (e: Error) => {

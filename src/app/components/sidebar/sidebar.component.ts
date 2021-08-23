@@ -74,6 +74,6 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.user$.pipe(map((res) => res?.isAuthenticated && this.fetchAvatar())).subscribe();
+    this.isSingIn$.pipe(map((res) => res && this.fetchAvatar())).subscribe();
   }
 }

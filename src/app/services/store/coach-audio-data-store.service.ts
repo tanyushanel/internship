@@ -38,10 +38,7 @@ export class CoachAudioDataStoreService {
   }
 
   async fetchUrlAudio(audioPath: string = ''): Promise<Blob> {
-    const audioPathWithWrongDataFromBackEnd = audioPath && audioPath.split('\\').reverse()[0];
-    // backend wrong path
-    // const urlAudio = audioPath && `${DownloadFileListeningApiUrl}?filePath=${audioPath}`
-    const urlAudio = `${DownloadFileListeningApiUrl}?filePath=${audioPathWithWrongDataFromBackEnd}`;
+    const urlAudio = audioPath && `${DownloadFileListeningApiUrl}?filePath=${audioPath}`;
     const result = await fetch(urlAudio, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
