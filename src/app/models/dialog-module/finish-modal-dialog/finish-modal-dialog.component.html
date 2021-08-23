@@ -1,21 +1,27 @@
 <div class="finish-test__alert">
   <span class="warn" *ngIf="isFinished">The time is out.</span>
   <span> By completing the Test all answered data will be sent to review. </span>
-</div>
-<div class="finish-test__button-position" mat-dialog-content>
-  <button mat-raised-button class="finish-test__button" (click)="onCompleteTestClick()">
-    Complete
-  </button>
-  <button
-    mat-raised-button
-    class="finish-test__button finish-test__button-close"
-    (click)="closeClick()"
-    *ngIf="!isFinished"
-  >
-    Close
-  </button>
-</div>
-
-<div class="count-down warn" *ngIf="isFinished">
-  <span>{{ timer$ | async }} sec left</span>
+  <div class="finish-test__button-position" mat-dialog-content>
+    <button
+      mat-raised-button
+      color="primary"
+      class="finish-test__button"
+      (click)="onCompleteTestClick()"
+    >
+      Complete
+    </button>
+    <button
+      mat-button
+      mat-dialog-close
+      cdkFocusInitial
+      class="finish-test__button finish-test__button-close"
+      (click)="closeClick()"
+      *ngIf="!isFinished"
+    >
+      Close
+    </button>
+  </div>
+  <div class="count-down warn" *ngIf="isFinished">
+    <span>{{ timer$ | async }} sec left</span>
+  </div>
 </div>

@@ -1,8 +1,5 @@
 <mat-card class="description">
-  <p>
-    Listen audio and answer the questions. <br />
-    The audio can be played 2 times
-  </p>
+  <p>Listen audio and answer the questions.</p>
   <ngx-audio-player
     class="ngx-audio"
     class="audio-player-position"
@@ -22,6 +19,7 @@
     [disablePositionSlider]="msaapDisablePositionSlider"
   >
   </ngx-audio-player>
+  <p class="hint">The audio can be played 2 times</p>
 
   <app-stepper
     [testId]="testId"
