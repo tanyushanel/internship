@@ -69,7 +69,7 @@ export class UserResultsTableComponent implements OnInit, AfterViewInit, OnChang
       this.dataSource.filter = JSON.stringify(this.filterValues);
     });
     this.dateFilter.valueChanges.subscribe((testPassingDate) => {
-      this.filterValues.testPassingDate = new Date(testPassingDate).toDateString();
+      this.filterValues.testPassingDate = testPassingDate;
       this.dataSource.filter = JSON.stringify(this.filterValues);
     });
   }
