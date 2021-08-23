@@ -8,14 +8,13 @@ import { SpeakingTestModule } from '../speaking-test/speaking-test.module';
 import { WritingTestModule } from '../writing-test/writing-test.module';
 import { CommonTestRoutingModule } from './common-test-routing.module';
 import { CommonTestComponent } from './common-test.component';
-import { ProceedButtonsComponent } from './proceed-buttons/proceed-buttons.component';
 import { ReportMistakeDialogComponent } from '../../components/report-mistake-dialog/report-mistake-dialog.component';
 import { ReportSubmitModalComponent } from '../../components/report-submit-modal/report-submit-modal.component';
 
 @NgModule({
   declarations: [
     CommonTestComponent,
-    ProceedButtonsComponent,
+
     TimePipe,
     ReportMistakeDialogComponent,
     ReportSubmitModalComponent,
@@ -29,6 +28,6 @@ import { ReportSubmitModalComponent } from '../../components/report-submit-modal
     SpeakingTestModule,
     WritingTestModule,
   ],
-  exports: [ProceedButtonsComponent, TimePipe],
+  exports: [TimePipe],
 })
 export class CommonTestModule {}
