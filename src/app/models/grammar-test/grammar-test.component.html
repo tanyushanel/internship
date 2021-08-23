@@ -1,7 +1,9 @@
-<mat-card class="description">Please, answer the questions</mat-card>
-<app-stepper
-  [testId]="testId"
-  class="grammar-stepper__position"
-  [questionList]="questions"
-  (answersChosenId)="onAnswersSubmit($event)"
-></app-stepper>
+<mat-card class="description"
+  ><p>Please, answer the questions</p>
+  <app-stepper
+    [testId]="testId"
+    class="grammar-stepper__position"
+    [questionList]="questions"
+    (answersChosenId)="onAnswersSubmit($event)"
+  ></app-stepper>
+</mat-card>

@@ -9,6 +9,10 @@
   margin: 0 auto;
 }
 
+mat-card {
+  margin: 50px 30px 100px 30px;
+}
+
 :host ::ng-deep {
   .play-pause-disable,
   .play-repeat-disable {
