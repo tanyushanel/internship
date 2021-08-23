@@ -55,7 +55,8 @@ export class TableComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result === null) {
+      console.log(result);
+      if (result !== undefined) {
         this.coachUpdate = {
           testId: result?.id,
           coachId: result?.coach?.userId,

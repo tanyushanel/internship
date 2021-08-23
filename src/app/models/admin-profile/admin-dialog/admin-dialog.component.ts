@@ -15,10 +15,17 @@ export class AdminDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.data);
+    console.log(this.coachControl);
+  }
 
   unselect(): void {
     this.coachControl.reset(null);
     this.data.coach = null;
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }
