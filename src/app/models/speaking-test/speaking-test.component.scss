@@ -1,0 +1,118 @@
+@import 'src/theme/variables';
+
+.speaking-module-position {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-position {
+  display: block;
+  height: 54px;
+}
+
+.description {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.text-of-theme {
+  display: block;
+  text-transform: uppercase;
+}
+
+.countdown-position {
+  box-sizing: border-box;
+  background-color: thistle;
+  border-radius: 4px;
+  box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%),
+    0px 1px 5px 0px rgb(0 0 0 / 12%);
+}
+
+.countdown {
+  margin-bottom: 0;
+  padding: 17px;
+  color: whitesmoke;
+  font-size: 20px;
+}
+
+p {
+  margin: 0px;
+}
+
+.paragraph-position {
+  justify-content: left;
+  box-sizing: border-box;
+  max-width: 215px;
+  padding: 7px;
+  color: whitesmoke;
+  text-align: center;
+  background-color: thistle;
+  border-radius: 10px;
+  border-radius: 4px;
+  box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%),
+    0px 1px 5px 0px rgb(0 0 0 / 12%);
+}
+
+.number-of-attempt {
+  font-size: 20px;
+}
+
+.audio-reserv-place {
+  height: 19rem;
+  margin: 0 auto;
+}
+
+.audio-position {
+  max-width: 350px;
+  margin: 0 auto;
+}
+
+.audio {
+  width: 100%;
+}
+
+.text-of-theme-warning {
+  margin: 1% 30%;
+  padding: 20px;
+  text-align: center;
+}
+
+.mat-icon {
+  width: 12px;
+  height: 12px;
+  margin-top: 3px;
+  font-size: 12px;
+}
+
+.text-of-theme-warning {
+  font-size: 0.75rem;
+  font-style: italic;
+}
+
+.recorder-card {
+  width: 90%;
+  min-height: 20rem;
+  margin: 1rem auto;
+}
+
+.report {
+  text-align: end;
+}
+
+.report__text {
+  display: inline-block;
+  margin-left: 0.5rem;
+}
+
+.report__text:hover {
+  color: $secondary-grey2;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.mat-icon {
+  color: $error;
+  font-size: 1rem;
+  vertical-align: top;
+}

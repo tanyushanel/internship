@@ -1,0 +1,74 @@
+<mat-sidenav-container class="sidebar" autosize *ngIf="{ isSingIn: isSingIn$ | async } as $">
+  <mat-sidenav
+    *ngIf="$.isSingIn"
+    class="sidebar__container"
+    [style]="getWidth()"
+    mode="side"
+    [opened]="true"
+  >
+    <mat-nav-list>
+      <ng-container *ngIf="{ user: user$ | async } as $">
+        <div class="sidebar__items">
+          <ng-container *ngIf="isOpen">
+            <div mat-card-avatar class="sidebar__logo sidebar__center">
+              <input type="file" accept="image/*" (change)="handleFileInput($event)" />
+              <img [src]="imgFilePath" alt="Avatar" #img *ngIf="imgFilePath; else logo" />
+              <ng-template #logo>
+                <span class="sidebar__initials">{{
+                  $.user!.lastName[0] + $.user!.firstName[0]
+                }}</span>
+              </ng-template>
+            </div>
+            <p class="sidebar__username">{{ $.user!.firstName }}</p>
+          </ng-container>
+        </div>
+
+        <nav class="sidebar__nav">
+          <div class="sidebar__list">
+            <div *ngFor="let route of usersRoute[$.user!.roles[0]].route; let i = index">
+              <mat-list-item
+                [routerLinkActive]="['is-active']"
+                [routerLink]="'/' + route"
+                class="sidebar__list_item"
+              >
+                <div class="sidebar__icon-position">
+                  <mat-icon
+                    [routerLinkActive]="['is-active-icon']"
+                    class="sidebar__icons-hover material-icons-round md-30 md-dark"
+                  >
+                    {{ usersRoute[$.user!.roles[0]].menuIcon[i] }}
+                  </mat-icon>
+                </div>
+                <span *ngIf="isOpen" class="sidebar__items-heading"
+                  >{{ usersRoute[$.user!.roles[0]].menuItem[i] }}
+                </span>
+              </mat-list-item>
+            </div>
+          </div>
+
+          <mat-list-item (click)="authService.signOut()" class="sidebar__list_item sidebar__exit">
+            <div class="sidebar__exit-position">
+              <mat-icon class="sidebar__icons-hover material-icons-round md-30 md-dark">
+                logout
+              </mat-icon>
+            </div>
+
+            <span *ngIf="isOpen" class="sidebar__items-heading">Exit</span>
+          </mat-list-item>
+        </nav>
+      </ng-container>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-icon
+      *ngIf="$.isSingIn"
+      mat-icon-button
+      class="sidebar__button"
+      (click)="toggleShow()"
+      [ngClass]="{ sidebar__button_close: isOpen }"
+    >
+      chevron_right
+    </mat-icon>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

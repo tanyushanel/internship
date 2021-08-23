@@ -1,0 +1,35 @@
+@import 'src/theme/variables.scss';
+
+table {
+  width: 100%;
+}
+
+.mat-elevation-z8 {
+  margin: 30px;
+}
+
+.mat-flat-button:hover {
+  background-color: $light-cyan;
+}
+
+.mat-raised-button:hover {
+  background-color: gray;
+}
+
+td,
+th {
+  width: 10%;
+}
+
+.header {
+  padding: 5px;
+  vertical-align: bottom;
+}
+
+.mat-form-field {
+  margin: 1.5em 0;
+}
+
+.filter {
+  display: block;
+}

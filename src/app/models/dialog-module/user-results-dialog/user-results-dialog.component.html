@@ -1,0 +1,16 @@
+<div class="content" mat-dialog-content>
+  <mat-card class="user-info-wrap">
+    <div mat-card-avatar class="user-pic"></div>
+    <div class="user-info">
+      <b>{{ user.firstName }} {{ user.lastName }}</b>
+      <p>{{ user.email }}</p>
+    </div>
+  </mat-card>
+
+  <app-user-results-table class="user-results-table" [results]="(results$ | async)!">
+  </app-user-results-table>
+</div>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close cdkFocusInitial>Close</button>
+</mat-dialog-actions>

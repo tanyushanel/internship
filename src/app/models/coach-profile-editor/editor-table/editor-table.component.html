@@ -1,0 +1,85 @@
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef class="header">
+        <mat-form-field class="filter" floatLabel="never">
+          <mat-label>Enter Number</mat-label>
+          <input matInput [formControl]="idFilter" />
+        </mat-form-field>
+        <div mat-sort-header>Number</div>
+      </th>
+      <td mat-cell *matCellDef="let row">№ {{ row.number }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="questionName">
+      <th mat-header-cell *matHeaderCellDef class="header">
+        <mat-form-field class="filter" floatLabel="never">
+          <mat-label>Enter {{ selectTab != 'Grammar' ? 'Topic' : 'Question' }}</mat-label>
+          <input matInput [formControl]="idNameFilter" />
+        </mat-form-field>
+        <div mat-sort-header>{{ selectTab != 'Grammar' ? 'Topic' : 'Question' }}</div>
+      </th>
+      <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="level">
+      <th mat-header-cell *matHeaderCellDef class="header">
+        <mat-form-field class="filter" floatLabel="never">
+          <mat-label>Enter English Level </mat-label>
+          <input matInput [formControl]="levelFilter" />
+        </mat-form-field>
+        <div mat-sort-header>English Level</div>
+      </th>
+      <td mat-cell *matCellDef="let row">{{ languageLevel[row.level] }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="creator">
+      <th mat-header-cell *matHeaderCellDef class="header">
+        <mat-form-field class="filter" floatLabel="never">
+          <mat-label>Enter Coach Name</mat-label>
+          <input matInput [formControl]="idCoach" />
+        </mat-form-field>
+        <div mat-sort-header>Coach Name</div>
+      </th>
+      <td mat-cell *matCellDef="let row">{{ row.creatorName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th class="header" mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let row">
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          aria-label="Example icon-button with a menu"
+        >
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="openEditor(row)">
+            <mat-icon>edit</mat-icon>
+            <span>Edit</span>
+          </button>
+          <button mat-menu-item (click)="delete(row.id)">
+            <mat-icon>delete</mat-icon>
+            <span>Delete</span>
+          </button>
+        </mat-menu>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">
+        <div *ngIf="filterValues.number">
+          No data matching the number filter "{{ filterValues.number }}"
+        </div>
+        <div *ngIf="filterValues.level">
+          No data matching the level filter "{{ filterValues.level }}"
+        </div>
+      </td>
+    </tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>

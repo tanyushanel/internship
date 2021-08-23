@@ -1,0 +1,39 @@
+.close-button {
+  position: absolute;
+  top: -1px;
+  right: 15px;
+}
+
+h1,
+h2 {
+  text-align: center;
+}
+
+h2 {
+  color: #3f51b5;
+}
+
+.mat-dialog-content {
+  position: relative;
+  width: 30rem;
+}
+
+.container {
+  display: grid;
+}
+
+.mistake__description {
+  margin-bottom: 1rem;
+  font-size: 16px;
+  text-align: center;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+button.mat-raised-button {
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
+}

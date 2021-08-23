@@ -1,0 +1,88 @@
+@import '../../../../theme/variables';
+
+button.mat-raised-button {
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+button.mat-raised-button:not([disabled]):hover {
+  background-color: $secondary-grey2;
+}
+
+.mat-dialog-content {
+  position: relative;
+  width: 50rem;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 70% 30%;
+  padding-top: 2rem;
+}
+
+.text-essay {
+  grid-column: 1;
+  margin-right: 30px;
+}
+
+.essay-mark {
+  grid-column: 2;
+  padding: 5px;
+}
+
+.essay-mark-label {
+  display: flex;
+  align-self: center;
+  justify-content: space-between;
+}
+
+.audio {
+  grid-column: 1;
+  width: 94%;
+  margin-bottom: 18px;
+}
+
+.speaking-mark {
+  grid-column: 2;
+  padding: 5px;
+}
+
+.speaking-mark-label {
+  display: flex;
+  align-self: center;
+  justify-content: space-between;
+}
+
+.feedback {
+  grid-column: 1 / span 2;
+}
+
+.close-button {
+  position: absolute;
+  top: 1px;
+  right: 15px;
+}
+
+input {
+  &.ng-invalid.ng-touched {
+    border: 1px solid red;
+  }
+
+  &.ng-valid.ng-touched {
+    border: 1px solid green;
+  }
+}
+
+.validation {
+  grid-column: 2;
+  color: red;
+}
+
+textarea {
+  resize: none;
+}
+
+h1 {
+  text-align: center;
+}

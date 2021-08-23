@@ -1,0 +1,49 @@
+@import 'theme/variables';
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+.red-snackbar {
+  background: $error;
+}
+
+.mat-snack-bar-container.success {
+  color: $black;
+  background-color: $secondary-grey3;
+  border: 1px solid $primary-blue;
+}
+
+.mat-snack-bar-container.error {
+  color: $black;
+  background-color: $secondary-grey3;
+  border: 1px solid $error;
+}
+
+.mat-simple-snackbar-action {
+  color: $primary-blue;
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: $primary-blue;
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle,
+.mat-radio-button.mat-accent
+  .mat-radio-ripple
+  .mat-ripple-element:not(.mat-radio-persistent-ripple),
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple,
+.mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
+  background-color: $primary-blue;
+}
+
+.mat-step-optional,
+.mat-step-sub-label-error {
+  font-size: 0.6rem !important;
+}

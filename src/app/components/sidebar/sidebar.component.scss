@@ -1,0 +1,127 @@
+@import 'src/theme/variables';
+
+.material-icons.md-30 {
+  font-size: 1.88em;
+}
+
+.material-icons.md-dark {
+  color: rgba(0, 0, 0, 0.25);
+}
+
+.sidebar {
+  height: 100%;
+  margin: auto;
+  color: $black;
+  background-color: $others-grey6;
+
+  &__container {
+    width: 15%;
+    padding-top: 0.5em;
+    overflow-y: hidden;
+    background-color: $white;
+    visibility: visible;
+  }
+
+  &__logo {
+    position: relative;
+    width: 98px;
+    height: 98px;
+    margin: 0 auto;
+    border: 3px solid lightblue;
+    border-radius: 50%;
+
+    input[type='file'] {
+      position: absolute;
+      width: 98px;
+      height: 98px;
+      cursor: pointer;
+      opacity: 0;
+    }
+
+    img {
+      width: 98px;
+      height: 98px;
+      border-radius: 50%;
+    }
+  }
+
+  &__center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__initials {
+    color: $blue;
+    font-weight: 600;
+    font-size: 2rem;
+  }
+
+  &__items {
+    height: 7.5em;
+    margin-bottom: 15%;
+  }
+
+  &__items-heading {
+    margin-left: 1.38em;
+  }
+
+  &__icon-position,
+  &__exit-position {
+    display: inline-block;
+    width: 2em;
+    height: 2em;
+    margin-left: 0.06em;
+  }
+
+  &__list_item:hover,
+  &__list_item:focus,
+  .is-active {
+    background-color: whitesmoke;
+  }
+
+  &__list_item:hover &__icons-hover,
+  &__list_item:focus &__icons-hover,
+  .is-active-icon {
+    color: $blue;
+  }
+
+  &__list_item:hover &__items-heading {
+    color: rgb(65, 64, 64);
+    font-weight: 500;
+  }
+
+  &__username {
+    text-align: center;
+  }
+
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 5em;
+  }
+
+  &__exit {
+    border-top: 1px solid rgb(170, 213, 228);
+  }
+
+  &__button {
+    position: absolute;
+    bottom: 50%;
+    z-index: 10;
+    transform: rotate(0deg);
+    cursor: pointer;
+    transition: 300ms ease-in-out;
+
+    &_close {
+      transform: rotate(180deg);
+    }
+
+    &__center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

@@ -1,0 +1,11 @@
+@import '../../../../theme/variables';
+
+.error {
+  display: flex;
+  padding: 1em;
+  color: $white;
+  font-size: 1.5em;
+  word-break: break-all;
+  column-gap: 1em;
+  background: $error;
+}
