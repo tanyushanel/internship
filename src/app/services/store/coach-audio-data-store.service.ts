@@ -7,6 +7,7 @@ import { CoachListeningStoreService } from './coach-listening-store.service';
 import { DownloadFileListeningApiUrl } from '../../constants/route-constant';
 import { TestStoreService } from './test-store.service';
 import { CoachTestsStoreService } from '../../models/coach-profile/service/coach-tests-store.service';
+import { AuthStoreService } from './auth-store.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,11 +17,14 @@ export class CoachAudioDataStoreService {
 
   audioData$ = new Subject<Blob>();
 
+  imgData$ = new Subject<Blob>();
+
   constructor(
     private readonly testStoreService: TestStoreService,
     private readonly coachListeningHttpService: CoachListeningHttpService,
     private readonly coachListeningStoreService: CoachListeningStoreService,
     private readonly coachCheckService: CoachTestsStoreService,
+    private readonly userService: AuthStoreService,
   ) {}
 
   uploadListeningFile(file: File) {
@@ -33,8 +37,8 @@ export class CoachAudioDataStoreService {
     });
   }
 
-  async fetchUrlAudio(audioPath: string): Promise<Blob> {
-    const urlAudio = `${DownloadFileListeningApiUrl}?filePath=${audioPath}`;
+  async fetchUrlAudio(audioPath: string = ''): Promise<Blob> {
+    const urlAudio = audioPath && `${DownloadFileListeningApiUrl}?filePath=${audioPath}`;
     const result = await fetch(urlAudio, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -81,6 +85,20 @@ export class CoachAudioDataStoreService {
       .subscribe({
         next: async (blob) => {
           this.audioData$.next(await blob);
+        },
+      });
+  }
+
+  downloadAvatar() {
+    this.userService.activeUser$
+      .pipe(
+        map((res) => {
+          return this.fetchUrlAudio(res?.avatar as string);
+        }),
+      )
+      .subscribe({
+        next: async (blob) => {
+          this.imgData$.next(await blob);
         },
       });
   }
