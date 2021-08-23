@@ -40,3 +40,4 @@ export const TopicApiUrl = `${BASE_API_URL}/Topic`;
 export const ListeningApiUrl = `${BASE_API_URL}/Audition`;
 export const UploadFileListeningApiUrl = `${BASE_API_URL}/File/Upload`;
 export const DownloadFileListeningApiUrl = `${BASE_API_URL}/File/Download`;
+export const MistakeReportApiUrl = `${BASE_API_URL}/Report`;

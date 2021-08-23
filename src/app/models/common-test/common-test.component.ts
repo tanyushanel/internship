@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { TopicModule } from '../../interfaces/essay-speaking';
 import { Question } from '../../interfaces/question-answer';
 import { SubmitTestResponse, TestContent } from '../../interfaces/test';
@@ -15,6 +13,8 @@ import { FinishModalDialogComponent } from '../dialog-module/finish-modal-dialog
   styleUrls: ['./common-test.component.scss'],
 })
 export class CommonTestComponent implements OnInit {
+  test$: Observable<TestContent> = this.testStoreService.test$;
+
   grammarAnswers: string[] = [];
 
   listeningAnswers: string[] = [];
@@ -25,15 +25,13 @@ export class CommonTestComponent implements OnInit {
 
   requestBody: Observable<SubmitTestResponse | null> = this.testStoreService.submitTestBody$;
 
-  test$: Observable<TestContent | null> = this.testStoreService.test$;
+  grammar: Question[] = [];
 
-  grammar$!: Observable<Question[] | null>;
+  listening: Question[] = [];
 
-  listening$!: Observable<Question[] | null>;
+  essay!: TopicModule;
 
-  essay$!: Observable<TopicModule | null>;
-
-  speaking$!: Observable<TopicModule | null>;
+  speaking!: TopicModule;
 
   selectedIndex = 0;
 
@@ -45,19 +43,18 @@ export class CommonTestComponent implements OnInit {
 
   timerSubscription!: Subscription;
 
-  testId: string | undefined = '';
+  testId = '';
 
   constructor(private testStoreService: TestStoreService, public dialog: MatDialog) {}
 
   ngOnInit() {
-    this.testStoreService.createTestContent();
-    this.testStoreService.getTestId();
-
-    this.test$.pipe(map((test) => test?.id)).subscribe((id) => (this.testId = id));
-    this.grammar$ = this.test$.pipe(map((test) => test?.grammarQuestions || null));
-    this.listening$ = this.test$.pipe(map((test) => test?.audition.questions || null));
-    this.essay$ = this.test$.pipe(map((test) => test?.essay || null));
-    this.speaking$ = this.test$.pipe(map((test) => test?.speaking || null));
+    this.test$.subscribe((test) => {
+      this.testId = test.id;
+      this.grammar = test.grammarQuestions;
+      this.listening = test.audition.questions;
+      this.essay = test.essay;
+      this.speaking = test.speaking;
+    });
 
     if (this.testId) {
       this.testStoreService.createAssignedTestContent(this.testId);

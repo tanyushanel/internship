@@ -1,8 +1,7 @@
-<div class="container">
-  <mat-card class="description" i18n>
-    Please, write something about <b>{{ essay!.topicName }}</b>
-  </mat-card>
-
+<mat-card class="container">
+  <p>
+    Please write an essay on suggested <b>{{ essay!.topicName }}</b>
+  </p>
   <form [formGroup]="form" (ngSubmit)="submit()">
     <mat-form-field class="mat-form-field" appearance="fill">
       <textarea
@@ -14,6 +13,7 @@
         (ngModelChange)="onWritingSubmit()"
       ></textarea>
       <mat-hint align="start" i18n>Max 512 characters</mat-hint>
+
       <span class="symbol-count">{{ text.value.length }}/ 512 </span>
 
       <div *ngIf="form.get('text')?.invalid && form.get('text')?.touched" class="validation">
@@ -27,4 +27,8 @@
       </div>
     </mat-form-field>
   </form>
-</div>
+  <div class="report">
+    <mat-icon>warning_amber</mat-icon>
+    <span class="report__text" (click)="openReportDialog(essay?.id)">Report Mistake</span>
+  </div>
+</mat-card>

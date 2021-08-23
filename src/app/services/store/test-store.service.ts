@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BehaviorSubject, Observable, Subject, Subscription, timer } from 'rxjs';
-import { concatMap, map, take, takeWhile, tap } from 'rxjs/operators';
+import { concatMap, map, take, takeWhile, tap, filter } from 'rxjs/operators';
 import { Level } from '../../constants/data-constants';
 import { SubmitTestResponse, TestContent, TestResult } from '../../interfaces/test';
 import { TestHttpService } from '../test-http.service';
@@ -27,11 +27,9 @@ export class TestStoreService {
     map((results) => results?.filter((result) => result && result.testPassingDate)),
   );
 
-  assignedTests$: Observable<TestResult[] | undefined> = this.allTests$.pipe(
-    map((tests) =>
-      tests?.filter((test) => !test.level && new Date(test.assignmentEndDate) >= new Date()),
-    ),
-  );
+  public assignedTestsSubject$ = new BehaviorSubject<TestResult[] | null>(null);
+
+  assignedTests$ = this.assignedTestsSubject$.asObservable();
 
   public timerSubject$ = new BehaviorSubject<number>(0);
 
@@ -53,6 +51,10 @@ export class TestStoreService {
     this.allTestsSubject$.next(testResults);
   }
 
+  private set assignedTestsResults(testResults: TestResult[]) {
+    this.assignedTestsSubject$.next(testResults);
+  }
+
   private set submitTestBody(body: SubmitTestResponse) {
     this.submitTestSubject$.next(body);
   }
@@ -67,16 +69,16 @@ export class TestStoreService {
     private snackbar: MatSnackBar,
   ) {}
 
-  selectLevel(selected: Level): void {
-    this.selectedLevel = selected;
-  }
-
   getTestId(): void {
     this.test$.subscribe((test) => {
       if (test) {
         this.testId = test.id;
       }
     });
+  }
+
+  selectLevel(selected: Level): void {
+    this.selectedLevel = selected;
   }
 
   getAll(): void {
@@ -88,6 +90,9 @@ export class TestStoreService {
       .subscribe({
         next: (res) => {
           this.allTests = [...res];
+          this.assignedTestsResults = res.filter(
+            (result) => !result.level && !result.testPassingDate,
+          );
         },
       });
   }
@@ -127,7 +132,7 @@ export class TestStoreService {
       },
 
       error: () => {
-        this.snackbar.open('Something went wrong', 'Close', {
+        this.snackbar.open(`Unfortunately, your test wasn't submitted`, 'Close', {
           verticalPosition: 'bottom',
           duration: 2000,
           panelClass: 'error',

@@ -65,10 +65,6 @@ tr.element-row:not(.expanded-row):active {
   cursor: pointer;
 }
 
-.assigned {
-  background: $light-cyan;
-}
-
 .element-detail {
   overflow: hidden;
 }
@@ -82,12 +78,6 @@ tr.element-row:not(.expanded-row):active {
   .element-description-attribution {
     margin: 0 2rem;
   }
-}
-
-.element-symbol {
-  font-weight: bold;
-  font-size: 40px;
-  line-height: normal;
 }
 
 .element-description {
@@ -112,4 +102,21 @@ tr.element-row:not(.expanded-row):active {
 
 .element-description-attribution {
   opacity: 0.5;
+}
+
+.header {
+  padding: 5px;
+}
+
+.header-without-filter {
+  padding: 5px;
+  vertical-align: bottom;
+}
+
+.filter {
+  display: block;
+}
+
+.mat-form-field {
+  margin: 1.5em 0;
 }

@@ -23,13 +23,38 @@
   }
 
   &__logo {
+    position: relative;
     width: 98px;
     height: 98px;
     margin: 0 auto;
-    background-image: url('https://scontent.fiev6-1.fna.fbcdn.net/v/t1.6435-9/89845151_2502495549967541_8418276994130640896_n.jpg?_nc_cat=111&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=6tnOcGrridIAX8LQjDw&_nc_ht=scontent.fiev6-1.fna&oh=b7143c9dda9fd3ef81c86e41f788a9ab&oe=612EA9AA');
-    background-size: cover;
     border: 3px solid lightblue;
     border-radius: 50%;
+
+    input[type='file'] {
+      position: absolute;
+      width: 98px;
+      height: 98px;
+      cursor: pointer;
+      opacity: 0;
+    }
+
+    img {
+      width: 98px;
+      height: 98px;
+      border-radius: 50%;
+    }
+  }
+
+  &__center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__initials {
+    color: $blue;
+    font-weight: 600;
+    font-size: 2rem;
   }
 
   &__items {
@@ -58,7 +83,7 @@
   &__list_item:hover &__icons-hover,
   &__list_item:focus &__icons-hover,
   .is-active-icon {
-    color: rgb(170, 213, 228);
+    color: $blue;
   }
 
   &__list_item:hover &__items-heading {
@@ -74,12 +99,11 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 67vh;
     margin-top: 5em;
   }
 
   &__exit {
-    margin-top: 90%;
+    border-top: 1px solid rgb(170, 213, 228);
   }
 
   &__button {
@@ -92,6 +116,12 @@
 
     &_close {
       transform: rotate(180deg);
+    }
+
+    &__center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }

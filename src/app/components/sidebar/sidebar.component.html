@@ -15,7 +15,15 @@
       <ng-container *ngIf="{ user: user$ | async } as $">
         <div class="sidebar__items">
           <ng-container *ngIf="isOpen">
-            <div mat-card-avatar class="sidebar__logo"></div>
+            <div mat-card-avatar class="sidebar__logo sidebar__center">
+              <input type="file" accept="image/*" (change)="handleFileInput($event)" />
+              <img [src]="imgFilePath" alt="Avatar" #img *ngIf="imgFilePath; else logo" />
+              <ng-template #logo>
+                <span class="sidebar__initials">{{
+                  $.user!.lastName[0] + $.user!.firstName[0]
+                }}</span>
+              </ng-template>
+            </div>
             <p class="sidebar__username">{{ $.user!.firstName }}</p>
           </ng-container>
         </div>
@@ -42,13 +50,15 @@
               </mat-list-item>
             </div>
           </div>
+
           <mat-list-item (click)="authService.signOut()" class="sidebar__list_item sidebar__exit">
             <div class="sidebar__exit-position">
               <mat-icon class="sidebar__icons-hover material-icons-round md-30 md-dark">
                 logout
               </mat-icon>
             </div>
-            <span *ngIf="isOpen" class="sidebar__items-heading" i18n>Exit</span>
+
+            <span *ngIf="isOpen" class="sidebar__items-heading">Exit</span>
           </mat-list-item>
         </nav>
       </ng-container>

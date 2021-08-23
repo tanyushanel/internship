@@ -9,9 +9,17 @@ import { WritingTestModule } from '../writing-test/writing-test.module';
 import { CommonTestRoutingModule } from './common-test-routing.module';
 import { CommonTestComponent } from './common-test.component';
 import { ProceedButtonsComponent } from './proceed-buttons/proceed-buttons.component';
+import { ReportMistakeDialogComponent } from '../../components/report-mistake-dialog/report-mistake-dialog.component';
+import { ReportSubmitModalComponent } from '../../components/report-submit-modal/report-submit-modal.component';
 
 @NgModule({
-  declarations: [CommonTestComponent, ProceedButtonsComponent, TimePipe],
+  declarations: [
+    CommonTestComponent,
+    ProceedButtonsComponent,
+    TimePipe,
+    ReportMistakeDialogComponent,
+    ReportSubmitModalComponent,
+  ],
   imports: [
     CommonModule,
     AngularMaterialCommonModule,

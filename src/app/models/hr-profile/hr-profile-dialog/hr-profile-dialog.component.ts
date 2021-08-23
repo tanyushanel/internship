@@ -13,11 +13,11 @@ export class HrProfileDialogComponent {
 
   priority = false;
 
-  currentDay = new Date();
-
   myFilter = (d: Date | null): boolean => {
-    const day = (d || new Date()).getDate();
-    return day > this.currentDay.getDate();
+    const currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0);
+    const day = (d || currentDate).getTime();
+    return day >= currentDate.getTime();
   };
 
   constructor(

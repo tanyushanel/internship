@@ -33,3 +33,21 @@ body {
 .mat-simple-snackbar-action {
   color: $primary-blue;
 }
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: $primary-blue;
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle,
+.mat-radio-button.mat-accent
+  .mat-radio-ripple
+  .mat-ripple-element:not(.mat-radio-persistent-ripple),
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple,
+.mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
+  background-color: $primary-blue;
+}
+
+.mat-step-optional,
+.mat-step-sub-label-error {
+  font-size: 0.6rem !important;
+}

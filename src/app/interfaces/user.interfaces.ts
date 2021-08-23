@@ -21,6 +21,7 @@ export interface GetHrUser {
 }
 
 export interface UserResponseType {
+  avatar?: string;
   userId: string;
   message: null;
   isAuthenticated: boolean;

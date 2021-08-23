@@ -1,5 +1,5 @@
 .description {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   text-align: center;
 }
 
@@ -7,6 +7,10 @@
   display: block;
   max-width: 600px;
   margin: 0 auto;
+}
+
+mat-card {
+  margin: 50px 30px 100px 30px;
 }
 
 :host ::ng-deep {

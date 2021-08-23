@@ -4,12 +4,12 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-top: 16px;
+  margin-top: 1rem;
 }
 
 .stepper {
   width: 90%;
-  margin: 3rem auto;
+  margin: 1rem auto;
   overflow: auto;
   border-radius: 10px;
   box-shadow: 0 5px 10px 5px rgba(117, 56, 141, 0.2);
@@ -32,4 +32,31 @@
 
 .text__center {
   font-size: 18px;
+}
+
+.mat-icon {
+  width: 12px;
+  height: 12px;
+  font-size: 12px;
+}
+
+.report {
+  text-align: end;
+}
+
+.report__text {
+  display: inline-block;
+  margin-left: 0.5rem;
+}
+
+.report__text:hover {
+  color: $secondary-grey2;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.mat-icon {
+  color: $error;
+  font-size: 1rem;
+  vertical-align: top;
 }
