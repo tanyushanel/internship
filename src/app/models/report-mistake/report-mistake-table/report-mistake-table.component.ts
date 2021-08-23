@@ -23,7 +23,7 @@ import { CoachEditorTabs, languageLevel } from '../../../constants/data-constant
 import { GrammarAddingEditingDialogComponent } from '../../coach-profile-editor/grammar-adding-editing-dialog/grammar-adding-editing-dialog.component';
 import { ListeningAddingEditingDialogComponent } from '../../coach-profile-editor/listening-adding-editing-dialog/listening-adding-editing-dialog.component';
 import { TopicAddingEditingDialogComponent } from '../../coach-profile-editor/topic-adding-editing-dialog/topic-adding-editing-dialog.component';
-import { MistakeReport } from '../../../interfaces/mistake-report';
+import { GetMistakeReportID, MistakeReport } from '../../../interfaces/mistake-report';
 
 @Component({
   selector: 'app-report-mistake-table',
@@ -117,7 +117,7 @@ export class ReportMistakeTableComponent implements OnInit, AfterViewInit, OnCha
     };
   }
 
-  openEditor(row: MistakeReport, description: string) {
+  openEditor(row: GetMistakeReportID, description: string) {
     if (this.selectTab === CoachEditorTabs.grammar) {
       this.coachEditQuestion.getQuestion(row.questionId);
       this.coachEditQuestion.question$.pipe(take(1)).subscribe((question) => {

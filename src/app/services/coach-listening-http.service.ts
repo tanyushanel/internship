@@ -19,7 +19,7 @@ export class CoachListeningHttpService {
     return this.http.get<ResponseGetAll<CoachListening>>(ListeningApiUrl);
   }
 
-  getListening(id: string | undefined) {
+  getListening(id: string) {
     return this.http.get<EditionCoachListening>(`${ListeningApiUrl}/${id}`);
   }
 

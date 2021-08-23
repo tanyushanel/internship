@@ -9,6 +9,12 @@ export interface MistakeReport {
   coachName?: string;
 }
 
+export interface GetMistakeReportID {
+  questionId: string;
+  auditionId: string;
+  topicId: string;
+}
+
 export interface SendMistakeReport {
   questionId?: string;
   auditionId?: string;

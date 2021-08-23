@@ -13,7 +13,7 @@ export class CoachQuestionHttpService {
     return this.http.get<ResponseGetAll<CoachQuestion>>(QuestionApiUrl);
   }
 
-  getQuestion(id: string | undefined) {
+  getQuestion(id: string) {
     return this.http.get<CoachQuestion>(`${QuestionApiUrl}/${id}`);
   }
 
