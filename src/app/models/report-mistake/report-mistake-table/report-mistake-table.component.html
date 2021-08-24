@@ -1,0 +1,63 @@
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef class="header">
+        <mat-form-field class="filter" floatLabel="never">
+          <mat-label>Enter Description</mat-label>
+          <input matInput [formControl]="idNameFilter" />
+        </mat-form-field>
+        <div mat-sort-header>Description</div>
+      </th>
+      <td mat-cell *matCellDef="let row">{{ row.description }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="coachName">
+      <th mat-header-cell *matHeaderCellDef class="header">
+        <mat-form-field class="filter" floatLabel="never">
+          <mat-label>Enter Coach Name</mat-label>
+          <input matInput [formControl]="idFilter" />
+        </mat-form-field>
+        <div mat-sort-header>Coach Name</div>
+      </th>
+      <td mat-cell *matCellDef="let row">{{ row.coachName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="creationDate">
+      <th mat-header-cell *matHeaderCellDef class="header">
+        <mat-form-field class="filter" floatLabel="never">
+          <mat-label>Enter Date</mat-label>
+          <input matInput [formControl]="idCoach" />
+        </mat-form-field>
+        <div mat-sort-header>Date</div>
+      </th>
+      <td mat-cell *matCellDef="let row">{{ row.creationDate | date: 'dd.MM.YYYY' }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <th class="header" mat-header-cell *matHeaderCellDef>Edit</th>
+      <td mat-cell *matCellDef="let row">
+        <button mat-icon-button (click)="openEditor(row, row.description)">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">
+        <div *ngIf="filterValues.coachName">
+          No data matching the Coach Name "{{ filterValues.coachName }}"
+        </div>
+        <div *ngIf="filterValues.description">
+          No data matching the description filter "{{ filterValues.description }}"
+        </div>
+        <div *ngIf="filterValues.creationDate">
+          No data matching the date filter "{{ filterValues.creationDate }}"
+        </div>
+      </td>
+    </tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>
