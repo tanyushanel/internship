@@ -5,7 +5,7 @@ button {
 }
 
 button:hover {
-  background-color: $secondary-grey2;
+  background-color: var(--secondary-grey2);
 }
 
 table {
@@ -22,7 +22,7 @@ th {
 }
 
 .priority.high {
-  background-color: $light-cyan;
+  background-color: var(--light-cyan);
 }
 
 .header {

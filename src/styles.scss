@@ -14,19 +14,19 @@ body {
 }
 
 .mat-snack-bar-container.success {
-  color: $black;
-  background-color: $secondary-grey3;
-  border: 1px solid $green;
+  color: var(--black);
+  background-color: var(--secondary-grey3);
+  border: 1px solid var(--primary-blue);
 }
 
 .mat-snack-bar-container.error {
-  color: $black;
-  background-color: $secondary-grey3;
-  border: 1px solid $error;
+  color: var(--black);
+  background-color: var(--secondary-grey3);
+  border: 1px solid var(--error);
 }
 
 .mat-simple-snackbar-action {
-  color: $primary-blue;
+  color: var(--primary-blue);
 }
 
 .mat-step-optional,

@@ -5,7 +5,7 @@ button {
 }
 
 button:hover {
-  background-color: $secondary-grey2;
+  background-color: var(--secondary-grey2);
 }
 
 table {
@@ -14,7 +14,7 @@ table {
 
 .mat-elevation-z8 {
   margin: 5% 100px 0;
-  background-color: $white;
+  background-color: var(--white);
 }
 
 mat-form-field {

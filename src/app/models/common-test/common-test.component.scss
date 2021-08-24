@@ -31,18 +31,13 @@
 }
 
 .warn {
-  color: $error;
+  color: var(--error);
   vertical-align: middle;
 }
 
 .timer .material-icons-outlined {
   display: inline-block;
-  color: $blue;
+  color: var(--blue);
   font-size: 1rem;
   vertical-align: text-top;
-}
-
-.mat-raised-button {
-  transform: none !important;
-  transition: none !important;
 }
