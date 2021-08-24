@@ -5,8 +5,7 @@ button:hover {
 }
 
 .container {
-  position: relative; /* добавили */
-  height: 75vh;
+  max-height: 100%;
   margin: auto;
 }
 
@@ -21,12 +20,6 @@ td {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-}
-
-mat-paginator {
-  position: absolute;
-  right: 0;
-  bottom: 0;
 }
 
 .priority.high {
