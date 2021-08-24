@@ -1,9 +1,15 @@
 <div class="container">
   <button mat-icon-button class="close-button" [mat-dialog-close]="true">✖</button>
   <h1>{{ data.isEdit ? 'Edit Grammar' : 'Add Grammar' }}</h1>
+  <mat-form-field appearance="outline" *ngIf="report.description">
+    <mat-label>Mistake description</mat-label>
+    <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="2" readonly class="description">{{
+      report.description
+    }}</textarea>
+  </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Grammar Question</mat-label>
-    <textarea matInput [(ngModel)]="nameQuestion">{{ nameQuestion }}</textarea>
+    <textarea matInput cdkTextareaAutosize [(ngModel)]="nameQuestion">{{ nameQuestion }}</textarea>
   </mat-form-field>
   <h3>Select level</h3>
   <app-choose-level

@@ -1,6 +1,12 @@
 <div class="container">
   <button mat-icon-button class="close-button" [mat-dialog-close]="true">✖</button>
   <h1>Writing/Speaking Topics</h1>
+  <mat-form-field appearance="outline" *ngIf="report.description">
+    <mat-label>Mistake description</mat-label>
+    <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="2" readonly class="description">{{
+      report.description
+    }}</textarea>
+  </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Writing/Speaking Topic</mat-label>
     <textarea matInput [(ngModel)]="topicName">{{

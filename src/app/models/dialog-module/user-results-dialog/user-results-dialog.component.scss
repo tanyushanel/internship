@@ -60,7 +60,7 @@ table {
 
   & span {
     padding: 0.5rem 0.75rem;
-    color: white;
+    color: var(--white);
   }
 }
 
@@ -75,5 +75,5 @@ table {
 }
 
 .mat-dialog-content {
-  overflow: hidden;
+  overflow: auto;
 }
