@@ -1,9 +1,10 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { AdminTableStoreService } from 'src/app/services/store/adminTableStore.service';
 import { AdminDialogComponent } from '../admin-dialog/admin-dialog.component';
 import {
+  AdminTestTabs,
   ServiceCoachData,
   TestData,
   UpdateCoachesData,
@@ -35,15 +36,23 @@ export class TableComponent implements OnInit {
 
   dataSource: MatTableDataSource<TestData>;
 
-  displaedColumshasCoach = ['testNumber', 'Level', 'Date', 'Coach', 'Button'];
+  @Input() displayedColumns!: string[];
 
-  constructor(public dialog: MatDialog, private service: AdminTableStoreService) {
+  @Input() selectedTab!: AdminTestTabs;
+
+  constructor(
+    private dialog: MatDialog,
+    private service: AdminTableStoreService,
+    private rerender: ChangeDetectorRef,
+  ) {
     this.dataSource = new MatTableDataSource(this.tableData);
   }
 
   @ViewChild(MatTable) table!: MatTable<any>;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.selectedTab);
+  }
 
   openDialog(element: TestData, coachesData: ServiceCoachData | null) {
     const dialogRef = this.dialog.open(AdminDialogComponent, {
@@ -62,6 +71,10 @@ export class TableComponent implements OnInit {
           coachId: result?.coach?.userId,
         };
         this.service.updateTestData(this.coachUpdate, result.id);
+        setTimeout(() => {
+          this.rerender.detectChanges();
+          this.table.renderRows();
+        }, 3000);
       }
     });
   }

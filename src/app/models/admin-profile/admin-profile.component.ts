@@ -23,7 +23,9 @@ export class AdminProfileComponent implements OnInit {
 
   coaches$: Observable<ServiceCoachData | null> = this.admin.adminCoachResults$;
 
-  public selectedTab = AdminTestTabs.highPriority;
+  public selectedTab = AdminTestTabs.assigned;
+
+  displayedColumns = ['testNumber', 'Level', 'Date', 'Coach', 'Button'];
 
   tabs: AdminTestTabs[] = [
     AdminTestTabs.highPriority,
@@ -38,14 +40,17 @@ export class AdminProfileComponent implements OnInit {
       this.admin.getAssignedTestData();
       this.tables$ = this.admin.adminTestResults$;
       this.selectedTab = AdminTestTabs.notAssigned;
+      this.displayedColumns = ['testNumber', 'Level', 'Date', 'Coach', 'Button'];
     } else if (tabChangeEvent.index === 1) {
       this.admin.getNotAssignedTestData();
       this.tables$ = this.admin.adminTestResults$;
       this.selectedTab = AdminTestTabs.assigned;
+      this.displayedColumns = ['testNumber', 'Level', 'Date', 'Button'];
     } else if (tabChangeEvent.index === 0) {
       this.admin.getAssignedTestData();
       this.tables$ = this.admin.adminTestResults$;
       this.selectedTab = AdminTestTabs.assigned;
+      this.displayedColumns = ['testNumber', 'Level', 'Date', 'Coach', 'Button'];
     }
   }
 
