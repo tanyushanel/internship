@@ -16,8 +16,8 @@
 
 .timer {
   position: fixed;
-  top: 4rem;
-  right: 2rem;
+  top: 7rem;
+  right: 3rem;
   z-index: 10;
 }
 
@@ -33,4 +33,16 @@
 .warn {
   color: $error;
   vertical-align: middle;
+}
+
+.timer .material-icons-outlined {
+  display: inline-block;
+  color: $blue;
+  font-size: 1rem;
+  vertical-align: text-top;
+}
+
+.mat-raised-button {
+  transform: none !important;
+  transition: none !important;
 }

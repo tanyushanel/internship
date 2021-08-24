@@ -11,13 +11,12 @@ body {
 }
 
 .red-snackbar {
-  background: $error;
 }
 
 .mat-snack-bar-container.success {
   color: $black;
   background-color: $secondary-grey3;
-  border: 1px solid $primary-blue;
+  border: 1px solid $green;
 }
 
 .mat-snack-bar-container.error {
@@ -28,19 +27,6 @@ body {
 
 .mat-simple-snackbar-action {
   color: $primary-blue;
-}
-
-.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
-  border-color: $primary-blue;
-}
-
-.mat-radio-button.mat-accent .mat-radio-inner-circle,
-.mat-radio-button.mat-accent
-  .mat-radio-ripple
-  .mat-ripple-element:not(.mat-radio-persistent-ripple),
-.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple,
-.mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
-  background-color: $primary-blue;
 }
 
 .mat-step-optional,
