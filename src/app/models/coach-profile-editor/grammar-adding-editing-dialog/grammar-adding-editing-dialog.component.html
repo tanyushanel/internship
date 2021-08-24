@@ -1,10 +1,10 @@
 <div class="container">
   <button mat-icon-button class="close-button" [mat-dialog-close]="true">✖</button>
   <h1>{{ data.isEdit ? 'Edit Grammar' : 'Add Grammar' }}</h1>
-  <mat-form-field appearance="outline" *ngIf="report.description">
+  <mat-form-field appearance="outline" *ngIf="mistakeReport.description">
     <mat-label>Mistake description</mat-label>
     <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="2" readonly class="description">{{
-      report.description
+      mistakeReport.description
     }}</textarea>
   </mat-form-field>
   <mat-form-field appearance="fill">
@@ -31,7 +31,19 @@
       </span>
     </div>
   </mat-radio-group>
-  <button mat-raised-button color="primary" (click)="updateData()">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="updateData()"
+    *ngIf="!mistakeReport.description"
+    class="save"
+  >
     {{ data.isEdit ? 'UPDATE' : 'SAVE' }}
   </button>
+  <div class="button-container" *ngIf="mistakeReport.description">
+    <button mat-raised-button color="primary" (click)="SolveAndUpdate()">
+      Solve Mistake And Update
+    </button>
+    <button mat-raised-button color="basic" (click)="RejectMistake()">Reject Mistake</button>
+  </div>
 </div>

@@ -1,9 +1,9 @@
 <div class="main">
   <h1>{{ data.isEdit ? 'Edit Listening' : 'Add Listening' }}</h1>
-  <mat-form-field appearance="outline" *ngIf="report.description">
+  <mat-form-field appearance="outline" *ngIf="mistakeReport.description">
     <mat-label>Mistake description</mat-label>
     <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="2" readonly class="description">{{
-      report.description
+      mistakeReport.description
     }}</textarea>
   </mat-form-field>
   <div>
@@ -62,10 +62,16 @@
       </div>
     </mat-step>
   </mat-stepper>
-  <div class="dialog-button">
+  <div class="dialog-button" *ngIf="!mistakeReport.description">
     <button mat-raised-button mat-dialog-close>Close</button>
     <button mat-raised-button color="primary" (click)="updateData()">
       {{ data.isEdit ? 'Update' : 'Save' }}
     </button>
+  </div>
+  <div class="button-container" *ngIf="mistakeReport.description">
+    <button mat-raised-button color="primary" (click)="SolveAndUpdate()">
+      Solve Mistake And Update
+    </button>
+    <button mat-raised-button color="basic" (click)="RejectMistake()">Reject Mistake</button>
   </div>
 </div>
