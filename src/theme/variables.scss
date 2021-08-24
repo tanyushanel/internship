@@ -1,26 +1,5 @@
 @use "~@angular/material" as mat;
 
-:root {
-  --others-grey6: rgb(242, 242, 242);
-  --secondary-grey3: rgb(227, 227, 227);
-  --white: rgb(255, 255, 255);
-  --light-cyan: rgb(224, 255, 255);
-  --secondary-grey2: rgb(84, 87, 90);
-  --secondary-grey1: rgb(65, 65, 65);
-
-  --green: rgb(56, 118, 46);
-  --black: rgba(0, 0, 0);
-  --primary-blue: #0277bd;
-
-  --blue: rgb(170, 213, 228);
-
-  --error: rgb(174, 19, 15);
-
-  --border-radius-big: 15px;
-  --border-radius-small: 10px;
-  --border-radius-medium: 7px;
-}
-
 $my-primary: mat.define-palette(mat.$light-blue-palette, 900);
 $my-accent: mat.define-palette(mat.$light-blue-palette, 900);
 
