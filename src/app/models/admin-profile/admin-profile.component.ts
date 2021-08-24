@@ -2,16 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { Observable } from 'rxjs';
 import { AdminTableStoreService } from '../../services/store/adminTableStore.service';
-import { CoachTestTabs } from '../../constants/data-constants';
-import { CoachTest } from '../../interfaces/coach-edit';
 import {
   AdminTestTabs,
-  CoachData,
   ServiceCoachData,
-  ServiceTestData,
   TestData,
 } from '../../interfaces/admin-profile-intarfaces';
-import { AdminHttpService } from '../../services/adminTableData.service';
 
 @Component({
   selector: 'app-admin-profile',
@@ -23,7 +18,7 @@ export class AdminProfileComponent implements OnInit {
 
   coaches$: Observable<ServiceCoachData | null> = this.admin.adminCoachResults$;
 
-  public selectedTab = AdminTestTabs.assigned;
+  public selectedTab!: AdminTestTabs;
 
   displayedColumns = ['testNumber', 'Level', 'Date', 'Coach', 'Button'];
 
@@ -33,7 +28,9 @@ export class AdminProfileComponent implements OnInit {
     AdminTestTabs.assigned,
   ];
 
-  constructor(private admin: AdminTableStoreService) {}
+  constructor(private admin: AdminTableStoreService) {
+    this.selectedTab = AdminTestTabs.highPriority;
+  }
 
   tabChanged(tabChangeEvent: MatTabChangeEvent): void {
     if (tabChangeEvent.index === 2) {
@@ -47,7 +44,7 @@ export class AdminProfileComponent implements OnInit {
       this.selectedTab = AdminTestTabs.assigned;
       this.displayedColumns = ['testNumber', 'Level', 'Date', 'Button'];
     } else if (tabChangeEvent.index === 0) {
-      this.admin.getAssignedTestData();
+      this.admin.getHighPriorityTest();
       this.tables$ = this.admin.adminTestResults$;
       this.selectedTab = AdminTestTabs.assigned;
       this.displayedColumns = ['testNumber', 'Level', 'Date', 'Coach', 'Button'];
@@ -55,7 +52,7 @@ export class AdminProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.admin.getAssignedTestData();
+    this.admin.getHighPriorityTest();
     this.tables$ = this.admin.adminTestResults$;
     this.admin.getCoachData();
     this.coaches$ = this.admin.adminCoachResults$;

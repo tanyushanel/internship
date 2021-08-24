@@ -34,25 +34,17 @@ export class TableComponent implements OnInit {
 
   @Input() coachData!: ServiceCoachData | null;
 
-  dataSource: MatTableDataSource<TestData>;
-
   @Input() displayedColumns!: string[];
 
   @Input() selectedTab!: AdminTestTabs;
 
-  constructor(
-    private dialog: MatDialog,
-    private service: AdminTableStoreService,
-    private rerender: ChangeDetectorRef,
-  ) {
-    this.dataSource = new MatTableDataSource(this.tableData);
+  constructor(private dialog: MatDialog, private service: AdminTableStoreService) {
+    console.log(this.tableData);
   }
 
   @ViewChild(MatTable) table!: MatTable<any>;
 
-  ngOnInit(): void {
-    console.log(this.selectedTab);
-  }
+  ngOnInit(): void {}
 
   openDialog(element: TestData, coachesData: ServiceCoachData | null) {
     const dialogRef = this.dialog.open(AdminDialogComponent, {
@@ -71,10 +63,6 @@ export class TableComponent implements OnInit {
           coachId: result?.coach?.userId,
         };
         this.service.updateTestData(this.coachUpdate, result.id);
-        setTimeout(() => {
-          this.rerender.detectChanges();
-          this.table.renderRows();
-        }, 3000);
       }
     });
   }

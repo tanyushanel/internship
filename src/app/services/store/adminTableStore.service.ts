@@ -31,6 +31,17 @@ export class AdminTableStoreService {
       .subscribe({ next: (value) => this.adminTestSubject$.next(value) });
   }
 
+  getHighPriorityTest() {
+    return this.adminHttpService.getHighPriorityAdminTests().subscribe({
+      next: (value) =>
+        this.adminTestSubject$.next(
+          value.filter((test) => {
+            return test.priority;
+          }),
+        ),
+    });
+  }
+
   getNotAssignedTestData() {
     return this.adminHttpService
       .getNotAssignedAdminTests()

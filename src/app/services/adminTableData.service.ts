@@ -30,12 +30,12 @@ export class AdminHttpService {
     );
   }
 
-  getAdminTests() {
-    this.http
-      .get<ServiceTestData>(
-        'http://elevel-001-site1.btempurl.com/api/Test/forAdmin?IsAssigned=true',
-      )
-      .subscribe((data) => console.log(data.results));
+  getHighPriorityAdminTests() {
+    return this.http.get<ServiceTestData>(`${AdmintableApi}forAdmin?IsAssigned=true`).pipe(
+      map((res) => {
+        return res.results;
+      }),
+    );
   }
 
   getNotAssignedAdminTests() {
