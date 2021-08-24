@@ -6,7 +6,6 @@ import {
   SendMistakeReport,
   UpdateMistakeReport,
 } from '../../interfaces/mistake-report';
-import { UpdateCoachQuestion } from '../../interfaces/question-answer';
 
 @Injectable({
   providedIn: 'root',

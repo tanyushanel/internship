@@ -19,7 +19,7 @@
     [currentLevel]="languageLevel[data.level.toString()]"
   ></app-choose-level>
   <p *ngIf="!mistakeReport.description">
-    <button mat-raised-button color="primary" (click)="updateData()">
+    <button mat-raised-button color="primary" (click)="updateData()" class="save">
       {{ data.isEdit ? 'UPDATE' : 'SAVE' }}
     </button>
   </p>

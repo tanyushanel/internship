@@ -1,6 +1,6 @@
 @import '../../../../theme/variables.scss';
 
-button.mat-raised-button {
+.save {
   position: relative;
   left: 50%;
   transform: translate(-50%, 0);
@@ -34,5 +34,5 @@ h3 {
 .button-container {
   display: flex;
   justify-content: space-between;
-  padding-bottom: 40px;
+  padding-top: 40px;
 }
