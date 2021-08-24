@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApiAssignTest } from 'src/app/interfaces/user.interfaces';
 import { PostHttpService } from '../services/post-http.service';
 
@@ -23,6 +24,7 @@ export class HrProfileDialogComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ApiAssignTest,
     private readonly postHttpService: PostHttpService,
+    private snackbar: MatSnackBar,
   ) {}
 
   assignTestUser() {
@@ -32,6 +34,21 @@ export class HrProfileDialogComponent {
         userId: this.data.userId,
         priority: this.priority,
       })
-      .subscribe();
+      .subscribe({
+        next: () => {
+          this.snackbar.open('Test was successfully assigned', 'Close', {
+            verticalPosition: 'bottom',
+            duration: 2000,
+            panelClass: 'success',
+          });
+        },
+        error: () => {
+          this.snackbar.open(`Unfortunately test wasn't assigned`, 'Close', {
+            verticalPosition: 'bottom',
+            duration: 2000,
+            panelClass: 'error',
+          });
+        },
+      });
   }
 }

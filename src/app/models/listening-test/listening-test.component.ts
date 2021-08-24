@@ -36,7 +36,7 @@ export class ListeningTestComponent implements OnInit, AfterViewInit, AfterViewC
 
   msaapPageSizeOptions = [2, 4, 6];
 
-  msaapDisplayVolumeControls = true;
+  msaapDisplayVolumeControls = false;
 
   msaapDisplayRepeatControls = true;
 
