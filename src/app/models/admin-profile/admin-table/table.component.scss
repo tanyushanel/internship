@@ -1,8 +1,34 @@
+@import '../../../../theme/variables';
+
 button:hover {
   background-color: grey;
 }
 
+.container {
+  position: relative; /* добавили */
+  height: 75vh;
+  margin: auto;
+}
+
 table {
   width: 100%;
-  margin: 0 auto;
+  table-layout: fixed;
+}
+
+th,
+td {
+  width: 200px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+mat-paginator {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.priority.high {
+  background-color: $light-cyan;
 }
