@@ -1,11 +1,8 @@
-@import '../../../../theme/variables';
-
 .error {
   display: flex;
-  padding: 1em;
-  color: $white;
+  padding: 0.5em;
+  color: var(--white);
   font-size: 1.5em;
   word-break: break-all;
   column-gap: 1em;
-  background: $error;
 }

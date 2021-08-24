@@ -1,4 +1,23 @@
-@import 'theme/variables';
+:root {
+  --others-grey6: rgb(242, 242, 242);
+  --secondary-grey3: rgb(227, 227, 227);
+  --white: rgb(255, 255, 255);
+  --light-cyan: rgb(224, 255, 255);
+  --secondary-grey2: rgb(84, 87, 90);
+  --secondary-grey1: rgb(65, 65, 65);
+
+  --green: rgb(56, 118, 46);
+  --black: rgba(0, 0, 0);
+  --primary-blue: #0277bd;
+
+  --blue: rgb(170, 213, 228);
+
+  --error: rgb(174, 19, 15);
+
+  --border-radius-big: 15px;
+  --border-radius-small: 10px;
+  --border-radius-medium: 7px;
+}
 
 html,
 body {
@@ -11,36 +30,22 @@ body {
 }
 
 .red-snackbar {
-  background: $error;
 }
 
 .mat-snack-bar-container.success {
-  color: $black;
-  background-color: $secondary-grey3;
-  border: 1px solid $primary-blue;
+  color: var(--black);
+  background-color: var(--secondary-grey3);
+  border: 1px solid var(--primary-blue);
 }
 
 .mat-snack-bar-container.error {
-  color: $black;
-  background-color: $secondary-grey3;
-  border: 1px solid $error;
+  color: var(--black);
+  background-color: var(--secondary-grey3);
+  border: 1px solid var(--error);
 }
 
 .mat-simple-snackbar-action {
-  color: $primary-blue;
-}
-
-.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
-  border-color: $primary-blue;
-}
-
-.mat-radio-button.mat-accent .mat-radio-inner-circle,
-.mat-radio-button.mat-accent
-  .mat-radio-ripple
-  .mat-ripple-element:not(.mat-radio-persistent-ripple),
-.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple,
-.mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
-  background-color: $primary-blue;
+  color: var(--primary-blue);
 }
 
 .mat-step-optional,

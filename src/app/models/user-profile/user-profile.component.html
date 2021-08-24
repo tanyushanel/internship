@@ -23,7 +23,7 @@
   </button>
 
   <div *ngIf="(assignedTests$ | async)?.length">
-    <h3 class="table-caption warn">You have a test assigned!</h3>
+    <h3 class="table-caption warn">You've got an assigned test!</h3>
     <p class="table-caption">
       Deadline: <span class="warn">{{ deadLine | date: 'medium' }}</span>
     </p>

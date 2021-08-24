@@ -1,8 +1,5 @@
-@import 'src/theme/variables.scss';
-
 .container {
-  width: 90%;
-  margin: 50px 30px 100px 30px;
+  margin: 3rem 2rem;
   text-align: center;
 
   span {
@@ -17,7 +14,6 @@ form {
 p {
   margin-bottom: 1rem;
   text-align: center;
-  text-decoration: underline;
 }
 
 .main-content {
@@ -31,7 +27,7 @@ p {
 
 .mat-form-field {
   width: 70%;
-  border-radius: $border-radius-medium;
+  border-radius: var(--border-radius-medium);
 
   textarea {
     height: 14em;
@@ -45,13 +41,12 @@ p {
 }
 
 .error {
-  color: $error;
+  color: var(--error);
 }
 
 .mat-icon {
-  width: 12px;
-  height: 12px;
-  font-size: 12px;
+  font-size: 1rem;
+  vertical-align: text-top;
 }
 
 .report {
@@ -64,13 +59,7 @@ p {
 }
 
 .report__text:hover {
-  color: $secondary-grey2;
+  color: var(--secondary-grey2);
   text-decoration: underline;
   cursor: pointer;
-}
-
-.mat-icon {
-  color: $error;
-  font-size: 1rem;
-  vertical-align: top;
 }
