@@ -133,7 +133,6 @@
       <td class="mat-cell" colspan="9999">No data matching the filter</td>
     </tr>
   </table>
-
   <mat-paginator
     [length]="resultsCount"
     [pageSize]="5"
@@ -141,7 +140,7 @@
     showFirstLastButtons
   >
   </mat-paginator>
-  <p class="warn hint">* Temporary result</p>
+  <div class="warn hint">* Temporary result</div>
 </div>
 
 <p class="table-caption" [hidden]="resultsCount">No results yet</p>
