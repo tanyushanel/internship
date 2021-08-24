@@ -44,9 +44,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   onStartButtonClick(level: Level): void {
-    const startTestTime = new Date().toLocaleTimeString();
-
-    this.isDisabledTime = true; //
+    this.isDisabledTime = true;
     this.testStoreService.selectLevel(level);
 
     this.router.navigate([Route.test]);
