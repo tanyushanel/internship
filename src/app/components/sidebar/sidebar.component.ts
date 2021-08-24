@@ -17,9 +17,6 @@ export class SidebarComponent implements OnInit {
 
   imgFilePath: string | SafeUrl | undefined;
 
-  defaultAvatar =
-    'https://scontent.fiev6-1.fna.fbcdn.net/v/t1.6435-9/89845151_2502495549967541_8418276994130640896_n.jpg?_nc_cat=111&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=6tnOcGrridIAX8LQjDw&_nc_ht=scontent.fiev6-1.fna&oh=b7143c9dda9fd3ef81c86e41f788a9ab&oe=612EA9AA';
-
   @ViewChild('img') img: ElementRef | undefined;
 
   readonly user$: Observable<UserResponseType | null> = this.userService.activeUser$;
@@ -63,11 +60,9 @@ export class SidebarComponent implements OnInit {
         map((blob) => {
           const reader = new FileReader();
           reader.readAsDataURL(<Blob>blob);
-          if (reader.result) {
-            reader.onload = () => {
-              this.imgFilePath = this.sanitizer.bypassSecurityTrustUrl(reader.result as string);
-            };
-          }
+          reader.onload = () => {
+            this.imgFilePath = this.sanitizer.bypassSecurityTrustUrl(reader.result as string);
+          };
         }),
       )
       .subscribe();

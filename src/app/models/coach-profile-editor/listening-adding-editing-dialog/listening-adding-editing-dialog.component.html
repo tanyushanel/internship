@@ -1,5 +1,11 @@
 <div class="main">
   <h1>{{ data.isEdit ? 'Edit Listening' : 'Add Listening' }}</h1>
+  <mat-form-field appearance="outline" *ngIf="report.description">
+    <mat-label>Mistake description</mat-label>
+    <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="2" readonly class="description">{{
+      report.description
+    }}</textarea>
+  </mat-form-field>
   <div>
     <div class="load-file">
       <label class="label">

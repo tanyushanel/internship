@@ -13,6 +13,7 @@
             <div mat-card-avatar class="sidebar__logo sidebar__center">
               <input type="file" accept="image/*" (change)="handleFileInput($event)" />
               <img [src]="imgFilePath" alt="Avatar" #img *ngIf="imgFilePath; else logo" />
+              <span class="material-icons-outlined sidebar__icon-photo">camera_alt</span>
               <ng-template #logo>
                 <span class="sidebar__initials">{{
                   $.user!.lastName[0] + $.user!.firstName[0]
