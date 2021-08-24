@@ -27,7 +27,7 @@ p {
 
 .mat-form-field {
   width: 70%;
-  border-radius: $border-radius-medium;
+  border-radius: var(--border-radius-medium);
 
   textarea {
     height: 14em;
@@ -59,7 +59,7 @@ p {
 }
 
 .report__text:hover {
-  color: $secondary-grey2;
+  color: var(--secondary-grey2);
   text-decoration: underline;
   cursor: pointer;
 }

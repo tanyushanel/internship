@@ -1,5 +1,3 @@
-@import '../../../theme/variables';
-
 .mat-elevation-z8 {
   margin: 5% 100px;
 }
@@ -13,5 +11,5 @@ button {
 }
 
 button:hover {
-  background-color: $secondary-grey2;
+  background-color: var(--secondary-grey2);
 }
