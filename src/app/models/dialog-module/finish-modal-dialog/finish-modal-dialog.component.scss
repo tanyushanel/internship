@@ -1,5 +1,3 @@
-@import 'src/theme/variables.scss';
-
 .finish-test {
   margin: 5em auto;
 
@@ -27,7 +25,7 @@
 }
 
 .warn {
-  color: $error;
+  color: var(--error);
 }
 
 .count-down {
