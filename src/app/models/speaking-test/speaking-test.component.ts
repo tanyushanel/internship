@@ -15,6 +15,7 @@ import { ErrorStoreService } from '../../services/store/error-store.service';
 import { Route } from '../../constants/route-constant';
 import { FinishModalDialogComponent } from '../dialog-module/finish-modal-dialog/finish-modal-dialog.component';
 import { ReportMistakeDialogComponent } from '../../components/report-mistake-dialog/report-mistake-dialog.component';
+import { CoachAudioDataStoreService } from '../../services/store/coach-audio-data-store.service';
 
 declare let MediaRecorder: any;
 
@@ -51,6 +52,7 @@ export class SpeakingTestComponent implements OnInit, OnDestroy {
   numberAttempt = 0;
 
   constructor(
+    private audioData: CoachAudioDataStoreService,
     private cd: ChangeDetectorRef,
     private dom: DomSanitizer,
     private errorStoreService: ErrorStoreService,
@@ -83,6 +85,7 @@ export class SpeakingTestComponent implements OnInit, OnDestroy {
           src: this.dom.bypassSecurityTrustUrl(audioURL),
         };
         this.audioFile = audio;
+        this.audioData.uploadListeningFile(blob);
         this.cd.detectChanges();
       };
       this.mediaRecorder.ondataavailable = (e: { data: Blob }) => {
