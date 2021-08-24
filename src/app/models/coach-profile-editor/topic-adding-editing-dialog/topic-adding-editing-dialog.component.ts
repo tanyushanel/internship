@@ -4,6 +4,7 @@ import { languageLevel, Level } from '../../../constants/data-constants';
 import { CoachTopicStoreService } from '../../../services/store/coach-topic-store.service';
 import { CoachTopicUpdate } from '../../../interfaces/coach-edit';
 import { englishLevelNumber } from '../../../helpers/checks';
+import { MistakeReport } from '../../../interfaces/mistake-report';
 
 export interface TopicEditDialogData {
   id: string;
@@ -29,6 +30,7 @@ export class TopicAddingEditingDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<TopicAddingEditingDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: TopicEditDialogData,
+    @Inject(MAT_DIALOG_DATA) public report: MistakeReport,
     private coachEditorTopic: CoachTopicStoreService,
   ) {
     if (data.isEdit && data.topicName) {

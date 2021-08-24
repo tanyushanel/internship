@@ -4,6 +4,7 @@ import { languageLevel, GrammarAnswers, Level } from '../../../constants/data-co
 import { CoachQuestionStoreService } from '../../../services/store/coach-question-store.service';
 import { CoachQuestion } from '../../../interfaces/question-answer';
 import { englishLevelNumber } from '../../../helpers/checks';
+import { MistakeReport } from '../../../interfaces/mistake-report';
 
 @Component({
   selector: 'app-coach-profile-editor-grammar-edit-dialog',
@@ -14,6 +15,7 @@ export class GrammarAddingEditingDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<GrammarAddingEditingDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: CoachQuestion,
+    @Inject(MAT_DIALOG_DATA) public report: MistakeReport,
     private coachEditor: CoachQuestionStoreService,
   ) {}
 

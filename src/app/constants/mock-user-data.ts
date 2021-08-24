@@ -1,4 +1,4 @@
-import { Route, SidebarMenu, SidebarIcon } from './route-constant';
+import { Route, SidebarIcon, SidebarMenu } from './route-constant';
 import { UserRole } from './data-constants';
 import { UserResponseType } from '../interfaces/user.interfaces';
 
@@ -28,9 +28,14 @@ export const usersRoute: UserRoutesType = {
     menuIcon: [SidebarIcon.homeicon, SidebarIcon.usersicon],
   },
   [UserRole.Coach]: {
-    route: [Route.home, Route.check, Route.editor],
-    menuItem: [SidebarMenu.home, SidebarMenu.check, SidebarMenu.editor],
-    menuIcon: [SidebarIcon.homeicon, SidebarIcon.checkicon, SidebarIcon.editoricon],
+    route: [Route.home, Route.check, Route.editor, Route.report],
+    menuItem: [SidebarMenu.home, SidebarMenu.check, SidebarMenu.editor, SidebarMenu.mistakes],
+    menuIcon: [
+      SidebarIcon.homeicon,
+      SidebarIcon.checkicon,
+      SidebarIcon.editoricon,
+      SidebarIcon.reporticon,
+    ],
   },
   [UserRole.Administrator]: {
     route: [Route.home, Route.manage],

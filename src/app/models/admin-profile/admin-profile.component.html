@@ -1,10 +1,16 @@
-<div class="mat-elevation-z8 container">
-  <mat-tab-group mat-align-tabs="center">
-    <mat-tab *ngFor="let tab of tabs" [label]="tab">
-      <app-table
-        [tableData]="adminTable[tab]"
-        [displaedColums]="adminDisplayListMap[tab]"
-      ></app-table>
-    </mat-tab>
+<div class="mat-elevation-z8">
+  <mat-tab-group mat-align-tabs="center" (selectedTabChange)="tabChanged($event)">
+    <ng-container *ngIf="{ table: tables$ | async } as $">
+      <mat-tab *ngFor="let tab of tabs" [label]="tab">
+        <app-table
+          *ngIf="$.table"
+          [tableData]="$.table"
+          [coachData]="coaches$ | async"
+          [displayedColumns]="displayedColumns"
+          [selectedTab]="selectedTab"
+        >
+        </app-table>
+      </mat-tab>
+    </ng-container>
   </mat-tab-group>
 </div>
