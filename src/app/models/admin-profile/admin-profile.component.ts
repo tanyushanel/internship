@@ -1,6 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminTestTabs, TestData } from 'src/mocks/admin-profile-utils.mock';
-import { ServiceComponent } from './service/service.component';
+import { MatTabChangeEvent } from '@angular/material/tabs';
+import { Observable } from 'rxjs';
+import { AdminTableStoreService } from '../../services/store/adminTableStore.service';
+import { CoachTestTabs } from '../../constants/data-constants';
+import { CoachTest } from '../../interfaces/coach-edit';
+import {
+  AdminTestTabs,
+  CoachData,
+  ServiceCoachData,
+  ServiceTestData,
+  TestData,
+} from '../../interfaces/admin-profile-intarfaces';
+import { AdminHttpService } from '../../services/adminTableData.service';
 
 @Component({
   selector: 'app-admin-profile',
@@ -8,24 +19,45 @@ import { ServiceComponent } from './service/service.component';
   styleUrls: ['./admin-profile.component.scss'],
 })
 export class AdminProfileComponent implements OnInit {
-  tabs: AdminTestTabs[] = [AdminTestTabs.notAssigned, AdminTestTabs.assigned];
+  tables$: Observable<TestData[] | null> = this.admin.adminTestResults$;
 
-  adminTable: { [key: string]: TestData[] } = {};
+  coaches$: Observable<ServiceCoachData | null> = this.admin.adminCoachResults$;
 
-  adminDisplayListMap: { [key: string]: string[] } = {};
+  public selectedTab = AdminTestTabs.assigned;
 
-  ngOnInit(): void {}
+  displayedColumns = ['testNumber', 'Level', 'Date', 'Coach', 'Button'];
 
-  constructor(private service: ServiceComponent) {
-    this.service.getData().subscribe((data) => {
-      this.adminTable = {
-        [AdminTestTabs.notAssigned]: data.filter((test) => !test.isAssign),
-        [AdminTestTabs.assigned]: data.filter((test) => test.isAssign),
-      };
-      this.adminDisplayListMap = {
-        [AdminTestTabs.notAssigned]: ['Position', 'Level', 'Date', 'Button'],
-        [AdminTestTabs.assigned]: ['Position', 'Level', 'Date', 'Coach', 'Button'],
-      };
-    });
+  tabs: AdminTestTabs[] = [
+    AdminTestTabs.highPriority,
+    AdminTestTabs.notAssigned,
+    AdminTestTabs.assigned,
+  ];
+
+  constructor(private admin: AdminTableStoreService) {}
+
+  tabChanged(tabChangeEvent: MatTabChangeEvent): void {
+    if (tabChangeEvent.index === 2) {
+      this.admin.getAssignedTestData();
+      this.tables$ = this.admin.adminTestResults$;
+      this.selectedTab = AdminTestTabs.notAssigned;
+      this.displayedColumns = ['testNumber', 'Level', 'Date', 'Coach', 'Button'];
+    } else if (tabChangeEvent.index === 1) {
+      this.admin.getNotAssignedTestData();
+      this.tables$ = this.admin.adminTestResults$;
+      this.selectedTab = AdminTestTabs.assigned;
+      this.displayedColumns = ['testNumber', 'Level', 'Date', 'Button'];
+    } else if (tabChangeEvent.index === 0) {
+      this.admin.getAssignedTestData();
+      this.tables$ = this.admin.adminTestResults$;
+      this.selectedTab = AdminTestTabs.assigned;
+      this.displayedColumns = ['testNumber', 'Level', 'Date', 'Coach', 'Button'];
+    }
+  }
+
+  ngOnInit() {
+    this.admin.getAssignedTestData();
+    this.tables$ = this.admin.adminTestResults$;
+    this.admin.getCoachData();
+    this.coaches$ = this.admin.adminCoachResults$;
   }
 }

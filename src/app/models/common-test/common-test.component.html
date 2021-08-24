@@ -1,4 +1,6 @@
-<p class="timer styled" [class.warn]="(timer$ | async)! < 10">{{ (timer$ | async)! | time }}</p>
+<p class="timer styled" [class.warn]="(timer$ | async)! < 10">
+  <span class="material-icons-outlined"> timer </span> {{ (timer$ | async)! | time }}
+</p>
 
 <mat-tab-group mat-stretch-tabs mat-align-tabs="center" [(selectedIndex)]="selectedIndex">
   <mat-tab label="GRAMMAR">

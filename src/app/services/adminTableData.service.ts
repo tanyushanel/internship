@@ -1,21 +1,60 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { TestData } from '../../mocks/admin-profile-utils.mock';
+
+import {
+  ServiceCoachData,
+  ServiceTestData,
+  TestData,
+  UpdateCoachesData,
+} from 'src/app/interfaces/admin-profile-intarfaces';
+import { map } from 'rxjs/operators';
+import { AdmintableApi, CoachTestApi } from '../constants/route-constant';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AdminHttpService {
+  data: any;
+
   constructor(private readonly http: HttpClient) {}
 
-  getAdminTests() {
-    return this.http.get<TestData[]>('http://elevel-001-site1.btempurl.com/api/Test/forAdmin');
+  options = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  };
+
+  getAssignedAdminTests() {
+    return this.http.get<ServiceTestData>(`${AdmintableApi}forAdmin?IsAssigned=true`).pipe(
+      map((res) => {
+        return res.results;
+      }),
+    );
   }
 
-  passAdminTest(test: TestData) {
-    return this.http.post<TestData[]>(
-      'http://elevel-001-site1.btempurl.com/api/Test/forAdmin',
-      test,
+  getAdminTests() {
+    this.http
+      .get<ServiceTestData>(
+        'http://elevel-001-site1.btempurl.com/api/Test/forAdmin?IsAssigned=true',
+      )
+      .subscribe((data) => console.log(data.results));
+  }
+
+  getNotAssignedAdminTests() {
+    return this.http.get<ServiceTestData>(`${AdmintableApi}forAdmin`).pipe(
+      map((res) => {
+        return res.results;
+      }),
     );
+  }
+
+  getAdminCoaches() {
+    return this.http.get<ServiceCoachData>(CoachTestApi).pipe(
+      map((res) => {
+        return res;
+      }),
+    );
+  }
+
+  updateCoachTest(data: UpdateCoachesData, testID: number) {
+    return this.http.put<TestData>(`${AdmintableApi}${testID}/assignForCoach`, data, this.options);
   }
 }

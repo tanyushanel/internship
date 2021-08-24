@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ReportSubmitModalComponent } from '../report-submit-modal/report-submit-modal.component';
-import { MistakeReport } from '../../interfaces/mistake-report';
+import { SendMistakeReport } from '../../interfaces/mistake-report';
 import { MistakeReportStoreService } from '../../services/store/mistake-report-store.service';
 
 @Component({
@@ -12,14 +12,14 @@ import { MistakeReportStoreService } from '../../services/store/mistake-report-s
 export class ReportMistakeDialogComponent {
   constructor(
     public dialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: MistakeReport,
+    @Inject(MAT_DIALOG_DATA) public data: SendMistakeReport,
     public dialogRef: MatDialogRef<ReportMistakeDialogComponent>,
     private sendReport: MistakeReportStoreService,
   ) {}
 
   description = '';
 
-  report!: MistakeReport;
+  report!: SendMistakeReport;
 
   mistakeType(): void {
     if (this.data.questionId && !this.data.auditionId) {

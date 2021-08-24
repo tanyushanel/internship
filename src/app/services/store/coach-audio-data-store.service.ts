@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { map, take } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { CoachListeningHttpService } from '../coach-listening-http.service';
 import { PathFile } from '../../interfaces/audition';
 import { CoachListeningStoreService } from './coach-listening-store.service';
@@ -13,7 +13,9 @@ import { AuthStoreService } from './auth-store.service';
   providedIn: 'root',
 })
 export class CoachAudioDataStoreService {
-  readonly audioFilePath$ = new Subject<PathFile>();
+  defaultPath: PathFile = { pathfile: '' };
+
+  readonly audioFilePath$ = new BehaviorSubject<PathFile>(this.defaultPath);
 
   audioData$ = new Subject<Blob>();
 
@@ -27,7 +29,7 @@ export class CoachAudioDataStoreService {
     private readonly userService: AuthStoreService,
   ) {}
 
-  uploadListeningFile(file: File) {
+  uploadListeningFile(file: File | Blob) {
     const fd = new FormData();
     fd.append('formFiles', file);
     this.coachListeningHttpService.uploadListeningFile(fd).subscribe({

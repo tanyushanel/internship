@@ -1,8 +1,15 @@
 .container {
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
   width: 22em;
-  height: 17em;
+  height: 20em;
+}
+
+.mat-header {
+  width: 17em;
+  height: 100px;
+  padding: 0.3em;
 }
 
 .dialog-card {
@@ -17,6 +24,11 @@
 .dialog-header-image {
   width: 3.5em;
   height: 3.5em;
+  padding: auto;
   background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
   background-size: cover;
+}
+
+button {
+  padding: 0 1em;
 }
