@@ -51,6 +51,8 @@
         <b>
           {{ element.result }}
         </b>
+
+        <span class="warn" *ngIf="!element.essayMark && !element.speakingMark">*</span>
       </td>
     </ng-container>
 

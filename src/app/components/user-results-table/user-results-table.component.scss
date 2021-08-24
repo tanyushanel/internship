@@ -120,3 +120,7 @@ tr.element-row:not(.expanded-row):active {
 .mat-form-field {
   margin: 1.5em 0;
 }
+
+.warn {
+  color: var(--error);
+}
