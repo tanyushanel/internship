@@ -22,12 +22,6 @@ export class TestHttpService {
       .pipe(map((res) => res.results));
   }
 
-  getResults(userId: string): Observable<TestResult[]> {
-    return this.http
-      .get<GetTestsResults>(`${BASE_API_URL}/Test?userId=${userId}`)
-      .pipe(map((res) => res.results.filter((r) => r.testPassingDate !== null)));
-  }
-
   getAllResults(userId: string): Observable<TestResult[]> {
     return this.http
       .get<GetTestsResults>(`${BASE_API_URL}/Test?userId=${userId}`)

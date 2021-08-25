@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { Level } from 'src/app/constants/data-constants';
@@ -43,12 +43,18 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.testStoreService.getAll();
-
     this.userProfileService.checkIfDisabled();
   }
 
   onStartButtonClick(level: Level): void {
     this.isDisabledTime = true;
+
+    this.timerSubscription = this.testStoreService.timer(
+      60000,
+      1000,
+      () => (this.isDisabledTime = false),
+    );
+
     this.testStoreService.selectLevel(level);
 
     if (this.assignedTest) {

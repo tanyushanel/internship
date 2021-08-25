@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
@@ -13,7 +13,7 @@ import { FinishModalDialogComponent } from '../dialog-module/finish-modal-dialog
   templateUrl: './common-test.component.html',
   styleUrls: ['./common-test.component.scss'],
 })
-export class CommonTestComponent implements OnInit {
+export class CommonTestComponent implements OnInit, OnDestroy {
   test$: Observable<TestContent> = this.testStoreService.test$;
 
   grammarAnswers: string[] = [];
@@ -71,6 +71,10 @@ export class CommonTestComponent implements OnInit {
     this.timerSubscription = this.testStoreService.timer(3600, 1000, () =>
       this.onSubmitTestOnTimerRunOut(),
     );
+  }
+
+  ngOnDestroy(): void {
+    this.timerSubscription.unsubscribe();
   }
 
   setTabIndex(ind: number): void {
