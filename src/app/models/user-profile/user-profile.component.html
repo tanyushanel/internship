@@ -12,8 +12,8 @@
   </mat-radio-group>
 
   <button
-    *ngIf="!(assignedTests$ | async)?.length"
-    [disabled]="!selectedLevel || isStarted"
+    *ngIf="!assignedTest || deadLine! < now"
+    [disabled]="!selectedLevel || isDisabledTime"
     mat-raised-button
     color="primary"
     class="start-btn"
@@ -22,17 +22,17 @@
     START TEST
   </button>
 
-  <div *ngIf="(assignedTests$ | async)?.length">
+  <div *ngIf="assignedTest && deadLine! > now">
     <h3 class="table-caption warn">You've got an assigned test!</h3>
     <p class="table-caption">
       Deadline: <span class="warn">{{ deadLine | date: 'medium' }}</span>
     </p>
     <button
-      [disabled]="!selectedLevel || isStarted"
+      [disabled]="!selectedLevel || isDisabledTime"
       mat-raised-button
       color="primary"
       class="start-btn"
-      (click)="onStartAssignedButtonClick(selectedLevel, assignedTest)"
+      (click)="onStartAssignedButtonClick(selectedLevel)"
     >
       START ASSIGNED TEST
     </button>
