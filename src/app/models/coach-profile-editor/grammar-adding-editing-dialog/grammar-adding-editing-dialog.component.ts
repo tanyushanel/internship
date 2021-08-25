@@ -1,10 +1,16 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { languageLevel, GrammarAnswers, Level } from '../../../constants/data-constants';
+import {
+  languageLevel,
+  GrammarAnswers,
+  Level,
+  ReportStatus,
+} from '../../../constants/data-constants';
 import { CoachQuestionStoreService } from '../../../services/store/coach-question-store.service';
 import { CoachQuestion } from '../../../interfaces/question-answer';
 import { englishLevelNumber } from '../../../helpers/checks';
-import { MistakeReport } from '../../../interfaces/mistake-report';
+import { MistakeReport, UpdateMistakeReport } from '../../../interfaces/mistake-report';
+import { MistakeReportStoreService } from '../../../services/store/mistake-report-store.service';
 
 @Component({
   selector: 'app-coach-profile-editor-grammar-edit-dialog',
@@ -15,8 +21,10 @@ export class GrammarAddingEditingDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<GrammarAddingEditingDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: CoachQuestion,
-    @Inject(MAT_DIALOG_DATA) public report: MistakeReport,
+    @Inject(MAT_DIALOG_DATA) public mistakeReport: MistakeReport,
+    @Inject(MAT_DIALOG_DATA) public updateReport: UpdateMistakeReport,
     private coachEditor: CoachQuestionStoreService,
+    private reportUpdate: MistakeReportStoreService,
   ) {}
 
   languageLevel = languageLevel;
@@ -28,6 +36,11 @@ export class GrammarAddingEditingDialogComponent {
   answerOption = this.data.answers;
 
   QuestionList = Object.values(GrammarAnswers);
+
+  reports = {
+    id: this.updateReport.id,
+    status: this.updateReport.status,
+  };
 
   updateData(): void {
     const question = {
@@ -41,6 +54,26 @@ export class GrammarAddingEditingDialogComponent {
     } else {
       this.coachEditor.createQuestion(question);
     }
+    this.dialogRef.close();
+  }
+
+  solveAndUpdate(): void {
+    const question = {
+      id: this.data.id,
+      nameQuestion: this.nameQuestion,
+      level: this.englishLevel ?? this.data.level,
+      answers: this.answerOption,
+    };
+    this.reports.status = ReportStatus.solve;
+    this.coachEditor.updateQuestion(question);
+    this.reportUpdate.updateReportMistake(this.reports);
+    this.dialogRef.close();
+  }
+
+  rejectMistake(): void {
+    this.reports.status = ReportStatus.reject;
+
+    this.reportUpdate.updateReportMistake(this.reports);
     this.dialogRef.close();
   }
 

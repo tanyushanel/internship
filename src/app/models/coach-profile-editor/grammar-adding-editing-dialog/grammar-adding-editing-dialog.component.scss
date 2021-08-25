@@ -1,4 +1,4 @@
-button.mat-raised-button {
+.save {
   position: relative;
   left: 50%;
   margin-bottom: 40px;
@@ -37,5 +37,11 @@ h3 {
 }
 
 .description {
-  $error: darkred;
+  color: var(--error);
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 40px;
 }

@@ -1,10 +1,11 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { languageLevel, Level } from '../../../constants/data-constants';
+import { languageLevel, Level, ReportStatus } from '../../../constants/data-constants';
 import { CoachTopicStoreService } from '../../../services/store/coach-topic-store.service';
 import { CoachTopicUpdate } from '../../../interfaces/coach-edit';
 import { englishLevelNumber } from '../../../helpers/checks';
-import { MistakeReport } from '../../../interfaces/mistake-report';
+import { MistakeReport, UpdateMistakeReport } from '../../../interfaces/mistake-report';
+import { MistakeReportStoreService } from '../../../services/store/mistake-report-store.service';
 
 export interface TopicEditDialogData {
   id: string;
@@ -30,13 +31,20 @@ export class TopicAddingEditingDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<TopicAddingEditingDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: TopicEditDialogData,
-    @Inject(MAT_DIALOG_DATA) public report: MistakeReport,
+    @Inject(MAT_DIALOG_DATA) public mistakeReport: MistakeReport,
+    @Inject(MAT_DIALOG_DATA) public updateReport: UpdateMistakeReport,
     private coachEditorTopic: CoachTopicStoreService,
+    private reportUpdate: MistakeReportStoreService,
   ) {
     if (data.isEdit && data.topicName) {
       this.topic = { ...data };
     }
   }
+
+  reports = {
+    id: this.updateReport.id,
+    status: this.updateReport.status,
+  };
 
   levelChangeHandler($event: Level): void {
     this.englishLevel = englishLevelNumber($event);
@@ -53,6 +61,24 @@ export class TopicAddingEditingDialogComponent {
     } else {
       this.coachEditorTopic.createTopic(topic);
     }
+    this.dialogRef.close();
+  }
+
+  solveAndUpdate(): void {
+    const topic: CoachTopicUpdate = {
+      id: this.data.id,
+      topicName: this.topicName,
+      level: this.englishLevel ?? this.data.level,
+    };
+    this.reports.status = ReportStatus.solve;
+    this.coachEditorTopic.updateTopic(topic);
+    this.reportUpdate.updateReportMistake(this.reports);
+    this.dialogRef.close();
+  }
+
+  rejectMistake(): void {
+    this.reports.status = ReportStatus.reject;
+    this.reportUpdate.updateReportMistake(this.reports);
     this.dialogRef.close();
   }
 }

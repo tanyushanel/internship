@@ -2,12 +2,18 @@ import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { map } from 'rxjs/operators';
-import { GrammarAnswers, languageLevel, Level } from '../../../constants/data-constants';
+import {
+  GrammarAnswers,
+  languageLevel,
+  Level,
+  ReportStatus,
+} from '../../../constants/data-constants';
 import { EditionCoachListening, ListeningQuestion } from '../../../interfaces/audition';
 import { CoachListeningStoreService } from '../../../services/store/coach-listening-store.service';
 import { englishLevelNumber } from '../../../helpers/checks';
 import { CoachAudioDataStoreService } from '../../../services/store/coach-audio-data-store.service';
-import { MistakeReport } from '../../../interfaces/mistake-report';
+import { MistakeReport, UpdateMistakeReport } from '../../../interfaces/mistake-report';
+import { MistakeReportStoreService } from '../../../services/store/mistake-report-store.service';
 
 @Component({
   selector: 'app-edit-listening-dialog',
@@ -39,12 +45,19 @@ export class ListeningAddingEditingDialogComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: EditionCoachListening,
-    @Inject(MAT_DIALOG_DATA) public report: MistakeReport,
+    @Inject(MAT_DIALOG_DATA) public mistakeReport: MistakeReport,
+    @Inject(MAT_DIALOG_DATA) public updateReport: UpdateMistakeReport,
     public dialogRef: MatDialogRef<ListeningAddingEditingDialogComponent>,
     private coachListening: CoachListeningStoreService,
     private coachAudioData: CoachAudioDataStoreService,
     private sanitizer: DomSanitizer,
+    private reportUpdate: MistakeReportStoreService,
   ) {}
+
+  reports = {
+    id: this.updateReport.id,
+    status: this.updateReport.status,
+  };
 
   ngOnInit(): void {
     if (this.data.isEdit) this.downloadListeningFile();
@@ -84,6 +97,25 @@ export class ListeningAddingEditingDialogComponent implements OnInit {
     } else {
       this.coachListening.createListening(questions);
     }
+    this.dialogRef.close();
+  }
+
+  solveAndUpdate(): void {
+    const questions = {
+      id: this.data.id,
+      audioFilePath: this.audioFilePath,
+      level: this.englishLevel ?? this.data.level,
+      questions: this.questions.slice(0, 10),
+    };
+    this.reports.status = ReportStatus.solve;
+    this.coachListening.updateListening(questions);
+    this.reportUpdate.updateReportMistake(this.reports);
+    this.dialogRef.close();
+  }
+
+  rejectMistake(): void {
+    this.reports.status = ReportStatus.reject;
+    this.reportUpdate.updateReportMistake(this.reports);
     this.dialogRef.close();
   }
 
