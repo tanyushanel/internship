@@ -2,16 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { Observable } from 'rxjs';
 import { AdminTableStoreService } from '../../services/store/adminTableStore.service';
-import { CoachTestTabs } from '../../constants/data-constants';
-import { CoachTest } from '../../interfaces/coach-edit';
 import {
   AdminTestTabs,
-  CoachData,
   ServiceCoachData,
-  ServiceTestData,
   TestData,
 } from '../../interfaces/admin-profile-intarfaces';
-import { AdminHttpService } from '../../services/adminTableData.service';
 
 @Component({
   selector: 'app-admin-profile',
