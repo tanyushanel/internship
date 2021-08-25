@@ -1,4 +1,4 @@
-<div [hidden]="!resultsCount">
+<div class="min-width" [hidden]="!resultsCount">
   <table
     mat-table
     [dataSource]="dataSource"
@@ -28,7 +28,7 @@
         </mat-form-field>
         <div mat-sort-header>Passing Date</div>
       </th>
-      <td mat-cell *matCellDef="let element">{{ element.testPassingDate | date: 'dd.MM.YYYY' }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.testPassingDate | date: 'mediumDate' }}</td>
     </ng-container>
 
     <ng-container matColumnDef="level">
@@ -47,12 +47,18 @@
         <div mat-sort-header>Result</div>
       </th>
 
-      <td mat-cell *matCellDef="let element">
+      <td class="result" mat-cell *matCellDef="let element">
         <b>
           {{ element.result }}
         </b>
 
-        <span class="warn" *ngIf="!element.essayMark && !element.speakingMark">*</span>
+        <span
+          class="hint"
+          matTooltip="Temporary result"
+          matTooltipPosition="right"
+          *ngIf="!element.essayMark && !element.speakingMark"
+          >*</span
+        >
       </td>
     </ng-container>
 
@@ -140,7 +146,6 @@
     showFirstLastButtons
   >
   </mat-paginator>
-  <div class="warn hint">* Temporary result</div>
 </div>
 
 <p class="table-caption" [hidden]="resultsCount">No results yet</p>

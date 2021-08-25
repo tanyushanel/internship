@@ -5,6 +5,7 @@
   --light-cyan: rgb(224, 255, 255);
   --secondary-grey2: rgb(84, 87, 90);
   --secondary-grey1: rgb(65, 65, 65);
+  --secondary-grey: rgb(161, 157, 165);
 
   --green: rgb(56, 118, 46);
   --black: rgba(0, 0, 0);
@@ -27,9 +28,6 @@ body {
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
-}
-
-.red-snackbar {
 }
 
 .mat-snack-bar-container.success {

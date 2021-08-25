@@ -124,9 +124,17 @@ tr.element-row:not(.expanded-row):active {
 }
 
 .hint {
-  margin-left: 1rem;
-  color: var(--secondary-grey2);
-  font-size: 0.7rem;
-  font-style: italic;
-  text-align: start;
+  color: var(--secondary-grey);
+}
+
+.result {
+  display: flex;
+  align-self: center;
+  justify-content: start;
+  padding: 1rem;
+  column-gap: 0.25rem;
+}
+
+.min-width {
+  min-width: 800px;
 }

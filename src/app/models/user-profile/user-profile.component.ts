@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { Level } from 'src/app/constants/data-constants';
 import { Route } from 'src/app/constants/route-constant';
 import { TestResult } from '../../interfaces/test';
 import { TestStoreService } from '../../services/store/test-store.service';
+import { UserProfileService } from './user-profile.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -15,19 +15,19 @@ import { TestStoreService } from '../../services/store/test-store.service';
 export class UserProfileComponent implements OnInit {
   results$: Observable<TestResult[] | undefined> = this.testStoreService.testResults$;
 
-  assignedTests$: Observable<TestResult[] | null> = this.testStoreService.assignedTests$;
-
-  assignedTest: TestResult | null = null;
+  assignedTest = this.userProfileService.assignedTest;
 
   levels = [...Object.values(Level)];
 
-  isDisabledTime = false;
+  isDisabledTime = this.userProfileService.isDisabledTime;
 
   selectedLevel!: Level;
 
-  deadLine!: Date;
+  deadLine = this.userProfileService.deadLine;
 
-  now = new Date();
+  now = this.userProfileService.now;
+
+  lastPassTime = this.userProfileService.lastPassTime;
 
   testId: string | undefined = '';
 
@@ -35,38 +35,24 @@ export class UserProfileComponent implements OnInit {
 
   timerSubscription!: Subscription;
 
-  constructor(private router: Router, private testStoreService: TestStoreService) {}
+  constructor(
+    private router: Router,
+    private testStoreService: TestStoreService,
+    private userProfileService: UserProfileService,
+  ) {}
 
   ngOnInit(): void {
     this.testStoreService.getAll();
 
-    this.assignedTests$
-      .pipe(
-        map((arr) =>
-          arr?.length ? arr.find((test) => new Date(test.assignmentEndDate) > this.now) : null,
-        ),
-      )
-      .subscribe((test) => {
-        if (test) {
-          this.assignedTest = test;
-          this.deadLine = new Date(test.assignmentEndDate);
-        }
-      });
+    this.userProfileService.checkIfDisabled();
   }
 
   onStartButtonClick(level: Level): void {
     this.isDisabledTime = true;
     this.testStoreService.selectLevel(level);
 
-    this.router.navigate([Route.test]);
-  }
-
-  onStartAssignedButtonClick(level: Level): void {
-    this.isDisabledTime = true;
-    this.testStoreService.selectLevel(level);
-
     if (this.assignedTest) {
       this.router.navigate([Route.test, { id: this.assignedTest.id }]);
-    }
+    } else this.router.navigate([Route.test]);
   }
 }
