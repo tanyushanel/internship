@@ -31,7 +31,7 @@ export class AdminHttpService {
   }
 
   getHighPriorityAdminTests() {
-    return this.http.get<ServiceTestData>(`${AdmintableApi}forAdmin?IsAssigned=true`).pipe(
+    return this.http.get<ServiceTestData>(`${AdmintableApi}forAdmin`).pipe(
       map((res) => {
         return res.results;
       }),

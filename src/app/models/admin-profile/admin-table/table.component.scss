@@ -25,3 +25,12 @@ td {
 .priority.high {
   background-color: $light-cyan;
 }
+
+.filter {
+  display: flex;
+  flex-direction: row;
+}
+
+mat-form-field {
+  margin: 0 1.3em;
+}

@@ -31,7 +31,7 @@ export interface TestData {
   testNumber: number;
   testPassingDate: number;
   level: string;
-  coach: string | null;
+  coach: string;
   isAssign: boolean;
 }
 
