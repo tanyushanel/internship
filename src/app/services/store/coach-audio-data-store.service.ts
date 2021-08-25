@@ -40,7 +40,7 @@ export class CoachAudioDataStoreService {
   }
 
   async fetchUrlAudio(audioPath: string): Promise<Blob> {
-    const urlAudio = `${DownloadFileListeningApiUrl}?filePath= ${audioPath}`;
+    const urlAudio = `${DownloadFileListeningApiUrl}?filePath=${audioPath}`;
     const result = await fetch(urlAudio, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,

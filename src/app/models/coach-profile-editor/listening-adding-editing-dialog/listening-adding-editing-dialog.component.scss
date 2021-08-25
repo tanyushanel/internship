@@ -68,7 +68,7 @@ audio {
 }
 
 .description {
-  color: $error;
+  color: var(--error);
 }
 
 .button-container {
