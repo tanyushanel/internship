@@ -6,6 +6,7 @@ import {
   MistakeListeningReport,
   MistakeWritingOrSpeakingReport,
   SendMistakeReport,
+  UpdateMistakeReport,
 } from '../interfaces/mistake-report';
 import { MistakeReportApiUrl } from '../constants/route-constant';
 import { ResponseGetAll } from '../interfaces/question-answer';
@@ -31,7 +32,7 @@ export class MistakeReportHttpService {
   getMistakeGrammarList() {
     return this.http.get<ResponseGetAll<MistakeGrammarReport>>(MistakeReportApiUrl).pipe(
       map((res) => {
-        return res.results.filter((r) => r.questionId !== null);
+        return res.results.filter((r) => r.questionId !== null && !r.auditionId);
       }),
     );
   }
@@ -42,5 +43,9 @@ export class MistakeReportHttpService {
         return res.results.filter((r) => r.topicId !== null);
       }),
     );
+  }
+
+  updateMistakeReport(report: UpdateMistakeReport) {
+    return this.http.put(`${MistakeReportApiUrl}/${report.id}`, report);
   }
 }

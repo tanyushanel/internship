@@ -64,7 +64,7 @@ export class CoachProfileDialogComponent implements OnInit {
   }
 
   downloadListeningFile() {
-    this.coachAudioData.downloadAudio();
+    this.coachAudioData.downloadAudio(this.data.id);
     this.coachAudioData.audioData$
       .pipe(
         map((blob) => {
