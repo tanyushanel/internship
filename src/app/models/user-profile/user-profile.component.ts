@@ -21,11 +21,13 @@ export class UserProfileComponent implements OnInit {
 
   levels = [...Object.values(Level)];
 
-  isStarted = false;
+  isDisabledTime = false;
 
   selectedLevel!: Level;
 
   deadLine: string | undefined = '';
+
+  now = new Date().toLocaleDateString();
 
   testId: string | undefined = '';
 
@@ -42,17 +44,17 @@ export class UserProfileComponent implements OnInit {
   }
 
   onStartButtonClick(level: Level): void {
-    this.isStarted = true;
+    this.isDisabledTime = true;
     this.testStoreService.selectLevel(level);
 
     this.router.navigate([Route.test]);
   }
 
-  onStartAssignedButtonClick(level: Level, assignedTest: TestResult | undefined): void {
-    this.isStarted = true;
+  onStartAssignedButtonClick(level: Level): void {
+    this.isDisabledTime = true;
     this.testStoreService.selectLevel(level);
 
-    if (assignedTest) {
+    if (this.assignedTest && this.deadLine) {
       this.router.navigate([Route.test]);
     }
   }

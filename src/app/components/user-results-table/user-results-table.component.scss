@@ -118,3 +118,15 @@ tr.element-row:not(.expanded-row):active {
 .mat-form-field {
   margin: 1.5em 0;
 }
+
+.warn {
+  color: var(--error);
+}
+
+.hint {
+  margin-left: 1rem;
+  color: var(--secondary-grey2);
+  font-size: 0.7rem;
+  font-style: italic;
+  text-align: start;
+}
