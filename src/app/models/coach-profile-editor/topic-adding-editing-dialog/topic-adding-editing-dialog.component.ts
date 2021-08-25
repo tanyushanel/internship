@@ -64,7 +64,7 @@ export class TopicAddingEditingDialogComponent {
     this.dialogRef.close();
   }
 
-  SolveAndUpdate(): void {
+  solveAndUpdate(): void {
     const topic: CoachTopicUpdate = {
       id: this.data.id,
       topicName: this.topicName,
@@ -76,7 +76,7 @@ export class TopicAddingEditingDialogComponent {
     this.dialogRef.close();
   }
 
-  RejectMistake(): void {
+  rejectMistake(): void {
     this.reports.status = ReportStatus.reject;
     this.reportUpdate.updateReportMistake(this.reports);
     this.dialogRef.close();

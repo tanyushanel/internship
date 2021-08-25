@@ -41,9 +41,9 @@
     {{ data.isEdit ? 'UPDATE' : 'SAVE' }}
   </button>
   <div class="button-container" *ngIf="mistakeReport.description">
-    <button mat-raised-button color="primary" (click)="SolveAndUpdate()">
+    <button mat-raised-button color="primary" (click)="solveAndUpdate()">
       Solve Mistake And Update
     </button>
-    <button mat-raised-button color="basic" (click)="RejectMistake()">Reject Mistake</button>
+    <button mat-raised-button color="basic" (click)="rejectMistake()">Reject Mistake</button>
   </div>
 </div>

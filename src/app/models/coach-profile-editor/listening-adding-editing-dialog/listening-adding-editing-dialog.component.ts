@@ -100,7 +100,7 @@ export class ListeningAddingEditingDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  SolveAndUpdate(): void {
+  solveAndUpdate(): void {
     const questions = {
       id: this.data.id,
       audioFilePath: this.audioFilePath,
@@ -113,7 +113,7 @@ export class ListeningAddingEditingDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  RejectMistake(): void {
+  rejectMistake(): void {
     this.reports.status = ReportStatus.reject;
     this.reportUpdate.updateReportMistake(this.reports);
     this.dialogRef.close();

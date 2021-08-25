@@ -57,7 +57,7 @@ export class GrammarAddingEditingDialogComponent {
     this.dialogRef.close();
   }
 
-  SolveAndUpdate(): void {
+  solveAndUpdate(): void {
     const question = {
       id: this.data.id,
       nameQuestion: this.nameQuestion,
@@ -70,7 +70,7 @@ export class GrammarAddingEditingDialogComponent {
     this.dialogRef.close();
   }
 
-  RejectMistake(): void {
+  rejectMistake(): void {
     this.reports.status = ReportStatus.reject;
 
     this.reportUpdate.updateReportMistake(this.reports);
