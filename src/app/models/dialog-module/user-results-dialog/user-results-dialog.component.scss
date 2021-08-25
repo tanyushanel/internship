@@ -12,10 +12,27 @@
 }
 
 .user-pic {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 6rem;
   height: 6rem;
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-  background-size: cover;
+  margin: 1rem;
+  border: 3px solid lightblue;
+  border-radius: 50%;
+
+  img {
+    width: 98px;
+    height: 98px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}
+
+.user-initials {
+  color: var(--blue);
+  font-weight: 600;
+  font-size: 2rem;
 }
 
 .user-info {
@@ -75,5 +92,6 @@ table {
 }
 
 .mat-dialog-content {
-  overflow: auto;
+  padding: 0;
+  overflow: visible;
 }

@@ -1,6 +1,11 @@
 <div class="content" mat-dialog-content>
   <mat-card class="user-info-wrap">
-    <div mat-card-avatar class="user-pic"></div>
+    <div mat-card-avatar class="user-pic">
+      <img [src]="imgFilePath" alt="Avatar" *ngIf="imgFilePath; else logo" />
+      <ng-template #logo>
+        <span class="user-initials">{{ user!.lastName[0] + user!.firstName[0] }}</span>
+      </ng-template>
+    </div>
     <div class="user-info">
       <b>{{ user.firstName }} {{ user.lastName }}</b>
       <p>{{ user.email }}</p>
