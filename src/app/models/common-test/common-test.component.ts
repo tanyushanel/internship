@@ -53,13 +53,15 @@ export class CommonTestComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.testId = this.route.snapshot.paramMap.get('id');
+    const idFromRoute = this.route.snapshot.paramMap.get('id');
 
-    if (this.testId) {
+    if (idFromRoute) {
+      this.testId = idFromRoute;
       this.testStoreService.createAssignedTestContent(this.testId);
     } else this.testStoreService.createTestContent();
 
     this.test$.subscribe((test) => {
+      this.testId = test.id;
       this.grammar = test.grammarQuestions;
       this.listening = test.audition.questions;
       this.essay = test.essay;
