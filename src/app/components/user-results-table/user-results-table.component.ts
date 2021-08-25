@@ -40,7 +40,7 @@ export class UserResultsTableComponent implements OnInit, AfterViewInit, OnChang
   filterValues = {
     testNumber: '',
     level: '',
-    testPassingDate: '',
+    testPassingDate: Date,
   };
 
   get resultsCount() {

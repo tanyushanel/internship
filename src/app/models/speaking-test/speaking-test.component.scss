@@ -3,12 +3,6 @@
   text-align: center;
 }
 
-.speaking-module-position {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .button-position {
   height: 3rem;
 }
@@ -59,7 +53,6 @@
 }
 
 .text-of-theme-warning {
-  margin-top: 10rem;
   color: var(--secondary-grey);
   font-size: 0.75rem;
   font-style: italic;

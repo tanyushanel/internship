@@ -73,6 +73,7 @@ export class SpeakingTestComponent implements OnInit, OnDestroy {
       id: '',
       topicName: '',
     };
+
     let stream = null;
     try {
       stream = await navigator.mediaDevices.getUserMedia({ audio: true });
