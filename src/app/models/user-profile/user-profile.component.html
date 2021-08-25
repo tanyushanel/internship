@@ -22,10 +22,10 @@
     START TEST
   </button>
 
-  <div *ngIf="assignedTest && deadLine! > now">
+  <div *ngIf="assignedTest && deadLine! > now && !isDisabledTime">
     <h3 class="table-caption warn">You've got an assigned test!</h3>
     <p class="table-caption">
-      Deadline: <span class="warn">{{ deadLine | date: 'medium' }}</span>
+      Deadline: <span class="warn">{{ deadLine | date: 'mediumDate' }}</span>
     </p>
     <button
       [disabled]="!selectedLevel || isDisabledTime"

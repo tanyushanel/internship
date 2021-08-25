@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { TopicModule } from '../../interfaces/essay-speaking';
 import { Question } from '../../interfaces/question-answer';
@@ -43,22 +44,27 @@ export class CommonTestComponent implements OnInit {
 
   timerSubscription!: Subscription;
 
-  testId = '';
+  testId: string | null = '';
 
-  constructor(private testStoreService: TestStoreService, public dialog: MatDialog) {}
+  constructor(
+    private testStoreService: TestStoreService,
+    public dialog: MatDialog,
+    private route: ActivatedRoute,
+  ) {}
 
   ngOnInit() {
+    this.testId = this.route.snapshot.paramMap.get('id');
+
+    if (this.testId) {
+      this.testStoreService.createAssignedTestContent(this.testId);
+    } else this.testStoreService.createTestContent();
+
     this.test$.subscribe((test) => {
-      this.testId = test.id;
       this.grammar = test.grammarQuestions;
       this.listening = test.audition.questions;
       this.essay = test.essay;
       this.speaking = test.speaking;
     });
-
-    if (this.testId) {
-      this.testStoreService.createAssignedTestContent(this.testId);
-    } else this.testStoreService.createTestContent();
 
     this.timerSubscription = this.testStoreService.timer(3600, 1000, () =>
       this.onSubmitTestOnTimerRunOut(),

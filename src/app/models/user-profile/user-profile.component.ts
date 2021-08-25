@@ -17,7 +17,7 @@ export class UserProfileComponent implements OnInit {
 
   assignedTests$: Observable<TestResult[] | null> = this.testStoreService.assignedTests$;
 
-  assignedTest: TestResult | undefined;
+  assignedTest: TestResult | null = null;
 
   levels = [...Object.values(Level)];
 
@@ -25,9 +25,9 @@ export class UserProfileComponent implements OnInit {
 
   selectedLevel!: Level;
 
-  deadLine: string | undefined = '';
+  deadLine!: Date;
 
-  now = new Date().toLocaleDateString();
+  now = new Date();
 
   testId: string | undefined = '';
 
@@ -36,11 +36,18 @@ export class UserProfileComponent implements OnInit {
   ngOnInit(): void {
     this.testStoreService.getAll();
 
-    const chooseFirst = this.assignedTests$.pipe(map((arr) => (arr?.length ? arr[0] : undefined)));
-    chooseFirst.subscribe((test) => {
-      this.assignedTest = test;
-      this.deadLine = test?.assignmentEndDate;
-    });
+    this.assignedTests$
+      .pipe(
+        map((arr) =>
+          arr?.length ? arr.find((test) => new Date(test.assignmentEndDate) > this.now) : null,
+        ),
+      )
+      .subscribe((test) => {
+        if (test) {
+          this.assignedTest = test;
+          this.deadLine = new Date(test.assignmentEndDate);
+        }
+      });
   }
 
   onStartButtonClick(level: Level): void {
@@ -54,8 +61,8 @@ export class UserProfileComponent implements OnInit {
     this.isDisabledTime = true;
     this.testStoreService.selectLevel(level);
 
-    if (this.assignedTest && this.deadLine) {
-      this.router.navigate([Route.test]);
+    if (this.assignedTest) {
+      this.router.navigate([Route.test, { id: this.assignedTest.id }]);
     }
   }
 }
