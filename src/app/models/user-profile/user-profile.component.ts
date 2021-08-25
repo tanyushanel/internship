@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Level } from 'src/app/constants/data-constants';
 import { Route } from 'src/app/constants/route-constant';
@@ -30,6 +30,10 @@ export class UserProfileComponent implements OnInit {
   now = new Date();
 
   testId: string | undefined = '';
+
+  timer$ = this.testStoreService.timerValue$;
+
+  timerSubscription!: Subscription;
 
   constructor(private router: Router, private testStoreService: TestStoreService) {}
 

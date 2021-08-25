@@ -22,6 +22,10 @@
     START TEST
   </button>
 
+  <p class="hint" *ngIf="isDisabledTime">
+    You will be able to pass the next test in <span> {{ (timer$ | async)! | time }} </span>
+  </p>
+
   <div *ngIf="assignedTest && deadLine! > now && !isDisabledTime">
     <h3 class="table-caption warn">You've got an assigned test!</h3>
     <p class="table-caption">
