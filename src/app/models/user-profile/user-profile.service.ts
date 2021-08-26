@@ -28,7 +28,7 @@ export class UserProfileService {
     this.isDisabledTimeSubject$.next(isDisabled);
   }
 
-  set disableGap(numb: number) {
+  set timeLeftToNext(numb: number) {
     this.disableGapSubject$.next(numb);
   }
 
@@ -46,9 +46,9 @@ export class UserProfileService {
       .subscribe((test) => {
         if (test) {
           this.lastPassTime = new Date(test[0].testPassingDate);
-          const dg = (+this.now - +this.lastPassTime) / 3600000;
-          this.disableGap = 24 - dg;
-          if (dg > 24) {
+          const timeFromLastPass = (+this.now - +this.lastPassTime) / 3600000;
+          this.timeLeftToNext = 24 - timeFromLastPass;
+          if (timeFromLastPass > 24) {
             this.isDisabled = false;
           } else {
             this.isDisabled = true;
