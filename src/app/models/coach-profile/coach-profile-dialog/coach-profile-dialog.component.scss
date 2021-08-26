@@ -24,6 +24,11 @@ button.mat-raised-button:not([disabled]):hover {
   margin-right: 30px;
 }
 
+.essay-topic {
+  grid-column: 1;
+  margin-bottom: 15px;
+}
+
 .essay-mark {
   grid-column: 2;
   padding: 5px;
@@ -39,6 +44,12 @@ button.mat-raised-button:not([disabled]):hover {
   grid-column: 1;
   width: 94%;
   margin-bottom: 18px;
+}
+
+.speaking-topic {
+  grid-column: 1;
+  margin-bottom: 15px;
+  margin-left: 3px;
 }
 
 .speaking-mark {

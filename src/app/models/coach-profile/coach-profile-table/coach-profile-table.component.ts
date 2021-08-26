@@ -16,6 +16,7 @@ import { CoachProfileDialogComponent } from '../coach-profile-dialog/coach-profi
 import { isSubstring } from '../../../helpers/filter-check';
 import { CoachTest } from '../../../interfaces/coach-edit';
 import { languageLevel } from '../../../constants/data-constants';
+import { CoachTestsStoreService } from '../service/coach-tests-store.service';
 
 @Component({
   selector: 'app-coach-profile-table',
@@ -51,7 +52,7 @@ export class CoachProfileTableComponent implements AfterViewInit, OnInit, OnChan
 
   @ViewChild(MatTable) tableView!: MatTable<CoachTest>;
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog, private coachCheck: CoachTestsStoreService) {
     this.dataSource = new MatTableDataSource(this.table);
     this.dataSource.filterPredicate = this.createFilter();
   }
@@ -82,8 +83,10 @@ export class CoachProfileTableComponent implements AfterViewInit, OnInit, OnChan
     comment: string,
     speakingAnswerReference: string,
     priority: boolean,
+    speakingTopic: string,
+    essayTopic: string,
   ) {
-    this.dialog.open(CoachProfileDialogComponent, {
+    const coachDialog = this.dialog.open(CoachProfileDialogComponent, {
       data: {
         essayAnswer,
         id,
@@ -92,8 +95,18 @@ export class CoachProfileTableComponent implements AfterViewInit, OnInit, OnChan
         comment,
         speakingAnswerReference,
         priority,
+        speakingTopic,
+        essayTopic,
       },
       disableClose: true,
+    });
+
+    coachDialog.afterClosed().subscribe(() => {
+      if (this.selectTab === 'Reviewed') {
+        this.coachCheck.getCoachUncheckedTestResults();
+      } else if (this.selectTab === 'High Priority') {
+        this.coachCheck.getCoachHighPriorityTestResults();
+      }
     });
   }
 

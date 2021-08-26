@@ -1,5 +1,6 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   languageLevel,
   GrammarAnswers,
@@ -17,7 +18,7 @@ import { MistakeReportStoreService } from '../../../services/store/mistake-repor
   templateUrl: './grammar-adding-editing-dialog.component.html',
   styleUrls: ['./grammar-adding-editing-dialog.component.scss'],
 })
-export class GrammarAddingEditingDialogComponent {
+export class GrammarAddingEditingDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<GrammarAddingEditingDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: CoachQuestion,
@@ -39,8 +40,16 @@ export class GrammarAddingEditingDialogComponent {
 
   reports = {
     id: this.updateReport.id,
-    status: this.updateReport.status,
+    reportStatus: this.updateReport.reportStatus,
   };
+
+  form!: FormGroup;
+
+  ngOnInit() {
+    this.form = new FormGroup({
+      nameQuestion: new FormControl(this.data.nameQuestion, [Validators.required]),
+    });
+  }
 
   updateData(): void {
     const question = {
@@ -53,6 +62,7 @@ export class GrammarAddingEditingDialogComponent {
       this.coachEditor.updateQuestion(question);
     } else {
       this.coachEditor.createQuestion(question);
+      console.log(this.form);
     }
     this.dialogRef.close();
   }
@@ -64,14 +74,14 @@ export class GrammarAddingEditingDialogComponent {
       level: this.englishLevel ?? this.data.level,
       answers: this.answerOption,
     };
-    this.reports.status = ReportStatus.solve;
+    this.reports.reportStatus = ReportStatus.solve;
     this.coachEditor.updateQuestion(question);
     this.reportUpdate.updateReportMistake(this.reports);
     this.dialogRef.close();
   }
 
   rejectMistake(): void {
-    this.reports.status = ReportStatus.reject;
+    this.reports.reportStatus = ReportStatus.reject;
 
     this.reportUpdate.updateReportMistake(this.reports);
     this.dialogRef.close();
