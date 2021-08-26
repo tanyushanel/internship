@@ -36,17 +36,17 @@ export class AdminProfileComponent implements OnInit {
     if (tabChangeEvent.index === 2) {
       this.admin.getAssignedTestData();
       this.tables$ = this.admin.adminTestResults$;
-      this.selectedTab = AdminTestTabs.notAssigned;
+      this.selectedTab = AdminTestTabs.assigned;
       this.displayedColumns = ['testNumber', 'Level', 'Date', 'Coach', 'Button'];
     } else if (tabChangeEvent.index === 1) {
       this.admin.getNotAssignedTestData();
       this.tables$ = this.admin.adminTestResults$;
-      this.selectedTab = AdminTestTabs.assigned;
+      this.selectedTab = AdminTestTabs.notAssigned;
       this.displayedColumns = ['testNumber', 'Level', 'Date', 'Button'];
     } else if (tabChangeEvent.index === 0) {
       this.admin.getHighPriorityTest();
       this.tables$ = this.admin.adminTestResults$;
-      this.selectedTab = AdminTestTabs.assigned;
+      this.selectedTab = AdminTestTabs.highPriority;
       this.displayedColumns = ['testNumber', 'Level', 'Date', 'Coach', 'Button'];
     }
   }

@@ -1,28 +1,18 @@
-import {
-  AfterViewInit,
-  ChangeDetectorRef,
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { AdminTableStoreService } from 'src/app/services/store/adminTableStore.service';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort, Sort } from '@angular/material/sort';
+import { MatSort } from '@angular/material/sort';
 import { FormControl } from '@angular/forms';
 import { AdminDialogComponent } from '../admin-dialog/admin-dialog.component';
 import {
   AdminTestTabs,
-  PeriodicElement,
   ServiceCoachData,
   TestData,
   UpdateCoachesData,
 } from '../../../interfaces/admin-profile-intarfaces';
 import { languageLevel } from '../../../constants/data-constants';
-import { CoachTest } from '../../../interfaces/coach-edit';
 import { isSubstring } from '../../../helpers/filter-check';
 
 @Component({
@@ -115,7 +105,7 @@ export class TableComponent implements AfterViewInit, OnInit, OnChanges {
           testId: result?.id,
           coachId: result?.coach?.userId,
         };
-        this.service.updateTestData(this.coachUpdate, result.id);
+        this.service.updateTestData(this.coachUpdate, result.id, this.selectedTab);
         this.dataSource.data = this.tableData;
       }
     });

@@ -17,7 +17,7 @@
           <mat-label>Enter English Level</mat-label>
           <input matInput [formControl]="levelFilter" />
         </mat-form-field>
-        <div mat-sort-header>English Level</div>
+        <div>English Level</div>
       </th>
       <td mat-cell *matCellDef="let element">{{ languageLevel[element.level] }}</td>
     </ng-container>
@@ -28,7 +28,7 @@
           <mat-label>Enter Test Date</mat-label>
           <input matInput [formControl]="dateFilter" />
         </mat-form-field>
-        <div mat-sort-header>Test Date</div>
+        <div>Test Date</div>
       </th>
       <td mat-cell *matCellDef="let element">
         {{ element.testPassingDate | date: 'dd.MM.YYYY' }}
@@ -38,7 +38,7 @@
     <ng-container matColumnDef="Coach">
       <th mat-header-cell *matHeaderCellDef>
         <div class="blank"></div>
-        <div class="coach" mat-sort-header>Coach</div>
+        <div class="coach">Coach</div>
       </th>
       <td mat-cell *matCellDef="let element">
         {{ coachName(element.coachId) }}
