@@ -18,7 +18,7 @@ export class AdminProfileComponent implements OnInit {
 
   coaches$: Observable<ServiceCoachData | null> = this.admin.adminCoachResults$;
 
-  public selectedTab = AdminTestTabs.assigned;
+  public selectedTab!: AdminTestTabs;
 
   displayedColumns = ['testNumber', 'Level', 'Date', 'Coach', 'Button'];
 
@@ -28,29 +28,31 @@ export class AdminProfileComponent implements OnInit {
     AdminTestTabs.assigned,
   ];
 
-  constructor(private admin: AdminTableStoreService) {}
+  constructor(private admin: AdminTableStoreService) {
+    this.selectedTab = AdminTestTabs.highPriority;
+  }
 
   tabChanged(tabChangeEvent: MatTabChangeEvent): void {
     if (tabChangeEvent.index === 2) {
       this.admin.getAssignedTestData();
       this.tables$ = this.admin.adminTestResults$;
-      this.selectedTab = AdminTestTabs.notAssigned;
+      this.selectedTab = AdminTestTabs.assigned;
       this.displayedColumns = ['testNumber', 'Level', 'Date', 'Coach', 'Button'];
     } else if (tabChangeEvent.index === 1) {
       this.admin.getNotAssignedTestData();
       this.tables$ = this.admin.adminTestResults$;
-      this.selectedTab = AdminTestTabs.assigned;
+      this.selectedTab = AdminTestTabs.notAssigned;
       this.displayedColumns = ['testNumber', 'Level', 'Date', 'Button'];
     } else if (tabChangeEvent.index === 0) {
-      this.admin.getAssignedTestData();
+      this.admin.getHighPriorityTest();
       this.tables$ = this.admin.adminTestResults$;
-      this.selectedTab = AdminTestTabs.assigned;
+      this.selectedTab = AdminTestTabs.highPriority;
       this.displayedColumns = ['testNumber', 'Level', 'Date', 'Coach', 'Button'];
     }
   }
 
   ngOnInit() {
-    this.admin.getAssignedTestData();
+    this.admin.getHighPriorityTest();
     this.tables$ = this.admin.adminTestResults$;
     this.admin.getCoachData();
     this.coaches$ = this.admin.adminCoachResults$;

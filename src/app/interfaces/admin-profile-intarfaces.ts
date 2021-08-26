@@ -31,7 +31,7 @@ export interface TestData {
   testNumber: number;
   testPassingDate: number;
   level: string;
-  coach: string | null;
+  coach: string;
   isAssign: boolean;
 }
 
@@ -47,4 +47,11 @@ export enum AdminTestTabs {
   highPriority = 'High Priority',
   notAssigned = 'Not Assigned',
   assigned = 'Assigned',
+}
+
+export interface PeriodicElement {
+  position: number;
+  name: string;
+  weight: number;
+  symbol: string;
 }

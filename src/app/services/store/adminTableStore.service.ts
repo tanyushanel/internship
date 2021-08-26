@@ -1,21 +1,20 @@
 import { Injectable } from '@angular/core';
 import {
-  CoachData,
   ServiceCoachData,
-  ServiceTestData,
   TestData,
   UpdateCoachesData,
 } from 'src/app/interfaces/admin-profile-intarfaces';
 
 import { BehaviorSubject } from 'rxjs';
 import { AdminHttpService } from '../adminTableData.service';
-import { CoachTest } from '../../interfaces/coach-edit';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AdminTableStoreService {
   adminTestSubject$ = new BehaviorSubject<TestData[] | null>(null);
+
+  temp!: TestData[];
 
   adminTestResults$ = this.adminTestSubject$.asObservable();
 
@@ -31,6 +30,17 @@ export class AdminTableStoreService {
       .subscribe({ next: (value) => this.adminTestSubject$.next(value) });
   }
 
+  getHighPriorityTest() {
+    return this.adminHttpService.getHighPriorityAdminTests().subscribe({
+      next: (value) =>
+        this.adminTestSubject$.next(
+          value.filter((test) => {
+            return test.priority;
+          }),
+        ),
+    });
+  }
+
   getNotAssignedTestData() {
     return this.adminHttpService
       .getNotAssignedAdminTests()
@@ -43,7 +53,19 @@ export class AdminTableStoreService {
       .subscribe({ next: (coaches) => this.adminCoachSubject$.next(coaches) });
   }
 
-  updateTestData(data: UpdateCoachesData, testID: number) {
-    this.adminHttpService.updateCoachTest(data, testID).subscribe((resp) => console.log(resp));
+  updateTestData(data: UpdateCoachesData, testID: number, currentTab: string) {
+    this.adminHttpService.updateCoachTest(data, testID).subscribe((resp) => {
+      console.log(currentTab);
+      if (currentTab === 'High Priority') {
+        this.getHighPriorityTest();
+        this.getCoachData();
+      } else if (currentTab === 'Not Assigned') {
+        this.getNotAssignedTestData();
+        this.getCoachData();
+      } else if (currentTab === 'Assigned') {
+        this.getAssignedTestData();
+        this.getCoachData();
+      }
+    });
   }
 }
