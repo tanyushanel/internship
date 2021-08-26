@@ -22,6 +22,8 @@ export class UserProfileService {
 
   now = new Date();
 
+  disableGap = 0;
+
   constructor(private testStoreService: TestStoreService) {}
 
   setLastPassTime(): void {
@@ -54,9 +56,9 @@ export class UserProfileService {
   checkIfDisabled() {
     this.setLastPassTime();
     this.setDeadline();
-    const disableGap = +this.now - +this.lastPassTime;
+    this.disableGap = +this.now - +this.lastPassTime;
 
-    if (disableGap > 86400000) {
+    if (this.disableGap > 86400000) {
       this.isDisabledTime = false;
     } else {
       this.isDisabledTime = true;

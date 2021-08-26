@@ -44,7 +44,7 @@
     </button>
   </div>
   <p class="table-caption" *ngIf="isDisabledTime">
-    You will be able to pass the next test in <span> {{ (timer$ | async)! | time }} </span>
+    You will be able to pass the next test in <span> {{ disableGap }} </span>
   </p>
 
   <app-user-results-table class="user-results-table" [results]="(results$ | async)!">

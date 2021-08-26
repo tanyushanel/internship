@@ -8,7 +8,7 @@
     matSortActive="date"
     matSortStart="asc"
   >
-    <ng-container matColumnDef="id">
+    <ng-container matColumnDef="testNumber">
       <th class="header" mat-header-cell *matHeaderCellDef>
         <mat-form-field class="filter" floatLabel="never">
           <mat-label>Enter Test Number</mat-label>
@@ -28,7 +28,7 @@
         </mat-form-field>
         <div mat-sort-header>Passing Date</div>
       </th>
-      <td mat-cell *matCellDef="let element">{{ element.testPassingDate | date: 'mediumDate' }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.testPassingDate | date: 'dd.MM.yyyy' }}</td>
     </ng-container>
 
     <ng-container matColumnDef="level">

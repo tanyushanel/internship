@@ -31,15 +31,15 @@ export class UserProfileComponent implements OnInit {
 
   testId: string | undefined = '';
 
-  timer$ = this.testStoreService.timerValue$;
-
-  timerSubscription!: Subscription;
+  disableGap = 0;
 
   constructor(
     private router: Router,
     private testStoreService: TestStoreService,
     private userProfileService: UserProfileService,
-  ) {}
+  ) {
+    this.disableGap = this.userProfileService.disableGap;
+  }
 
   ngOnInit(): void {
     this.testStoreService.getAll();
@@ -48,12 +48,6 @@ export class UserProfileComponent implements OnInit {
 
   onStartButtonClick(level: Level): void {
     this.isDisabledTime = true;
-
-    this.timerSubscription = this.testStoreService.timer(
-      60000,
-      1000,
-      () => (this.isDisabledTime = false),
-    );
 
     this.testStoreService.selectLevel(level);
 
