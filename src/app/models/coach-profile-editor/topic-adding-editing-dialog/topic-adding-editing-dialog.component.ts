@@ -1,5 +1,6 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { languageLevel, Level, ReportStatus } from '../../../constants/data-constants';
 import { CoachTopicStoreService } from '../../../services/store/coach-topic-store.service';
 import { CoachTopicUpdate } from '../../../interfaces/coach-edit';
@@ -19,7 +20,7 @@ export interface TopicEditDialogData {
   templateUrl: './topic-adding-editing-dialog.component.html',
   styleUrls: ['./topic-adding-editing-dialog.component.scss'],
 })
-export class TopicAddingEditingDialogComponent {
+export class TopicAddingEditingDialogComponent implements OnInit {
   topic: TopicEditDialogData | undefined;
 
   languageLevel = languageLevel;
@@ -43,8 +44,16 @@ export class TopicAddingEditingDialogComponent {
 
   reports = {
     id: this.updateReport.id,
-    status: this.updateReport.status,
+    reportStatus: this.updateReport.reportStatus,
   };
+
+  form!: FormGroup;
+
+  ngOnInit() {
+    this.form = new FormGroup({
+      topicName: new FormControl(this.data.topicName, [Validators.required]),
+    });
+  }
 
   levelChangeHandler($event: Level): void {
     this.englishLevel = englishLevelNumber($event);
@@ -53,7 +62,7 @@ export class TopicAddingEditingDialogComponent {
   updateData(): void {
     const topic: CoachTopicUpdate = {
       id: this.data.id,
-      topicName: this.topicName,
+      topicName: this.form.value.topicName,
       level: this.englishLevel ?? this.data.level,
     };
     if (this.data.isEdit) {
@@ -70,14 +79,14 @@ export class TopicAddingEditingDialogComponent {
       topicName: this.topicName,
       level: this.englishLevel ?? this.data.level,
     };
-    this.reports.status = ReportStatus.solve;
+    this.reports.reportStatus = ReportStatus.solve;
     this.coachEditorTopic.updateTopic(topic);
     this.reportUpdate.updateReportMistake(this.reports);
     this.dialogRef.close();
   }
 
   rejectMistake(): void {
-    this.reports.status = ReportStatus.reject;
+    this.reports.reportStatus = ReportStatus.reject;
     this.reportUpdate.updateReportMistake(this.reports);
     this.dialogRef.close();
   }
