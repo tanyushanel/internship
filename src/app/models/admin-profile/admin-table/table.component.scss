@@ -1,8 +1,56 @@
+@import '../../../../theme/variables';
+
 button:hover {
   background-color: grey;
 }
 
+.container {
+  max-height: 100%;
+  margin: auto;
+}
+
 table {
   width: 100%;
-  margin: 0 auto;
+  table-layout: fixed;
+}
+
+th {
+  height: 150px;
+}
+
+th,
+td {
+  width: 200px;
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.priority.high {
+  background-color: $light-cyan;
+}
+
+.mat-form-field {
+  margin: 1.5em 0;
+}
+
+.priority.high {
+  background-color: $light-cyan;
+}
+
+.header {
+  padding: 5px;
+}
+
+.filter {
+  display: block;
+  margin-right: 4em;
+}
+
+.coach {
+}
+
+.blank {
+  height: 5.5rem;
 }
