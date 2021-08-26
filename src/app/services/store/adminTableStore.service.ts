@@ -58,10 +58,13 @@ export class AdminTableStoreService {
       console.log(currentTab);
       if (currentTab === 'High Priority') {
         this.getHighPriorityTest();
+        this.getCoachData();
       } else if (currentTab === 'Not Assigned') {
         this.getNotAssignedTestData();
+        this.getCoachData();
       } else if (currentTab === 'Assigned') {
         this.getAssignedTestData();
+        this.getCoachData();
       }
     });
   }
