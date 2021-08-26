@@ -12,11 +12,7 @@ export class UserProfileService {
 
   assignedTests$: Observable<TestResult[] | null> = this.testStoreService.assignedTests$;
 
-  assignedTest: TestResult | null = null;
-
   lastPassTime!: Date;
-
-  deadLine!: Date;
 
   isDisabledTimeSubject$ = new Subject<boolean>();
 
@@ -51,7 +47,7 @@ export class UserProfileService {
         if (test) {
           this.lastPassTime = new Date(test[0].testPassingDate);
           const dg = (+this.now - +this.lastPassTime) / 3600000;
-          this.disableGap = dg;
+          this.disableGap = 24 - dg;
           if (dg > 24) {
             this.isDisabled = false;
           } else {
@@ -61,19 +57,12 @@ export class UserProfileService {
       });
   }
 
-  setDeadline(): void {
-    this.assignedTests$
-      .pipe(
-        map((arr) =>
-          arr?.length ? arr.find((test) => new Date(test.assignmentEndDate) > this.now) : null,
-        ),
-      )
-      .subscribe((test) => {
-        if (test) {
-          this.assignedTest = test;
-          this.deadLine = new Date(test.assignmentEndDate);
-        }
-      });
+  setDeadline(): Observable<TestResult | null | undefined> {
+    return this.assignedTests$.pipe(
+      map((arr) =>
+        arr?.length ? arr.find((test) => new Date(test.assignmentEndDate) > this.now) : null,
+      ),
+    );
   }
 
   checkIfDisabled() {

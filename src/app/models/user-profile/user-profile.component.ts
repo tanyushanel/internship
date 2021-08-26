@@ -15,7 +15,7 @@ import { UserProfileService } from './user-profile.service';
 export class UserProfileComponent implements OnInit {
   results$: Observable<TestResult[] | undefined> = this.testStoreService.testResults$;
 
-  assignedTest = this.userProfileService.assignedTest;
+  assignedTest!: TestResult;
 
   levels = [...Object.values(Level)];
 
@@ -23,7 +23,7 @@ export class UserProfileComponent implements OnInit {
 
   selectedLevel!: Level;
 
-  deadLine = this.userProfileService.deadLine;
+  deadLine!: Date;
 
   now = this.userProfileService.now;
 
@@ -46,6 +46,13 @@ export class UserProfileComponent implements OnInit {
 
     this.userProfileService.disableGap$.subscribe({
       next: (res) => (this.disableGap = Math.trunc(res)),
+    });
+
+    this.userProfileService.setDeadline().subscribe((test) => {
+      if (test) {
+        this.assignedTest = test;
+        this.deadLine = new Date(test.assignmentEndDate);
+      }
     });
 
     this.testStoreService.getAll();

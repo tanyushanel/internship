@@ -2,7 +2,7 @@
   <h3 class="table-caption">Please choose your level to start a test:</h3>
 
   <mat-radio-group
-    [disabled]="isDisabledTime"
+    [disabled]="isDisabledTime && !assignedTest"
     name="levels"
     class="radio"
     [(ngModel)]="selectedLevel"
@@ -34,7 +34,6 @@
     </p>
     <button
       [disabled]="!selectedLevel"
-      [hidden]="isDisabledTime"
       mat-raised-button
       color="primary"
       class="start-btn"
