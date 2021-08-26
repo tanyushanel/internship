@@ -14,8 +14,6 @@ import { AdmintableApi, CoachTestApi } from '../constants/route-constant';
   providedIn: 'root',
 })
 export class AdminHttpService {
-  data: any;
-
   constructor(private readonly http: HttpClient) {}
 
   options = {
@@ -30,12 +28,12 @@ export class AdminHttpService {
     );
   }
 
-  getAdminTests() {
-    this.http
-      .get<ServiceTestData>(
-        'http://elevel-001-site1.btempurl.com/api/Test/forAdmin?IsAssigned=true',
-      )
-      .subscribe((data) => console.log(data.results));
+  getHighPriorityAdminTests() {
+    return this.http.get<ServiceTestData>(`${AdmintableApi}forAdmin`).pipe(
+      map((res) => {
+        return res.results;
+      }),
+    );
   }
 
   getNotAssignedAdminTests() {
