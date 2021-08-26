@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { TopicModule } from '../../interfaces/essay-speaking';
 import { Question } from '../../interfaces/question-answer';
@@ -12,7 +13,7 @@ import { FinishModalDialogComponent } from '../dialog-module/finish-modal-dialog
   templateUrl: './common-test.component.html',
   styleUrls: ['./common-test.component.scss'],
 })
-export class CommonTestComponent implements OnInit {
+export class CommonTestComponent implements OnInit, OnDestroy {
   test$: Observable<TestContent> = this.testStoreService.test$;
 
   grammarAnswers: string[] = [];
@@ -43,11 +44,22 @@ export class CommonTestComponent implements OnInit {
 
   timerSubscription!: Subscription;
 
-  testId = '';
+  testId: string | null = '';
 
-  constructor(private testStoreService: TestStoreService, public dialog: MatDialog) {}
+  constructor(
+    private testStoreService: TestStoreService,
+    public dialog: MatDialog,
+    private route: ActivatedRoute,
+  ) {}
 
   ngOnInit() {
+    const idFromRoute = this.route.snapshot.paramMap.get('id');
+
+    if (idFromRoute) {
+      this.testId = idFromRoute;
+      this.testStoreService.createAssignedTestContent(this.testId);
+    } else this.testStoreService.createTestContent();
+
     this.test$.subscribe((test) => {
       this.testId = test.id;
       this.grammar = test.grammarQuestions;
@@ -56,13 +68,13 @@ export class CommonTestComponent implements OnInit {
       this.speaking = test.speaking;
     });
 
-    if (this.testId) {
-      this.testStoreService.createAssignedTestContent(this.testId);
-    } else this.testStoreService.createTestContent();
-
     this.timerSubscription = this.testStoreService.timer(3600, 1000, () =>
       this.onSubmitTestOnTimerRunOut(),
     );
+  }
+
+  ngOnDestroy(): void {
+    this.timerSubscription.unsubscribe();
   }
 
   setTabIndex(ind: number): void {

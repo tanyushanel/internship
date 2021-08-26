@@ -27,7 +27,7 @@ export class UserResultsTableComponent implements OnInit, AfterViewInit, OnChang
 
   languageLevel = languageLevel;
 
-  columnsToDisplay: string[] = ['id', 'testPassingDate', 'level', 'result'];
+  columnsToDisplay: string[] = ['testNumber', 'testPassingDate', 'level', 'result'];
 
   isOpen = false;
 
@@ -40,7 +40,7 @@ export class UserResultsTableComponent implements OnInit, AfterViewInit, OnChang
   filterValues = {
     testNumber: '',
     level: '',
-    testPassingDate: '',
+    testPassingDate: Date,
   };
 
   get resultsCount() {
@@ -78,11 +78,19 @@ export class UserResultsTableComponent implements OnInit, AfterViewInit, OnChang
     return (filterValues, filter): boolean => {
       const searchTerms = JSON.parse(filter);
 
-      return (
-        isSubstring(filterValues.testNumber, searchTerms.testNumber) &&
-        isSubstring(languageLevel[filterValues.level], searchTerms.level) &&
-        isSubstring(filterValues.testPassingDate, searchTerms.testPassingDate)
-      );
+      if (searchTerms.testNumber && !isSubstring(filterValues.testNumber, searchTerms.testNumber))
+        return false;
+
+      if (searchTerms.level && !isSubstring(languageLevel[filterValues.level], searchTerms.level))
+        return false;
+
+      if (
+        searchTerms.testPassingDate &&
+        !isSubstring(filterValues.testPassingDate.slice(0, 10), searchTerms.testPassingDate)
+      )
+        return false;
+
+      return true;
     };
   }
 

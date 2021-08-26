@@ -21,7 +21,7 @@ import { ReportMistakeDialogComponent } from '../report-mistake-dialog/report-mi
 export class StepperComponent implements OnChanges, OnInit {
   @Input() questionList: Question[] | null = null;
 
-  @Input() testId: string | undefined;
+  @Input() testId: string | null = null;
 
   @Output() answersChosenId = new EventEmitter<string[] | null>();
 

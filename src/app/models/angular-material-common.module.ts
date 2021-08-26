@@ -23,6 +23,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule, MAT_TABS_CONFIG } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { TimePipe } from '../components/timer/time.pipe';
 
 @NgModule({
   imports: [
@@ -49,7 +50,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatMenuModule,
     MatSnackBarModule,
   ],
-  declarations: [],
+  declarations: [TimePipe],
   exports: [
     CommonModule,
     MatPaginatorModule,
@@ -76,6 +77,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatCheckboxModule,
     MatMenuModule,
     MatTooltipModule,
+    TimePipe,
   ],
   providers: [
     {

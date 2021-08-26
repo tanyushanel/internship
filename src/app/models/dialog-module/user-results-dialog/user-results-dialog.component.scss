@@ -92,6 +92,8 @@ table {
 }
 
 .mat-dialog-content {
+  min-width: fit-content;
+  min-height: fit-content;
   padding: 0;
-  overflow: visible;
+  overflow: auto;
 }

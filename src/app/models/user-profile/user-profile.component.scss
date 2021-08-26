@@ -5,7 +5,7 @@
 }
 
 .user-results-table {
-  max-width: 60%;
+  min-width: 50rem;
 }
 
 .radio {
@@ -33,4 +33,11 @@
 
 .warn {
   color: var(--error);
+}
+
+.hint {
+  color: var(--secondary-grey2);
+  font-size: 0.7rem;
+  font-style: italic;
+  text-align: center;
 }

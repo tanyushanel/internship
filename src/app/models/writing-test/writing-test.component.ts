@@ -14,7 +14,7 @@ export class WritingTestComponent implements OnInit {
 
   @Input() essay: TopicModule | null = null;
 
-  @Input() testId: string | undefined;
+  @Input() testId: string | null = null;
 
   @Output() essayWritten = new EventEmitter<string | null>();
 
