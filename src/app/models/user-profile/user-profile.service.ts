@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { TestResult } from '../../interfaces/test';
 import { TestStoreService } from '../../services/store/test-store.service';
@@ -18,11 +18,23 @@ export class UserProfileService {
 
   deadLine!: Date;
 
-  isDisabledTime = false;
+  isDisabledTimeSubject$ = new Subject<boolean>();
+
+  isDisabledTime$ = this.isDisabledTimeSubject$.asObservable();
+
+  disableGapSubject$ = new Subject<number>();
+
+  disableGap$ = this.disableGapSubject$.asObservable();
 
   now = new Date();
 
-  disableGap = 0;
+  set isDisabled(isDisabled: boolean) {
+    this.isDisabledTimeSubject$.next(isDisabled);
+  }
+
+  set disableGap(numb: number) {
+    this.disableGapSubject$.next(numb);
+  }
 
   constructor(private testStoreService: TestStoreService) {}
 
@@ -38,11 +50,12 @@ export class UserProfileService {
       .subscribe((test) => {
         if (test) {
           this.lastPassTime = new Date(test[0].testPassingDate);
-          this.disableGap = +this.now - +this.lastPassTime;
-          if (this.disableGap < 24 * 60 * 60 * 1000) {
-            this.isDisabledTime = false;
+          const dg = (+this.now - +this.lastPassTime) / 3600000;
+          this.disableGap = dg;
+          if (dg > 24) {
+            this.isDisabled = false;
           } else {
-            this.isDisabledTime = true;
+            this.isDisabled = true;
           }
         }
       });

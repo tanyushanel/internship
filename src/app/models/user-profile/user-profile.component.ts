@@ -19,7 +19,7 @@ export class UserProfileComponent implements OnInit {
 
   levels = [...Object.values(Level)];
 
-  isDisabledTime = this.userProfileService.isDisabledTime;
+  isDisabledTime = false;
 
   selectedLevel!: Level;
 
@@ -40,9 +40,16 @@ export class UserProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.userProfileService.isDisabledTimeSubject$.subscribe({
+      next: (res) => (this.isDisabledTime = res),
+    });
+
+    this.userProfileService.disableGap$.subscribe({
+      next: (res) => (this.disableGap = Math.trunc(res)),
+    });
+
     this.testStoreService.getAll();
     this.userProfileService.checkIfDisabled();
-    this.disableGap = Math.trunc(this.userProfileService.disableGap / 3600000);
   }
 
   onStartButtonClick(level: Level): void {
