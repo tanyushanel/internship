@@ -25,9 +25,7 @@ export class TestStoreService {
 
   public testResultsSubject$ = new Subject<TestResult[]>();
 
-  testResults$: Observable<TestResult[] | undefined> = this.allTests$.pipe(
-    map((results) => results?.filter((result) => result && result.testPassingDate)),
-  );
+  testResults$ = this.testResultsSubject$.asObservable();
 
   public assignedTestsSubject$ = new BehaviorSubject<TestResult[] | null>(null);
 
