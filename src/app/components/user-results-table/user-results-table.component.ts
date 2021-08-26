@@ -14,9 +14,9 @@ import { TestResult, TestResultWithTotal } from '../../interfaces/test';
   styleUrls: ['./user-results-table.component.scss'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('collapsed, void', style({ height: '0px', minHeight: '0' })),
       state('expanded', style({ height: '*' })),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+      transition('expanded <=> void', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
 })
@@ -27,7 +27,7 @@ export class UserResultsTableComponent implements OnInit, AfterViewInit, OnChang
 
   languageLevel = languageLevel;
 
-  columnsToDisplay: string[] = ['id', 'testPassingDate', 'level', 'result'];
+  columnsToDisplay: string[] = ['testNumber', 'testPassingDate', 'level', 'result'];
 
   isOpen = false;
 
@@ -40,7 +40,7 @@ export class UserResultsTableComponent implements OnInit, AfterViewInit, OnChang
   filterValues = {
     testNumber: '',
     level: '',
-    testPassingDate: '',
+    testPassingDate: Date,
   };
 
   get resultsCount() {
@@ -78,11 +78,19 @@ export class UserResultsTableComponent implements OnInit, AfterViewInit, OnChang
     return (filterValues, filter): boolean => {
       const searchTerms = JSON.parse(filter);
 
-      return (
-        isSubstring(filterValues.testNumber, searchTerms.testNumber) &&
-        isSubstring(languageLevel[filterValues.level], searchTerms.level) &&
-        isSubstring(filterValues.testPassingDate, searchTerms.testPassingDate)
-      );
+      if (searchTerms.testNumber && !isSubstring(filterValues.testNumber, searchTerms.testNumber))
+        return false;
+
+      if (searchTerms.level && !isSubstring(languageLevel[filterValues.level], searchTerms.level))
+        return false;
+
+      if (
+        searchTerms.testPassingDate &&
+        !isSubstring(filterValues.testPassingDate.slice(0, 10), searchTerms.testPassingDate)
+      )
+        return false;
+
+      return true;
     };
   }
 

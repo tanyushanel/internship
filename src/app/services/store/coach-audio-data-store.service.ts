@@ -39,8 +39,8 @@ export class CoachAudioDataStoreService {
     });
   }
 
-  async fetchUrlAudio(audioPath: string = ''): Promise<Blob> {
-    const urlAudio = audioPath && `${DownloadFileListeningApiUrl}?filePath=${audioPath}`;
+  async fetchUrlAudio(audioPath: string): Promise<Blob> {
+    const urlAudio = `${DownloadFileListeningApiUrl}?filePath=${audioPath}`;
     const result = await fetch(urlAudio, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -63,10 +63,10 @@ export class CoachAudioDataStoreService {
       });
   }
 
-  downloadAudio() {
+  downloadAudio(openedTestId: string) {
     this.coachCheckService.coachTestResults$
       .pipe(
-        map((res) => res?.find((id) => id)),
+        map((res) => res?.find((test) => test.id === openedTestId)),
         map((user) => this.fetchUrlAudio(user?.speakingAnswerReference as string)),
       )
       .subscribe({

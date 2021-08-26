@@ -22,7 +22,7 @@ import { CoachAudioDataStoreService } from '../../services/store/coach-audio-dat
 export class ListeningTestComponent implements OnInit, AfterViewInit, AfterViewChecked {
   @Input() questions: Question[] | null = null;
 
-  @Input() testId: string | undefined;
+  @Input() testId: string | null = null;
 
   @Output() answersListening = new EventEmitter<string[] | null>();
 

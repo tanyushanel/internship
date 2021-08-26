@@ -9,7 +9,7 @@ import { AnswerQuestion, Question } from '../../interfaces/question-answer';
 export class GrammarTestComponent {
   @Input() questions: Question[] | null = null;
 
-  @Input() testId: string | undefined;
+  @Input() testId: string | null = null;
 
   @Output() answersGrammar = new EventEmitter<string[] | null>();
 

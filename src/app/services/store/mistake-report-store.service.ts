@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { MistakeReportHttpService } from '../mistake-report-http.service';
-import { MistakeReport, SendMistakeReport } from '../../interfaces/mistake-report';
+import {
+  MistakeReport,
+  SendMistakeReport,
+  UpdateMistakeReport,
+} from '../../interfaces/mistake-report';
 
 @Injectable({
   providedIn: 'root',
@@ -31,5 +35,9 @@ export class MistakeReportStoreService {
     this.mistakeReportHttpService
       .getMistakeTopicList()
       .subscribe({ next: (value) => this.mistakes$.next(value) });
+  }
+
+  updateReportMistake(report: UpdateMistakeReport) {
+    this.mistakeReportHttpService.updateMistakeReport(report).subscribe();
   }
 }

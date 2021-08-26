@@ -118,3 +118,19 @@ tr.element-row:not(.expanded-row):active {
 .mat-form-field {
   margin: 1.5em 0;
 }
+
+.warn {
+  color: var(--error);
+}
+
+.hint {
+  color: var(--secondary-grey);
+}
+
+.result {
+  display: flex;
+  align-self: center;
+  justify-content: start;
+  padding: 1rem;
+  column-gap: 0.25rem;
+}

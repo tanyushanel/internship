@@ -1,12 +1,10 @@
 .container {
   margin: 3rem 2rem;
   text-align: center;
-}
 
-.speaking-module-position {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  p {
+    font-size: 1rem;
+  }
 }
 
 .button-position {
@@ -41,7 +39,7 @@
 
 .text-for-attempt {
   margin: 0.5rem;
-  color: grey;
+  color: var(--secondary-grey);
 }
 
 .audio-reserv-place {
@@ -59,14 +57,16 @@
 }
 
 .text-of-theme-warning {
-  margin-top: 10rem;
-  color: grey;
+  color: var(--secondary-grey);
   font-size: 0.75rem;
   font-style: italic;
   text-align: center;
 }
 
 .report {
+  color: var(--secondary-grey);
+  font-size: 0.75rem;
+  font-style: italic;
   text-align: end;
 }
 

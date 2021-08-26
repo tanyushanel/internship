@@ -68,5 +68,11 @@ audio {
 }
 
 .description {
-  $error: darkred;
+  color: var(--error);
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 40px;
 }

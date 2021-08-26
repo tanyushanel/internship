@@ -18,7 +18,7 @@
 }
 
 .button__color {
-  margin-right: 5px;
+  margin: 0 3rem;
 }
 
 .form__color {
@@ -38,6 +38,9 @@
 }
 
 .report {
+  color: var(--secondary-grey);
+  font-size: 0.75rem;
+  font-style: italic;
   text-align: end;
 }
 

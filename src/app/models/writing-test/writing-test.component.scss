@@ -2,6 +2,10 @@
   margin: 3rem 2rem;
   text-align: center;
 
+  p {
+    font-size: 1rem;
+  }
+
   span {
     font-style: italic;
   }
@@ -50,6 +54,8 @@ p {
 }
 
 .report {
+  color: var(--secondary-grey);
+  font-size: 0.75rem;
   text-align: end;
 }
 

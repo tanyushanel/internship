@@ -27,7 +27,7 @@ declare let MediaRecorder: any;
 export class SpeakingTestComponent implements OnInit, OnDestroy {
   @Input() speaking: TopicModule | null = null;
 
-  @Input() testId: string | undefined;
+  @Input() testId: string | null = null;
 
   @Output() speachRecorded = new EventEmitter<{ src: SafeUrl } | null>();
 
@@ -73,6 +73,7 @@ export class SpeakingTestComponent implements OnInit, OnDestroy {
       id: '',
       topicName: '',
     };
+
     let stream = null;
     try {
       stream = await navigator.mediaDevices.getUserMedia({ audio: true });

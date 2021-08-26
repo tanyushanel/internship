@@ -23,6 +23,8 @@ export class TestStoreService {
 
   test$ = this.testSubject$.asObservable();
 
+  public testResultsSubject$ = new Subject<TestResult[]>();
+
   testResults$: Observable<TestResult[] | undefined> = this.allTests$.pipe(
     map((results) => results?.filter((result) => result && result.testPassingDate)),
   );
@@ -48,7 +50,7 @@ export class TestStoreService {
   }
 
   private set testResults(testResults: TestResult[]) {
-    this.allTestsSubject$.next(testResults);
+    this.testResultsSubject$.next(testResults);
   }
 
   private set assignedTestsResults(testResults: TestResult[]) {

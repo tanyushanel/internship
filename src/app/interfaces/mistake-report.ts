@@ -15,6 +15,11 @@ export interface GetMistakeReportID {
   topicId: string;
 }
 
+export interface UpdateMistakeReport {
+  id: string;
+  status: number;
+}
+
 export interface SendMistakeReport {
   questionId?: string;
   auditionId?: string;
@@ -28,6 +33,7 @@ export interface MistakeGrammarReport {
   questionId: string;
   description: string;
   testId: string;
+  auditionId: string;
   creationDate?: string;
 }
 

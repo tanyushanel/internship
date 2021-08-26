@@ -117,13 +117,13 @@ export class ReportMistakeTableComponent implements OnInit, AfterViewInit, OnCha
     };
   }
 
-  openEditor(row: GetMistakeReportID, description: string) {
+  openEditor(row: GetMistakeReportID, description: string, id: string) {
     if (this.selectTab === CoachEditorTabs.grammar) {
       this.coachEditQuestion.getQuestion(row.questionId);
       this.coachEditQuestion.question$.pipe(take(1)).subscribe((question) => {
         if (question !== null) {
           this.dialog.open(GrammarAddingEditingDialogComponent, {
-            data: { ...question, isEdit: true, description },
+            data: { ...question, isEdit: true, description, id },
             disableClose: true,
           });
         }
@@ -134,7 +134,7 @@ export class ReportMistakeTableComponent implements OnInit, AfterViewInit, OnCha
       this.coachListening.listening$.pipe(take(1)).subscribe((listen) => {
         if (listen !== null) {
           this.dialog.open(ListeningAddingEditingDialogComponent, {
-            data: { ...listen, isEdit: true, description },
+            data: { ...listen, isEdit: true, description, id },
             disableClose: true,
           });
         }
@@ -144,7 +144,7 @@ export class ReportMistakeTableComponent implements OnInit, AfterViewInit, OnCha
     this.coachEditTopic.topic$.pipe(take(1)).subscribe((topic) => {
       if (topic !== null) {
         this.dialog.open(TopicAddingEditingDialogComponent, {
-          data: { ...topic, isEdit: true, description },
+          data: { ...topic, isEdit: true, description, id },
           disableClose: true,
         });
       }

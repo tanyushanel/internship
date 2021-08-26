@@ -25,6 +25,11 @@ export enum CoachTestTabs {
   checked = 'Reviewed',
 }
 
+export enum ReportStatus {
+  reject = 2,
+  solve = 3,
+}
+
 export enum UserRole {
   User = 'User',
   HumanResourceManager = 'HumanResourceManager',
