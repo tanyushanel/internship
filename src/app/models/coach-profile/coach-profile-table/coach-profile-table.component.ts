@@ -82,6 +82,8 @@ export class CoachProfileTableComponent implements AfterViewInit, OnInit, OnChan
     comment: string,
     speakingAnswerReference: string,
     priority: boolean,
+    speakingTopic: string,
+    essayTopic: string,
   ) {
     this.dialog.open(CoachProfileDialogComponent, {
       data: {
@@ -92,6 +94,8 @@ export class CoachProfileTableComponent implements AfterViewInit, OnInit, OnChan
         comment,
         speakingAnswerReference,
         priority,
+        speakingTopic,
+        essayTopic,
       },
       disableClose: true,
     });

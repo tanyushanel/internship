@@ -17,7 +17,7 @@ export interface GetMistakeReportID {
 
 export interface UpdateMistakeReport {
   id: string;
-  status: number;
+  reportStatus: number;
 }
 
 export interface SendMistakeReport {

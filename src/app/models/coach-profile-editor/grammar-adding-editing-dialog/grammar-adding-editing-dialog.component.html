@@ -1,49 +1,61 @@
 <div class="container">
   <button mat-icon-button class="close-button" [mat-dialog-close]="true">✖</button>
-  <h1>{{ data.isEdit ? 'Edit Grammar' : 'Add Grammar' }}</h1>
-  <mat-form-field appearance="outline" *ngIf="mistakeReport.description">
-    <mat-label>Mistake description</mat-label>
-    <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="2" readonly class="description">{{
-      mistakeReport.description
-    }}</textarea>
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Grammar Question</mat-label>
-    <textarea matInput cdkTextareaAutosize [(ngModel)]="nameQuestion">{{ nameQuestion }}</textarea>
-  </mat-form-field>
-  <h3>Select level</h3>
-  <app-choose-level
-    (changeLevel)="levelChangeHandler($event)"
-    [currentLevel]="languageLevel[data.level.toString()]"
-  ></app-choose-level>
-  <mat-radio-group class="radio-group">
-    <div *ngFor="let answer of answerOption; let i = index">
-      <mat-radio-button
-        [value]="QuestionList[i]"
-        [checked]="answer.isRight"
-        (change)="radioChangeHandler(i)"
-        class="radio-button"
-      >
-        {{ QuestionList[i] }}
-      </mat-radio-button>
-      <span>
-        <mat-form-field><input matInput [(ngModel)]="answer.nameAnswer" /></mat-form-field>
-      </span>
-    </div>
-  </mat-radio-group>
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="updateData()"
-    *ngIf="!mistakeReport.description"
-    class="save"
-  >
-    {{ data.isEdit ? 'UPDATE' : 'SAVE' }}
-  </button>
-  <div class="button-container" *ngIf="mistakeReport.description">
-    <button mat-raised-button color="primary" (click)="solveAndUpdate()">
-      Solve Mistake And Update
+  <form [formGroup]="form">
+    <h1>{{ data.isEdit ? 'Edit Grammar' : 'Add Grammar' }}</h1>
+    <mat-form-field appearance="outline" *ngIf="mistakeReport.description">
+      <mat-label>Mistake description</mat-label>
+      <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="2" readonly class="description">{{
+        mistakeReport.description
+      }}</textarea>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Grammar Question</mat-label>
+      <textarea matInput cdkTextareaAutosize formControlName="nameQuestion">{{
+        nameQuestion
+      }}</textarea>
+    </mat-form-field>
+    <h3>Select level</h3>
+    <app-choose-level
+      (changeLevel)="levelChangeHandler($event)"
+      [currentLevel]="languageLevel[data.level.toString()]"
+    ></app-choose-level>
+    <mat-radio-group class="radio-group">
+      <div *ngFor="let answer of answerOption; let i = index">
+        <mat-radio-button
+          [value]="QuestionList[i]"
+          [checked]="answer.isRight"
+          (change)="radioChangeHandler(i)"
+          class="radio-button"
+        >
+          {{ QuestionList[i] }}
+        </mat-radio-button>
+        <span>
+          <mat-form-field
+            ><input
+              matInput
+              required
+              [(ngModel)]="answer.nameAnswer"
+              [ngModelOptions]="{ standalone: true }"
+          /></mat-form-field>
+        </span>
+      </div>
+    </mat-radio-group>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="updateData()"
+      *ngIf="!mistakeReport.description"
+      class="save"
+      [disabled]="form.invalid"
+      type="submit"
+    >
+      {{ data.isEdit ? 'UPDATE' : 'SAVE' }}
     </button>
-    <button mat-raised-button color="basic" (click)="rejectMistake()">Reject Mistake</button>
-  </div>
+    <div class="button-container" *ngIf="mistakeReport.description">
+      <button mat-raised-button color="primary" (click)="solveAndUpdate()">
+        Solve Mistake And Update
+      </button>
+      <button mat-raised-button color="basic" (click)="rejectMistake()">Reject Mistake</button>
+    </div>
+  </form>
 </div>

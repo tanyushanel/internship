@@ -1,32 +1,40 @@
 <div class="container">
   <button mat-icon-button class="close-button" [mat-dialog-close]="true">✖</button>
   <h1>Writing/Speaking Topics</h1>
-  <mat-form-field appearance="outline" *ngIf="mistakeReport.description">
-    <mat-label>Mistake description</mat-label>
-    <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="2" readonly class="description">{{
-      mistakeReport.description
-    }}</textarea>
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Writing/Speaking Topic</mat-label>
-    <textarea matInput [(ngModel)]="topicName">{{
-      data.isEdit ? 'Topic ' + data.topicName : ''
-    }}</textarea>
-  </mat-form-field>
-  <h3>Select level</h3>
-  <app-choose-level
-    (changeLevel)="levelChangeHandler($event)"
-    [currentLevel]="languageLevel[data.level.toString()]"
-  ></app-choose-level>
-  <p *ngIf="!mistakeReport.description">
-    <button mat-raised-button color="primary" (click)="updateData()" class="save">
-      {{ data.isEdit ? 'UPDATE' : 'SAVE' }}
-    </button>
-  </p>
-  <div class="button-container" *ngIf="mistakeReport.description">
-    <button mat-raised-button color="primary" (click)="solveAndUpdate()">
-      Solve Mistake And Update
-    </button>
-    <button mat-raised-button color="basic" (click)="rejectMistake()">Reject Mistake</button>
-  </div>
+  <form [formGroup]="form">
+    <mat-form-field appearance="outline" *ngIf="mistakeReport.description">
+      <mat-label>Mistake description</mat-label>
+      <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="2" readonly class="description">{{
+        mistakeReport.description
+      }}</textarea>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Writing/Speaking Topic</mat-label>
+      <textarea matInput formControlName="topicName">{{
+        data.isEdit ? 'Topic ' + data.topicName : ''
+      }}</textarea>
+    </mat-form-field>
+    <h3>Select level</h3>
+    <app-choose-level
+      (changeLevel)="levelChangeHandler($event)"
+      [currentLevel]="languageLevel[data.level.toString()]"
+    ></app-choose-level>
+    <p *ngIf="!mistakeReport.description">
+      <button
+        [disabled]="form.invalid"
+        mat-raised-button
+        color="primary"
+        (click)="updateData()"
+        class="save"
+      >
+        {{ data.isEdit ? 'UPDATE' : 'SAVE' }}
+      </button>
+    </p>
+    <div class="button-container" *ngIf="mistakeReport.description">
+      <button mat-raised-button color="primary" (click)="solveAndUpdate()">
+        Solve Mistake And Update
+      </button>
+      <button mat-raised-button color="basic" (click)="rejectMistake()">Reject Mistake</button>
+    </div>
+  </form>
 </div>

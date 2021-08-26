@@ -15,6 +15,8 @@ export interface CoachTest {
   speakingMark: number;
   comment: string;
   speakingAnswerReference: string;
+  essayTopic: string;
+  speakingTopic: string;
 }
 
 export interface CoachCheckTestID {

@@ -56,7 +56,7 @@ export class ListeningAddingEditingDialogComponent implements OnInit {
 
   reports = {
     id: this.updateReport.id,
-    status: this.updateReport.status,
+    reportStatus: this.updateReport.reportStatus,
   };
 
   ngOnInit(): void {
@@ -107,14 +107,14 @@ export class ListeningAddingEditingDialogComponent implements OnInit {
       level: this.englishLevel ?? this.data.level,
       questions: this.questions.slice(0, 10),
     };
-    this.reports.status = ReportStatus.solve;
+    this.reports.reportStatus = ReportStatus.solve;
     this.coachListening.updateListening(questions);
     this.reportUpdate.updateReportMistake(this.reports);
     this.dialogRef.close();
   }
 
   rejectMistake(): void {
-    this.reports.status = ReportStatus.reject;
+    this.reports.reportStatus = ReportStatus.reject;
     this.reportUpdate.updateReportMistake(this.reports);
     this.dialogRef.close();
   }
