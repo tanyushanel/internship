@@ -13,7 +13,7 @@ import { UserProfileService } from './user-profile.service';
   styleUrls: ['./user-profile.component.scss'],
 })
 export class UserProfileComponent implements OnInit {
-  results$: Observable<TestResult[] | undefined> = this.testStoreService.testResults$;
+  results$: Observable<TestResult[] | null> = this.testStoreService.allTests$;
 
   assignedTest!: TestResult;
 
