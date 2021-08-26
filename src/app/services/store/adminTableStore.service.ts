@@ -17,6 +17,8 @@ import { CoachTest } from '../../interfaces/coach-edit';
 export class AdminTableStoreService {
   adminTestSubject$ = new BehaviorSubject<TestData[] | null>(null);
 
+  temp!: TestData[];
+
   adminTestResults$ = this.adminTestSubject$.asObservable();
 
   adminCoachSubject$ = new BehaviorSubject<ServiceCoachData | null>(null);
@@ -33,12 +35,14 @@ export class AdminTableStoreService {
 
   getHighPriorityTest() {
     return this.adminHttpService.getHighPriorityAdminTests().subscribe({
-      next: (value) =>
+      next: (value) => {
+        this.temp = [...value.notAssigned.results, ...value.assigned.results];
         this.adminTestSubject$.next(
-          value.filter((test) => {
+          this.temp.filter((test) => {
             return test.priority;
           }),
-        ),
+        );
+      },
     });
   }
 

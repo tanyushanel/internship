@@ -130,7 +130,7 @@ export class TableComponent implements AfterViewInit, OnInit, OnChanges {
           break;
         }
       }
-    }
+    } else this.temp = 'Not assigned yet';
     return this.temp;
   }
 
@@ -140,7 +140,10 @@ export class TableComponent implements AfterViewInit, OnInit, OnChanges {
       return (
         isSubstring(filterValues.testNumber, searchTerms.testNumber) &&
         isSubstring(languageLevel[filterValues.level], searchTerms.level) &&
-        isSubstring(filterValues.testPassingDate, searchTerms.testPassingDate)
+        isSubstring(
+          filterValues.testPassingDate.toString().substr(0, 10),
+          searchTerms.testPassingDate.trim().toString(),
+        )
       );
     };
   }

@@ -1,48 +1,55 @@
 <div class="container">
-  <div class="filter">
-    <mat-form-field class="filter" floatLabel="never">
-      <mat-label>Enter Test Number</mat-label>
-      <input matInput [formControl]="idFilter" />
-    </mat-form-field>
-    <mat-form-field class="filter" floatLabel="never">
-      <mat-label>Enter English Level</mat-label>
-      <input matInput [formControl]="levelFilter" />
-    </mat-form-field>
-    <mat-form-field class="filter" floatLabel="never">
-      <mat-label>Enter Test Date</mat-label>
-      <input matInput [formControl]="dateFilter" />
-    </mat-form-field>
-  </div>
-
   <table mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="testNumber">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        <div>Test Number</div>
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-form-field class="filter" floatLabel="never">
+          <mat-label>Enter Test Number</mat-label>
+          <input matInput [formControl]="idFilter" />
+        </mat-form-field>
+        <div mat-sort-header>Test Number</div>
       </th>
       <td mat-cell *matCellDef="let element">{{ element.testNumber }}</td>
     </ng-container>
 
     <ng-container matColumnDef="Level">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Level</th>
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-form-field class="filter" floatLabel="never">
+          <mat-label>Enter English Level</mat-label>
+          <input matInput [formControl]="levelFilter" />
+        </mat-form-field>
+        <div mat-sort-header>English Level</div>
+      </th>
       <td mat-cell *matCellDef="let element">{{ languageLevel[element.level] }}</td>
     </ng-container>
 
     <ng-container matColumnDef="Date">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-form-field class="filter" floatLabel="never">
+          <mat-label>Enter Test Date</mat-label>
+          <input matInput [formControl]="dateFilter" />
+        </mat-form-field>
+        <div mat-sort-header>Test Date</div>
+      </th>
       <td mat-cell *matCellDef="let element">
         {{ element.testPassingDate | date: 'dd.MM.YYYY' }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="Coach">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Coach</th>
+      <th mat-header-cell *matHeaderCellDef>
+        <div class="blank"></div>
+        <div class="coach" mat-sort-header>Coach</div>
+      </th>
       <td mat-cell *matCellDef="let element">
         {{ coachName(element.coachId) }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="Button">
-      <th mat-header-cell *matHeaderCellDef>Test Assignment</th>
+      <th mat-header-cell *matHeaderCellDef>
+        <div class="blank"></div>
+        <div class="assignButton">Test Assignment</div>
+      </th>
       <td mat-cell *matCellDef="let element">
         <button mat-raised-button color="primary" (click)="openDialog(element, coachData)">
           {{ selectedTab !== 'Assigned' ? 'Reassign' : 'Assign' }}

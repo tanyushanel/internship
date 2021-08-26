@@ -8,14 +8,13 @@ import {
   UpdateCoachesData,
 } from 'src/app/interfaces/admin-profile-intarfaces';
 import { map } from 'rxjs/operators';
+import { forkJoin } from 'rxjs';
 import { AdmintableApi, CoachTestApi } from '../constants/route-constant';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AdminHttpService {
-  data: any;
-
   constructor(private readonly http: HttpClient) {}
 
   options = {
@@ -31,9 +30,12 @@ export class AdminHttpService {
   }
 
   getHighPriorityAdminTests() {
-    return this.http.get<ServiceTestData>(`${AdmintableApi}forAdmin`).pipe(
+    return forkJoin({
+      notAssigned: this.http.get<ServiceTestData>(`${AdmintableApi}forAdmin`),
+      assigned: this.http.get<ServiceTestData>(`${AdmintableApi}forAdmin?IsAssigned=true`),
+    }).pipe(
       map((res) => {
-        return res.results;
+        return res;
       }),
     );
   }

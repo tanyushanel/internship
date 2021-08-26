@@ -14,9 +14,14 @@ table {
   table-layout: fixed;
 }
 
+th {
+  height: 150px;
+}
+
 th,
 td {
   width: 200px;
+
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -26,11 +31,26 @@ td {
   background-color: $light-cyan;
 }
 
-.filter {
-  display: flex;
-  flex-direction: row;
+.mat-form-field {
+  margin: 1.5em 0;
 }
 
-mat-form-field {
-  margin: 0 1.3em;
+.priority.high {
+  background-color: $light-cyan;
+}
+
+.header {
+  padding: 5px;
+}
+
+.filter {
+  display: block;
+  margin-right: 4em;
+}
+
+.coach {
+}
+
+.blank {
+  height: 5.5rem;
 }
