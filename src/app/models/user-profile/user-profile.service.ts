@@ -35,7 +35,17 @@ export class UserProfileService {
             : null,
         ),
       )
-      .subscribe((test) => (test ? (this.lastPassTime = new Date(test[0].testPassingDate)) : null));
+      .subscribe((test) => {
+        if (test) {
+          this.lastPassTime = new Date(test[0].testPassingDate);
+          this.disableGap = +this.now - +this.lastPassTime;
+          if (this.disableGap < 24 * 60 * 60 * 1000) {
+            this.isDisabledTime = false;
+          } else {
+            this.isDisabledTime = true;
+          }
+        }
+      });
   }
 
   setDeadline(): void {
@@ -56,12 +66,5 @@ export class UserProfileService {
   checkIfDisabled() {
     this.setLastPassTime();
     this.setDeadline();
-    this.disableGap = +this.now - +this.lastPassTime;
-
-    if (this.disableGap > 86400000) {
-      this.isDisabledTime = false;
-    } else {
-      this.isDisabledTime = true;
-    }
   }
 }

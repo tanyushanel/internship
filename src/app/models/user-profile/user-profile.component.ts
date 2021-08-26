@@ -37,13 +37,12 @@ export class UserProfileComponent implements OnInit {
     private router: Router,
     private testStoreService: TestStoreService,
     private userProfileService: UserProfileService,
-  ) {
-    this.disableGap = this.userProfileService.disableGap;
-  }
+  ) {}
 
   ngOnInit(): void {
     this.testStoreService.getAll();
     this.userProfileService.checkIfDisabled();
+    this.disableGap = Math.trunc(this.userProfileService.disableGap / 3600000);
   }
 
   onStartButtonClick(level: Level): void {
