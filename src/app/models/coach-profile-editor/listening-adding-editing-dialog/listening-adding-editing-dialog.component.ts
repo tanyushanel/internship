@@ -87,7 +87,7 @@ export class ListeningAddingEditingDialogComponent implements OnInit {
   updateData() {
     const questions = {
       id: this.data.id,
-      audioFilePath: this.audioFilePath,
+      audioFilePath: this.audioFilePath ?? this.data.audioFilePath,
       level: this.englishLevel ?? this.data.level,
       questions: this.questions.slice(0, 10), // for wrong data in backend
     };

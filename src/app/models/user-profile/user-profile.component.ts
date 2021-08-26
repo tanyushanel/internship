@@ -13,9 +13,9 @@ import { UserProfileService } from './user-profile.service';
   styleUrls: ['./user-profile.component.scss'],
 })
 export class UserProfileComponent implements OnInit {
-  results$: Observable<TestResult[] | undefined> = this.testStoreService.testResults$;
+  results$: Observable<TestResult[] | null> = this.testStoreService.allTests$;
 
-  assignedTest!: TestResult;
+  assignedTest!: TestResult | null;
 
   levels = [...Object.values(Level)];
 
@@ -49,14 +49,16 @@ export class UserProfileComponent implements OnInit {
     });
 
     this.userProfileService.setDeadline().subscribe((test) => {
-      if (test) {
-        this.assignedTest = test;
-        this.deadLine = new Date(test.assignmentEndDate);
+      if (test?.length) {
+        this.assignedTest = test[0];
+        this.deadLine = new Date(test[0].assignmentEndDate);
+      } else {
+        this.assignedTest = null;
       }
     });
 
     this.testStoreService.getAll();
-    this.userProfileService.checkIfDisabled();
+    this.userProfileService.setLastPassTime();
   }
 
   onStartButtonClick(level: Level): void {

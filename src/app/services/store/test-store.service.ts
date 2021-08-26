@@ -25,9 +25,7 @@ export class TestStoreService {
 
   public testResultsSubject$ = new Subject<TestResult[]>();
 
-  testResults$: Observable<TestResult[] | undefined> = this.allTests$.pipe(
-    map((results) => results?.filter((result) => result && result.testPassingDate)),
-  );
+  testResults$ = this.testResultsSubject$.asObservable();
 
   public assignedTestsSubject$ = new BehaviorSubject<TestResult[] | null>(null);
 
@@ -91,7 +89,7 @@ export class TestStoreService {
       )
       .subscribe({
         next: (res) => {
-          this.allTests = [...res];
+          this.allTests = res.filter((result) => result.testPassingDate && result.level);
           this.assignedTestsResults = res.filter(
             (result) => !result.level && !result.testPassingDate,
           );

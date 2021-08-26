@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { TestResult } from '../../interfaces/test';
 import { TestStoreService } from '../../services/store/test-store.service';
@@ -8,7 +8,7 @@ import { TestStoreService } from '../../services/store/test-store.service';
   providedIn: 'root',
 })
 export class UserProfileService {
-  results$: Observable<TestResult[] | undefined> = this.testStoreService.testResults$;
+  results$: Observable<TestResult[] | null> = this.testStoreService.allTests$;
 
   assignedTests$: Observable<TestResult[] | null> = this.testStoreService.assignedTests$;
 
@@ -57,16 +57,15 @@ export class UserProfileService {
       });
   }
 
-  setDeadline(): Observable<TestResult | null | undefined> {
+  setDeadline(): Observable<TestResult[] | null> {
     return this.assignedTests$.pipe(
       map((arr) =>
-        arr?.length ? arr.find((test) => new Date(test.assignmentEndDate) > this.now) : null,
+        arr?.length
+          ? arr.filter(
+              (test) => new Date(test.assignmentEndDate) > this.now && !test.testPassingDate,
+            )
+          : null,
       ),
     );
-  }
-
-  checkIfDisabled() {
-    this.setLastPassTime();
-    this.setDeadline();
   }
 }

@@ -18,7 +18,7 @@ export class TestHttpService {
 
   getAllTests(userId: string): Observable<TestResult[]> {
     return this.http
-      .get<GetTestsResults>(`${BASE_API_URL}/Test?userId=${userId}&pageSize=100000`)
+      .get<GetTestsResults>(`${BASE_API_URL}/Test?userId=${userId}&pageSize=1000`)
       .pipe(map((res) => res.results));
   }
 
